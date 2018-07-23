@@ -5,7 +5,7 @@ public class Product {
 	private String productName;
 	private String extremeName;
 	private float productPrice;
-	private String discription;
+	private String description;
 	private String color;
 	private String version;
 	private String size;
@@ -37,11 +37,11 @@ public class Product {
 	public void setProductPrice(float productPrice) {
 		this.productPrice = productPrice;
 	}
-	public String getDiscription() {
-		return discription;
+	public String getDescription() {
+		return description;
 	}
-	public void setDiscription(String discription) {
-		this.discription = discription;
+	public void setDiscription(String description) {
+		this.description = description;
 	}
 	public String getColor() {
 		return color;
