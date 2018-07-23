@@ -15,6 +15,7 @@ public class Order {
 	private float deliveryFee;
 	private float actualTotal;
 	private Date createDate;
+	
 	public int getOrderId() {
 		return orderId;
 	}

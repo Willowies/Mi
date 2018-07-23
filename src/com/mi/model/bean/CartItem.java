@@ -7,6 +7,7 @@ public class CartItem {
 	private float amount;
 	private int userId;
 	private int state;
+	
 	public int getCartItem() {
 		return cartItem;
 	}

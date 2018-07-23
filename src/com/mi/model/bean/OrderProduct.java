@@ -8,6 +8,7 @@ public class OrderProduct {
 	private float productPrice;
 	private int orderId;
 	private float amount;
+	
 	public int getOrderItemId() {
 		return orderItemId;
 	}

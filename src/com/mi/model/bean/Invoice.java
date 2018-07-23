@@ -12,6 +12,7 @@ public class Invoice {
 	private String receiveEmail;
 	private String receiver;
 	private int orderId;
+	
 	public int getInvoiceId() {
 		return invoiceId;
 	}
