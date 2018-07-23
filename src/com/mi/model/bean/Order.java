@@ -1,5 +1,8 @@
 package com.mi.model.bean;
 
+import java.util.Date;
+import java.util.List;
+
 public class Order {
 	private int orderId;
 	private User user;
