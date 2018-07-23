@@ -4,6 +4,7 @@ public class LikeProduct {
 	private int likeProductId;
 	private Product product;
 	private User user;
+	
 	public int getLikeProductId() {
 		return likeProductId;
 	}

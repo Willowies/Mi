@@ -10,6 +10,7 @@ public class ReceiverAddress {
 	private String receiverDistrict;
 	private String address;
 	private String addressLabel;
+	
 	public int getReceiverAddressId() {
 		return receiverAddressId;
 	}

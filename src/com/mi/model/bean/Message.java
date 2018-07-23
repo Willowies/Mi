@@ -10,6 +10,7 @@ public class Message {
 	private Date sendTime;
 	private int type;
 	private String picUrl;
+	
 	public int getMessageId() {
 		return messageId;
 	}
