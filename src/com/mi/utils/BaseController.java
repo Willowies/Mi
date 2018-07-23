@@ -8,7 +8,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
-public abstract class BaseContoller {
+public abstract class BaseController {
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
