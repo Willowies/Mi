@@ -4,9 +4,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<%
+			String path =request.getContextPath();
+	      	String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"; 
+	     %>
+	    <base href=<%=basePath%>>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>首页</title>
-		<link href="css/homepage.css" type="text/css" rel="stylesheet" />
+		<link href="css/Reset.css" type="text/css" rel="stylesheet" />
+		<link href="css/homepage.css" type="text/css" rel="stylesheet"/>
 		<link href="css/font-awesome.css" rel="stylesheet">
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/homepage.js"></script>
@@ -267,6 +273,415 @@
 		</div>
 	</div>
 	<div style="height:500px; width:100%;"></div>
+	
+	<div class="xm-groupPurchase">
+		<div class="title" style="background:#c16666;">
+			<h3>小米团购</h3>
+		</div>
+		<div class="content" style="background:#b68df9;">
+			<div class="goods-list">
+				<div class="all-goods-list" style="width: 2480px;height:340px;margin-left: 0px;transition: margin-left 0.5s ease;">
+					<div class="goods-item">
+						<a href="" target="_blank"></a>
+						<div class="inner">
+							<div class="inner-img">
+								<img src="images/T1bXKjBQAT1RXrhCrK.jpg" width="160px" height="160px">
+							</div>
+							<h3 class="title"><a>彩虹7号电池（10粒装）</a></h3>
+							<p class="desc">无汞无镉 环保电池</p>
+							<p class="price">
+								<span>1</span>&nbsp;<span>元</span>
+								<del>9.9元</del>
+							</p>
+						</div>
+					</div>
+					<div class="goods-item">
+						
+					</div>
+					<div class="goods-item">
+						
+					</div>
+					<div class="goods-item">
+						
+					</div>
+					<div class="goods-item">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="page-main home-main">
+		<div class="container">
+			<div class="phoneInfomation">
+				<div id="phone"  class="page-main-block" style="background:#c16666;">
+					<h3>手机</h3>
+				</div>
+				<div class="page-main-content" style="background:#b68df9;">
+					<div class="phoneAdv" style="background:#af77ad;">
+						
+					</div>
+					<div class="phoneInfo" style="background:#f5f7a4;">
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1528719476.67789934!220x220.jpg" width="160px" height="160px">
+								</div>
+								<h3 class="title"><a>红米6A</a></h3>
+								<p class="desc">AI人脸解锁，小巧全面屏，高性能处理器</p>
+								<p class="price">
+									<span>1</span>&nbsp;<span>元</span>
+									<del>9.9元</del>
+								</p>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1528719476.67789934!220x220.jpg" width="160px" height="160px">
+								</div>
+								<h3 class="title"><a>红米6A</a></h3>
+								<p class="desc">AI人脸解锁，小巧全面屏，高性能处理器</p>
+								<p class="price">
+									<span>1</span>&nbsp;<span>元</span>
+									<del>9.9元</del>
+								</p>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1528719476.67789934!220x220.jpg" width="160px" height="160px">
+								</div>
+								<h3 class="title"><a>红米6A</a></h3>
+								<p class="desc">AI人脸解锁，小巧全面屏，高性能处理器</p>
+								<p class="price">
+									<span>1</span>&nbsp;<span>元</span>
+									<del>9.9元</del>
+								</p>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1528719476.67789934!220x220.jpg" width="160px" height="160px">
+								</div>
+								<h3 class="title"><a>红米6A</a></h3>
+								<p class="desc">AI人脸解锁，小巧全面屏，高性能处理器</p>
+								<p class="price">
+									<span>1</span>&nbsp;<span>元</span>
+									<del>9.9元</del>
+								</p>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1528719476.67789934!220x220.jpg" width="160px" height="160px">
+								</div>
+								<h3 class="title"><a>红米6A</a></h3>
+								<p class="desc">AI人脸解锁，小巧全面屏，高性能处理器</p>
+								<p class="price">
+									<span>1</span>&nbsp;<span>元</span>
+									<del>9.9元</del>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="elecInfomation">
+				<div id="homeelec"  class="page-main-block" style="background:#c16666;">
+					<h3>家电</h3>
+				</div>
+				<div class="page-main-content" style="background:#b68df9;">
+					<div class="elecAdv" style="background:#af77ad;">
+						<div class="phoneInfo-item" style="margin-left:0;">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="desc">全高清屏 / 人工智能语音</p>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+									<del>1699元</del>
+								</p>
+							</div>
+						</div>
+						<div class="phoneInfo-item" style="margin-left:0;">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="desc">全高清屏 / 人工智能语音</p>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+									<del>1699元</del>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="elecInfo" style="background:#f5f7a4;">
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="desc">全高清屏 / 人工智能语音</p>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+									<del>1699元</del>
+								</p>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="desc">全高清屏 / 人工智能语音</p>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+									<del>1699元</del>
+								</p>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="desc">全高清屏 / 人工智能语音</p>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+									<del>1699元</del>
+								</p>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="desc">全高清屏 / 人工智能语音</p>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+									<del>1699元</del>
+								</p>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="desc">全高清屏 / 人工智能语音</p>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+									<del>1699元</del>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="accessoryInfomation">
+				<div id="accessory"  class="page-main-block" style="background:#c16666;">
+					<h3>手机配件</h3>
+				</div>
+				<div class="page-main-content" style="background:#b68df9;">
+					<div class="accessoryAdv" style="background:#af77ad;">
+						<div class="phoneInfo-item" style="margin-left:0;">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+								</p>
+								<p class="rank">1053人评价</p>
+								<div class="review-wrapper"></div>
+							</div>
+						</div>
+						<div class="phoneInfo-item" style="margin-left:0;">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+								</p>
+								<p class="rank">1053人评价</p>
+								<div class="review-wrapper"></div>
+							</div>
+						</div>
+					</div>
+					<div class="accessoryInfo" style="background:#f5f7a4;">
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+								</p>
+								<p class="rank">1053人评价</p>
+								<div class="review-wrapper"></div>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+								</p>
+								<p class="rank">1053人评价</p>
+								<div class="review-wrapper"></div>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+								</p>
+								<p class="rank">1053人评价</p>
+								<div class="review-wrapper"></div>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1527840795.6763911.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米8 硅胶保护套</a></h3>
+								<p class="price">
+									<span>49</span>&nbsp;<span>元</span>
+								</p>
+								<p class="rank">1053人评价</p>
+								<div class="review-wrapper"></div>
+							</div>
+						</div>
+						<div class="phoneInfo-item">
+							<a href="" target="_blank"></a>
+							<div class="inner">
+								<div class="inner-img">
+									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+								</div>
+								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
+								<p class="price">
+									<span>1499</span>&nbsp;<span>元</span>
+								</p>
+								<p class="rank">1053人评价</p>
+								<div class="review-wrapper"></div>
+							</div>
+						</div>				
+					</div>
+				</div>
+			</div>
+			<div class="recommend">
+				<div class="titleB" style="background:#c16666;">
+					<h3>为你推荐</h3>
+				</div>
+				<div class="content" style="background:#b68df9;">
+					<div class="goods-list">
+						<div class="all-goods-list" style="width: 2480px;height:320px;margin-left: 0px;transition: margin-left 0.5s ease;">
+							<div class="goods-item">
+								<a href="" target="_blank"></a>
+								<div class="inner">
+									<div class="inner-img">
+										<img src="images/pms_1528718738.78643039!280x280.jpg" width="140px" height="140px">
+									</div>
+									<h3 class="title"><a> 红米6 全网通版 3GB内存 32GB </a></h3>
+									<p class="price">
+										<span>769</span>&nbsp;<span>元</span>
+									</p>
+									<p class="rank">1643人好评</p>
+								</div>
+							</div>
+							<div class="goods-item">
+								
+							</div>
+							<div class="goods-item">
+								
+							</div>
+							<div class="goods-item">
+								
+							</div>
+							<div class="goods-item">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class=comment>
+				<div class="titleC" style="background:#c16666;">
+					<h2 style="font-size:22px;">热评产品</h2>
+				</div>
+				<div class="content" style="background:#b68df9;">
+					<div class="contentin">
+						<div class="contentItem">
+							<div class="picItem">
+								<img src="images/54e35fdd-bc68-4a89-bad7-c9c3bb2fc6fe.jpeg" width="296" height="220" alt="米家压力IH电饭煲">
+							</div>
+							<p class="review">包装很让人感动，式样也很可爱，做出的饭全家人都爱吃，超爱五星！手机控制还是不太熟练，最主要是没有连接...</p>
+							<p class="author"> 来自于 HZG 的评价 </p>
+							<div class="info">
+								<h3 class="title">
+									<a href="" >米家压力IH电饭煲</a>
+								</h3>
+								<span class="sep">|</span>
+								<p class="price">
+									<span class="num">999</span>元
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	
 	<div class="site-footer">
 		<div class="container">
 			<div class="footer-service">

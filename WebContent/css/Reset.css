@@ -1,0 +1,15 @@
+body{
+	margin:0;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+	color: #333;
+    background-color: #fff;
+    min-width: 1226px;
+}
+a{
+	text-decoration:none;
+}
+input[type="search"]{
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
