@@ -790,6 +790,9 @@
 /* home-main:phone, homeelec, accessory, recommend, comment  end!*/
 
 /* footer */
+.site-footer{
+	height:272px;
+}
 .site-footer .footer-service {
     padding: 27px 0;
     border-bottom: 1px solid #e0e0e0;
