@@ -18,7 +18,16 @@ public class Order {
 	private float deliveryFee;
 	private float actualTotal;
 	private Date createDate;
+	private Group group;
 	
+	
+	
+	public Group getGroup() {
+		return group;
+	}
+	public void setGroup(Group group) {
+		this.group = group;
+	}
 	public int getOrderId() {
 		return orderId;
 	}

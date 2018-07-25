@@ -12,6 +12,7 @@ public class Invoice {
 	private String receiveEmail;
 	private String receiver;
 	private int orderId;
+	private Date createDate;
 	
 	public int getInvoiceId() {
 		return invoiceId;
@@ -73,5 +74,5 @@ public class Invoice {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	private Date createDate;
+	
 }
