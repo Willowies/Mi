@@ -11,9 +11,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	 	<package name="com.mi.model.bean"/>	 	
 	 </typeAliases>
 	 
-	 
+	 <plugins>
+	 	<plugin interceptor="com.github.pagehelper.PageHelper">
+	 		<property name="dialect" value="mysql"/>
+	 	</plugin>
+	 </plugins>
 
-	 
 	 
 </configuration>  
 
