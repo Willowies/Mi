@@ -12,6 +12,13 @@ public interface OrderDAO {
 	
 	public List<Order> getOrderByState(Map<String, Object> map);
 	
+	public List<Order> getAllGroupOrder(User user);
+	
+	public List<Order> getGroupOrderByState(Map<String, Object> map);
+
+	public List<Order> getOrderByProductName(Map<String, Object> map);
+
+	public Order getOrderDetailsById(int orderId);
 	
 
 }
