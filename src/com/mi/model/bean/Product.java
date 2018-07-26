@@ -12,7 +12,15 @@ public class Product {
 	private String picUrl;
 	private Coupon coupon;
 	private int maxQuantity;
+	private int productCommentNum;
 	
+	
+	public int getProductCommentNum() {
+		return productCommentNum;
+	}
+	public void setProductCommentNum(int productCommentNum) {
+		this.productCommentNum = productCommentNum;
+	}
 	public int getProductId() {
 		return productId;
 	}
@@ -40,7 +48,7 @@ public class Product {
 	public String getDescription() {
 		return description;
 	}
-	public void setDiscription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 	public String getColor() {
