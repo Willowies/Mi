@@ -5,7 +5,7 @@ import java.util.Timer;
 
 public class GroupProduct {
 	private int groupProductId;
-	private int productId;
+	private Product product;
 	private float groupProductPrice;
 	private int leastGroupNum;
 	private int maxGroupProductNum;
@@ -19,11 +19,11 @@ public class GroupProduct {
 	public void setGroupProductId(int groupProductId) {
 		this.groupProductId = groupProductId;
 	}
-	public int getProductId() {
-		return productId;
+	public Product getProductId() {
+		return product;
 	}
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setProductId(Product product) {
+		this.product = product;
 	}
 	public float getGroupProductPrice() {
 		return groupProductPrice;

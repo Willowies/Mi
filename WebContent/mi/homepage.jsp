@@ -21,7 +21,7 @@
 	<div class="site-topbar">
 		<div class="container">
 			<div class="topbar-nav">
-				<a rel="nofollow" href="/Mi/homepage.jsp" >小米商城</a>
+				<a rel="nofollow" href="/Mi/mi/homepage.jsp" >小米商城</a>
 				<span class="sep">|</span>
 				<a rel="nofollow" href="https://www.miui.com/" target="_blank">MIUI</a>
 			  	<span class="sep">|</span>
@@ -63,7 +63,7 @@
 	<div class="site-header">
 		<div class="container">
 			<div class="header-logo">
-				<a href="/Mi/homepage.jsp"><img src="images/logo-footer.png"  alt="小米logo" /></a>
+				<a href="/Mi/mi/homepage.jsp"><img src="images/logo-footer.png"  alt="小米logo" /></a>
 			</div>
 			<div class="header-nav">
 				<ul class="nav-list">
@@ -280,33 +280,9 @@
 		</div>
 		<div class="content" style="background:#b68df9;">
 			<div class="goods-list">
-				<div class="all-goods-list" style="width: 2480px;height:340px;margin-left: 0px;transition: margin-left 0.5s ease;">
-					<div class="goods-item">
-						<a href="" target="_blank"></a>
-						<div class="inner">
-							<div class="inner-img">
-								<img src="images/T1bXKjBQAT1RXrhCrK.jpg" width="160px" height="160px">
-							</div>
-							<h3 class="title"><a>彩虹7号电池（10粒装）</a></h3>
-							<p class="desc">无汞无镉 环保电池</p>
-							<p class="price">
-								<span>1</span>&nbsp;<span>元</span>
-								<del>9.9元</del>
-							</p>
-						</div>
-					</div>
-					<div class="goods-item">
-						
-					</div>
-					<div class="goods-item">
-						
-					</div>
-					<div class="goods-item">
-						
-					</div>
-					<div class="goods-item">
-						
-					</div>
+				<div id="addGoodItem" class="all-goods-list" style="width: 2480px;height:340px;margin-left: 0px;transition: margin-left 0.5s ease;">
+					
+					
 				</div>
 			</div>
 		</div>
