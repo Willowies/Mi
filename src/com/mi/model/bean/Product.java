@@ -13,7 +13,8 @@ public class Product {
 	private Coupon coupon;
 	private int maxQuantity;
 	private int productCommentNum;
-	
+	private int secondClassId;
+	private Comment comment;
 	
 	public int getProductCommentNum() {
 		return productCommentNum;
@@ -86,6 +87,18 @@ public class Product {
 	}
 	public void setMaxQuantity(int maxQuantity) {
 		this.maxQuantity = maxQuantity;
+	}
+	public int getSecondClassId() {
+		return secondClassId;
+	}
+	public void setSecondClassId(int secondClassId) {
+		this.secondClassId = secondClassId;
+	}
+	public Comment getComment() {
+		return comment;
+	}
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 
 }

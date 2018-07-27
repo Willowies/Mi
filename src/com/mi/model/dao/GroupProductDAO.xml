@@ -12,12 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <resultMap id="groupProductResult" type="GroupProduct">
     	<id column="groupProductId" property="groupProductId"  />
-    	<result column="groupProductPrice" property="groupProductPrice"  />
+    	<result column="groupPrice" property="groupPrice"  />
     	<result column="leastGroupNum" property="leastGroupNum"  />
     	<result column="maxGroupProductNum" property="maxGroupProductNum"  />
     	<result column="beginDate" property="beginDate"  />
     	<result column="endDate" property="endDate"  />
-    	<association property="product" javaType="Product">
+    	<association property="product" column="productId" javaType="Product">
     		<id column="productId" property="productId" />
     		<result column="productName" property="productName" />
     		<result column="description" property="description" />

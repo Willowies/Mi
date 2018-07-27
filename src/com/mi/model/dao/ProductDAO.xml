@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.ProductDAO">
+     
+    <!-- 最好要去除商品名重复的，即使配置不同 -->
+    <select id="getPhoneProducts" resultMap="phoneProductResult" flushCache="true" >
+		select e.*, f.couponId, f.discountAmount, f.startDate, f.endDate, f.couponName 
+		from product as e left join coupon as f on e.productId=f.productId where e.secondClassId=1
+    </select>
+    <select id="getApplianceProducts" resultMap="applianceProductResult" flushCache="true">
+    	select l.*, u.userName 
+		from(select j.*, k.commentId, k.userId, k.commentContent, k.commentRank, k.commentUrl, k.commentDate 
+				 from(select z.*, i.secondClassName, i.firstClassId 
+				 		  from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
+									  from product as g left join coupon as h on g.productId=h.productId) as z, productsecondclass as i 
+						  where z.secondClassId=i.secondClassId and i.firstClassId=1) as j left join `comment` as k
+						  on j.productId=k.productId) as l left join `user` as u 
+		on l.userId=u.userId
+		group by l.productId
+    </select>
+    <select id="getCollocationProducts" resultMap="collocationProductResult" flushCache="true">
+    	select l.*, count(commentId) as productCommentNum, u.userName
+		from(select j.*, k.commentId, k.userId, k.commentContent, k.commentRank, k.commentUrl, k.commentDate 
+				 from (select z.*, i.secondClassName, i.firstClassId
+							 from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
+										 from product as g left join coupon as h on g.productId=h.productId) as z, productsecondclass as i
+										 where z.secondClassId=i.secondClassId and i.firstClassId=1)as j left join `comment` as k 
+							 on j.productId=k.productId) as l, `user` as u
+		where l.userId=u.userId
+		group by l.productId
+    </select>
+    
+    <resultMap id="phoneProductResult" type="Product">
+   		<id column="productId" property="productId" />
+   		<result column="productName" property="productName" />
+   		<result column="description" property="description" />
+   		<result column="productPrice" property="productPrice" />
+   		<result column="color" property="color" />
+   		<result column="version" property="version" />
+   		<result column="size" property="size" />
+   		<result column="picUrl" property="picUrl" />
+   		<result column="maxQuantity" property="maxQuantity" />
+   		<association property="coupon" column="couponId" javaType="Coupon">
+   			<id column="couponId" property="couponId"  />
+   			<result column="productId" property="productId"  />
+   			<result column="couponName" property="couponName"  />
+   			<result column="discountAmount" property="discountAmount"  />
+   			<result column="startDate" property="startDate"  />
+   			<result column="endDate" property="endDate"  />
+   		</association>
+    </resultMap>
+    <resultMap id="applianceProductResult" type="Product">
+    	<id column="productId" property="productId" />
+   		<result column="productName" property="productName" />
+   		<result column="description" property="description" />
+   		<result column="productPrice" property="productPrice" />
+   		<result column="color" property="color" />
+   		<result column="version" property="version" />
+   		<result column="size" property="size" />
+   		<result column="picUrl" property="picUrl" />
+   		<result column="maxQuantity" property="maxQuantity" />
+   		<result column="secondClassId" property="secondClassId" />
+   		<association property="coupon" column="couponId" javaType="Coupon">
+   			<id column="couponId" property="couponId"  />
+   			<result column="productId" property="productId"  />
+   			<result column="couponName" property="couponName"  />
+   			<result column="discountAmount" property="discountAmount"  />
+   			<result column="startDate" property="startDate"  />
+   			<result column="endDate" property="endDate"  />
+   			<association property="user" column="userId" javaType="User">
+   				<id column="userId" property="userId"  />
+   				<result column="userName" property="userName"  />
+   			</association>
+   		</association>
+   		<association property="comment" column="commentId" javaType="Comment">
+   			<id column="commentId" property="commentId"  />
+   			<result column="userId" property="userId"  />
+   			<result column="productId" property="productId"  />
+   			<result column="commentContent" property="commentContent"  />
+   			<result column="commentRank" property="commentRank"  />
+   			<result column="commentUrl" property="commentUrl"  />
+   			<result column="commentDate" property="commentDate"  />
+   		</association>
+    </resultMap>
+    <resultMap id="collocationProductResult" type="Product">
+    	<id column="productId" property="productId" />
+   		<result column="productName" property="productName" />
+   		<result column="description" property="description" />
+   		<result column="productPrice" property="productPrice" />
+   		<result column="color" property="color" />
+   		<result column="version" property="version" />
+   		<result column="size" property="size" />
+   		<result column="picUrl" property="picUrl" />
+   		<result column="maxQuantity" property="maxQuantity" />
+   		<result column="secondClassId" property="secondClassId" />
+   		<result column="productCommentNum" property="productCommentNum"  />
+   		<association property="coupon" column="couponId" javaType="Coupon">
+   			<id column="couponId" property="couponId"  />
+   			<result column="productId" property="productId"  />
+   			<result column="couponName" property="couponName"  />
+   			<result column="discountAmount" property="discountAmount"  />
+   			<result column="startDate" property="startDate"  />
+   			<result column="endDate" property="endDate"  />
+   			<association property="user" column="userId" javaType="User">
+   				<id column="userId" property="userId"  />
+   				<result column="userName" property="userName"  />
+   			</association>
+   		</association>
+   		<association property="comment" column="commentId" javaType="Comment">
+   			<id column="commentId" property="commentId"  />
+   			<result column="userId" property="userId"  />
+   			<result column="productId" property="productId"  />
+   			<result column="commentContent" property="commentContent"  />
+   			<result column="commentRank" property="commentRank"  />
+   			<result column="commentUrl" property="commentUrl"  />
+   			<result column="commentDate" property="commentDate"  />
+   		</association>
+    </resultMap>
+    
+</mapper>
