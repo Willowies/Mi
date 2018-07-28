@@ -1,13 +1,9 @@
 package com.mi.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.mi.model.bean.CartItem;
 import com.mi.model.bean.GroupProduct;
 import com.mi.model.bean.Product;
@@ -32,31 +27,13 @@ public class HomeController {
 	 * get CartItem data
 	 */
 	@RequestMapping("load_cart")
-	public @ResponseBody int loadData(HttpSession session){
+	public @ResponseBody int getCartItemsNum(HttpSession session){
 //		User userTemp = (User) session.getAttribute("user");//notice
 		User userTemp = new User();
 		userTemp.setUserId(1);
 		
-//		PrintWriter pw = response.getWriter();
-//		StringBuffer sBuffer = null;
-		
 		if(userTemp!=null) {
-			List<CartItem> list = getCartItems(userTemp);
-//			response.setContentType("application/json;charset=utf-8");
-//			sBuffer = new StringBuffer("");
-			/*for(int i=0;i<list.size();i++){
-				sBuffer.append("<p>");
-				sBuffer.append(i+1);
-				sBuffer.append("<img src=\"");
-				sBuffer.append(list.get(i).getProduct().getPicUrl());
-				sBuffer.append("\">");
-				sBuffer.append(list.get(i).getProduct().getProductName());
-				sBuffer.append(list.get(i).getProduct().getColor());
-				sBuffer.append(list.get(i).getProduct().getProductPrice());
-				sBuffer.append(" x ");
-				sBuffer.append(list.get(i).getQuantity());
-				sBuffer.append("</p>");
-			}*/
+			List<CartItem> list = homeservice.getCartItems(userTemp.getUserId());
 			int totalQuantityOfShopcart = 0;
 			for(int i=0;i<list.size();i++) {
 				totalQuantityOfShopcart += list.get(i).getQuantity();
@@ -65,15 +42,22 @@ public class HomeController {
 		}else {
 			//only get number of products in ShopCart
 			//i saved it in session
-			int numOfProInShopcart = getCartItems(session);
-//			response.setContentType("text/plain;charset=UTF-8");
-//			String jsonTotal = "{\"totalCartQuantity\":"+ numOfProInShopcart +"}";
-//			sBuffer.append("[");
-//			sBuffer.append(jsonTotal);
-//			sBuffer.append(",");
-//			System.out.println(sBuffer.toString());
+			int numOfProInShopcart = (int) session.getAttribute("cartItemNumber");
 			return numOfProInShopcart;
 		}
+	}
+	@RequestMapping("load_cartItem")
+	public @ResponseBody List<CartItem> getCartItems(HttpSession session){
+//		User userTemp = (User) session.getAttribute("user");//notice
+		User userTemp = new User();
+		userTemp.setUserId(1);
+		List<CartItem> list = null;
+		if(userTemp!=null) {
+			list = homeservice.getCartItems(userTemp.getUserId());
+		}else {
+			list = (ArrayList<CartItem>) session.getAttribute("cartItemList");
+		}
+		return list;
 	}
 	
 	/*
@@ -91,6 +75,13 @@ public class HomeController {
 		return homeservice.getPhoneProducts();
 	}
 	/*
+	 * get popular appliance product
+	 */
+	@RequestMapping("load_popularAppliance")
+	public @ResponseBody List<Product> getPopularProductsOfAppliance(){
+		return homeservice.getPopularProductsOfAppliance();
+	}
+	/*
 	 * get appliance product data
 	 */
 	@RequestMapping("load_appliance")
@@ -105,25 +96,14 @@ public class HomeController {
 			System.out.println(list.get(i).getProductName());
 		}
 		////////////
-		/*for(int i=0;i<list.size();i++) {
-			switch (list.get(i).getSecondClassId()) {
-			case 3:
-				System.out.println("Appliance_sort: TV");
-				list_tv.add(list.get(i));
-				break;
-			case 4:
-				System.out.println("Appliance_sort: LAPTOP");
-				list_laptop.add(list.get(i));
-				break;
-			default:
-				break;
-			}
-		}
-		List<List<Product>> list_sorted = new ArrayList<List<Product>>();
-		list_sorted.add(list_tv);
-		list_sorted.add(list_laptop);*/
-		
 		return list;
+	}
+	/*
+	 * get popular collocation product
+	 */
+	@RequestMapping("load_popularCollocation")
+	public @ResponseBody List<Product> getPopularProductsOfCollocation(){
+		return homeservice.getPopularProductsOfCollocation();
 	}
 	/*
 	 * get accessory product data
@@ -139,43 +119,50 @@ public class HomeController {
 		for(int i=0;i<list.size();i++) {
 			System.out.println(list.get(i).getProductName());
 		}
-		////////////
-		/*for(int i=0;i<list.size();i++) {
-			switch (list.get(i).getSecondClassId()) {
-			case 5:
-				System.out.println("Collocation_sort: TV");
-				list_patchBoard.add(list.get(i));
-				break;
-			case 6:
-				System.out.println("Collocation_sort: LAPTOP");
-				list_phoneShell.add(list.get(i));
-				break;
-			default:
-				break;
-			}
-		}
-		List<List<Product>> list_sorted = new ArrayList<List<Product>>();
-		list_sorted.add(list_patchBoard);
-		list_sorted.add(list_phoneShell);*/
-		
+		////////////		
 		return list;
 	}
-	
-	
-	
-	/**
-	 * get CartItem data
+	/*
+	 * get recommend product data
 	 */
-	public List<CartItem> getCartItems(User userTemp){
-		return homeservice.getCartItems(userTemp.getUserId());
+	@RequestMapping("load_recommend")
+	public @ResponseBody List<Product> getRecommendProducts(){
+		return homeservice.getRecommendProducts();
 	}
-	public int getCartItems(HttpSession session){
-		int numOfProInShopcart = (int) session.getAttribute("cartItemNumber");
-		return numOfProInShopcart;
+	/*
+	 * get popular product data
+	 */
+	@RequestMapping("load_popular")
+	public @ResponseBody List<Product> getPopularProducts(){
+		return homeservice.getPopularProducts();
+	}
+	/*
+	 * delete cart item data
+	 */
+	@RequestMapping("deleteCartItem")
+	public void deleteCartItem(HttpServletRequest request, HttpSession session) {
+		int cartItemId = Integer.parseInt((String) request.getAttribute("cartItemId"));
+		List<CartItem> list = (ArrayList<CartItem>) session.getAttribute("cartItems");
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getCartItem()==cartItemId) {
+				list.remove(i);
+			}
+		}
+	}
+	/*
+	 * get nav products data
+	 */
+	@RequestMapping("getNavmenu")
+	public List<Product> getNavProducts(HttpServletRequest request) {
+		String productName = (String)request.getAttribute("productName");
+		return homeservice.getNavProducts(productName);
 	}
 	
 	
 }
+
+
+
 
 
 

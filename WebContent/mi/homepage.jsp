@@ -46,7 +46,7 @@
 					<span class="cart-mini-num">（0）</span>
 				</a>
 				<div class="cart-menu" id="J_miniCartMenu" >
-				
+					
 				</div>
 			</div>
 			<div class="topbar-info">
@@ -388,32 +388,21 @@
 				</div>
 				<div class="content" style="background:#b68df9;">
 					<div class="goods-list">
-						<div class="all-goods-list" style="width: 2480px;height:320px;margin-left: 0px;transition: margin-left 0.5s ease;">
+						<div id="addGoodItemSecond" class="all-goods-list" style="width: 2480px;height:320px;margin-left: 0px;transition: margin-left 0.5s ease;">
 							<div class="goods-item">
 								<a href="" target="_blank"></a>
 								<div class="inner">
 									<div class="inner-img">
 										<img src="images/pms_1528718738.78643039!280x280.jpg" width="140px" height="140px">
 									</div>
-									<h3 class="title"><a> 红米6 全网通版 3GB内存 32GB </a></h3>
+									<h3 class="titleP"><a> 红米6 全网通版 3GB内存 32GB </a></h3>
 									<p class="price">
 										<span>769</span>&nbsp;<span>元</span>
 									</p>
 									<p class="rank">1643人好评</p>
 								</div>
 							</div>
-							<div class="goods-item">
-								
-							</div>
-							<div class="goods-item">
-								
-							</div>
-							<div class="goods-item">
-								
-							</div>
-							<div class="goods-item">
-								
-							</div>
+							
 						</div>
 					</div>
 				</div>

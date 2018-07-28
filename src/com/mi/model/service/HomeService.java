@@ -9,6 +9,7 @@ import com.mi.model.bean.CartItem;
 import com.mi.model.bean.GroupProduct;
 import com.mi.model.bean.Product;
 import com.mi.model.dao.CartItemDAO;
+import com.mi.model.dao.CommentDAO;
 import com.mi.model.dao.GroupProductDAO;
 import com.mi.model.dao.ProductDAO;
 
@@ -20,6 +21,8 @@ public class HomeService {
 	private GroupProductDAO groupProductDAO;
 	@Autowired
 	private ProductDAO productDAO;
+	@Autowired
+	private CommentDAO commentDAO;
 	
 	public List<CartItem> getCartItems(int userId){
 		return cartItemDAO.getCartItems(userId);
@@ -36,4 +39,20 @@ public class HomeService {
 	public List<Product> getCollocationProducts(){
 		return productDAO.getCollocationProducts();
 	}
+	public List<Product> getNavProducts(String navColumnName){
+		return productDAO.getNavProducts(navColumnName);
+	}
+	public List<Product> getRecommendProducts(){
+		return commentDAO.getRecommendProducts();
+	}
+	public List<Product> getPopularProducts(){
+		return commentDAO.getPopularProducts();
+	}
+	public List<Product> getPopularProductsOfAppliance(){
+		return commentDAO.getPopularProductsOfAppliance();
+	}
+	public List<Product> getPopularProductsOfCollocation(){
+		return commentDAO.getPopularProductsOfCollocation();
+	}
+	
 }

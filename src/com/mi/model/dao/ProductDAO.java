@@ -12,4 +12,6 @@ public interface ProductDAO {
 	
 	public List<Product> getCollocationProducts();
 	
+	public List<Product> getNavProducts(String navColumnName);
+	
 }

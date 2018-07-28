@@ -5,5 +5,7 @@ import java.util.List;
 import com.mi.model.bean.CartItem;
 
 public interface CartItemDAO {
+	
 	public List<CartItem> getCartItems(int userId);
+	
 }

@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	<result column="quantity" property="quantity"  />
     	<result column="userId" property="userId"  />
     	<result column="state" property="state"  />
-    	<association property="product" javaType="Product">
+    	<association property="product" column="productId" javaType="Product">
     		<id column="productId" property="productId" />
     		<result column="productName" property="productName" />
     		<result column="description" property="description" />
