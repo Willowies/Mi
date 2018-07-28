@@ -1,6 +1,7 @@
 package com.mi.model.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Comment {
 	
@@ -11,8 +12,30 @@ public class Comment {
 	private int commentRank;
 	private String commentUrl;
 	private Date commentDate;
+	private User user;
+	private Product product;
+	private List<CommentResponse> commentResponses;
 	
 	
+	
+	public List<CommentResponse> getCommentResponses() {
+		return commentResponses;
+	}
+	public void setCommentResponses(List<CommentResponse> commentResponses) {
+		this.commentResponses = commentResponses;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 	public int getCommentId() {
 		return commentId;
 	}

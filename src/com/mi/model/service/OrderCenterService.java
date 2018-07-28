@@ -25,12 +25,12 @@ public class OrderCenterService {
 
 	public Map<String, Object> getAllOrder(User user, int pageNum, int pageSize) {
 		Page<Order> page = PageHelper.startPage(pageNum, pageSize);
-		orderDAO.getAllOrder(user);
+		List<Order> os = orderDAO.getAllOrder(user);
 		List<Order> list = page.getResult();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("pageTotal", page.getPages());
-
+		System.out.println("size:"+list.size()+" size:"+os.size());
 		return map;
 	}
 	
