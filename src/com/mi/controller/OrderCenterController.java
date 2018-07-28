@@ -218,7 +218,7 @@ public class OrderCenterController extends BaseController {
 		//User user = (User)session.getAttribute("user");
 		
 		User user = new User();
-		user.setUserId(1);
+		user.setUserId(10001);
 		return user;
 	}
 

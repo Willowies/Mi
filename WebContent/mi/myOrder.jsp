@@ -36,7 +36,7 @@
 			<p>订单状态：${order.orderState} </p>
 			<p>订单金额：${order.orderState} </p>
 			<c:forEach items="${order.products}" var="product">
-				<p>商品名称：${product.product.productName} </p>
+				<p>商品名称：${product.product.productName} ${product.product.description}</p>
 				<p>商品数量：${product.quantity} </p>
 				<p>商品价格：${product.productPrice} </p>
 			</c:forEach>

@@ -3,6 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mi.model.dao.CommentDAO">
+
      <select id="getWaitCommentProduct" parameterType="user"  resultMap="productResult" flushCache="true" >
     	select count(commentId) as num,description,productId,productName,productPrice,picUrl,color,version,size from(
 			select 
@@ -365,3 +366,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
     
 </mapper>
+
