@@ -36,6 +36,7 @@ public class OrderCenterController extends BaseController {
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
 		request.setAttribute("orderList", orders);
+		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
 		return "forward:myOrder.jsp";
 	}
@@ -66,6 +67,7 @@ public class OrderCenterController extends BaseController {
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
 		request.setAttribute("orderList", orders);
+		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
 		return "forward:myOrder.jsp";
 	}
@@ -84,6 +86,7 @@ public class OrderCenterController extends BaseController {
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
 		request.setAttribute("orderList", orders);
+		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
 		return "forward:myOrder.jsp";
 	}
@@ -102,6 +105,7 @@ public class OrderCenterController extends BaseController {
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
 		request.setAttribute("orderList", orders);
+		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
 		return "forward:myOrder.jsp";
 	}
@@ -120,6 +124,7 @@ public class OrderCenterController extends BaseController {
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
 		request.setAttribute("orderList", orders);
+		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
 		return "forward:myOrder.jsp";
 	}
@@ -138,6 +143,7 @@ public class OrderCenterController extends BaseController {
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
 		request.setAttribute("orderList", orders);
+		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
 		return "forward:myOrder.jsp";
 	}
@@ -156,6 +162,7 @@ public class OrderCenterController extends BaseController {
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
 		request.setAttribute("orderList", orders);
+		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
 		return "forward:myOrder.jsp";
 	}
@@ -174,6 +181,7 @@ public class OrderCenterController extends BaseController {
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
 		request.setAttribute("orderList", orders);
+		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
 		return "forward:myOrder.jsp";
 	}
@@ -192,6 +200,7 @@ public class OrderCenterController extends BaseController {
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
 		request.setAttribute("orderList", orders);
+		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
 		return "forward:myOrder.jsp";
 	}
@@ -210,6 +219,7 @@ public class OrderCenterController extends BaseController {
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
 		request.setAttribute("orderList", orders);
+		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
 		return "forward:myOrder.jsp";
 	}

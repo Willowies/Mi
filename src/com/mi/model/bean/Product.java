@@ -15,7 +15,30 @@ public class Product {
 	private int productCommentNum;
 	private int secondClassId;
 	private Comment comment;
+	private int stock;
+	private ProductSecondClass secondClass;
+	private int likeProduct;
 	
+	
+	
+	public int getLikeProduct() {
+		return likeProduct;
+	}
+	public void setLikeProduct(int likeProduct) {
+		this.likeProduct = likeProduct;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public ProductSecondClass getSecondClass() {
+		return secondClass;
+	}
+	public void setSecondClass(ProductSecondClass secondClass) {
+		this.secondClass = secondClass;
+	}
 	public int getProductCommentNum() {
 		return productCommentNum;
 	}
