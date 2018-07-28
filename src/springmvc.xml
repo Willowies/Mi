@@ -50,6 +50,13 @@
 	<!-- 配置service不需要实现接口 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
     
+     <!-- 校验器注入到适配器中 -->
+  	<mvc:annotation-driven validator="validator"   ></mvc:annotation-driven>
+    
+    <!-- 配置校验器 -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+    	<property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+    </bean>
 </beans>   
 
 
