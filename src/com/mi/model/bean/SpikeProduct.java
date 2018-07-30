@@ -6,10 +6,14 @@ public class SpikeProduct {
 	private int spikeProductId;
 	private int productId;
 	private String productName;
+	private String version;
+	private String color;	
+	private String size;
+	private String description;
 	private float spikePrice;
 	private float previousPrice;
-	private Date spikeTime;
-	private int duringTime;
+	private Date startTime;
+	private Date endTime;
 	private int spikeQuantity;
 	private int currentSpikeNum;
 	private int spikeStatus;
@@ -45,18 +49,6 @@ public class SpikeProduct {
 	public void setPreviousPrice(float previousPrice) {
 		this.previousPrice = previousPrice;
 	}
-	public Date getSpikeTime() {
-		return spikeTime;
-	}
-	public void setSpikeTime(Date spikeTime) {
-		this.spikeTime = spikeTime;
-	}
-	public int getDuringTime() {
-		return duringTime;
-	}
-	public void setDuringTime(int duringTime) {
-		this.duringTime = duringTime;
-	}
 	public int getSpikeQuantity() {
 		return spikeQuantity;
 	}
@@ -81,7 +73,42 @@ public class SpikeProduct {
 	public void setPicUrl(String picUrl) {
 		this.picUrl = picUrl;
 	}
-	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	public String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
 	
 
 }
