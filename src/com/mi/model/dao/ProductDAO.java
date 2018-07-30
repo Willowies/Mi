@@ -14,4 +14,6 @@ public interface ProductDAO {
 	
 	public List<Product> getNavProducts(String navColumnName);
 	
+	public List<Product> getSecondClassProducts();
+	
 }

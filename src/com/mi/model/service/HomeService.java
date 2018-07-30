@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mi.model.bean.CartItem;
 import com.mi.model.bean.GroupProduct;
@@ -41,6 +42,9 @@ public class HomeService {
 	}
 	public List<Product> getNavProducts(String navColumnName){
 		return productDAO.getNavProducts(navColumnName);
+	}
+	public List<Product> getSecondClassProducts(){
+		return productDAO.getSecondClassProducts();
 	}
 	public List<Product> getRecommendProducts(){
 		return commentDAO.getRecommendProducts();

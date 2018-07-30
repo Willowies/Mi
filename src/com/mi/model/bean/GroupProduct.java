@@ -19,10 +19,10 @@ public class GroupProduct {
 	public void setGroupProductId(int groupProductId) {
 		this.groupProductId = groupProductId;
 	}
-	public Product getProductId() {
+	public Product getProduct() {
 		return product;
 	}
-	public void setProductId(Product product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 	public float getGroupPrice() {

@@ -8,7 +8,7 @@ function initData(){
 		async:true,
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"mi/load_cart.action",
+		url:"load_cart.action",
 		success:function(data){
 			console.log(data);
 //			$("#J_miniCartMenu").append(str);
@@ -21,13 +21,13 @@ function initData(){
 		async:true,
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"mi/load_gp.action",
+		url:"load_gp.action",
 		success:function(data){
 			console.log(data);
 			//images/T1bXKjBQAT1RXrhCrK.jpg 彩虹7号电池（10粒装）无汞无镉 环保电池
 			for(var i=0;i<data.length;i++){
 				var str="<div class='goods-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-					+"<img src='"+ data[i].productId.picUrl +"' width='160px' height='160px'></div>"
+					+"<img src='../"+ data[i].productId.picUrl +"' width='160px' height='160px'></div>"
 					+"<h3 class='title'><a>"+data[i].productId.productName+"</a></h3><p class='desc'>"+data[i].productId.description+"</p>"
 					+"<p class='price'><span>"+data[i].groupPrice+"</span>&nbsp;<span>元&nbsp;</span><del>"
 					+data[i].productId.productPrice+"元</del></p></div></div>";
@@ -41,12 +41,12 @@ function initData(){
 		async:true,
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"mi/load_phone.action",
+		url:"load_phone.action",
 		success:function(data){
 			console.log(data);
 			for(var i=0;i<data.length;i++){
 				var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-					+"<img src='"+data[i].picUrl + "' width='160px' height='160px'>"
+					+"<img src='../"+data[i].picUrl + "' width='160px' height='160px'>"
 					+"</div><h3 class='titleP'><a>"+data[i].productName+"</a></h3><p class='desc'>"+data[i].description
 					+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
 				$(".phoneInfo").append(str);
@@ -59,16 +59,16 @@ function initData(){
 		async:true,
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"mi/load_popularAppliance.action",
+		url:"load_popularAppliance.action",
 		success:function(data){
 			console.log(data);
 			console.log(data.length);
 //			for(var i=0;i<data.length;i++){
 //				var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-//					+"<img src='"+data[i].picUrl + "' width='150px' height='150px'>"
+//					+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
 //					+"</div><h3 class='titleP'><a>"+data[i].productName+"</a></h3><p class='desc'>"+data[i].description
 //					+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
-//				$(".elecInfo").append(str);
+//				$(".elecInfo").append(str);	
 //			}
 			console.log("Load finish--popular applianceproduct");
 		},
@@ -78,21 +78,21 @@ function initData(){
 		async:true,
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"mi/load_appliance.action",
+		url:"load_appliance.action",
 		success:function(data){
 			console.log(data);
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
 				if(data[i].secondClassId==1){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-						+"<img src='"+data[i].picUrl + "' width='150px' height='150px'>"
+						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
 						+"</div><h3 class='titleP'><a>"+data[i].productName+"</a></h3><p class='desc'>"+data[i].description
 						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
 					$(".elecInfo").append(str);
 				}
 				if(data[i].secondClassId==2){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-						+"<img src='"+data[i].picUrl + "' width='150px' height='150px'>"
+						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
 						+"</div><h3 class='titleP'><a>"+data[i].productName+"</a></h3><p class='desc'>"+data[i].description
 						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
 					$(".elecInfo").append(str);
@@ -106,13 +106,13 @@ function initData(){
 		async:true,
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"mi/load_popularCollocation.action",
+		url:"load_popularCollocation.action",
 		success:function(data){
 			console.log(data);
 			console.log(data.length);
 //			for(var i=0;i<data.length;i++){
 //				var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-//					+"<img src='"+data[i].picUrl + "' width='150px' height='150px'>"
+//					+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
 //					+"</div><h3 class='titleP'><a>"+data[i].productName+"</a></h3><p class='price'>"
 //					+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
 //				if(data[i].productCommentNum!=0){
@@ -130,14 +130,14 @@ function initData(){
 		async:true,
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"mi/load_collocation.action",
+		url:"load_collocation.action",
 		success:function(data){
 			console.log(data);
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
 				if(data[i].secondClassId==1){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-						+"<img src='"+data[i].picUrl + "' width='150px' height='150px'>"
+						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
 						+"</div><h3 class='titleP'><a>"+data[i].productName+"</a></h3><p class='price'>"
 						+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
 					if(data[i].productCommentNum!=0){
@@ -149,7 +149,7 @@ function initData(){
 				}
 				if(data[i].secondClassId==2){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-						+"<img src='"+data[i].picUrl + "' width='150px' height='150px'>"
+						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
 						+"</div><h3 class='titleP'><a>"+data[i].productName+"</a></h3><p class='price'>"
 						+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>"
 						if(data[i].productCommentNum!=0){
@@ -168,13 +168,13 @@ function initData(){
 		async:true,
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"mi/load_recommend.action",
+		url:"load_recommend.action",
 		success:function(data){
 			console.log(data);
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
 				var str="<div class='goods-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-					+"<img src='"+data[i].picUrl + "' width='140px' height='140px'>"
+					+"<img src='../"+data[i].picUrl + "' width='140px' height='140px'>"
 					+"</div><h3 class='titleP'><a>"+data[i].productName+"</a></h3><p class='price'>"
 					+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
 				if(data[i].productCommentNum!=0){
@@ -192,12 +192,12 @@ function initData(){
 		async:true,
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"mi/load_popular.action",
+		url:"load_popular.action",
 		success:function(data){
 			console.log(data);
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
-				var str="<div class='contentItem'><div class='picItem'><img src='"
+				var str="<div class='contentItem'><div class='picItem'><img src='../"
 					+data[i].picUrl+"' width='296' height='220' alt='"+data[i].productName
 					+"'></div><p class='review'>"+data[i].comment.commentContent+"</p><p class='author'>"
 					+"来自于 "+data[i].coupon.user.userName+" 的评价 </p><div class='info'><h3 class='title'>"
@@ -224,7 +224,7 @@ $(document).ready(function(){
 			async:true,
 			dataType:"json",
 			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-			url:"mi/load_cartItem.action",
+			url:"load_cartItem.action",
 			success:function(data){
 				console.log(data);
 //				$("#J_miniCartMenu").append(str);
@@ -247,7 +247,7 @@ $(document).ready(function(){
 		$("#J_miniCartTrigger").removeClass("topbar-cart-active");
 	});
 	
-	$("#J_miniCartMenu").hover(function(e){
+	$("#J_miniCartMenu").hover(function(){
 //		var ev = $(".cart-menu").children()?window.event:e;
 //		var v_id = $(ev.target);
 //		v_id.css("color","#000");
@@ -256,36 +256,55 @@ $(document).ready(function(){
 		$("#J_miniCartMenu i").css("color","#b0b0b0");
 	});
 	
-	
 	/* navigator */
 	$("#navItem1").hover(function(){
-		$("#navItem1>div.header-nav-menu").slideDown();
 		$.ajax({
 			type:"POST",
 			async:true,
 			data:{
-				productName:$("#navItem1").val()
+				productName:"小米手机"
 				},
 			dataType:"json",
 			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-			url:"mi/getNavmenu.action",
+			url:"getNavmenu.action",
 			success:function(data){
-//				console.log(data+"delete success");
-				console.log("delete finish--shopping cartItem");
+				console.log(data);
+				console.log("get Navmenu finish--nav product ");
 			},
 		});
-	});
+		$("#navItem1>div.header-nav-menu").slideDown();
 	},function(){
 		$("#navItem1>div.header-nav-menu").slideUp();
 	});
-	
 	/* category-item */
-	$("#category-item1").mouseover(function(){
+	$("#category-item1").hover(function(){
 		$("#category-item1").addClass("category-item-active");
 		$("#category-item1>div.children").css("display","flex");
-	$("#category-item1").mouseout(function(){
+		$.ajax({
+			type:"POST",
+			async:true,
+			data:{
+				cartItemId:$("#cartItemId0").html()
+				},
+			dataType:"json",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+			url:"getCategorymenu.action",
+			success:function(data){
+				console.log(data);
+				for(var i=0;i<data.length;i++){
+					var str="<div class='childrenItem'><a class='link' href=''>"
+						+"<img alt='"+data[i].productName+"' src='../"+data[i].picUrl+"' width='40' height='40'><span class='text1'>"
+						+data[i].productName+"</span></a></div>";
+					$(".children").append(str);
+				}
+				console.log("get Categorymenu finish--category menu product");
+			},
+		});
+	},function(){
 		$("#category-item1").removeClass("category-item-active");
 		$("#category-item1>div.children").css("display","none");
+		$(".children").empty();
+		console.log("sss");
 	});
 	
 });
@@ -300,11 +319,10 @@ function deleteCartItem0(){
 			},
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"mi/deleteCartItem.action",
+		url:"deleteCartItem.action",
 		success:function(data){
-//			console.log(data+"delete success");
+//				console.log(data+"delete success");
 			console.log("delete finish--shopping cartItem");
 		},
 	});
 }
-

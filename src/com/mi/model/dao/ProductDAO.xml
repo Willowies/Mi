@@ -32,7 +32,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by l.productId
     </select>
     <select id="getNavProducts" parameterType="String" resultMap="navProductResult" flushCache="true">
-    	
+    	select * from(
+				select e.*, f.couponId, f.discountAmount, f.startDate, f.endDate, f.couponName 
+				from product as e left join coupon as f on e.productId=f.productId 
+				where e.productName like '小米%' and e.secondClassId=1
+				order by e.productPrice)as l
+		group by l.productName
+		limit 6
+    </select>
+    <select id="getSecondClassProducts" resultMap="secondClassProductResult" flushCache="true">
+		select e.*
+		from product as e 
+		where e.secondClassId=1
     </select>
     <resultMap id="phoneProductResult" type="Product">
    		<id column="productId" property="productId" />
@@ -139,5 +150,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    			<result column="endDate" property="endDate"  />
    		</association>
     </resultMap>
-    
+    <resultMap id="secondClassProductResult" type="Product">
+    	<id column="productId" property="productId" />
+   		<result column="productName" property="productName" />
+   		<result column="description" property="description" />
+   		<result column="productPrice" property="productPrice" />
+   		<result column="color" property="color" />
+   		<result column="version" property="version" />
+   		<result column="size" property="size" />
+   		<result column="picUrl" property="picUrl" />
+   		<result column="maxQuantity" property="maxQuantity" />
+    </resultMap>
 </mapper>

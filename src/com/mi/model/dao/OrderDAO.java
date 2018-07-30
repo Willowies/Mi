@@ -20,5 +20,6 @@ public interface OrderDAO {
 
 	public Order getOrderDetailsById(int orderId);
 	
+	public void updateGroupInfo(int groupId, int userId);
 
 }

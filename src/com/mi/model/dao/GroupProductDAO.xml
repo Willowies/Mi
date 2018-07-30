@@ -9,6 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select c.groupProductId, c.groupPrice, c.leastGroupNum, c.maxGroupProductNum, c.beginDate, c.endDate, d.* 
 		from groupproduct as c, product as d 
 		where c.productId=d.productId
+		LIMIT 8
+    </select>
+    <select id="getAllGroupProducts" resultMap="groupProductResult" flushCache="true" >
+		select c.groupProductId, c.groupPrice, c.leastGroupNum, c.maxGroupProductNum, c.beginDate, c.endDate, d.* 
+		from groupproduct as c, product as d 
+		where c.productId=d.productId
     </select>
     <resultMap id="groupProductResult" type="GroupProduct">
     	<id column="groupProductId" property="groupProductId"  />

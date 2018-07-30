@@ -4,8 +4,10 @@ import java.util.List;
 
 public class Group {
 	private int groupId;
-	private int productId;
+	private GroupProduct groupProduct;
+	private String creator;
 	private List<User> groupMember;
+	private int currentQuantity;
 	
 	public int getGroupId() {
 		return groupId;
@@ -13,16 +15,28 @@ public class Group {
 	public void setGroupId(int groupId) {
 		this.groupId = groupId;
 	}
-	public int getProductId() {
-		return productId;
+	public GroupProduct getGroupProduct() {
+		return groupProduct;
 	}
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setGroupProduct(GroupProduct groupProduct) {
+		this.groupProduct = groupProduct;
+	}
+	public String getCreator() {
+		return creator;
+	}
+	public void setCreator(String creator) {
+		this.creator = creator;
 	}
 	public List<User> getGroupMember() {
 		return groupMember;
 	}
 	public void setGroupMember(List<User> groupMember) {
 		this.groupMember = groupMember;
+	}
+	public int getCurrentQuantity() {
+		return currentQuantity;
+	}
+	public void setCurrentQuantity(int currentQuantity) {
+		this.currentQuantity = currentQuantity;
 	}
 }

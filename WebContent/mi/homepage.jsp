@@ -4,24 +4,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<%
-			String path =request.getContextPath();
-	      	String basePath =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"; 
-	     %>
-	    <base href=<%=basePath%>>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>首页</title>
-		<link href="css/Reset.css" type="text/css" rel="stylesheet" />
-		<link href="css/homepage.css" type="text/css" rel="stylesheet"/>
-		<link href="css/font-awesome.css" rel="stylesheet">
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/homepage.js"></script>
+		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
+		<link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
+		<link href="../css/font-awesome.css" rel="stylesheet">
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/homepage.js"></script>
 	</head>
 <body>
 	<div class="site-topbar">
 		<div class="container">
 			<div class="topbar-nav">
-				<a rel="nofollow" href="/Mi/mi/homepage.jsp" >小米商城</a>
+				<a rel="nofollow" href="../mi/homepage.jsp" >小米商城</a>
 				<span class="sep">|</span>
 				<a rel="nofollow" href="https://www.miui.com/" target="_blank">MIUI</a>
 			  	<span class="sep">|</span>
@@ -63,7 +58,7 @@
 	<div class="site-header">
 		<div class="container">
 			<div class="header-logo">
-				<a href="/Mi/mi/homepage.jsp"><img src="images/logo-footer.png"  alt="小米logo" /></a>
+				<a href="homepage.jsp"><img src="../images/logo-footer.png"  alt="小米logo" /></a>
 			</div>
 			<div class="header-nav">
 				<ul class="nav-list">
@@ -79,66 +74,7 @@
 										<i class="fa fa-chevron-right"></i>
 									</a>
 									<div class="children">
-										<div class="childrenItem">
-											<a class="link" href="">
-												<img alt="小米8" src="images/m8-80.png" width="40" height="40">
-												<span class="text1">小米8</span>
-											</a>
-										</div>
-										<div class="childrenItem">
-											<a class="link" href="">
-												<img alt="小米8" src="images/m8se-80.png" width="40" height="40">
-												<span class="text1">小米8</span>
-											</a>
-										</div>
-										<div class="childrenItem">
-											<a class="link" href="">
-												<img alt="小米8" src="images/m8se-80.png" width="40" height="40">
-												<span class="text1">小米8</span>
-											</a>
-										</div>
-										<div class="childrenItem">
-											<a class="link" href="">
-												<img alt="小米8" src="images/m8se-80.png" width="40" height="40">
-												<span class="text1">小米8</span>
-											</a>
-										</div>
-										<div class="childrenItem">
-											<a class="link" href="">
-												<img alt="小米8" src="images/m8se-80.png" width="40" height="40">
-												<span class="text1">小米8</span>
-											</a>
-										</div>
-										<div class="childrenItem">
-											<a class="link" href="">
-												<img alt="小米8" src="images/m8se-80.png" width="40" height="40">
-												<span class="text1">小米8</span>
-											</a>
-										</div>
-										<div class="childrenItem">
-											<a class="link" href="">
-												<img alt="小米8" src="images/m8se-80.png" width="40" height="40">
-												<span class="text1">小米8</span>
-											</a>
-										</div>
-										<div class="childrenItem">
-											<a class="link" href="">
-												<img alt="小米8" src="images/m8se-80.png" width="40" height="40">
-												<span class="text1">小米8</span>
-											</a>
-										</div>
-										<div class="childrenItem">
-											<a class="link" href="">
-												<img alt="小米8" src="images/m8se-80.png" width="40" height="40">
-												<span class="text1">小米8</span>
-											</a>
-										</div>
-										<div class="childrenItem">
-											<a class="link" href="">
-												<img alt="小米8" src="images/m8se-80.png" width="40" height="40">
-												<span class="text1">小米8</span>
-											</a>
-										</div>
+										
 									</div>
 								</li>
 								<li id="category-item2" class="category-item">
@@ -181,7 +117,7 @@
 				                	<li class="first">
 										<div class="figure figure-thumb">
 											<a href="https://www.mi.com/mi8/">
-												<img src="images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
+												<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
 											</a>
 				                        </div>
 				                        <div class="title">
@@ -193,7 +129,7 @@
 				                		<i class="line"></i>
 										<div class="figure figure-thumb">
 											<a href="https://www.mi.com/mi8/">
-												<img src="images/pc-320-220-mi8se.png" alt="小米8" width="160" height="110">
+												<img src="../images/pc-320-220-mi8se.png" alt="小米8" width="160" height="110">
 											</a>
 				                        </div>
 				                        <div class="title">
@@ -205,7 +141,7 @@
 				                		<i class="line"></i>
 										<div class="figure figure-thumb">
 											<a href="https://www.mi.com/mi8/">
-												<img src="images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
+												<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
 											</a>
 				                        </div>
 				                        <div class="title">
@@ -217,7 +153,7 @@
 				                		<i class="line"></i>
 										<div class="figure figure-thumb">
 											<a href="https://www.mi.com/mi8/">
-												<img src="images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
+												<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
 											</a>
 				                        </div>
 				                        <div class="title">
@@ -229,7 +165,7 @@
 				                		<i class="line"></i>
 										<div class="figure figure-thumb">
 											<a href="https://www.mi.com/mi8/">
-												<img src="images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
+												<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
 											</a>
 				                        </div>
 				                        <div class="title">
@@ -241,7 +177,7 @@
 				                		<i class="line"></i>
 										<div class="figure figure-thumb">
 											<a href="https://www.mi.com/mi8/">
-												<img src="images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
+												<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
 											</a>
 				                        </div>
 				                        <div class="title">
@@ -313,7 +249,7 @@
 							<a href="" target="_blank"></a>
 							<div class="inner">
 								<div class="inner-img">
-									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+									<img src="../images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
 								</div>
 								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
 								<p class="desc">全高清屏 / 人工智能语音</p>
@@ -326,7 +262,7 @@
 							<a href="" target="_blank"></a>
 							<div class="inner">
 								<div class="inner-img">
-									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+									<img src="../images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
 								</div>
 								<h3 class="title"><a>小米电视4A 43英寸青春版</a></h3>
 								<p class="desc">全高清屏 / 人工智能语音</p>
@@ -352,7 +288,7 @@
 							<a href="" target="_blank"></a>
 							<div class="inner">
 								<div class="inner-img">
-									<img src="images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
+									<img src="../images/pms_1524883847.49276938!220x220.jpg" width="150px" height="150px">
 								</div>
 								<h3 class="titleP"><a>小米电视4A 43英寸青春版</a></h3>
 								<p class="price">
@@ -366,7 +302,7 @@
 							<a href="" target="_blank"></a>
 							<div class="inner">
 								<div class="inner-img">
-									<img src="images/pms_1527840795.6763911.jpg" width="150px" height="150px">
+									<img src="../images/pms_1527840795.6763911.jpg" width="150px" height="150px">
 								</div>
 								<h3 class="titleP"><a>小米8 硅胶保护套</a></h3>
 								<p class="price">
@@ -393,7 +329,7 @@
 								<a href="" target="_blank"></a>
 								<div class="inner">
 									<div class="inner-img">
-										<img src="images/pms_1528718738.78643039!280x280.jpg" width="140px" height="140px">
+										<img src="../images/pms_1528718738.78643039!280x280.jpg" width="140px" height="140px">
 									</div>
 									<h3 class="titleP"><a> 红米6 全网通版 3GB内存 32GB </a></h3>
 									<p class="price">
@@ -416,7 +352,7 @@
 					<div class="contentin">
 						<div class="contentItem">
 							<div class="picItem">
-								<img src="images/54e35fdd-bc68-4a89-bad7-c9c3bb2fc6fe.jpeg" width="296" height="220" alt="米家压力IH电饭煲">
+								<img src="../images/54e35fdd-bc68-4a89-bad7-c9c3bb2fc6fe.jpeg" width="296" height="220" alt="米家压力IH电饭煲">
 							</div>
 							<p class="review">包装很让人感动，式样也很可爱，做出的饭全家人都爱吃，超爱五星！手机控制还是不太熟练，最主要是没有连接...</p>
 							<p class="author"> 来自于 HZG 的评价 </p>
@@ -444,31 +380,31 @@
 				<ul class="list-service">
 					<li style="border-left:0;">
 						<div style="margin-right: auto;margin-left: auto;height: 25px;width: 126px;">
-							<img src="images/wrench.png" width="25px" height="25px" style="float:left">
+							<img src="../images/wrench.png" width="25px" height="25px" style="float:left">
 							<a rel="nofollow" href="" target="_blank">预约维修服务</a>
 						</div>
 					</li>
 					<li>
 						<div style="margin-right: auto;margin-left: auto;height: 25px;width: 135px;">
-							<img src="images/seven.png" width="25px" height="25px" style="float:left">
+							<img src="../images/seven.png" width="25px" height="25px" style="float:left">
 							<a rel="nofollow" href="" target="_blank">7天无理由退货</a>
 						</div>
 					</li>
 					<li>
 						<div style="margin-right: auto;margin-left: auto;height: 25px;width: 127px;">
-							<img src="images/fifteen.png" width="25px" height="25px" style="float:left">
+							<img src="../images/fifteen.png" width="25px" height="25px" style="float:left">
 							<a rel="nofollow" href="" target="_blank">15天免费换货</a>
 						</div>
 					</li>
 					<li>
 						<div style="margin-right: auto;margin-left: auto;height: 25px;width: 121px;">
-							<img src="images/present.png" width="25px" height="25px" style="float:left">
+							<img src="../images/present.png" width="25px" height="25px" style="float:left">
 							<a rel="nofollow" href="" target="_blank">满150元包邮</a>
 						</div>
 					</li>
 					<li>
 						<div style="margin-right: auto;margin-left: auto;height: 25px;width: 148px;">
-							<img src="images/location.png" width="25px" height="25px" style="float:left">
+							<img src="../images/location.png" width="25px" height="25px" style="float:left">
 							<a rel="nofollow" href="" target="_blank">520余家售后网点</a>
 						</div>
 					</li>
@@ -551,11 +487,11 @@
 				</p>
 			</div>
 			<div class="info-links">
-                   <a rel="nofollow" href="" target="_blank"><img src="images/truste.png" alt="TRUSTe Privacy Certification"></a>
-                   <a rel="nofollow" href="" target="_blank" ><img src="images/v-logo-2.png" alt="诚信网站"></a>
-                   <a rel="nofollow" href="" target="_blank" ><img src="images/v-logo-1.png" alt="可信网站"></a>
-                   <a rel="nofollow" href="" target="_blank" ><img src="images/v-logo-3.png" alt="网上交易保障中心"></a>
-                   <a rel="nofollow" href="" target="_blank" ><img src="images/ba10428a4f9495ac310fd0b5e0cf8370.png" alt="诚信经营 放心消费"></a>
+                   <a rel="nofollow" href="" target="_blank"><img src="../images/truste.png" alt="TRUSTe Privacy Certification"></a>
+                   <a rel="nofollow" href="" target="_blank" ><img src="../images/v-logo-2.png" alt="诚信网站"></a>
+                   <a rel="nofollow" href="" target="_blank" ><img src="../images/v-logo-1.png" alt="可信网站"></a>
+                   <a rel="nofollow" href="" target="_blank" ><img src="../images/v-logo-3.png" alt="网上交易保障中心"></a>
+                   <a rel="nofollow" href="" target="_blank" ><img src="../images/ba10428a4f9495ac310fd0b5e0cf8370.png" alt="诚信经营 放心消费"></a>
 			</div>
 		</div>
 		<div class="slogan ir">探索黑科技，小米为发烧而生</div>
