@@ -18,7 +18,16 @@ public class SpikeProduct {
 	private int currentSpikeNum;
 	private int spikeStatus;
 	private String picUrl;
+	private int stock;
 	
+	
+	
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 	public int getSpikeProductId() {
 		return spikeProductId;
 	}

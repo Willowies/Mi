@@ -11,8 +11,16 @@ public class GroupProduct {
 	private int maxGroupProductNum;
 	private Date beginDate;
 	private Date endDate;
+	private int stock;
 	private Timer remainTime;
 	
+	
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 	public int getGroupProductId() {
 		return groupProductId;
 	}
