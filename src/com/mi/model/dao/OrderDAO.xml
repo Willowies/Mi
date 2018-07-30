@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.OrderDAO">
+     
+    <select id="getOrderByProductName" parameterType="map"  resultMap="orderResult" flushCache="true" >
+    	select 
+    		a.*,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+			c.orderItemId,c.quantity,c.sn,c.productPrice,
+			d.productId,d.productName,d.description,d.productPrice as productOriginalPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+			e.discountAmount,e.couponName,e.startDate,e.endDate,
+			f.invoiceType,f.receiverType,f.content,f.taxNum,f.receivePhone,f.receiveEmail,f.orderId as invoiceOrderId,f.createDate as invoiceDate
+    	from mi.user b,mi.orderproduct c,mi.product d,mi.order a LEFT JOIN mi.coupon e on a.couponId=e.couponId,mi.invoice f 
+    	where (a.orderType=1 or a.orderType=2) and a.userId=#{user.userId} and a.userId=b.userId 
+    	and a.orderId=c.orderId and c.productId=d.productId and a.invoiceId=f.invoiceId
+    	and a.orderId in 
+    	( select DISTINCT(aa.orderId) from mi.order aa left join mi.orderProduct ab on aa.orderId=ab.orderId left join mi.product ac on ab.productId=ac.productId where ac.productName like "%"#{productName}"%")
+    </select>
+    
+    <select id="getAllOrder" parameterType="user"  resultMap="orderResult" flushCache="true" >
+    	select 
+    		a.*,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+			c.orderItemId,c.quantity,c.sn,c.productPrice,
+			d.productId,d.productName,d.description,d.productPrice as productOriginalPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+			e.discountAmount,e.couponName,e.startDate,e.endDate,
+			f.invoiceType,f.receiverType,f.content,f.taxNum,f.receivePhone,f.receiveEmail,f.orderId as invoiceOrderId,f.createDate as invoiceDate
+    	from mi.user b,mi.orderproduct c,mi.product d,mi.order a LEFT JOIN mi.coupon e on a.couponId=e.couponId,mi.invoice f 
+    	where (a.orderType=1 or a.orderType=2) and a.userId=#{userId} and a.userId=b.userId 
+    	and a.orderId=c.orderId and c.productId=d.productId and a.invoiceId=f.invoiceId
+    </select>
+    
+    <select id="getOrderDetailsById"  resultMap="orderResult" flushCache="true" >
+    	select 
+    		a.*,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+			c.orderItemId,c.quantity,c.sn,c.productPrice,
+			d.productId,d.productName,d.description,d.productPrice as productOriginalPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+			e.discountAmount,e.couponName,e.startDate,e.endDate,
+			f.invoiceType,f.receiverType,f.content,f.taxNum,f.receivePhone,f.receiveEmail,f.orderId as invoiceOrderId,f.createDate as invoiceDate
+    	from mi.user b,mi.orderproduct c,mi.product d,mi.order a LEFT JOIN mi.coupon e on a.couponId=e.couponId,mi.invoice f 
+    	where a.userId=b.userId and a.orderId=#{orderId}
+    	and a.orderId=c.orderId and c.productId=d.productId and a.invoiceId=f.invoiceId
+    </select>
+    
+    <select id="getOrderByState" parameterType="map"  resultMap="orderResult" flushCache="true" >
+    	select 
+    		a.*,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+			c.orderItemId,c.quantity,c.sn,c.productPrice,
+			d.productId,d.productName,d.description,d.productPrice as productOriginalPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+			e.discountAmount,e.couponName,e.startDate,e.endDate,
+			f.invoiceType,f.receiverType,f.content,f.taxNum,f.receivePhone,f.receiveEmail,f.orderId as invoiceOrderId,f.createDate as invoiceDate
+    	from mi.user b,mi.orderproduct c,mi.product d,mi.order a LEFT JOIN mi.coupon e on a.couponId=e.couponId,mi.invoice f 
+    	where (a.orderType=1 or a.orderType=2) and a.userId=#{user.userId} and a.orderState=#{orderState}
+    	and a.userId=b.userId 
+    	and a.orderId=c.orderId and c.productId=d.productId and a.invoiceId=f.invoiceId
+    </select>
+    
+    <select id="getAllGroupOrder" parameterType="user"  resultMap="orderResult" flushCache="true" >
+    	select 
+    		a.*,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+			c.orderItemId,c.quantity,c.sn,c.productPrice,
+			d.productId,d.productName,d.description,d.productPrice as productOriginalPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+			e.discountAmount,e.couponName,e.startDate,e.endDate,
+			f.invoiceType,f.receiverType,f.content,f.taxNum,f.receivePhone,f.receiveEmail,f.orderId as invoiceOrderId,f.createDate as invoiceDate
+    	from mi.order a LEFT JOIN mi.coupon e on a.couponId=e.couponId,mi.user b,mi.orderproduct c,mi.product d,mi.invoice f
+    	where a.orderType=3 and a.userId=#{userId} and a.userId=b.userId 
+    	and a.orderId=c.orderId and c.productId=d.productId and a.invoiceId=f.invoiceId
+    </select>
+    
+    <select id="getGroupOrderByState" parameterType="map"  resultMap="orderResult" flushCache="true" >
+    	select 
+    		a.*,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+			c.orderItemId,c.quantity,c.sn,c.productPrice,
+			d.productId,d.productName,d.description,d.productPrice as productOriginalPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+			e.discountAmount,e.couponName,e.startDate,e.endDate,
+			f.invoiceType,f.receiverType,f.content,f.taxNum,f.receivePhone,f.receiveEmail,f.orderId as invoiceOrderId,f.createDate as invoiceDate
+    	from mi.user b,mi.orderproduct c,mi.product d,mi.order a LEFT JOIN mi.coupon e on a.couponId=e.couponId,mi.invoice f 
+    	where a.orderType=3 and a.userId=#{user.userId} and a.orderState=#{orderState}
+    	and a.userId=b.userId 
+    	and a.orderId=c.orderId and c.productId=d.productId and a.invoiceId=f.invoiceId
+    </select>
+    
+    <resultMap type="order" id="orderResult">
+     	<result column="orderId" property="orderId" />
+    	<result column="receiverName" property="receiverName" />
+    	<result column="receiverPhone" property="receiverPhone" />
+    	<result column="receiverAddress" property="receiverAddress" />
+    	<result column="sendPeroid" property="sendPeroid" />
+    	<result column="orderType" property="orderType" />
+    	<result column="orderState" property="orderState" />
+    	<result column="deliveryFee" property="deliveryFee" />
+    	<result column="actualTotal" property="actualTotal" />
+    	<result column="createDate" property="createDate" />
+    	<association property="user" column="userId" resultMap="userResult" />
+    	<association property="coupon" column="couponId" resultMap="couponResult" />
+    	<association property="invoice" column="invoiceId" resultMap="invoiceResult" />
+    	<collection property="products" resultMap="orderProductResult"/>
+    </resultMap>
+    
+    <resultMap type="invoice" id="invoiceResult">
+    	<result column="invoiceId" property="invoiceId" />
+    	<result column="invoiceType" property="invoiceType" />
+    	<result column="receiverType" property="receiverType" />
+    	<result column="content" property="content" />
+    	<result column="taxNum" property="taxNum" />
+    	<result column="receivePhone" property="receivePhone" />
+    	<result column="receiveEmail" property="receiveEmail" />
+    	<result column="receiver" property="receiver" />
+    	<result column="orderId" property="orderId" />
+    	<result column="invoiceDate" property="createDate" />
+    </resultMap>
+    
+    <resultMap type="coupon" id="couponResult">
+    	<result column="couponId" property="couponId" />
+    	<result column="productId" property="productId" />
+    	<result column="couponName" property="couponName" />
+    	<result column="discountAmount" property="discountAmount" />
+    	<result column="startDate" property="startDate" />
+    	<result column="endDate" property="endDate" />
+    </resultMap>
+    
+    <resultMap type="orderProduct" id="orderProductResult">
+    	<result column="orderItemId" property="orderItemId" />
+    	<result column="quantity" property="quantity" />
+    	<result column="sn" property="sn" />
+    	<result column="productPrice" property="productPrice" />
+    	<result column="orderId" property="orderId" />
+    	<association property="product" column="productId" resultMap="productResult" />
+    </resultMap>
+    
+    <resultMap type="product" id="productResult">
+    	<result column="productId" property="productId" />
+    	<result column="productName" property="productName" />
+    	<result column="productOriginalPrice" property="productPrice" />
+    	<result column="description" property="description" />
+    	<result column="color" property="color" />
+    	<result column="version" property="version" />
+    	<result column="size" property="size" />
+    	<result column="picUrl" property="picUrl" />
+    	<result column="maxQuantity" property="maxQuantity" />
+    </resultMap>
+    
+    <resultMap type="user" id="userResult">
+    	<result column="userId" property="userId" />
+    	<result column="userName" property="userName" />
+    	<result column="userBirth" property="userBirth" />
+    	<result column="userSex" property="userSex" />
+    	<result column="userPhone" property="userPhone" />
+    	<result column="userEmail" property="userEmail" />
+    	<result column="userPassword" property="userPassword" />
+    	<result column="userCard" property="userCard" />
+    	<result column="userHead" property="userHead" />
+    </resultMap>
+    
+    
+    
+</mapper>
+
+
+
+
+
+
+
+

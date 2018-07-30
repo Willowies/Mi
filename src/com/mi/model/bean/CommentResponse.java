@@ -10,6 +10,15 @@ public class CommentResponse {
 	private int userId;
 	private String commentContent;
 	private Date commentDate;
+	private User user;
+	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getCommentResponseId() {
 		return commentResponseId;
 	}

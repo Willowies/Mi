@@ -16,7 +16,26 @@
 						http://www.springframework.org/schema/mvc
 						http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	  
-    <mvc:annotation-driven ></mvc:annotation-driven>
+    <mvc:annotation-driven >
+    	<mvc:message-converters> 
+		  <bean class="org.springframework.http.converter.StringHttpMessageConverter"> 
+		    <property name="supportedMediaTypes"> 
+		       <list>
+		       <value>application/json;charset=UTF-8</value>
+		       <value>text/html;charset=UTF-8</value>
+		       <value>text/plain;charset=UTF-8</value> 
+		       </list>
+		    </property> 
+		  </bean> 
+		</mvc:message-converters> 
+    </mvc:annotation-driven>
+    
+     <!-- 配置文件上传解析器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<property name="maxUploadSize">
+    		<value>5242880</value>
+    	</property>
+    </bean>
         
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	    	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
@@ -31,6 +50,13 @@
 	<!-- 配置service不需要实现接口 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
     
+     <!-- 校验器注入到适配器中 -->
+  	<mvc:annotation-driven validator="validator"   ></mvc:annotation-driven>
+    
+    <!-- 配置校验器 -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+    	<property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+    </bean>
 </beans>   
 
 

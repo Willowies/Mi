@@ -9,6 +9,7 @@ public class Coupon {
 	private float discountAmount;
 	private Date startDate;
 	private Date endDate;
+	private User user;
 	
 	public int getCouponId() {
 		return couponId;
@@ -45,5 +46,11 @@ public class Coupon {
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

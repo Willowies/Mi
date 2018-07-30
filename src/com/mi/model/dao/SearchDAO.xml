@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.SearchDAO">
+     
+    
+    <select id="getSearchProducts" resultMap="productResult" flushCache="true" >
+    select T.*,count(T.commentId) as num from (
+		select
+		 a.*,
+		 b.firstClassId,b.secondClassName,
+		 c.commentId,c.commentContent
+		from mi.product a left join mi.productsecondclass b on a.secondClassId=b.secondClassId
+		left join mi.comment c on a.productId=c.productId
+		where a.productName like "%"#{text}"%" 
+		<if test="secondClassName!=null and secondClassName!='' ">
+    		and a.secondClassId in 
+    		(select secondClassId from mi.productsecondclass c where c.secondClassName=#{secondClassName})
+    	</if>
+    	) T
+    GROUP BY T.productId
+    </select>
+    
+    <select id="getSearchProductsWithComment" resultMap="productResult2" flushCache="true" >
+	select T.*,count(T.commentId) as num from (
+		select
+		 a.*,
+		 b.firstClassId,b.secondClassName,
+		 c.commentId,c.commentContent
+		from mi.product a left join mi.productsecondclass b on a.secondClassId=b.secondClassId
+		left join mi.comment c on a.productId=c.productId
+		where a.productName like "%"#{text}"%"
+		<if test="secondClassName!=null and secondClassName!='' ">
+    		and a.secondClassId in 
+    		(select secondClassId from mi.productsecondclass c where c.secondClassName=#{secondClassName})
+    	</if>
+    	) T
+    GROUP BY T.productId
+    </select>
+    
+    <select id="getSearchProductsWithStock" resultMap="productResult3" flushCache="true" >
+	select T.*,count(T.commentId) as num from (
+		select
+		 a.*,
+		 b.firstClassId,b.secondClassName,
+		 c.commentId,c.commentContent,
+		 d.stockId,d.totalStock,d.allocatableStock
+		from mi.product a left join mi.productsecondclass b on a.secondClassId=b.secondClassId
+		left join mi.comment c on a.productId=c.productId
+		left join mi.stock d on a.productId=d.productId and d.allocatableStock != 0
+		where a.productName like "%"#{text}"%"
+		<if test="secondClassName!=null and secondClassName!='' ">
+    		and a.secondClassId in 
+    		(select secondClassId from mi.productsecondclass c where c.secondClassName=#{secondClassName})
+    	</if>
+    	) T
+    GROUP BY T.productId
+    </select>
+    
+    <select id="getLikeProductId" parameterType="int" resultType="int" flushCache="true" >
+    	select a.productId
+    	from mi.likeproduct a
+    	where a.userId=#{userId}
+    </select>
+    
+    <insert id="addLikeProduct" >
+    	insert into likeproduct (userId,productId)
+    	 values(#{0},#{1})
+    </insert>
+    
+    <resultMap type="product" id="productResult2">
+    	<id column="productId" property="productId" />
+    	<result column="productName" property="productName" />
+    	<result column="productPrice" property="productPrice" />
+    	<result column="description" property="description" />
+    	<result column="color" property="color" />
+    	<result column="version" property="version" />
+    	<result column="size" property="size" />
+    	<result column="picUrl" property="picUrl" />
+    	<result column="num" property="productCommentNum" />
+    	<result column="maxQuantity" property="maxQuantity" />
+    	<association property="secondClass" column="secondClassId" resultMap="productSecondClassResult" />
+    	<association property="comment" column="commentId" resultMap="commentResult" />
+    </resultMap>
+    
+    <resultMap type="product" id="productResult3">
+    	<id column="productId" property="productId" />
+    	<result column="productName" property="productName" />
+    	<result column="productPrice" property="productPrice" />
+    	<result column="description" property="description" />
+    	<result column="color" property="color" />
+    	<result column="version" property="version" />
+    	<result column="size" property="size" />
+    	<result column="picUrl" property="picUrl" />
+    	<result column="num" property="productCommentNum" />
+    	<result column="maxQuantity" property="maxQuantity" />
+    	<result column="allocatableStock" property="stock" />
+    	<association property="secondClass" column="secondClassId" resultMap="productSecondClassResult" />
+    	<association property="comment" column="commentId" resultMap="commentResult" />
+    </resultMap>
+    
+    <resultMap type="comment" id="commentResult">
+     	<id column="commentId" property="commentId" />
+     	<result column="commentContent" property="commentContent" />
+     </resultMap>
+    
+    <resultMap type="product" id="productResult">
+    	<id column="productId" property="productId" />
+    	<result column="productName" property="productName" />
+    	<result column="productPrice" property="productPrice" />
+    	<result column="description" property="description" />
+    	<result column="color" property="color" />
+    	<result column="version" property="version" />
+    	<result column="size" property="size" />
+    	<result column="picUrl" property="picUrl" />
+    	<result column="num" property="productCommentNum" />
+    	<result column="maxQuantity" property="maxQuantity" />
+    	<association property="secondClass" column="secondClassId" resultMap="productSecondClassResult" />
+    </resultMap>
+    
+    <resultMap type="productSecondClass" id="productSecondClassResult">
+    	<id column="secondClassId" property="secondClassId" />
+    	<result column="firstClassId" property="firstClassId" />
+    	<result column="secondClassName" property="secondClassName" />
+    </resultMap>
+    
+</mapper>
+
+
+
+
+
+
+
+
+

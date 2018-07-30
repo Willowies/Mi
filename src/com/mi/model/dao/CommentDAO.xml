@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.CommentDAO">
+
+     <select id="getWaitCommentProduct" parameterType="user"  resultMap="productResult" flushCache="true" >
+    	select count(commentId) as num,description,productId,productName,productPrice,picUrl,color,version,size from(
+			select 
+	    		a.*,e.commentId
+	    	from mi.product a left join mi.comment e on a.productId=e.productId
+	    	where a.productId in
+		    	 (select d.productId 
+		    	 from mi.order c left join orderproduct d on c.orderId=d.orderId
+		    	 where  c.userId=#{userId} and d.productId not in 
+		    		 (select b.productId from mi.comment b where b.userId=#{userId} )
+		    	  )
+		) T GROUP BY productId 
+    </select>
+    
+    <select id="getCommentedProduct" parameterType="user"  resultMap="productResult" flushCache="true" >
+    	select count(commentId) as num,description,productId,productName,productPrice,picUrl,color,version,size from(
+			select 
+	    		a.*,e.commentId
+	    	from mi.product a left join mi.comment e on a.productId=e.productId
+	    	where a.productId in
+		    	 (select d.productId 
+		    	 from mi.order c left join orderproduct d on c.orderId=d.orderId
+		    	 where  c.userId=#{userId} and d.productId in 
+		    		 (select b.productId from mi.comment b where b.userId=#{userId} )
+		    	  )
+		) T GROUP BY productId 
+    </select>
+    
+    <insert id="addCommentProduct"  parameterType="comment">
+    	insert into comment (userId,productId,commentContent,commentRank,commentDate
+    	<if test="commentUrl!=null and commentUrl!='' ">
+    		,commentUrl
+    	</if>
+    	)
+    	 values(#{userId},#{productId},#{commentContent},#{commentRank},#{commentDate}
+    	<if test="commentUrl!=null and commentUrl!='' ">
+    		,#{commentUrl}
+    	</if>
+    	 )
+    </insert>
+    
+    <insert id="addCommentResponse"  parameterType="commentResponse">
+    	insert into commentresponse (commentId,userId,commentContent,commentDate)
+    	 values(#{commentId},#{userId},#{commentContent},#{commentDate})
+    </insert> 
+    
+     <select id="getCommentByUserAndProduct" resultMap="commentResult" flushCache="true" >
+    	select 
+    		a.*,
+    		d.productName,d.description,d.productPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+    		T.commentResponseId,T.userId2,T.commentContent2,T.commentDate2,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+    		T.userName2,T.userBirth2,T.userSex2,T.userPhone2,T.userEmail2,
+    		T.userPassword2,T.userCard2,T.userHead2
+    	from mi.comment a left join mi.user b on a.userId=b.userId
+    	 left join mi.product d on a.productId=d.productId 
+    	 left join 
+			 (select 
+		c.commentId,c.commentResponseId,c.userId as userId2,c.commentContent as commentContent2,c.commentDate as commentDate2,e.userName as userName2,e.userBirth as userBirth2,e.userSex as userSex2,e.userPhone as userPhone2,e.userEmail as userEmail2,
+    		e.userPassword as userPassword2,e.userCard as userCard2,e.userHead as userHead2
+			from mi.commentresponse c left join mi.user e on c.userId=e.userId) 
+			 T on a.commentId=T.commentId 
+    	where a.userId=#{0} and a.productId=#{1}
+    </select>
+    
+    <select id="getCommentById" resultMap="commentResult" flushCache="true" >
+    	select 
+    		a.*,
+    		d.productName,d.description,d.productPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+    		T.commentResponseId,T.userId2,T.commentContent2,T.commentDate2,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+    		T.userName2,T.userBirth2,T.userSex2,T.userPhone2,T.userEmail2,
+    		T.userPassword2,T.userCard2,T.userHead2
+    	from mi.comment a left join mi.user b on a.userId=b.userId
+    	 left join mi.product d on a.productId=d.productId 
+    	 left join 
+			 (select 
+		c.commentId,c.commentResponseId,c.userId as userId2,c.commentContent as commentContent2,c.commentDate as commentDate2,e.userName as userName2,e.userBirth as userBirth2,e.userSex as userSex2,e.userPhone as userPhone2,e.userEmail as userEmail2,
+    		e.userPassword as userPassword2,e.userCard as userCard2,e.userHead as userHead2
+			from mi.commentresponse c left join mi.user e on c.userId=e.userId) 
+			 T on a.commentId=T.commentId 
+    	where a.commentId=#{commentId}
+    </select>
+    
+    <select id="getNewComments" resultMap="commentResult" flushCache="true" >
+    	select 
+    		a.*,
+    		d.productName,d.description,d.productPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+    		T.commentResponseId,T.userId2,T.commentContent2,T.commentDate2,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+    		T.userName2,T.userBirth2,T.userSex2,T.userPhone2,T.userEmail2,
+    		T.userPassword2,T.userCard2,T.userHead2
+    	from mi.comment a left join mi.user b on a.userId=b.userId
+    	 left join mi.product d on a.productId=d.productId 
+    	 left join 
+			 (select 
+		c.commentId,c.commentResponseId,c.userId as userId2,c.commentContent as commentContent2,c.commentDate as commentDate2,e.userName as userName2,e.userBirth as userBirth2,e.userSex as userSex2,e.userPhone as userPhone2,e.userEmail as userEmail2,
+    		e.userPassword as userPassword2,e.userCard as userCard2,e.userHead as userHead2
+			from mi.commentresponse c left join mi.user e on c.userId=e.userId) 
+			 T on a.commentId=T.commentId 
+    	where a.productId in (select productId from mi.product f where f.productName=#{productName} )
+    	order by a.commentDate desc
+    	limit 0,5
+    </select>
+    
+    <select id="getHotComments" resultMap="commentResult" flushCache="true" >
+    	select 
+    		a.*,
+    		d.productName,d.description,d.productPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+    		T.commentResponseId,T.userId2,T.commentContent2,T.commentDate2,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+    		T.userName2,T.userBirth2,T.userSex2,T.userPhone2,T.userEmail2,
+    		T.userPassword2,T.userCard2,T.userHead2
+    	from mi.comment a left join mi.user b on a.userId=b.userId
+    	 left join mi.product d on a.productId=d.productId 
+    	 left join 
+			 (select 
+		c.commentId,c.commentResponseId,c.userId as userId2,c.commentContent as commentContent2,c.commentDate as commentDate2,e.userName as userName2,e.userBirth as userBirth2,e.userSex as userSex2,e.userPhone as userPhone2,e.userEmail as userEmail2,
+    		e.userPassword as userPassword2,e.userCard as userCard2,e.userHead as userHead2
+			from mi.commentresponse c left join mi.user e on c.userId=e.userId) 
+			 T on a.commentId=T.commentId 
+    	where a.productId in (select productId from mi.product f where f.productName=#{productName} )
+    	and a.commentId in
+    	<foreach collection="ids" item="item" open="(" separator="," close=")">
+    		#{item}
+    	</foreach>
+    </select>
+    
+    <select id="getHotCommentIds" resultType="int" flushCache="true" >
+    	select 
+    		a.commentId
+    	from mi.comment a left join mi.commentresponse b on a.commentId=b.commentId
+    	where  a.productId in (select productId from mi.product f where f.productName=#{productName})
+    	 and a.commentId not in 
+    	<foreach collection="ids" item="item" open="(" separator="," close=")">
+    		#{item}
+    	</foreach>
+    	group by a.commentId
+    	order by count(b.commentResponseId) desc
+		limit 0,5
+    </select>
+    
+     <select id="getGoodCommentsNum" resultType="int" flushCache="true" >
+    	select 
+    		count(a.commentId)
+    	from mi.comment a 
+    	where  a.productId in (select productId from mi.product f where f.productName=#{productName})
+    	and (a.commentRank=5 or a.commentRank=4)
+    </select>
+    
+     <select id="getMiddleCommentsNum" resultType="int" flushCache="true" >
+    	select 
+    		count(a.commentId)
+    	from mi.comment a 
+    	where  a.productId in (select productId from mi.product f where f.productName=#{productName})
+    	and (a.commentRank=3 or a.commentRank=2)
+    </select>
+    
+     <select id="getBadCommentsNum" resultType="int" flushCache="true" > 
+    	select 
+    		count(a.commentId)
+    	from mi.comment a 
+    	where  a.productId in (select productId from mi.product f where f.productName=#{productName})
+    	and a.commentRank=1
+    </select>
+    
+    <select id="getCommentsByNameAndRank" resultMap="commentResult" flushCache="true" > 
+    	select 
+    		a.*,
+    		d.productName,d.description,d.productPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+    		T.commentResponseId,T.userId2,T.commentContent2,T.commentDate2,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+    		T.userName2,T.userBirth2,T.userSex2,T.userPhone2,T.userEmail2,
+    		T.userPassword2,T.userCard2,T.userHead2
+    	from mi.comment a left join mi.user b on a.userId=b.userId
+    	 left join mi.product d on a.productId=d.productId 
+    	 left join 
+			 (select 
+		c.commentId,c.commentResponseId,c.userId as userId2,c.commentContent as commentContent2,c.commentDate as commentDate2,e.userName as userName2,e.userBirth as userBirth2,e.userSex as userSex2,e.userPhone as userPhone2,e.userEmail as userEmail2,
+    		e.userPassword as userPassword2,e.userCard as userCard2,e.userHead as userHead2
+			from mi.commentresponse c left join mi.user e on c.userId=e.userId) 
+			 T on a.commentId=T.commentId 
+    	where a.productId in (select productId from mi.product f where f.productName=#{productName} )
+    	<if test="rank==1 ">
+    		and (a.commentRank=4 or a.commentRank=5)
+    	</if>
+    	<if test="rank==2 ">
+    		and (a.commentRank=2 or a.commentRank=3)
+    	</if>
+    	<if test="rank==3 ">
+    		and a.commentRank=1
+    	</if>
+    	limit 0,5
+    </select>
+    <!-- 最好要去除商品名重复的，即使配置不同 -->
+    <!-- 推荐商品不需要指定种类，也不需要user信息 -->
+    <!-- 降序，取评价数前10 -->
+    <select id="getRecommendProducts" resultMap="recommendProductResult" flushCache="true">
+    	select l.*, count(commentId) as productCommentNum 
+		from(select j.*, k.commentId, k.userId, k.commentContent, k.commentRank, k.commentUrl, k.commentDate 
+				 from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
+							 from product as g left join coupon as h on g.productId=h.productId)as j left join `comment` as k 
+							 on j.productId=k.productId) as l 
+		group by l.productId
+		order by productCommentNum desc
+		LIMIT 10
+    </select>
+    <!-- 降序，取评价数前4，虽然不要评价数目了，但是为了取前四，还是需要评价数的，需要user信息，消除0评价 -->
+    <select id="getPopularProducts" resultMap="popularProductResult" flushCache="true">
+    	select l.*, count(commentId) as productCommentNum, u.userName
+		from(select j.*, k.commentId, k.userId, k.commentContent, k.commentRank, k.commentUrl, k.commentDate 
+				 from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
+							 from product as g left join coupon as h on g.productId=h.productId)as j left join `comment` as k 
+							 on j.productId=k.productId) as l left join `user` as u
+		on l.userId=u.userId
+		group by l.productId
+		having productCommentNum>0
+		order by productCommentNum desc
+		LIMIT 4
+    </select>
+    <select id="getPopularProductsOfAppliance" resultMap="popularProductResult" flushCache="true">
+    	select l.*, count(commentId) as productCommentNum, u.userName 
+		from(select j.*, k.commentId, k.userId, k.commentContent, k.commentRank, k.commentUrl, k.commentDate 
+				 from(select z.*, i.secondClassName, i.firstClassId 
+							from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
+										from product as g left join coupon as h on g.productId=h.productId) as z, productsecondclass as i 
+							where z.secondClassId=i.secondClassId and i.firstClassId=1) as j left join `comment` as k
+							on j.productId=k.productId) as l left join `user` as u 
+		on l.userId=u.userId
+		group by l.productId
+		order by productCommentNum desc 
+		LIMIT 8
+    </select>
+    <select id="getPopularProductsOfCollocation" resultMap="popularProductResult" flushCache="true">
+    	select l.*, count(commentId) as productCommentNum, u.userName 
+		from(select j.*, k.commentId, k.userId, k.commentContent, k.commentRank, k.commentUrl, k.commentDate 
+				 from(select z.*, i.secondClassName, i.firstClassId 
+							from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
+										from product as g left join coupon as h on g.productId=h.productId) as z, productsecondclass as i 
+							where z.secondClassId=i.secondClassId and i.firstClassId=1) as j left join `comment` as k
+							on j.productId=k.productId) as l left join `user` as u 
+		on l.userId=u.userId
+		group by l.productId
+		order by productCommentNum desc 
+		LIMIT 8
+    </select>
+    <resultMap type="comment" id="commentResult">
+     	<id column="commentId" property="commentId" />
+     	<result column="commentContent" property="commentContent" />
+     	<result column="commentRank" property="commentRank" />
+     	<result column="commentUrl" property="commentUrl" />
+     	<result column="commentDate" property="commentDate" /> 
+     	<result column="userId" property="userId" />
+     	<result column="productId" property="productId" />
+     	<association property="user" column="userId" resultMap="userResult" />
+     	<association property="product" column="productId" resultMap="productResult" />
+     	<collection property="commentResponses" resultMap="commentResponseResult"/>
+     </resultMap>
+     
+    <resultMap type="commentresponse" id="commentResponseResult">
+    	<id column="commentResponseId" property="commentResponseId" />
+     	<result column="commentId" property="commentId" />
+     	<result column="productId" property="productId" />
+     	<result column="userId2" property="userId" />
+     	<result column="commentContent2" property="commentContent" /> 
+     	<result column="commentDate2" property="commentDate" />
+     	<association property="user" column="userId2" resultMap="userResult2" />
+    </resultMap>
+    
+    <resultMap type="user" id="userResult">
+    	<id column="userId" property="userId" />
+    	<result column="userName" property="userName" />
+    	<result column="userBirth" property="userBirth" />
+    	<result column="userSex" property="userSex" />
+    	<result column="userPhone" property="userPhone" />
+    	<result column="userEmail" property="userEmail" />
+    	<result column="userPassword" property="userPassword" />
+    	<result column="userCard" property="userCard" />
+    	<result column="userHead" property="userHead" />
+    </resultMap>
+    
+    <resultMap type="user" id="userResult2">
+    	<id column="userId2" property="userId" />
+    	<result column="userName2" property="userName" />
+    	<result column="userBirth2" property="userBirth" />
+    	<result column="userSex2" property="userSex" />
+    	<result column="userPhone2" property="userPhone" />
+    	<result column="userEmail2" property="userEmail" />
+    	<result column="userPassword2" property="userPassword" />
+    	<result column="userCard2" property="userCard" />
+    	<result column="userHead2" property="userHead" />
+    </resultMap>
+    
+    <resultMap type="product" id="productResult">
+    	<id column="productId" property="productId" />
+    	<result column="productName" property="productName" />
+    	<result column="productPrice" property="productPrice" />
+    	<result column="description" property="description" />
+    	<result column="color" property="color" />
+    	<result column="version" property="version" />
+    	<result column="size" property="size" />
+    	<result column="picUrl" property="picUrl" />
+    	<result column="num" property="productCommentNum" />
+    	<result column="maxQuantity" property="maxQuantity" />
+    </resultMap>
+    <resultMap id="recommendProductResult" type="Product">
+    	<id column="productId" property="productId" />
+   		<result column="productName" property="productName" />
+   		<result column="description" property="description" />
+   		<result column="productPrice" property="productPrice" />
+   		<result column="color" property="color" />
+   		<result column="version" property="version" />
+   		<result column="size" property="size" />
+   		<result column="picUrl" property="picUrl" />
+   		<result column="maxQuantity" property="maxQuantity" />
+   		<result column="secondClassId" property="secondClassId" />
+   		<result column="productCommentNum" property="productCommentNum"  />
+   		<association property="coupon" column="couponId" javaType="Coupon">
+   			<id column="couponId" property="couponId"  />
+   			<result column="productId" property="productId"  />
+   			<result column="couponName" property="couponName"  />
+   			<result column="discountAmount" property="discountAmount"  />
+   			<result column="startDate" property="startDate"  />
+   			<result column="endDate" property="endDate"  />
+   		</association>
+    </resultMap>
+    <resultMap id="popularProductResult" type="Product">
+    	<id column="productId" property="productId" />
+   		<result column="productName" property="productName" />
+   		<result column="description" property="description" />
+   		<result column="productPrice" property="productPrice" />
+   		<result column="color" property="color" />
+   		<result column="version" property="version" />
+   		<result column="size" property="size" />
+   		<result column="picUrl" property="picUrl" />
+   		<result column="maxQuantity" property="maxQuantity" />
+   		<result column="secondClassId" property="secondClassId" />
+   		<result column="productCommentNum" property="productCommentNum"  />
+   		<association property="coupon" column="couponId" javaType="Coupon">
+   			<id column="couponId" property="couponId"  />
+   			<result column="productId" property="productId"  />
+   			<result column="couponName" property="couponName"  />
+   			<result column="discountAmount" property="discountAmount"  />
+   			<result column="startDate" property="startDate"  />
+   			<result column="endDate" property="endDate"  />
+   			<association property="user" column="userId" javaType="User">
+   				<id column="userId" property="userId"  />
+   				<result column="userName" property="userName"  />
+   			</association>
+   		</association>
+   		<association property="comment" column="commentId" javaType="Comment">
+   			<id column="commentId" property="commentId"  />
+   			<result column="userId" property="userId"  />
+   			<result column="productId" property="productId"  />
+   			<result column="commentContent" property="commentContent"  />
+   			<result column="commentRank" property="commentRank"  />
+   			<result column="commentUrl" property="commentUrl"  />
+   			<result column="commentDate" property="commentDate"  />
+   		</association>
+    </resultMap>
+    
+</mapper>
+
