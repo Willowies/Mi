@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    	where a.productId in
 		    	 (select d.productId 
 		    	 from mi.order c left join orderproduct d on c.orderId=d.orderId
-		    	 where  c.userId=#{userId} and d.productId not in 
+		    	 where  c.userId=#{userId} and c.orderState=3 and d.productId not in 
 		    		 (select b.productId from mi.comment b where b.userId=#{userId} )
 		    	  )
 		) T GROUP BY productId 
