@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.CouponDAO">
+    <select id="selectCoupon" parameterType="String" resultType="Coupon">
+        select * from coupon c, product p  
+        where p.productName="${_parameter}" and c.productId=p.productId
+    </select>
+
+    <select id="selectValidateCoupon" parameterType="map" resultType="Integer">
+        select count(*) from clientcoupon
+        where userId=#{userId} and couponId=#{couponId}
+    </select>
+
+    <insert id="updateReceiveCoupon" parameterType="map">
+        insert into clientcoupon(couponId,userId,couponStatus)
+        values(#{couponId},#{userId},1)
+    </insert>
+    
+</mapper>

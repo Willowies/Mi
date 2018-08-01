@@ -161,4 +161,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		<result column="picUrl" property="picUrl" />
    		<result column="maxQuantity" property="maxQuantity" />
     </resultMap>
+    <select id="selectProductByName" parameterType="String" resultType="Product">
+        select * from product where productName="${_parameter}"
+    </select>
+    
+    <select id="selectProduct" parameterType="map" resultType="Product">
+        select * from product
+        where productName=#{productName} and version=#{version} and color=#{color}
+    </select>
+    
+    <select id="selectProductColor" parameterType="map" resultType="Product">
+        select * from product
+        where productName=#{productName} and version=#{version}
+    </select>
+    
+    <select id="selectProductById" parameterType="int" resultType="Product">
+        select * from product where productId=#{productId}
+    </select>
 </mapper>

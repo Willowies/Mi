@@ -22,6 +22,7 @@
 	flex-direction:row;
 	align-items:center;
 	background:#fff;
+	margin-bottom:10px;
 }
 .group .groupItem .num{
 	font-size:26px;

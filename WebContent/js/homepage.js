@@ -27,10 +27,10 @@ function initData(){
 			//images/T1bXKjBQAT1RXrhCrK.jpg 彩虹7号电池（10粒装）无汞无镉 环保电池
 			for(var i=0;i<data.length;i++){
 				var str="<div class='goods-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-					+"<img src='../"+ data[i].productId.picUrl +"' width='160px' height='160px'></div>"
-					+"<h3 class='title'><a>"+data[i].productId.productName+"</a></h3><p class='desc'>"+data[i].productId.description+"</p>"
+					+"<img src='../"+ data[i].product.picUrl +"' width='160px' height='160px'></div>"
+					+"<h3 class='title'><a>"+data[i].product.productName+"</a></h3><p class='desc'>"+data[i].product.description+"</p>"
 					+"<p class='price'><span>"+data[i].groupPrice+"</span>&nbsp;<span>元&nbsp;</span><del>"
-					+data[i].productId.productPrice+"元</del></p></div></div>";
+					+data[i].product.productPrice+"元</del></p></div></div>";
 				$("#addGoodItem").append(str);
 			}
 			console.log("Load finish--groupproduct");
