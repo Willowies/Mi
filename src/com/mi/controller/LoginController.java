@@ -13,7 +13,7 @@ import com.mi.model.bean.User;
 @RequestMapping("mi")
 public class LoginController {
 	
-	@RequestMapping("mi")
+	@RequestMapping("checkLoginState")
 	public @ResponseBody String checkLoginState(HttpSession session){
 		String loginState = "false";
 		User user = (User) session.getAttribute("user");
