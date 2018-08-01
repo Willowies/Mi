@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.StockDAO">
+	<select id="selectProductStock" parameterType="int" resultType="int">
+        select allocatableStock from stock where productId=#{productId}
+    </select>
+	<update id="updateClearingSuccessOrder" flushCache="true">
+		update `order` as o
+		set o.orderState=2
+		where o.groupId=#{groupId}
+	</update>
+	<update id="updateClearingSuccessStock" flushCache="true">
+		update stock
+		set totalStock = totalStock-#{changeStock}
+		where productId in (select p.productId from groupproduct as p where p.groupProductId=#{groupProductId})
+	</update>
+	<update id="updateClearingFailOrder" flushCache="true">
+		update `order` as o
+		set o.orderState=2
+		where o.groupId=#{groupId}
+	</update>
+	<update id="updateClearingFailStock" flushCache="true">
+		update stock
+		set allocatableStock = allocatableStock+#{changeStock}
+		where productId in (select p.productId from groupproduct as p where p.groupProductId=#{groupProductId})
+	</update>
+</mapper>
