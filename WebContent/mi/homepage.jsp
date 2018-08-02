@@ -45,13 +45,7 @@
 				</div>
 			</div>
 			<div class="topbar-info">
-				<a rel="nofollow" class="link" href="" >登录</a>
-				<span class="sep">|</span>
-				<a rel="nofollow" class="link" href="" >注册</a>
-				<span class="sep">|</span>
-				<span class="message">
-					<a rel="nofollow" href="">消息通知</a>
-				</span>
+				
 			</div>
 		</div>
 	</div>
@@ -125,66 +119,7 @@
 				                        </div>
 				                        <p class="price">2699元起</p>
 				                	</li>
-				                	<li>
-				                		<i class="line"></i>
-										<div class="figure figure-thumb">
-											<a href="https://www.mi.com/mi8/">
-												<img src="../images/pc-320-220-mi8se.png" alt="小米8" width="160" height="110">
-											</a>
-				                        </div>
-				                        <div class="title">
-				                        	<a href="" >小米8 SE</a>
-				                        </div>
-				                        <p class="price">2699元起</p>
-				                	</li>
-				                	<li>
-				                		<i class="line"></i>
-										<div class="figure figure-thumb">
-											<a href="https://www.mi.com/mi8/">
-												<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-											</a>
-				                        </div>
-				                        <div class="title">
-				                        	<a href="" >小米8</a>
-				                        </div>
-				                        <p class="price">2699元起</p>
-				                	</li>
-				                	<li>
-				                		<i class="line"></i>
-										<div class="figure figure-thumb">
-											<a href="https://www.mi.com/mi8/">
-												<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-											</a>
-				                        </div>
-				                        <div class="title">
-				                        	<a href="" >小米8</a>
-				                        </div>
-				                        <p class="price">2699元起</p>
-				                	</li>
-				                	<li>
-				                		<i class="line"></i>
-										<div class="figure figure-thumb">
-											<a href="https://www.mi.com/mi8/">
-												<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-											</a>
-				                        </div>
-				                        <div class="title">
-				                        	<a href="" >小米8</a>
-				                        </div>
-				                        <p class="price">2699元起</p>
-				                	</li>
-				                	<li>
-				                		<i class="line"></i>
-										<div class="figure figure-thumb">
-											<a href="https://www.mi.com/mi8/">
-												<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-											</a>
-				                        </div>
-				                        <div class="title">
-				                        	<a href="" >小米8</a>
-				                        </div>
-				                        <p class="price">2699元起</p>
-				                	</li>
+				                	
 				                </ul>
 							</div>
 						</div>

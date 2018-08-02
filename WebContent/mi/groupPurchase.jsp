@@ -179,7 +179,7 @@
 					<p class="desc">能放在口袋的小风扇</p>
 					<p class="price">1元<del>19.9元</del></p>
 					<a href="../mi/groupProductInfo.jsp" class="moreInfo">商品详情</a>
-					<p class="person">已有4421人设置提醒</p>
+					
 				</div>			
 			</div>
 		</div>

@@ -1,6 +1,5 @@
 package com.mi.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -23,6 +22,18 @@ public class LoginController {
 			}
 		}
 		return loginState;
+	}
+	@RequestMapping("checkLoginState2")
+	public @ResponseBody User checkLoginState2(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		if(user != null){
+			if(user.getUserId() != 0){
+				return user;
+			}
+		}
+		User userTemp = new User();
+		userTemp.setUserId(0);
+		return userTemp;
 	}
 
 }
