@@ -86,6 +86,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	and a.orderId=c.orderId and c.productId=d.productId and a.invoiceId=f.invoiceId
     </select>
     
+    <update id="updateClearingSuccessOrder" flushCache="true">
+		update `order` as o
+		set o.orderState=2
+		where o.groupId=#{groupId}
+	</update>
+	
+	<update id="updateClearingFailOrder" flushCache="true">
+		update `order`
+		set orderState = 0 
+		where groupId in (select g.groupId from `group` as g where g.groupId=#{groupId}) and orderType=2
+	</update>
+    
     <resultMap type="order" id="orderResult">
      	<result column="orderId" property="orderId" />
     	<result column="receiverName" property="receiverName" />
