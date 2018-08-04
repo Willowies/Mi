@@ -9,8 +9,10 @@
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
 		<link href="../css/font-awesome.css" rel="stylesheet">
+		<link href="../css/bootstrap-self-use.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
+		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	</head>
 <body>
 	<div class="site-topbar">
@@ -41,7 +43,6 @@
 					<span class="cart-mini-num">（0）</span>
 				</a>
 				<div class="cart-menu" id="J_miniCartMenu" >
-					
 				</div>
 			</div>
 			<div class="topbar-info">
@@ -60,73 +61,39 @@
 						<a class="link-category">
 							<span class="text">全部商品分类</span>
 						</a>
-						<div class="site-category">
+						<div class="site-category" style="display:block;">
 							<ul id="J_categoryList" class="site-category-list">
-								<li id="category-item1" class="category-item">
-									<a class="title">
-										手机
-										<i class="fa fa-chevron-right"></i>
-									</a>
-									<div class="children">
-										
-									</div>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=1" class="title">手机<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
 								</li>
-								<li id="category-item2" class="category-item">
-									<a class="title">
-										电视
-										<i class="fa fa-chevron-right"></i>
-									</a>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=2" class="title">平板<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
 								</li>
-								<li id="category-item3" class="category-item">
-									<a class="title">
-										笔记本
-										<i class="fa fa-chevron-right"></i>
-									</a>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=3" class="title">电视机<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
 								</li>
-								<li id="category-item4" class="category-item">
-									<a class="title">
-										插线板
-										<i class="fa fa-chevron-right"></i>
-									</a>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=4" class="title">笔记本<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
 								</li>
-								<li id="category-item5" class="category-item">
-									<a class="title">
-										空气净化器
-										<i class="fa fa-chevron-right"></i>
-									</a>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=5" class="title">空气净化器<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
 								</li>
-								<li id="category-item6" class="category-item">
-									<a class="title">
-										插线板
-										<i class="fa fa-chevron-right"></i>
-									</a>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=6" class="title">插线板<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
 								</li>
 							</ul>
 						</div>
 					</li>
-					<li id="navItem1" class="nav-item">小米手机
-						<div id="J_navMenu" class="header-nav-menu"  style="display:none;">
-							<div class="container">
-								<ul class="children-list clearfix">
-				                	<li class="first">
-										<div class="figure figure-thumb">
-											<a href="https://www.mi.com/mi8/">
-												<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-											</a>
-				                        </div>
-				                        <div class="title">
-				                        	<a href="" >小米8</a>
-				                        </div>
-				                        <p class="price">2699元起</p>
-				                	</li>
-				                	
-				                </ul>
-							</div>
-						</div>
-					</li>
-					<li id="navItem2" class="nav-item">红米</li>
-					<li id="navItem3" class="nav-item">电视</li>
-					<li id="navItem4" class="nav-item">笔记本</li>
+					<li id="navItem1" class="nav-item">小米手机<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem2" class="nav-item">红米<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem3" class="nav-item">电视<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem4" class="nav-item">笔记本<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
 					<li id="navItem5" class="nav-item">盒子</li>
 					<li id="navItem6" class="nav-item">新品</li>
 					<li id="navItem7" class="nav-item">路由器</li>
@@ -136,8 +103,8 @@
 				</ul>
 			</div>
 			<div class="header-search">
-				<form id="J_searchForm" class="search-form">
-					<input class="search-text" type="search" id="search" name="keyword" >
+				<form id="J_searchForm" class="search-form" method="post" action="searchProduct.action">
+					<input class="search-text" type="search" id="search" name="text" >
 					<input type="submit" class="search-btn" value="">
 				</form>
 			</div>

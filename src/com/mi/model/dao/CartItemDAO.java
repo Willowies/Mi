@@ -8,4 +8,6 @@ public interface CartItemDAO {
 	
 	public List<CartItem> getCartItems(int userId);
 	
+	public void deleteCartItem(int cartItemId);
+	
 }

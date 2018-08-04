@@ -1,26 +1,75 @@
 .groupProductInfo{
 	width:100%;
-	height:200px;
-	margin:20px 0;
+	height:600px;
+	background:#e3d9ff;
+}
+.groupProductInfo .container{
 	display:flex;
 	flex-direction:row;
-	align-items:center;
 }
-
+.groupProductInfo .groupProduct_show{
+	width:50%;
+	height:600px;
+	background:#85a5ff;
+}
+.groupProductInfo .groupProduct_info{
+	width:50%;
+	height:600px;
+	background:#c5ecff;
+	display:flex;
+	flex-direction:column;
+}
+.groupProductInfo .groupProduct_info .groupProductName{
+	font-size: 24px;
+    font-style: normal;
+    margin: 20px 0 0 20px;
+}
+.groupProductInfo .groupProduct_info .groupProductDesc{
+	font-size:14px;
+	font-style:normal;
+	margin:0 20px 10px 20px;
+	padding-top:8px;
+	color:#b0b0b0;
+}
+.groupProductInfo .groupProduct_info .groupProductPrice{
+	font-size: 18px;
+    line-height: 1;
+    color: #ff6700;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 3px 0 20px;
+    margin: 0 0 0 20px;
+}
+.groupProductInfo .groupProduct_info .productPrice{
+	color:#b0b0b0;
+}
+.groupProductInfo .groupProduct_info .countDown{
+	height: 60px;
+    font-size: 22px;
+    line-height: 60px;
+    padding: 0 20px;
+    background: #fff700;
+}
 .group{
 	width:100%;
-	padding:40px 0;
+	height: 362px;
+	padding:0 0 10px 0;
 	display:flex;
 	flex-direction:column;
 	align-items:center;
 	background:#fafafa;
 }
+.group .groupList{
+	width:573px;
+	height:280px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	overflow:scroll;
+}
 .group .groupItem{
 	width:500px;
 	height:83px;
-	display:flex;
-	flex-direction:row;
-	align-items:center;
+	position:relative;
 	background:#fff;
 	margin-bottom:10px;
 }
@@ -34,16 +83,18 @@
 	border:2px solid #ababab;
 	background:#cecece;
 	color:#656565;
+	float:left;
 }
 .group .groupItem .info{
 	font-size:12px;
 	width:120px;
 	height:36px;
 	padding:12px 0 13px 0;
-	margin-right:20px;
+	margin:10px 10px 10px 0;
 	color:#ababab;
 	display:flex;
 	flex-direction:column;
+	float:left;
 }
 .group .groupItem .info p{
 	margin:0;
@@ -52,21 +103,25 @@
 	width:100px;
 	height:35px;
 	border-radius:0;
+	float: left;
+    margin: 23px 0;
 }
 .group .groupItem .joinGroup{
 	width:80px;
 	height:30px;
-	margin-left:40px;
+	margin: 23px;
+    float: right;
 }
 .create{
 	width:100%;
 	height:58px;
-	position:relative;
 	background:#faa;
+	display:flex;
+	flex-direction:column;
 }
 .create  .createGroup{
 	width:80px;
 	height:30px;
-	margin:20px;
-	float:right;
+	margin:auto 10px;
+	align-self:flex-end;
 }

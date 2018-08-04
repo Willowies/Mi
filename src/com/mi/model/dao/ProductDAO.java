@@ -3,6 +3,8 @@ package com.mi.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.mi.model.bean.Product;
 
 public interface ProductDAO {
@@ -13,9 +15,9 @@ public interface ProductDAO {
 	
 	public List<Product> getCollocationProducts();
 	
-	public List<Product> getNavProducts(String navColumnName);
+	public List<Product> getNavProducts(@Param("navColumnName") String navColumnName, @Param("secondClassId") int secondClassId);
 	
-	public List<Product> getSecondClassProducts();
+	public List<Product> getSecondClassProducts(int secondClassProductId);
 	
 	public List<Product> selectProductByName(String productName);
 	

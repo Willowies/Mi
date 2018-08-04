@@ -169,31 +169,47 @@
 			</div>
 		</div>
 		<div class="groupProductInfo">
-			<p id="groupProductId">1</p>
-			<div style="width:200px; height:100%; background:#b0b0b0;">
-		        <span id="_d">00</span>
-		        <span id="_h">00</span>
-		        <span id="_m">00</span>
-		        <span id="_s">00</span>
-		    </div>
-		</div>
-		<div class="group">
-			<div class="groupitem">
-				<span id="groupId" style="width:0px; visibility:hidden;">1</span>
-				<p class="num">1</p>
-				<div class="info">
-					<p>创建者：xxx</p>
-					<p>当前人数：5人 / 10人</p>
+			<div class="container">
+				<div class="groupProduct_show">
+					
 				</div>
-				<select class="person">
-					<option></option>
-				</select>
-				<input type="button" id="joinGroup" class="joinGroup" value="我要参团">
+				<div class="groupProduct_info">
+					<p id="groupProductId" style="width:0px;visibility:hidden;height: 0px;margin: 0;"></p>
+					<p class="groupProductName"></p>
+					<p class="groupProductDesc"></p>
+					<span class="groupProductPrice"></span>
+					<div class="countDown">
+						<span>距离结束：</span>
+				        <span id="_d">00</span>
+				        <span id="_h">00</span>
+				        <span id="_m">00</span>
+				        <span id="_s">00</span>
+				    </div>
+					<div class="group">
+						<p style="margin:10px 20px; font-size:14px; color:#b0b0b0; width:573px;">已经创建的团：</p>
+						<div class="groupList">
+							<div class="groupitem">
+								<span class="groupId" style="width:0px; height: 0px; visibility: hidden; float: left;">1</span>
+								<p class="num">1</p>
+								<div class="info">
+									<p>创建者：xxx</p>
+									<p>当前人数：5人 / 10人</p>
+								</div>
+								<select class="person">
+									<option></option>
+								</select>
+								<input type="button" class="joinGroup" value="我要参团">
+							</div>
+							
+						</div>
+					</div>
+					<div class="create">
+							<input type="button" id="createGroup" class="createGroup" value="我要开团">
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="create">
-				<input type="button" id="createGroup" class="createGroup" value="我要开团">
-		</div>
+		
 		<div class="site-footer">
 			<div class="container">
 				<div class="footer-service">
