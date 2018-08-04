@@ -2,6 +2,8 @@ package com.mi.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +11,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.util.WebUtils;
 
 import com.mi.model.bean.Comment;
 import com.mi.model.bean.CommentResponse;
@@ -70,8 +75,7 @@ public class CommentController {
 	}
 
 	@RequestMapping("commentProduct")
-	public String commentProduct(HttpSession session, HttpServletRequest request, Comment comment,
-			MultipartFile commentPic) {
+	public String commentProduct(HttpSession session, HttpServletRequest request, Comment comment) {
 		User user = getUser(session);
 		if (user == null) {
 			return "homepage.jsp";
@@ -83,27 +87,37 @@ public class CommentController {
 		comment.setUserId(user.getUserId());
 		comment.setCommentDate(new Date());
 
-		// 文件上传
-		// 获取原文件名
-		String oldname = commentPic.getOriginalFilename();
-		// 构建新的文件名
-		String filename = System.currentTimeMillis() + oldname.substring(oldname.indexOf("."));
-
-		File file = new File("d:/data/commentPic/", filename);
-		try {
-			commentPic.transferTo(file);
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		MultipartFile commentPic = null;
+		boolean isMulitipart = ServletFileUpload.isMultipartContent(request);
+		if (isMulitipart) { 
+			MultipartHttpServletRequest multipartRequest = WebUtils.getNativeRequest(request, MultipartHttpServletRequest.class);
+			commentPic = multipartRequest.getFile("commentPic");
+			
 		}
-		comment.setCommentUrl("commentPic/"+filename);
+		
+		if (commentPic.getOriginalFilename() != null && !commentPic.getOriginalFilename().equals("")) {
+			// 文件上传
+			// 获取原文件名
+			String oldname = commentPic.getOriginalFilename();
+			// 构建新的文件名
+			String filename = System.currentTimeMillis() + oldname.substring(oldname.indexOf("."));
+
+			File file = new File("d:/data/commentPic/", filename);
+			try {
+				commentPic.transferTo(file);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			comment.setCommentUrl("commentPic/"+filename);
+		}
 		
 		commentService.addCommentProduct(comment);
 
-		return userToCommentDetails(session, request,comment.getProductId());
+		return getCommentedProduct(session, request);
 	}
 
 	@RequestMapping("userToCommentDetails")
@@ -142,6 +156,7 @@ public class CommentController {
 		int middleNum = (Integer)map.get("middleNum");
 		int badNum =(Integer) map.get("badNum");
 		
+		request.setAttribute("commentType", 1);
 		request.setAttribute("hotComments", hotComments);
 		request.setAttribute("newComments", newComments);
 		request.setAttribute("goodNum", goodNum);
@@ -179,7 +194,7 @@ public class CommentController {
 		int middleNum = (Integer)map.get("middleNum");
 		int badNum =(Integer) map.get("badNum");
 
-		
+		request.setAttribute("commentType", 2);
 		request.setAttribute("rankComments", comments);
 		request.setAttribute("goodNum", goodNum);
 		request.setAttribute("middleNum", middleNum);
@@ -201,6 +216,7 @@ public class CommentController {
 		int middleNum = (Integer)map.get("middleNum");
 		int badNum =(Integer) map.get("badNum");
 
+		request.setAttribute("commentType",3);
 		request.setAttribute("rankComments", comments);
 		request.setAttribute("goodNum", goodNum);
 		request.setAttribute("middleNum", middleNum);
@@ -222,6 +238,7 @@ public class CommentController {
 		int middleNum = (Integer)map.get("middleNum");
 		int badNum =(Integer) map.get("badNum");
 
+		request.setAttribute("commentType", 4);
 		request.setAttribute("rankComments", comments);
 		request.setAttribute("goodNum", goodNum);
 		request.setAttribute("middleNum", middleNum);

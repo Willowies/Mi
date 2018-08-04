@@ -23,22 +23,32 @@ public class OrderCenterController extends BaseController {
 	private OrderCenterService orderCenterService;
 	
 	@RequestMapping("getOrderByProductName")
-	public String getOrderByProductName(HttpSession session,HttpServletRequest request,String productName,Integer page) {
+	public String getOrderByProductName(HttpSession session,HttpServletRequest request,String productName,String orderType,Integer page) {
 		User user = getUser(session);
 		if (user == null) {
 			return "homepage.jsp";
 		}
+		int type = 0;
+		if (orderType != null && orderType.equals("3")) {
+			type = 3 ;
+		} 
 		
 		if (page == null || page == 0) {
 			page = 1;
 		}
-		Map<String, Object> map = orderCenterService.getOrderByProductName(user,productName,page,5);
+		Map<String, Object> map = orderCenterService.getOrderByProductName(user,type,productName,page,5);
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
+		request.setAttribute("type", 0);
 		request.setAttribute("orderList", orders);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
-		return "forward:myOrder.jsp";
+		if (type==0) {
+			return "forward:myOrder.jsp";
+		}else {
+			return "forward:myGroupOrder.jsp";
+		}
+		
 	}
 	
 	@RequestMapping("getOrderDetailsById")
@@ -66,6 +76,7 @@ public class OrderCenterController extends BaseController {
 		Map<String, Object> map = orderCenterService.getAllOrder(user,page,5);
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
+		request.setAttribute("type", 1);
 		request.setAttribute("orderList", orders);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
@@ -85,6 +96,7 @@ public class OrderCenterController extends BaseController {
 		Map<String, Object> map = orderCenterService.getOrderByState(user, page, 5, 1);
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
+		request.setAttribute("type", 2);
 		request.setAttribute("orderList", orders);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
@@ -104,6 +116,7 @@ public class OrderCenterController extends BaseController {
 		Map<String, Object> map = orderCenterService.getOrderByState(user, page, 5, 2);
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
+		request.setAttribute("type", 3);
 		request.setAttribute("orderList", orders);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
@@ -123,6 +136,7 @@ public class OrderCenterController extends BaseController {
 		Map<String, Object> map = orderCenterService.getOrderByState(user, page, 5, 0);
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
+		request.setAttribute("type", 4);
 		request.setAttribute("orderList", orders);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
@@ -142,10 +156,11 @@ public class OrderCenterController extends BaseController {
 		Map<String, Object> map = orderCenterService.getAllGroupOrder(user,page,5);
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
+		request.setAttribute("type", 1);
 		request.setAttribute("orderList", orders);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
-		return "forward:myOrder.jsp";
+		return "forward:myGroupOrder.jsp";
 	}
 	
 	@RequestMapping("getGroupOrderWaitPaid")
@@ -161,10 +176,11 @@ public class OrderCenterController extends BaseController {
 		Map<String, Object> map = orderCenterService.getGroupOrderByState(user, page, 5, 1);
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
+		request.setAttribute("type", 2);
 		request.setAttribute("orderList", orders);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
-		return "forward:myOrder.jsp";
+		return "forward:myGroupOrder.jsp";
 	}
 	
 	@RequestMapping("getGroupOrderWaitTaken")
@@ -180,10 +196,11 @@ public class OrderCenterController extends BaseController {
 		Map<String, Object> map = orderCenterService.getGroupOrderByState(user, page, 5, 2);
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
+		request.setAttribute("type", 3);
 		request.setAttribute("orderList", orders);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
-		return "forward:myOrder.jsp";
+		return "forward:myGroupOrder.jsp";
 	}
 	
 	@RequestMapping("getGroupOrderWaitBuilt")
@@ -199,10 +216,11 @@ public class OrderCenterController extends BaseController {
 		Map<String, Object> map = orderCenterService.getGroupOrderByState(user, page, 5, 4);
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
+		request.setAttribute("type", 5);
 		request.setAttribute("orderList", orders);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
-		return "forward:myOrder.jsp";
+		return "forward:myGroupOrder.jsp";
 	}
 	
 	@RequestMapping("getGroupOrderClosed")
@@ -218,10 +236,11 @@ public class OrderCenterController extends BaseController {
 		Map<String, Object> map = orderCenterService.getGroupOrderByState(user, page, 5, 0);
 		List<Order> orders = (List<Order>) map.get("list");
 		int pageTotal = (Integer) map.get("pageTotal");
+		request.setAttribute("type", 4);
 		request.setAttribute("orderList", orders);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);
-		return "forward:myOrder.jsp";
+		return "forward:myGroupOrder.jsp";
 	}
 	
 	public User getUser(HttpSession session) {

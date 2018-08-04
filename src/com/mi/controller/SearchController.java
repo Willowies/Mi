@@ -1,5 +1,7 @@
 package com.mi.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +49,25 @@ public class SearchController {
 		return list;
 	}
 	
+	@RequestMapping("unlikeProductInSeachPage")
+	public @ResponseBody List<String> unlikeProductInSeachPage(HttpSession session, HttpServletRequest request,Integer productId) {
+		List<String> list = new ArrayList<String>();
+		User user = getUser(session);
+		if (user == null) {
+			list.add("未登录");
+			return list;
+		}
+		if (productId==null || productId==0) {
+			list.add("数据传输错误");
+			return list;
+		}
+	
+		searchService.deleteLikeProduct(user.getUserId(),(int)productId);
+		
+		list.add("成功");
+		return list;
+	}
+	
 	@RequestMapping("searchProduct")
 	public String searchProduct(HttpSession session, HttpServletRequest request,String requireCondition,Integer page,String text,String secondClassName,String searchType) {
 
@@ -61,14 +82,14 @@ public class SearchController {
 		if (secondClassName==null) {
 			secondClassName = "";
 		}
-		
 		if (requireCondition==null) {
 			requireCondition = "";
 		}
 		
 		if (page == null || page == 0) {
-			page = 1;
+			page = 1; 
 		}
+		
 		
 		User user = getUser(session);
 		int userId = 0;
@@ -85,7 +106,14 @@ public class SearchController {
 		}else {
 			request.setAttribute("commentFormat",  0);
 		}
+		
+		List<String> secondClassNames = searchService.getSecondClassNames();
+		
 		request.setAttribute("text", text);
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("requireCondition", requireCondition);
+		request.setAttribute("secondClassName", secondClassName);
+		request.setAttribute("secondClassNames", secondClassNames);
 		request.setAttribute("searchResults", searchResults);
 		request.setAttribute("page", page);
 		request.setAttribute("pageTotal", pageTotal);

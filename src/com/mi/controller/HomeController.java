@@ -31,20 +31,14 @@ public class HomeController {
 //		User userTemp = (User) session.getAttribute("user");//notice
 		User userTemp = new User();
 		userTemp.setUserId(1);
-		
+		int totalQuantityOfShopcart = 0;
 		if(userTemp!=null) {
 			List<CartItem> list = homeservice.getCartItems(userTemp.getUserId());
-			int totalQuantityOfShopcart = 0;
-			for(int i=0;i<list.size();i++) {
-				totalQuantityOfShopcart += list.get(i).getQuantity();
+			for(CartItem cartItem:list) {
+				totalQuantityOfShopcart += cartItem.getQuantity();
 			}
-			return totalQuantityOfShopcart;
-		}else {
-			//only get number of products in ShopCart
-			//i saved it in session
-			int numOfProInShopcart = (int) session.getAttribute("cartItemNumber");
-			return numOfProInShopcart;
 		}
+		return totalQuantityOfShopcart;
 	}
 	@RequestMapping("load_cartItem")
 	public @ResponseBody List<CartItem> getCartItems(HttpSession session){
@@ -54,9 +48,8 @@ public class HomeController {
 		List<CartItem> list = null;
 		if(userTemp!=null) {
 			list = homeservice.getCartItems(userTemp.getUserId());
-		}else {
-			list = (ArrayList<CartItem>) session.getAttribute("cartItemList");
 		}
+		
 		return list;
 	}
 	
@@ -153,9 +146,48 @@ public class HomeController {
 	 * get nav products data
 	 */
 	@RequestMapping("getNavmenu")
-	public List<Product> getNavProducts(HttpServletRequest request) {
-		String productName = (String)request.getAttribute("productName");
-		return homeservice.getNavProducts(productName);
+	public @ResponseBody List<Product> getNavProducts(HttpServletRequest request) {
+		String productName = (String)request.getParameter("productName");
+		System.out.println("getNavmenu------"+productName);
+		String navColumnName;
+		switch(productName) {
+		case "小米手机":
+			navColumnName = "小米";
+			break;
+		case "红米":
+			navColumnName = "红米";
+			break;
+		case "电视":
+			navColumnName = "电视";
+			break;
+		case "笔记本":
+			navColumnName = "";
+			break;
+		case "盒子":
+			navColumnName = "";
+			break;
+		case "新品":
+			navColumnName = "";
+			break;
+		case "路由器":
+			navColumnName = "路由器";
+			break;
+		case "智能硬件":
+			navColumnName = "";
+			break;
+		default:
+			navColumnName = "";
+			break;
+		}
+		System.out.println("navColumnName:::"+navColumnName);
+		return homeservice.getNavProducts(navColumnName);
+	}
+	/*
+	 * get categorymenu product data 
+	 */
+	@RequestMapping("getCategorymenu")
+	public @ResponseBody List<Product> getSecondClassProducts(){
+		return homeservice.getSecondClassProducts();
 	}
 	
 	

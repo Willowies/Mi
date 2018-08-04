@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.ManageDAO">
+     
+    <select id="getSpikeProductByTime" resultType="spikeProduct" flushCache="true" >
+    	select a.*,b.productName,b.version,b.color,b.size,b.picUrl,c.allocatableStock as stock
+    	from mi.spikeproduct a left join mi.product b on a.productId=b.productId 
+    	left join mi.stock c on a.productId=c.productId 
+    	where a.startTime=#{d}
+    </select>
+    
+    <insert id="addSpikeProduct"  >
+    	insert into mi.spikeproduct (startTime,endTime,productId,spikePrice,spikeQuantity,currentSpikeNum,spikeStatus)
+    	 values(#{startTime},#{endTime},#{productId},#{spikePrice},#{spikeQuantity},#{currentSpikeNum},#{spikeStatus})
+    </insert> 
+    
+    <insert id="addGroupProduct"  >
+    	insert into mi.groupproduct (productId,groupPrice,leastGroupNum,maxGroupProductNum,beginDate,endDate)
+    	 values(#{0},#{1},#{2},#{3},#{4},#{5},#{6})
+    </insert> 
+    
+    <update id="addStock" > 
+    	update mi.stock
+    	set totalStock=totalStock+#{0},allocatableStock=allocatableStock+#{0}
+    	where productId=#{1}
+    </update>
+    
+    <update id="modifyStock" >
+    	update mi.stock
+    	set allocatableStock=allocatableStock-#{0}
+    	where productId=#{1}
+    </update>
+    
+    <update id="modifySpikeProduct" >
+    	update  mi.spikeproduct
+    	set spikePrice=#{1},spikeQuantity=#{3}
+    	where spikeProductId=#{0}
+    </update>
+    
+    <update id="modifyGroupProduct" >
+    	update  mi.spikeproduct
+    	set groupPrice=#{1},leastGroupNum=#{3},maxGroupProductNum=#{4}
+    	where groupProductId=#{0}
+    </update>
+    
+    <select id="getProductFirstClass" resultType="productFirstClass" flushCache="true" >
+    	select *
+    	from mi.productfirstclass
+    </select>
+    
+    <select id="getProductSecondClass" resultType="productSecondClass" flushCache="true" >
+    	select *
+    	from mi.productsecondclass
+    	where firstClassId=#{id}
+    </select>
+    
+    <select id="getProductBySecondClassIdAndTime" resultType="product" flushCache="true" >
+    	select a.*
+    	from mi.product a
+    	where a.secondClassId=#{0} and a.productId not in
+    	 (select b.productId from mi.spikeproduct b where b.startTime=#{1})
+    </select>
+    
+    <select id="getProductBySecondClassId" resultType="product" flushCache="true" >
+    	select *
+    	from mi.product
+    	where secondClassId=#{id}
+    </select>
+    
+    <select id="getProductById" resultType="product" flushCache="true" >
+    	select a.*,b.allocatableStock as stock
+    	from mi.product a left join mi.stock b on a.productId=b.productId
+    	where a.productId=#{id} 
+    </select>
+    
+    <delete id="deleteSpikeProduct" >  
+        delete from spikeproduct where spikeProductId=#{spikeProductId}  
+	</delete>  
+     
+    <select id="getGroupProduct" resultMap="groupProductResult" flushCache="true" >
+    	select a.*,b.productName,b.productPrice,b.picUrl,b.version,b.color,b.size,c.allocatableStock as stock
+    	from mi.groupproduct a left join mi.product b on a.productId=b.productId
+    	left join mi.stock c on a.productId=c.productId 
+    	where a.beginDate > #{date} 
+    </select>
+    
+    <select id="getSpikeQuantity" resultType="int" flushCache="true" >
+    	select a.spikeQuantity
+    	from mi.spikeproduct a 
+    	where a.spikeProductId=#{id}
+    </select>
+    
+     <select id="getGroupQuantity" resultType="int" flushCache="true" >
+    	select a.maxGroupProductNum
+    	from mi.groupproduct a 
+    	where a.groupProductId=#{id}
+    </select>
+    
+     <delete id="deleteGroupProduct" >  
+        delete from groupproduct where groupProductId=#{groupProductId}  
+	</delete> 
+    
+    <resultMap type="groupProduct" id="groupProductResult">
+    	<id column="groupProductId" property="groupProductId" />
+    	<result column="groupPrice" property="groupPrice" />
+    	<result column="leastGroupNum" property="leastGroupNum" />
+    	<result column="maxGroupProductNum" property="maxGroupProductNum" />
+    	<result column="beginDate" property="beginDate" />
+    	<result column="endDate" property="endDate" />
+    	<result column="stock" property="stock" />
+    	<association property="product" column="productId" resultMap="productResult" />
+    </resultMap>
+    
+    <resultMap type="product" id="productResult">
+    	<id column="productId" property="productId" />
+    	<result column="productName" property="productName" />
+    	<result column="productPrice" property="productPrice" />
+    	<result column="color" property="color" />
+    	<result column="version" property="version" />
+    	<result column="size" property="size" />
+    	<result column="picUrl" property="picUrl" />
+    </resultMap>
+     
+</mapper>
+
+
+
+
+
+
+
+
+

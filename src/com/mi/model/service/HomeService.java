@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mi.model.bean.CartItem;
 import com.mi.model.bean.GroupProduct;
@@ -25,34 +26,137 @@ public class HomeService {
 	private CommentDAO commentDAO;
 	
 	public List<CartItem> getCartItems(int userId){
-		return cartItemDAO.getCartItems(userId);
+		List<CartItem> list = cartItemDAO.getCartItems(userId);
+		for(int i=0;i<list.size();i++) {
+			String extremeName = list.get(i).getProduct().getProductName();
+			if(list.get(i).getProduct().getVersion()!=null) {
+				extremeName += " "+list.get(i).getProduct().getVersion();
+			}
+			if(list.get(i).getProduct().getColor()!=null) {
+				extremeName += " "+list.get(i).getProduct().getColor();
+			}
+			if(list.get(i).getProduct().getSize()!=null) {
+				extremeName += " "+list.get(i).getProduct().getSize();
+			}
+			list.get(i).getProduct().setExtremeName(extremeName);
+		}
+		return list;
 	}
 	public List<GroupProduct> getGroupProducts(){
-		return groupProductDAO.getGroupProducts();
+		List<GroupProduct> list = groupProductDAO.getGroupProducts();
+		for(int i=0;i<list.size();i++) {
+			String extremeName = list.get(i).getProduct().getProductName();
+			if(list.get(i).getProduct().getVersion()!=null) {
+				extremeName += " "+list.get(i).getProduct().getVersion();
+			}
+			if(list.get(i).getProduct().getColor()!=null) {
+				extremeName += " "+list.get(i).getProduct().getColor();
+			}
+			if(list.get(i).getProduct().getSize()!=null) {
+				extremeName += " "+list.get(i).getProduct().getSize();
+			}
+			list.get(i).getProduct().setExtremeName(extremeName);
+		}
+		return list;
 	}
 	public List<Product> getPhoneProducts(){
-		return productDAO.getPhoneProducts();
+		List<Product> list = productDAO.getPhoneProducts();
+		for(int i=0;i<list.size();i++) {
+			String extremeName = list.get(i).getProductName();
+			if(list.get(i).getVersion()!=null) {
+				extremeName += " "+list.get(i).getVersion();
+			}
+			list.get(i).setExtremeName(extremeName);
+		}
+		return list;
 	}
 	public List<Product> getApplianceProducts(){
-		return productDAO.getApplianceProducts();
+		List<Product> list = productDAO.getApplianceProducts();
+		for(int i=0;i<list.size();i++) {
+			String extremeName = list.get(i).getProductName();
+			if(list.get(i).getSize()!=null) {
+				extremeName += " "+list.get(i).getSize();
+			}
+			if(list.get(i).getVersion()!=null) {
+				extremeName += " "+list.get(i).getVersion();
+			}
+			list.get(i).setExtremeName(extremeName);
+		}
+		return list;
 	}
 	public List<Product> getCollocationProducts(){
-		return productDAO.getCollocationProducts();
+		List<Product> list = productDAO.getCollocationProducts();
+		for(int i=0;i<list.size();i++) {
+			String extremeName = list.get(i).getProductName();
+			if(list.get(i).getColor()!=null) {
+				extremeName += " "+list.get(i).getColor();
+			}
+			if(list.get(i).getSize()!=null) {
+				extremeName += " "+list.get(i).getSize();
+			}
+			if(list.get(i).getVersion()!=null) {
+				extremeName += " "+list.get(i).getVersion();
+			}
+			list.get(i).setExtremeName(extremeName);
+		}
+		return list;
 	}
 	public List<Product> getNavProducts(String navColumnName){
 		return productDAO.getNavProducts(navColumnName);
 	}
+	public List<Product> getSecondClassProducts(){
+		return productDAO.getSecondClassProducts();
+	}
 	public List<Product> getRecommendProducts(){
-		return commentDAO.getRecommendProducts();
+		List<Product> list = commentDAO.getRecommendProducts();
+		for(int i=0;i<list.size();i++) {
+			String extremeName = list.get(i).getProductName();
+			if(list.get(i).getColor()!=null) {
+				extremeName += " "+list.get(i).getColor();
+			}
+			if(list.get(i).getSize()!=null) {
+				extremeName += " "+list.get(i).getSize();
+			}
+			if(list.get(i).getVersion()!=null) {
+				extremeName += " "+list.get(i).getVersion();
+			}
+			list.get(i).setExtremeName(extremeName);
+		}
+		return list;
 	}
 	public List<Product> getPopularProducts(){
 		return commentDAO.getPopularProducts();
 	}
 	public List<Product> getPopularProductsOfAppliance(){
-		return commentDAO.getPopularProductsOfAppliance();
+		List<Product> list = commentDAO.getPopularProductsOfAppliance();
+		for(int i=0;i<list.size();i++) {
+			String extremeName = list.get(i).getProductName();
+			if(list.get(i).getSize()!=null) {
+				extremeName += " "+list.get(i).getSize();
+			}
+			if(list.get(i).getVersion()!=null) {
+				extremeName += " "+list.get(i).getVersion();
+			}
+			list.get(i).setExtremeName(extremeName);
+		}
+		return list;
 	}
 	public List<Product> getPopularProductsOfCollocation(){
-		return commentDAO.getPopularProductsOfCollocation();
+		List<Product> list = commentDAO.getPopularProductsOfCollocation();
+		for(int i=0;i<list.size();i++) {
+			String extremeName = list.get(i).getProductName();
+			if(list.get(i).getColor()!=null) {
+				extremeName += " "+list.get(i).getColor();
+			}
+			if(list.get(i).getSize()!=null) {
+				extremeName += " "+list.get(i).getSize();
+			}
+			if(list.get(i).getVersion()!=null) {
+				extremeName += " "+list.get(i).getVersion();
+			}
+			list.get(i).setExtremeName(extremeName);
+		}
+		return list;
 	}
 	
 }
