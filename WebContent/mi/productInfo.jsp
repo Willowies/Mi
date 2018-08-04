@@ -4,17 +4,128 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	    <link href="../css/Reset.css" type="text/css" rel="stylesheet" />
+		<link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
 		<link href="../css/productInfo.css" rel='stylesheet' type='text/css' />
 		<link href="../css/font-awesome.css" rel='stylesheet' type='text/css' />
-		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/bootstrap.min.css">		
 		<script src="../js/jquery-3.2.0.min.js"></script>
 		<script src="../js/bootstrap.min.js"></script>
-		<script src="../js/productInfo.js"></script>
+		<script type="text/javascript" src="../js/homepage.js"></script>
+		<script type="text/javascript" src="../js/productInfo.js"></script>
+		
 		<meta charset="UTF-8">
 		<title>商品详情</title>
 	</head>
 	<body>
+	<!-- 顶栏 -->
+		<div class="site-topbar">
+		<div class="container">
+			<div class="topbar-nav">
+				<a rel="nofollow" href="../mi/homepage.jsp" >小米商城</a>
+				<span class="sep">|</span>
+				<a rel="nofollow" href="https://www.miui.com/" target="_blank">MIUI</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="">IoT</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" target="_blank">云服务</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" target="_blank">金融</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" target="_blank" >有品</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" target="_blank" >小爱开放平台</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" target="_blank">政企服务</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
+			</div>
+			<div class="topbar-cart" id="J_miniCartTrigger">
+				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+					<i class="fa fa-shopping-cart"></i>
+					购物车
+					<span class="cart-mini-num">（0）</span>
+				</a>
+				<div class="cart-menu" id="J_miniCartMenu" >
+				</div>
+			</div>
+			<div class="topbar-info">
+				
+			</div>
+		</div>
+	</div>
+		<div class="site-header">
+		<div class="container">
+			<div class="header-logo">
+				<a href="homepage.jsp"><img src="../images/logo-footer.png"  alt="小米logo" /></a>
+			</div>
+			<div class="header-nav">
+				<ul class="nav-list">
+					<li id="J_navCategory" class="nav-category">
+						<a href="" class="link-category" style="visibility: visible;">
+							<span class="text">全部商品分类</span>
+						</a>
+						<div class="site-category" style="display:none;">
+							<ul id="J_categoryList" class="site-category-list">
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=1" class="title" style="color:#fff !important;">手机<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=2" class="title" style="color:#fff !important;">平板<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=3" class="title" style="color:#fff !important;">电视机<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=4" class="title" style="color:#fff !important;">笔记本<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=5" class="title" style="color:#fff !important;">空气净化器<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=6" class="title" style="color:#fff !important;">插线板<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li id="navItem1" class="nav-item">小米手机<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem2" class="nav-item">红米<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem3" class="nav-item">电视<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem4" class="nav-item">笔记本<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem5" class="nav-item">盒子</li>
+					<li id="navItem6" class="nav-item">新品</li>
+					<li id="navItem7" class="nav-item">路由器</li>
+					<li id="navItem8" class="nav-item">智能硬件</li>
+					<li id="navItem9" class="nav-item">服务</li>
+					<li id="navItem10" class="nav-item">社区</li>
+				</ul>
+			</div>
+			<div class="header-search">
+				<form id="J_searchForm" class="search-form" method="post" action="searchProduct.action">
+					<input class="search-text" type="search" id="search" name="text" >
+					<input type="submit" class="search-btn" value="">
+				</form>
+			</div>
+		</div>
+	</div>
 		
+		<div class="product-head-info">
+			<div class="product-head-box">
+				<div class="product-name">${productName}</div>
+				<div class="con">
+					<a href="//www.mi.com/huosai3/">概述</a>&nbsp; |&nbsp;
+					<a href="//www.mi.com/huosai3/">参数</a>&nbsp; |&nbsp;
+					<a href="//www.mi.com/huosai3/">用户评价</a>&nbsp; |&nbsp;
+					<a href="//www.mi.com/huosai3/" class="btn-toBuy">立即购买</a>
+				</div>
+			</div>
+		</div>
 		<div class="buyBox" id="buyBox">
 			<div class="box clearfix">
 				<div class="login-notic">
@@ -30,21 +141,26 @@
 						<!--左侧轮播图-->
 						<div class="imgload hide"></div>
 						<div id="img" class="img-con" style="left: 62.5px; margin-top: 0px;">
-							<div class="ui-wrapper" style="max-width: 100%;">
-								<div class="ui-viewport" style="width: 100%; overflow: hidden; position: relative; height: 560px;">
-									
-								</div>
-								<div class="ui-controls">
-									<div class="ui-pager ui-default-pager">
-										<div class="ui-pager-item">
-											<a href data-slide-index="0" class="ui-pager-link active">1</a>
-										</div>
-									</div>
-									<div class="ui-controls-direction">
-										<a class="ui-prev " style="cursor:pointer" onclick="">上一张</a>
-										<a class="ui-next " style="cursor:pointer" onclick="">下一张</a>
+							<div id="myCarousel" class="ui-wrapper carousel slide" data-ride="carousel" style="max-width: 100%;">
+							    <!-- 轮播指标 -->
+							    <ol class="carousel-indicators">
+		                           		                            
+	                            </ol>
+							    <!-- 轮播项目 -->
+								<div class="ui-viewport carousel-inner" style="width: 100%; overflow: hidden; position: relative; height: 560px;">
+									<div id="sliderView" class="sliderWrap item active" style="width: auto; position: relative;">
+									    <img class="slider done" src=""/>
 									</div>
 								</div>
+								<!-- 轮播导航 -->
+								<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		                            <span class="sr-only">Previous</span>
+	                            </a>
+								<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		                            <span class="sr-only">Next</span>
+	                            </a>
 							</div>
 						</div>
 					</div>
@@ -87,7 +203,7 @@
 											<span class="item">${receiverAddress.receiverProvince}</span>
 											<span class="item">${receiverAddress.receiverCity}</span>
 											<span class="item">${receiverAddress.receiverDistrict}</span>
-											<span class="item">${receiverAddress.address}</span>
+											<!-- span class="item">${receiverAddress.address}</span> -->
 										</div>
 									</div>
 									<div class="product-status active" id="productStatus">
@@ -96,16 +212,18 @@
 									</div>
 								</div>
 							</div>
-							<!--产品版本-->
+							<!-- 产品版本 -->
 							<div class="list-wrap" id="versionList">
-								<!--选择版本-->
+								<!-- 选择版本 -->
 								<div class="pro-choose pro-choose-col" data-index="0">
 									<div class="step-title version" data-name="选择版本">选择版本</div>
 									<ul id="selectVersion" class="step-list step-one clearfix">
 									  <c:forEach items="${productList}" var="p">
 										  <li class="but but-biglarge">
-											  <a onclick="">
+											  <a class="pro-para">
 												  <span class="name">${p.version}</span>
+												  <span class="productPrice" style="display:none;">${p.productPrice}</span>
+												  <span class="price" ></span>
 											  </a>
 										  </li>
 									  </c:forEach>	
@@ -131,7 +249,7 @@
 								<!--购买按钮-->
 								<ul class="btn-wrap clearfix" id="buyBtnBox">
 									<li>
-										<a id="buyOrNotice" class="but but-primary but-biglarge proBuyBtn" data-type="common" onclick=""></a>
+										<a id="buyOrNotice" class="but but-primary but-biglarge proBuyBtn" data-type="common" data-toggle="modal" onclick=""></a>
 									</li>
 								</ul>
 								<div class="pro-policy" id="policy">
@@ -210,10 +328,10 @@
 					&times;
 			</button>
 			<div class="modal-body" style="max-height: 400px; padding: 40px 60px;">
-				<h4 id="#isSetted" style="margin: 10px 0 20px; font-size: 30px; font-weight: normal; color: #ff6700;text-align: center;"></h4>
+				<h4 id="#isSetted" class="isSetted" style="margin: 10px 0 20px; font-size: 30px; font-weight: normal; color: #ff6700;text-align: center;"></h4>
 				<p style="margin: 1em 0;"></p>
 				<div>
-					<a class="but btn-primary known" data-dismiss="modal" style="width: 158px; height: 38px; background: #ff6700; border-color: #ff6700; font-size: 14px; line-height: 38px; margin-left: 61px;">我知道了</a>
+					<a class="but btn-primary known" data-dismiss="modal" style="color:#fff !important; width: 158px; height: 38px; background: #ff6700; border-color: #ff6700; font-size: 14px; line-height: 38px; margin-left: 61px;">我知道了</a>
 				</div>
 			</div>
 		</div>
