@@ -1,159 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>评价</title>
+		<title>首页</title>
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet" />
 		<link href="../css/font-awesome.css" rel="stylesheet">
 		<link href="../css/model.css" rel="stylesheet">
-		<link href="../css/comment.css" rel="stylesheet">
+		<link href="../css/onlineService.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				//为所有的li标签绑定mouseout和mouseover事件。bind({事件名：function(){},事件名：function(){}})的方法绑定多个事件
-				$("#div li").bind({
-					mouseout: function() {
-						//$(this).css("color", "grey").html("☆").prevAll().css("color", "grey").html("☆")
-					},
-					mouseover: function() {
-						$(this).css("color", "grey").html('<i class="fa fa-star-o" aria-hidden="true"></i>').nextAll().css("color", "grey").html('<i class="fa fa-star-o" aria-hidden="true"></i>')
-						$(this).css("color", "yellow").html('<i class="fa fa-star" aria-hidden="true"></i>').prevAll().css("color", "yellow").html('<i class="fa fa-star" aria-hidden="true"></i>')
-
-					}
-				});
-				//=实时显示分数.【index】搜索匹配的元素，并返回相应元素的索引值，从0开始计数。
-				$("#div li").mouseover(function() {
-					var rank = parseInt($(this).index("#div li")) + 1;
-					var html = "";
-					var s = "";
-					switch(rank) {
-						case 1:
-							s = '<span>失望</span>';
-							break;
-						case 2:
-							s = '<span>一般</span>';
-							break;
-						case 3:
-							s = '<span>满意</span>';
-							break;
-						case 4:
-							s = '<span>喜欢</span>';
-							break;
-						case 5:
-							s = '<span>超爱</span>';
-							break;
-					}
-					if(rank == 4 || rank == 5) {
-						html = '<i class="fa fa-smile-o" aria-hidden="true"></i>';
-					}
-					if(rank == 3 || rank == 2) {
-						html = '<i class="fa fa-meh-o" aria-hidden="true"></i>';
-					}
-					if(rank == 1) {
-						html = '<i class="fa fa-frown-o" aria-hidden="true"></i>';
-					}
-					html += " " + s;
-					$("#p").html(html);
-					$("input[name='commentRank']").val(rank);
-				});
-				//鼠标按下时，确定分数。。
-				$("#div li").mousedown(function() {
-					$("#score").html(("你选择的分数是" + (parseInt($(this).index("#div li")) + 1)));
-					$(this).css("color", "yellow").html('<i class="fa fa-star" aria-hidden="true"></i>').prevAll().css("color", "yellow").html('<i class="fa fa-star" aria-hidden="true"></i>');
-					$("input[name='commentRank']").val(parseInt($(this).index("#div li")));
-					//全部li标签的绑定事件全部清除--unbind方法可以加参数清除特定的事件。不加全部清除
-					//$(this).unbind().prevAll().unbind().nextAll().unbind();
-				});
-			})
-		</script>
-		<script type="text/javascript">
-			var loadImageFile = (function() {
-				if(window.FileReader) {
-					var oPreviewImg = null,
-						oFReader = new window.FileReader(),
-						rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
-
-					oFReader.onload = function(oFREvent) {
-						if(!oPreviewImg) {
-							var newPreview = document.getElementById("imagePreview");
-							oPreviewImg = new Image();
-							oPreviewImg.style.width = (newPreview.offsetWidth).toString() + "px";
-							oPreviewImg.style.height = (newPreview.offsetHeight).toString() + "px";
-							newPreview.appendChild(oPreviewImg);
-						}
-						oPreviewImg.src = oFREvent.target.result;
-					};
-
-					return function() {
-						var aFiles = document.getElementById("imageInput").files;
-						if(aFiles.length === 0) {
-							return;
-						}
-						if(!rFilter.test(aFiles[0].type)) {
-							alert("You must select a valid image file!");
-							return;
-						}
-						oFReader.readAsDataURL(aFiles[0]);
-					}
-
-				}
-				if(navigator.appName === "Microsoft Internet Explorer") {
-					return function() {
-						alert(document.getElementById("imageInput").value);
-						document.getElementById("imagePreview").filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = document.getElementById("imageInput").value;
-
-					}
-				}
-			})();
-		</script>
 		<script language="javascript">
-			function vaildForm() {
-				var id = $("input[name='productId']").val();
-				var rank = $("input[name='commentRank']").val();
-				var content = $("textarea[name='commentContent']").val();
-				if(id) {
-					if(rank != 0) {
-						if(content == null || content==undefined ||content=="") {
-							alert("评价内容不能为空");
-						} else {
-							return true;
-						}
-					} else {
-						alert("请先打分");
-					}
-
-				} else {
-					alert("数据错误");
+			function checkLogin() {
+				var html = $.ajax({
+					type: "POST",
+					url: "checkLoginState.action",
+					async: false
+				}).responseText;
+				if(html == "true"){
+					window.location.href = "./onlineCustom.html";
+				}else{
+					alert("请先登录");
 				}
-
-				return false;
 			}
 		</script>
-		<style type="text/css">
-			#menu {
-				font: 12px verdana, arial, sans-serif;
-				/* 设置文字大小和字体样式 */
-			}
-			
-			#menu,
-			#menu li {
-				cursor: pointer;
-				font-size: 30px;
-				list-style: none;
-				/* 将默认的列表符号去掉 */
-				padding: 0;
-				/* 将默认的内边距去掉 */
-				margin: 5px;
-				/* 将默认的外边距去掉 */
-				float: left;
-				/* 往左浮动 */
-			}
-		</style>
 	</head>
 
 	<body>
@@ -311,42 +182,18 @@
 		<div class="menu-bar">
 			<div class="container ">
 				<a href='../mi/homepage.jsp'>首页</a><span class="sep">&gt;</span>
-				<a>评价商品</a>
+				<a>在线客服</a>
 			</div>
 		</div>
 		<div class="grey-back-div">
-			<div class="middle-content">
-				<div class="product-info">
-					<img src="../${product.picUrl}" alt="" width="auto" height="160px">
-					<h3 class="product-name">${product.productName} ${product.version} ${product.color}</h3>
-					<div class="product-price">${product.productPrice}元 </div>
-					<p class="product-comments-info"> ${product.productCommentNum} 人评价</p>
-				</div>
-				<div class="comment-details">
-					<div id="div" style="margin-top: 50px;">
-						<ul id="menu">
-							<li><i class="fa fa-star-o" aria-hidden="true" style="color: grey;"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true" style="color: grey;"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true" style="color: grey;"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true" style="color: grey;"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true" style="color: grey;"></i></li>
-						</ul>
-
-						<p id="p" class="rank-face"></p>
-						<p id="score"></p>
-					</div>
-
-					<form action="commentProduct.action" method="post" enctype="multipart/form-data" onsubmit="return vaildForm()">
-						<input name="productId" value="${product.productId}" style="display: none;" />
-						<input name="commentRank" value="0" style="display: none;" />
-						<textarea name="commentContent" clos=",50" rows="5" warp="virtual" class="comment-text"></textarea>
-						<button type="submit" class="comment-button">发表评论</button>
-						<div id="imagePreview" style="height:100px;width:110px;margin:10px auto;background-image: url(../images/image-default.png);">
-							<input type="file" name="commentPic" class="inputstyle" id="imageInput" style="margin:0 0 10px 0" onchange="loadImageFile();">
-						</div>
-
-					</form>
-				</div>
+			<p class="online-head"> 在线客服 </p>
+			<div class="online clearfix">
+				<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size: 100px;color: #ff8d8d;display: inline-block;width: 100px;height: 100px;float: left;margin-left: 253px;margin-right: 45px;"></i>
+				<dl>
+					<dt class="">7×24在线聊天</dt>
+					<dd>专业客服在线对话，为您解决遇到的问题</dd>
+				</dl>
+				<a class="btn btn-primary" onclick="checkLogin()" style="color: #fff;margin-top: 50px;">立即咨询</a>
 			</div>
 		</div>
 

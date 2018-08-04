@@ -1,159 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.List"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>评价</title>
+		<title>首页</title>
+		<link rel="stylesheet" href="../css/bootstrap-self-use.css" />
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet" />
 		<link href="../css/font-awesome.css" rel="stylesheet">
 		<link href="../css/model.css" rel="stylesheet">
-		<link href="../css/comment.css" rel="stylesheet">
+		<link href="../css/commentPage.css" rel="stylesheet">
+
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				//为所有的li标签绑定mouseout和mouseover事件。bind({事件名：function(){},事件名：function(){}})的方法绑定多个事件
-				$("#div li").bind({
-					mouseout: function() {
-						//$(this).css("color", "grey").html("☆").prevAll().css("color", "grey").html("☆")
-					},
-					mouseover: function() {
-						$(this).css("color", "grey").html('<i class="fa fa-star-o" aria-hidden="true"></i>').nextAll().css("color", "grey").html('<i class="fa fa-star-o" aria-hidden="true"></i>')
-						$(this).css("color", "yellow").html('<i class="fa fa-star" aria-hidden="true"></i>').prevAll().css("color", "yellow").html('<i class="fa fa-star" aria-hidden="true"></i>')
-
-					}
-				});
-				//=实时显示分数.【index】搜索匹配的元素，并返回相应元素的索引值，从0开始计数。
-				$("#div li").mouseover(function() {
-					var rank = parseInt($(this).index("#div li")) + 1;
-					var html = "";
-					var s = "";
-					switch(rank) {
-						case 1:
-							s = '<span>失望</span>';
-							break;
-						case 2:
-							s = '<span>一般</span>';
-							break;
-						case 3:
-							s = '<span>满意</span>';
-							break;
-						case 4:
-							s = '<span>喜欢</span>';
-							break;
-						case 5:
-							s = '<span>超爱</span>';
-							break;
-					}
-					if(rank == 4 || rank == 5) {
-						html = '<i class="fa fa-smile-o" aria-hidden="true"></i>';
-					}
-					if(rank == 3 || rank == 2) {
-						html = '<i class="fa fa-meh-o" aria-hidden="true"></i>';
-					}
-					if(rank == 1) {
-						html = '<i class="fa fa-frown-o" aria-hidden="true"></i>';
-					}
-					html += " " + s;
-					$("#p").html(html);
-					$("input[name='commentRank']").val(rank);
-				});
-				//鼠标按下时，确定分数。。
-				$("#div li").mousedown(function() {
-					$("#score").html(("你选择的分数是" + (parseInt($(this).index("#div li")) + 1)));
-					$(this).css("color", "yellow").html('<i class="fa fa-star" aria-hidden="true"></i>').prevAll().css("color", "yellow").html('<i class="fa fa-star" aria-hidden="true"></i>');
-					$("input[name='commentRank']").val(parseInt($(this).index("#div li")));
-					//全部li标签的绑定事件全部清除--unbind方法可以加参数清除特定的事件。不加全部清除
-					//$(this).unbind().prevAll().unbind().nextAll().unbind();
-				});
-			})
-		</script>
-		<script type="text/javascript">
-			var loadImageFile = (function() {
-				if(window.FileReader) {
-					var oPreviewImg = null,
-						oFReader = new window.FileReader(),
-						rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
-
-					oFReader.onload = function(oFREvent) {
-						if(!oPreviewImg) {
-							var newPreview = document.getElementById("imagePreview");
-							oPreviewImg = new Image();
-							oPreviewImg.style.width = (newPreview.offsetWidth).toString() + "px";
-							oPreviewImg.style.height = (newPreview.offsetHeight).toString() + "px";
-							newPreview.appendChild(oPreviewImg);
-						}
-						oPreviewImg.src = oFREvent.target.result;
-					};
-
-					return function() {
-						var aFiles = document.getElementById("imageInput").files;
-						if(aFiles.length === 0) {
-							return;
-						}
-						if(!rFilter.test(aFiles[0].type)) {
-							alert("You must select a valid image file!");
-							return;
-						}
-						oFReader.readAsDataURL(aFiles[0]);
-					}
-
+		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+		<script>
+			function showPic(i) {
+				var src = i.src;
+				if(src != null && src != '') {
+					$('#jump-big-img').attr("src", src);
+					$('#jump-block').css("display", "block");
 				}
-				if(navigator.appName === "Microsoft Internet Explorer") {
-					return function() {
-						alert(document.getElementById("imageInput").value);
-						document.getElementById("imagePreview").filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = document.getElementById("imageInput").value;
+			}
 
-					}
-				}
-			})();
-		</script>
-		<script language="javascript">
-			function vaildForm() {
-				var id = $("input[name='productId']").val();
-				var rank = $("input[name='commentRank']").val();
-				var content = $("textarea[name='commentContent']").val();
-				if(id) {
-					if(rank != 0) {
-						if(content == null || content==undefined ||content=="") {
-							alert("评价内容不能为空");
-						} else {
-							return true;
-						}
-					} else {
-						alert("请先打分");
-					}
+			function fadePic() {
+				$('#jump-block').css("display", "none");
 
-				} else {
-					alert("数据错误");
-				}
-
-				return false;
 			}
 		</script>
-		<style type="text/css">
-			#menu {
-				font: 12px verdana, arial, sans-serif;
-				/* 设置文字大小和字体样式 */
-			}
-			
-			#menu,
-			#menu li {
-				cursor: pointer;
-				font-size: 30px;
-				list-style: none;
-				/* 将默认的列表符号去掉 */
-				padding: 0;
-				/* 将默认的内边距去掉 */
-				margin: 5px;
-				/* 将默认的外边距去掉 */
-				float: left;
-				/* 往左浮动 */
-			}
-		</style>
 	</head>
 
 	<body>
@@ -308,45 +187,159 @@
 				</div>
 			</div>
 		</div>
-		<div class="menu-bar">
-			<div class="container ">
-				<a href='../mi/homepage.jsp'>首页</a><span class="sep">&gt;</span>
-				<a>评价商品</a>
+		<div class="product-head-info">
+			<div class="product-head-box">
+				<div class="product-name">xiaomi8</div>
+				<div class="con">
+					<a href="//www.mi.com/huosai3/">概述</a>&nbsp; |&nbsp;
+					<a href="//www.mi.com/huosai3/">参数</a>&nbsp; |&nbsp;
+					<a href="//www.mi.com/huosai3/">用户评价</a>&nbsp; |&nbsp;
+					<a href="//www.mi.com/huosai3/" class="btn-toBuy">立即购买</a>
+				</div>
 			</div>
 		</div>
-		<div class="grey-back-div">
+		<!-- 弹窗 -->
+		<div id="jump-block" onclick="fadePic()">
+			<div class="big-img">
+				<img id="jump-big-img" src="../images/T1bXKjBQAT1RXrhCrK.jpg" width="600px" />
+			</div>
+		</div>
+		<div class="grey-back-div" style="padding-top: 20px;    box-shadow: inset 0px 5px 5px rgba(0,0,0,0.07);">
 			<div class="middle-content">
-				<div class="product-info">
-					<img src="../${product.picUrl}" alt="" width="auto" height="160px">
-					<h3 class="product-name">${product.productName} ${product.version} ${product.color}</h3>
-					<div class="product-price">${product.productPrice}元 </div>
-					<p class="product-comments-info"> ${product.productCommentNum} 人评价</p>
+				<div class="choose-comment">
+					<a href="getCommentPage.action?${productName}" class="choosed">全部</a>
+					<a href="getGoodCommentPage.action?${productName}">好评(${goodNum})</a>
+					<a href="getMiddleCommentPage.action?${productName}">中评(${middleNum})</a>
+					<a href="getBadCommentPage.action?${productName}">差评(${badNum})</a>
 				</div>
-				<div class="comment-details">
-					<div id="div" style="margin-top: 50px;">
-						<ul id="menu">
-							<li><i class="fa fa-star-o" aria-hidden="true" style="color: grey;"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true" style="color: grey;"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true" style="color: grey;"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true" style="color: grey;"></i></li>
-							<li><i class="fa fa-star-o" aria-hidden="true" style="color: grey;"></i></li>
+				<c:if test="${not empty newComments}">
+					<div class="comment-details" style="float: right;">
+						<h4 style="    margin-top: 50px;">最新评价</h4>
+						<ul class="m-spe-list J_speList">
+							<c:forEach items="${newComments}" var="comment">
+								<li class="">
+									<div class="spe-top" style="margin-bottom: 10px;"> <span class="time"><fmt:formatDate value="${comment.commentDate}" type="date"/></span>
+										<a>- ${comment.user.userName}</a>
+									</div>
+									<div class="txt">
+										<a> ${comment.commentContent} </a>
+									</div>
+									<div class="comment-eval">
+										<c:if test="${comment.commentRank == 1}"><i class="fa fa-frown-o" aria-hidden="true"></i> 失望</c:if>
+										<c:if test="${comment.commentRank == 2}"><i class="fa fa-meh-o" aria-hidden="true"></i> 一般</c:if>
+										<c:if test="${comment.commentRank == 3}"><i class="fa fa-meh-o" aria-hidden="true"></i> 满意</c:if>
+										<c:if test="${comment.commentRank == 4}"><i class="fa fa-smile-o" aria-hidden="true"></i> 喜欢</c:if>
+										<c:if test="${comment.commentRank == 5}"><i class="fa fa-smile-o" aria-hidden="true"></i> 超爱</c:if>
+									</div>
+								</li>
+							</c:forEach>
 						</ul>
-
-						<p id="p" class="rank-face"></p>
-						<p id="score"></p>
 					</div>
-
-					<form action="commentProduct.action" method="post" enctype="multipart/form-data" onsubmit="return vaildForm()">
-						<input name="productId" value="${product.productId}" style="display: none;" />
-						<input name="commentRank" value="0" style="display: none;" />
-						<textarea name="commentContent" clos=",50" rows="5" warp="virtual" class="comment-text"></textarea>
-						<button type="submit" class="comment-button">发表评论</button>
-						<div id="imagePreview" style="height:100px;width:110px;margin:10px auto;background-image: url(../images/image-default.png);">
-							<input type="file" name="commentPic" class="inputstyle" id="imageInput" style="margin:0 0 10px 0" onchange="loadImageFile();">
+				</c:if>
+				<c:forEach items="${hotComments}" var="comment">
+					<div class="product-info">
+						<div class="span13 comment-detail">
+							<ul class="m-comment-list">
+								<li class="com-item J_resetImgCon J_canZoomBox" data-id="154912845">
+									<a class="user-img"> <img src="../${comment.user.userHead}"> </a>
+									<div class="comment-info">
+										<a class="user-name">${comment.user.userName}</a>
+										<p class="time">
+											<fmt:formatDate value="${comment.commentDate}" type="date" />
+										</p>
+									</div>
+									<div class="comment-eval">
+										<c:if test="${comment.commentRank == 1}"><i class="fa fa-frown-o" aria-hidden="true"></i> 失望</c:if>
+										<c:if test="${comment.commentRank == 2}"><i class="fa fa-meh-o" aria-hidden="true"></i> 一般</c:if>
+										<c:if test="${comment.commentRank == 3}"><i class="fa fa-meh-o" aria-hidden="true"></i> 满意</c:if>
+										<c:if test="${comment.commentRank == 4}"><i class="fa fa-smile-o" aria-hidden="true"></i> 喜欢</c:if>
+										<c:if test="${comment.commentRank == 5}"><i class="fa fa-smile-o" aria-hidden="true"></i> 超爱</c:if>
+									</div>
+									<div class="comment-txt">
+										<p> ${comment.commentContent}</p>
+									</div>
+									<c:if test="${not empty comment.commentUrl}">
+										<div class="m-img-list clearfix h-img-list">
+											<div class="img-item img-item1 item-one showimg">
+												<img class="J_resetImgItem J_canZoom" src="../${comment.commentUrl}" height="160px" width="auto" style="cursor: pointer;" onclick="showPic(this)">
+											</div>
+										</div>
+									</c:if>
+									<div class="comment-answer">
+										<c:forEach items="${comment.commentResponses}" var="response" varStatus="i">
+											<c:if test="${i.index < 1}">
+											<div class="answer-item">
+												<c:if test="${not empty response.user.userHead}">
+													<img class="answer-img" src="../${response.user.userHead}">
+												</c:if>
+												<div class="answer-content">
+													<h3 class="">${response.user.userName}</h3>
+													<p> ${response.commentContent} </p>
+												</div>
+											</div>
+											</c:if>
+										</c:forEach>
+									</div>
+									<div class="comment-detail-btn">
+										<a href="commentDetails.action?commentId=${comment.commentId}">查看评价详情</a>
+									</div>
+								</li>
+							</ul>
 						</div>
-
-					</form>
-				</div>
+					</div>
+				</c:forEach>
+				<c:forEach items="${rankComments}" var="comment">
+					<div class="product-info">
+						<div class="span13 comment-detail">
+							<ul class="m-comment-list">
+								<li class="com-item J_resetImgCon J_canZoomBox" data-id="154912845">
+									<a class="user-img"> <img src="../${comment.user.userHead}"> </a>
+									<div class="comment-info">
+										<a class="user-name">${comment.user.userName}</a>
+										<p class="time">
+											<fmt:formatDate value="${comment.commentDate}" type="date" />
+										</p>
+									</div>
+									<div class="comment-eval">
+										<c:if test="${comment.commentRank == 1}"><i class="fa fa-frown-o" aria-hidden="true"></i> 失望</c:if>
+										<c:if test="${comment.commentRank == 2}"><i class="fa fa-meh-o" aria-hidden="true"></i> 一般</c:if>
+										<c:if test="${comment.commentRank == 3}"><i class="fa fa-meh-o" aria-hidden="true"></i> 满意</c:if>
+										<c:if test="${comment.commentRank == 4}"><i class="fa fa-smile-o" aria-hidden="true"></i> 喜欢</c:if>
+										<c:if test="${comment.commentRank == 5}"><i class="fa fa-smile-o" aria-hidden="true"></i> 超爱</c:if>
+									</div>
+									<div class="comment-txt">
+										<p> ${comment.commentContent}</p>
+									</div>
+									<c:if test="${not empty comment.commentUrl}">
+										<div class="m-img-list clearfix h-img-list">
+											<div class="img-item img-item1 item-one showimg">
+												<img class="J_resetImgItem J_canZoom" src="../${comment.commentUrl}" height="160px" width="auto" style="cursor: pointer;" onclick="showPic(this)">
+											</div>
+										</div>
+									</c:if>
+									<div class="comment-answer">
+										<c:forEach items="${comment.commentResponses}" var="response" varStatus="i">
+											<c:if test="${i.index < 1}">
+											<div class="answer-item">
+												<c:if test="${not empty response.user.userHead}">
+													<img class="answer-img" src="../${response.user.userHead}">
+												</c:if>
+												<div class="answer-content">
+													<h3 class="">${response.user.userName}</h3>
+													<p> ${response.commentContent} </p>
+												</div>
+											</div>
+											</c:if>
+										</c:forEach>
+									</div>
+									<div class="comment-detail-btn">
+										<a href="commentDetails.action?commentId=${comment.commentId}">查看评价详情</a>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 

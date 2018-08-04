@@ -76,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <delete id="deleteSpikeProduct" >  
-        delete from spikeproduct where spileProductId=#{spikeProductId}  
+        delete from spikeproduct where spikeProductId=#{spikeProductId}  
 	</delete>  
      
     <select id="getGroupProduct" resultMap="groupProductResult" flushCache="true" >

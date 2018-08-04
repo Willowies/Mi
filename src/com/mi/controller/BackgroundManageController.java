@@ -40,6 +40,7 @@ public class BackgroundManageController extends BaseController{
 		List<SpikeProduct> products = (List<SpikeProduct>) map.get("list");
 		
 		for (SpikeProduct p : products) {
+			System.out.println(p.getSpikeProductId()+" "+p.getProductName());
 			p.setProductName(p.getProductName() + (p.getSize()==null?"":" "+p.getSize()) + (p.getVersion()==null?"":" "+p.getVersion())+" "+p.getColor());
 		}
 		
@@ -62,7 +63,7 @@ public class BackgroundManageController extends BaseController{
 		}
 		
 		request.setAttribute("productList", products);
-		return "forward:setSpikeProduct.jsp";
+		return "forward:setGroupProduct.jsp";
 	}
 	
 	@RequestMapping("getProductFirstClassInManage")

@@ -69,6 +69,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	 values(#{0},#{1})
     </insert>
     
+    <delete id="deleteLikeProduct">
+    	delete from likeproduct where userId=#{0} and productId=#{1}  
+    </delete>
+    
+    <select id="getSecondClassNames" resultType="String" flushCache="true" >
+    	select a.secondClassName
+    	from mi.productsecondclass a
+    </select>
+    
     <resultMap type="product" id="productResult2">
     	<id column="productId" property="productId" />
     	<result column="productName" property="productName" />

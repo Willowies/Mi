@@ -36,6 +36,11 @@ public class ProductInfoController {
 	@RequestMapping("selectProductInfo")
 	public String selectProductInfo(Model model, String productName, HttpSession session){
 		//µ÷ÓÃService
+		try {
+			URLDecoder.decode(productName, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		User user = getUser(session);
 		List<Product> list = productInfoService.selectProductByName(productName);
 		ReceiverAddress receiverAddress = new ReceiverAddress();;

@@ -156,4 +156,12 @@ public class SearchService {
 		
 	}
 
+	public void deleteLikeProduct(int userId, int productId) {
+		searchDAO.deleteLikeProduct(userId,productId);
+	}
+
+	public List<String> getSecondClassNames() {
+		return searchDAO.getSecondClassNames();
+	}
+
 }

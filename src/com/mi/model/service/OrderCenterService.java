@@ -73,10 +73,11 @@ public class OrderCenterService {
 		return map;
 	}
 
-	public Map<String, Object> getOrderByProductName(User user, String productName, int pageNum, int pageSize) {
+	public Map<String, Object> getOrderByProductName(User user, int type, String productName, int pageNum, int pageSize) {
 		Map<String, Object> m = new HashMap<String, Object>();
 		m.put("user", user);
 		m.put("productName", productName);
+		m.put("type", type);
 		Page<Order> page = PageHelper.startPage(pageNum, pageSize);
 		orderDAO.getOrderByProductName(m);
 		List<Order> list = page.getResult();

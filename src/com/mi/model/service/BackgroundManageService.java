@@ -80,7 +80,9 @@ public class BackgroundManageService {
 	}
 
 	public void deleteSpikeProduct(SpikeProduct p) {
+		int quantity = manageDAO.getSpikeQuantity(p.getSpikeProductId());
 		manageDAO.deleteSpikeProduct(p.getSpikeProductId());
+		manageDAO.modifyStock(-quantity, p.getProductId());
 	}
 
 	public Map<String, Object> getGroupProduct() {
@@ -104,7 +106,9 @@ public class BackgroundManageService {
 	}
 
 	public void deleteGroupProduct(GroupProduct p) {
+		int quantity = manageDAO.getGroupQuantity(p.getGroupProductId());
 		manageDAO.deleteGrorupProduct(p.getGroupProductId());
+		manageDAO.modifyStock(-quantity, p.getGroupProductId());
 	}
 
 	

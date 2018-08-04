@@ -1,0 +1,136 @@
+.product-info {
+	height: 300px;
+	width: 1220px;
+	float: left;
+	margin-left: 14px;
+	min-height: 1px;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.comment-details {
+	height: 485px;
+	width: 750px;
+	float: left;
+	min-height: 1px;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	align-content: flex-start;
+}
+
+.product-name {
+	margin-top: 24px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333;
+	line-height: 14px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.product-price {
+	font-size: 14px;
+	color: #ff6700;
+	line-height: 14px;
+}
+
+.product-comments-info {
+	color: #757575;
+	font-size: 12px;
+	line-height: 12px;
+	margin-top: 14px;
+}
+
+.rank-face {
+	margin: 10px 0 0 240px;
+	font-size: 26px;
+	color: #f66262;
+}
+
+.inputstyle {
+	position: absolute;
+	font-size: 100px;
+	right: 0;
+	top: 0;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	cursor: pointer;
+}
+
+#imagePreview {
+	border: 1px dashed;
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+}
+
+.comment-text {
+	width: 85%;
+	height: 200px;
+	float: left;
+	clear: both;
+}
+
+.comment-button {
+	border: 0;
+	float: right;
+	margin: 80px 110px;
+	clear: both;
+	width: 106px;
+	height: 28px;
+	background-color: #f25807;
+	border-color: #f25807;
+	color: #fff;
+}
+
+.online-head {
+	width: 1220px;
+	margin: 0 auto 20px auto;
+	font-size: 30px;
+}
+
+.online {
+	padding: 30px 0;
+	border-bottom: 14px solid #f5f5f5;
+	background-color: #fff;
+	width: 1220px;
+	    height: 150px;
+	margin: 0 auto;
+}
+
+.online dl {
+	float: left;
+	width: 430px;
+	margin-top: 20px;
+}
+
+.online dt {
+	margin-bottom: 8px;
+}
+
+online .btn {
+	float: left;
+	margin-top: 30px;
+}
+
+.btn-primary {
+	background: #ff6700;
+	border-color: #ff6700;
+	color: #fff;
+}
+.online-block{
+	padding: 30px 0;
+	border-bottom: 14px solid #f5f5f5;
+	background-color: #fff;
+	width: 1220px;
+	height: 550px;
+	margin: 0 auto;
+}

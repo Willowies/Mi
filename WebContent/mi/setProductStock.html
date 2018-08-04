@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -16,113 +16,101 @@
 		<link href="../css/model.css" rel="stylesheet">
 		<link href="../css/manageSelf.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
-		<script type="text/javascript">
-				function changeSecondClass(id) {
-					$.post("getProductSecondClassInManage.action", {
-						"id": id
-					}, function(json) {
-						$(".secondClass").html(""); //清空下拉框  
-						for(var i = 0; i < json.length; i++) {
-							//添加一个secondClass  
-							$(".secondClass").append(
-								"<option value='" + json[i].secondClassId + "'>" + json[i].secondClassName +
-								"</option>");
-						}
-						changeProduct($(".secondClass").val());
-					}, 'json');
-				}
-
-				function changeProduct(id) {
-					$.post("getProductInfoInManageByTime.action", {
-						"id": id,
-						"date": "${date}",
-						"time": "${time}"
-					}, function(json) {
-						$(".product").html(""); //清空下拉框  
-						$(".product").append(
-							"<option value=''></option>");
-						for(var i = 0; i < json.length; i++) {
-							//添加一个product  
-							$(".product").append(
-								"<option value='" + json[i].productId + "'>" + json[i].extremeName +
-								"</option>");
-						}
-					}, 'json');
-				}
-
-				$(function() {
-					//初始化firstClass下拉框  
-					$.post("getProductFirstClassInManage.action", null, function(json) {
-						for(var i = 0; i < json.length; i++) {
-							//添加一个教师  
-							$(".firstClass").append(
-								"<option value='" + json[i].firstClassId + "'>" + json[i].firstClassName + "</option>");
-						}
-						changeSecondClass($(".firstClass").val());
-					}, 'json');
-					//注册firstClass下拉框事件   
-					$(".firstClass").change(function() {
-						changeSecondClass($(this).val());
-					});
-
-					$(".secondClass").change(function() {
-						changeProduct($(this).val());
-					});
-
-					<%
-		if(request.getAttribute("alertMsg")!=null){
-		%>
-					alert("${alertMsg}");
-					<%
-		}
-		%>
-
-				});
-
-				function changeProductInfo(value) {
-					var id = value.options[value.selectedIndex].value;
-					$.post("getProductInfoInManage.action", {
-						"id": id
-					}, function(json) {
-						$("#pAll").css("display","block");
-						$("#pName").html("商品名称："+json.extremeName); //清空下拉框  
-						$("#pUrl").attr("src",json.picUrl);
-						$("#pPrice").html(json.productPrice);
-						$("#pStock").html(json.stock);
-						$("input[name='productId']").val(json.productId);
-						$("input[name='spikeQuantity']").attr("max", json.stock);
-
-						if(json.stock <= 0) {
-							alert("商品缺货");
-							$("input[name='spikeButton']").removeAttr("onclick");
-						}
-
-					}, 'json');
-				}
-
-				function setProductStock() {
-
-					$.ajax({
-						type: "POST", //方法类型
-						dataType: "json", //预期服务器返回的数据类型
-						url: "setProductStock.action", //url
-						data: $('#stockForm').serialize(),
-						success: function(result) {
-							var c = parseInt($("#pStock").html()) + parseInt($("input[name='stock']").val());
-							console.log(c);
-							if(result.stock == c) {
-								alert("添加成功");
-								$("#pStock").html(result.stock);
-							} else {
-								alert("添加失败");
-							}
-						},
-						error: function() {
-							alert("添加失败");
-						}
-					});
-				}
-			</script>
+		<script>
+			function changeSecondClass(id) {
+		$.post("getProductSecondClassInManage.action", {
+			"id" : id
+		}, function(json) {
+			$(".secondClass").html("");//清空下拉框  
+			for (var i = 0; i < json.length; i++) {
+				//添加一个secondClass  
+				$(".secondClass").append(
+						"<option value='"+json[i].secondClassId+"'>" + json[i].secondClassName
+								+ "</option>");
+			}
+			changeProduct($(".secondClass").val());
+		}, 'json');
+	}
+	
+	function changeProduct(id) {
+		$.post("getProductInManage.action", {
+			"id" : id
+		}, function(json) {
+			$(".product").html("");//清空下拉框  
+			$(".product").append(
+						"<option value=''></option>");
+			for (var i = 0; i < json.length; i++) {
+				//添加一个product  
+				$(".product").append(
+						"<option value='"+json[i].productId+"'>" + json[i].extremeName
+								+ "</option>");
+			}
+		}, 'json');
+	}
+	
+	$(function() {
+		//初始化firstClass下拉框  
+		$.post("getProductFirstClassInManage.action", null, function(json) {
+			for (var i = 0; i < json.length; i++) {
+				//添加一个教师  
+				$(".firstClass").append(
+						"<option value='"+json[i].firstClassId+"'>" +json[i].firstClassName+ "</option>");
+			}
+			changeSecondClass($(".firstClass").val());
+		}, 'json');
+		//注册firstClass下拉框事件   
+		$(".firstClass").change(function() { 
+			changeSecondClass($(this).val()); 
+		}); 
+		
+		$(".secondClass").change(function() {
+			changeProduct($(this).val()); 
+		});
+		
+		$('.setStockButton').click(function(){
+			
+		}); 
+	});
+	
+	function changeProductInfo(value) {
+		var id = value.options[value.selectedIndex].value;
+		$.post("getProductInfoInManage.action", {
+			"id" : id
+		}, function(json) {
+			$("#pAll").css("display","flex");
+			$("#pName").html(json.extremeName);//清空下拉框  
+			$("#pUrl").attr("src",json.picUrl);
+			$("#pStock").html(json.stock);
+			$("input[name='productId']").val(json.productId);
+			
+		}, 'json');
+	}
+	
+	function setProductStock() {
+		
+		$.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "setProductStock.action" ,//url
+                data: $('#stockForm').serialize(),
+                success: function (result) {
+                	var c = parseInt($("#pStock").html()) + parseInt($("input[name='stock']").val());
+                	console.log(c);
+                    if (result.stock == c) {
+                        alert("添加成功");
+                        $("#pStock").html(result.stock);
+                    }else{
+                    	alert("添加失败");
+                    }
+                },
+                error : function() {
+                    alert("添加失败");
+                }
+            });
+	}
+	
+	
+		</script>
 	</head>
 
 	<body>
@@ -151,91 +139,36 @@
 		<div class="menu-bar">
 			<div class="container ">
 				<a href='manageHome.html'>首页</a><span class="sep">&gt;</span>
-				<a>设置抢购商品</a>
+				<a>设置商品库存</a>
 			</div>
 		</div>
 		<div class="grey-back-div">
-			<p class="online-head"> 设置抢购商品 </p>
+			<p class="online-head" > 设置商品库存 </p>
 			<div class="spikeproduct">
-				<div class="choosetime">
-					<form action="getSpikeProductByTime.action" method="post" class="row-form">
-
-						<input style="width: 200px;" type="date" name="date" required="required" class="form-control">
-						<select style="width: 200px;" name="time" class="form-control">
-							<option value="10">十点场</option>
-							<option value="12">十二点场</option>
-							<option value="18">十八点场</option>
-							<option value="20">二十点场</option>
-							<option value="22">二十二点场</option>
-						</select>
-						<button class="btn btn-default" type="submit">搜索场次</button>
-					</form>
-				</div>
-					<%
-	if(request.getAttribute("state")!=null){
-		
-	if(request.getAttribute("productList")!=null){
-		List l = (List) request.getAttribute("productList");
-		if (!l.isEmpty()) {
-	%>
-				<c:forEach items="${productList}" var="product">
-				<div class="productlist">
-					<div class="productitem">
-						<img src="../images/54e35fdd-bc68-4a89-bad7-c9c3bb2fc6fe.jpeg" height="150px" />
-						<div class="productinfo">
-							<p>商品名称：${product.productName}</p>
-							<form action="modifySpikeProduct.action" method="post">
-								<div>
-									<span>商品数量:${product.spikeQuantity}</span>&nbsp;&nbsp;&nbsp;<input type="number" name="spikeQuantity" value="2" required="required" min="1" max="${product.stock}" />
-								</div>
-								<div>
-									<span>商品价格:${product.spikePrice}</span>&nbsp;&nbsp;&nbsp;<input type="number" name="spikePrice" value="2099" required="required" min="1" />
-								</div>
-								<input name="spikeProductId" value="${product.spikeProductId}" style="display: none;" />
-								<input type="date" name="date" value="${date}" required="required" style="display: none;">
-								<input name="time" value="${time}" style="display: none;">
-								<div class="productinfoform">
-									<button class="btn btn-default" type="submit">修改</button>
-									<button class="btn btn-default" type="button" onclick="window.location.href='deleteSpikeProduct.action?spikeProductId=0&productId=0'">删除</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				</c:forEach>
-				<%
-		} else {
-	%>
-		<p style="margin-left: 170px;">未查询到数据</p3>
-			<%
-		}
-	}
-	%>
 				<div class="choosetime">
 					<select class="firstClass"></select>
 					<select class="secondClass"></select>
 					<select class="product" onclick="changeProductInfo(this)"></select>
 				</div>
-				<div class="productitem" id="pAll">
-						<img id="pUrl" src="../images/54e35fdd-bc68-4a89-bad7-c9c3bb2fc6fe.jpeg" height="150px" />
-						<div class="productinfo">
-							<p id="pName">商品名称</p>
-							<form action="addSpikeProduct.action" method="post">
-								<div>
-									<span>商品库存:</span>&nbsp;&nbsp;&nbsp;<p id="pStock">123</p>&nbsp;&nbsp;&nbsp;<input id="quantity"  placeholder="抢购量"  name="spikeQuantity" type="number" min="1" max="100" />
-								</div>
-								<div>
-									<span>商品价格:</span>&nbsp;&nbsp;&nbsp;<p id="pPrice"></p>&nbsp;&nbsp;&nbsp;<input placeholder="抢购价格" name="spikePrice" type="number" min="1" />
-								</div>
-								<input name="productId" value="" style="display: none;" />
-								<input type="date" name="date" value="${date}" required="required" style="display: none;">
-								<input name="time" value="${time}" style="display: none;">
-								<div class="productinfoform">
-									<button class="btn btn-default"  type="submit">增加抢购商品</button>
-								</div>
-							</form>
-						</div>
+				<div class="productitem" id="pAll" style="display: flex;">
+					<img id="pUrl" src="../images/54e35fdd-bc68-4a89-bad7-c9c3bb2fc6fe.jpeg" height="150px" />
+					<div class="productinfo">
+						<p id="pName">商品名称</p>
+						<form id="stockForm"  method="post">
+							<div>
+								<span>商品库存:</span>&nbsp;&nbsp;&nbsp;
+								<p id="pStock">123</p>
+							</div>
+							<div>
+								<input placeholder="增加库存量" name="stock" type="number"  min="1"  />
+							</div>
+							<input name="productId" value="" style="display: none;" />
+							<div class="productinfoform">
+								<button class="btn btn-default" type="button"  onclick="setProductStock()">增加库存</button>
+							</div>
+						</form>
 					</div>
+				</div>
 			</div>
 		</div>
 
