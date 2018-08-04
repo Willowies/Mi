@@ -210,6 +210,7 @@
 			<%
 		}
 	}
+	}
 	%>
 				<div class="choosetime">
 					<select class="firstClass"></select>

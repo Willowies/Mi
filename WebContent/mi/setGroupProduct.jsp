@@ -175,8 +175,6 @@
 					</div>
 				</div>
 					<%
-	if(request.getAttribute("state")!=null){
-		
 	if(request.getAttribute("productList")!=null){
 		List l = (List) request.getAttribute("productList");
 		if (!l.isEmpty()) {
@@ -218,7 +216,6 @@
 		<p style="margin-left: 170px;">未设置团购商品</p3>
 			<%
 		}
-	}
 	}
 	%>
 			</div>
