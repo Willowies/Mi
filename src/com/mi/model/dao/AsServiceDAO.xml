@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.AsServiceDAO">
+
+	<!-- 根据SN查询OrderProduct的数据 -->
+	<select id="getOrderProBySn" parameterType="int" resultType="OrderProduct"
+		flushCache="true">
+		select * from mi.orderproduct where sn=#{asSn}
+	</select>
+
+	<!-- 通过asSn向OrderProduct中找到productId，再通过productId在表product中找到productName，version，color，productId，sn等信息 -->
+	<select id="getProInfoBySn" parameterType="int" resultType="AsProInfo" flushCache="true">
+		select pro.productName , pro.version , pro.color , pro.productId , opro.sn , pro.picUrl
+		from mi.orderproduct opro, mi.product pro
+		where opro.sn=#{asSn}
+		and opro.productId = pro.productId
+	</select>
+
+	<!-- 插入售后服务表信息 -->
+	<insert id="insertAsInfo" parameterType="AsTable">
+		insert into mi.aftersale_service
+		values(#{asId},#{asProId},#{asSn},#{asWay},#{asBack},#{asDescription},#{asAddress},
+		#{asPerson},#{asPhone},#{asState},#{asTime},#{asRepairProUrl},#{asInvoiceUrl},
+		#{productName},#{version},#{color},#{picUrl})
+	</insert>
+	
+	<!-- 查询售后服务表的所有数据 -->
+    <select id="getAllTables" resultType="AsTable"  >
+        select *  from  mi.aftersale_service
+    </select>
+    
+    <!-- 根据sn获得一个售后服务表的数据 -->
+    <select id="getTableBySn" parameterType="String" resultType="AsTable" flushCache="true">
+		select * from mi.aftersale_service where asId=#{asId}
+	</select>
+    
+    
+     <!-- 根据asId修改服务表状态 -->
+     <update id="updateState" parameterType="String"  >
+         update mi.aftersale_service 
+         set asState= 7003
+         where asId=#{asId}
+     </update>
+ 
+	<!-- 选取所有的order里面的内容 -->
+	<select id="getAllOrder" resultType="Order" flushCache="true">
+		select * from mi.order
+	</select>
+  	
+  	<!-- 根据orderId选取orderproduct里面的记录 -->
+	<select id="getOrderProById" resultMap="orderProductResult" flushCache="true">
+		select * from mi.orderproduct where orderId=#{orderId}
+	</select>
+   
+   
+     	<!-- 根据productId选取product里面的记录 -->
+	<select id="getProductById" resultType="Product" flushCache="true">
+		select * from mi.product where productId=#{productId}
+	</select>
+	
+	 <resultMap type="orderProduct" id="orderProductResult">
+    	<result column="orderItemId" property="orderItemId" />
+    	<result column="quantity" property="quantity" />
+    	<result column="sn" property="sn" />
+    	<result column="productPrice" property="productPrice" />
+    	<result column="orderId" property="orderId" />
+    	<association property="product" column="productId" resultMap="productResult" />
+    </resultMap>
+    
+    <resultMap type="product" id="productResult">
+    	<result column="productId" property="productId" />
+    	<result column="productName" property="productName" />
+    	<result column="productOriginalPrice" property="productPrice" />
+    	<result column="description" property="description" />
+    	<result column="color" property="color" />
+    	<result column="version" property="version" />
+    	<result column="size" property="size" />
+    	<result column="picUrl" property="picUrl" />
+    	<result column="maxQuantity" property="maxQuantity" />
+    </resultMap>
+</mapper>
+
+
+
+
+
