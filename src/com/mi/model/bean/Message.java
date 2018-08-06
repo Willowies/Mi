@@ -4,36 +4,35 @@ import java.util.Date;
 
 public class Message {
 	private int messageId;
-	private String title;
-	private String content;
-	private User user;
+	private String messageTitle;
+	private String message;
+	private int userId;
 	private Date sendTime;
-	private int type;
+	private int messageType;
 	private String picUrl;
-	
 	public int getMessageId() {
 		return messageId;
 	}
 	public void setMessageId(int messageId) {
 		this.messageId = messageId;
 	}
-	public String getTitle() {
-		return title;
+	public String getMessageTitle() {
+		return messageTitle;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setMessageTitle(String messageTitle) {
+		this.messageTitle = messageTitle;
 	}
-	public String getContent() {
-		return content;
+	public String getMessage() {
+		return message;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setMessage(String message) {
+		this.message = message;
 	}
-	public User getUser() {
-		return user;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public Date getSendTime() {
 		return sendTime;
@@ -41,11 +40,11 @@ public class Message {
 	public void setSendTime(Date sendTime) {
 		this.sendTime = sendTime;
 	}
-	public int getType() {
-		return type;
+	public int getMessageType() {
+		return messageType;
 	}
-	public void setType(int type) {
-		this.type = type;
+	public void setMessageType(int messageType) {
+		this.messageType = messageType;
 	}
 	public String getPicUrl() {
 		return picUrl;
@@ -53,5 +52,6 @@ public class Message {
 	public void setPicUrl(String picUrl) {
 		this.picUrl = picUrl;
 	}
+	
 	
 }

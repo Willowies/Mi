@@ -1,0 +1,58 @@
+.messageNotice-main{
+	padding: 0 45px 40px
+}
+.messageNotice-main .messageNotice-Item{
+	position: relative;
+    padding: 18px 25px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-left: 2px solid #b0b0b0;
+}
+.messageNotice-main .messageNotice-item .m-tit {
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #212121;
+    font-weight: normal;
+}
+.messageNotice-main .message-item .m-commend {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #757575;
+}
+.messageNotice-main .m-bottom {
+    margin-top: 15px;
+}
+.messageNotice-main .messageNotice-Item .m-time {
+    font-size: 14px;
+    color: #757575;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+}
+.messageNotice-main .m-img-list img{
+    width: 220px;
+    height: 220px;
+    display: block;
+    float: left;
+}
+
+.messageNotice-main .m-btns {
+    display: inline-block;
+    width: 114px;
+    height: 28px;
+    line-height: 28px;
+    margin-top: 14px;
+    color: #212121;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    float: right;
+}
+
+.clearfix:after {
+    clear: both;
+}
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
