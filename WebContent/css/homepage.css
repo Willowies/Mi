@@ -273,7 +273,18 @@
 	float:left;
 	padding:26px 10px 0 10px;
 }
+.site-header .nav-item-service{
+	height:62px;
+	float:left;
+	padding:26px 10px 0 10px;
+}
 .site-header .nav-item:hover{
+	height:62px;
+	float:left;
+	padding:26px 10px 0 10px;
+	color:#ff6700;
+}
+.site-header .nav-item-service:hover{
 	height:62px;
 	float:left;
 	padding:26px 10px 0 10px;
