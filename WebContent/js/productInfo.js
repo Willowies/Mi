@@ -1,7 +1,4 @@
 $(function(){
-	$(".proLoginClose").click(function(){
-		$(".login-notic").css("display","none");
-	});
 	$(".link-category").hover(function(){
 		$(".site-category").css("display","block");
 	},function(){
@@ -11,6 +8,14 @@ $(function(){
 		$(".site-category").css("display","block");
 	},function(){
 		$(".site-category").css("display","none");
+	});
+	//判断登录
+	var isLogin = checkLoginState();
+	if(isLogin == true){
+		$(".login-notic").css("display","none");
+	}
+	$(".proLoginClose").click(function(){
+		$(".login-notic").css("display","none");
 	});
 	//设置版本及对应价格
 	$("#selectVersion li:first").addClass("active");	
@@ -34,10 +39,9 @@ $(function(){
 				var colorHtml = "";
 				var imgHtml = "";
 				var carouselIndex = "";
-				//$("span.price").text(data[0].productPrice+"元");
 				for(var i = 0; i < data.length; i++){
 					colorHtml = colorHtml+"<li class=\"but but-biglarge\" ><a id=\"color"+i+"\" >"+data[i].color+"</a></li>"
-					imgHtml = imgHtml+"<div id=\"sliderView\" class=\"sliderWrap item\" style=\"width: auto; position: relative;\"><img class=\"slider done\" src=\"../"+data[i].picUrl+"\" /></div>";
+					imgHtml = imgHtml+"<div id=\"sliderView\" class=\"sliderWrap item\" style=\"width: auto; position: relative;\"><img class=\"slider done\" src=\"../"+data[i].picUrl+"\" style=\"width:560px; height:560px;\"/></div>";
 					carouselIndex = carouselIndex+"<li data-target=\"#myCarousel\" data-slide-to=\""+i+"\" class=\"\"></li>";					
 					
 				}
@@ -47,8 +51,6 @@ $(function(){
 				$("ol.carousel-indicators li:first").addClass("active");
 				$(".ui-viewport div:first").addClass("active");
 				$("#selectColor ul li:first").addClass("active");
-				//$(".sliderWrap img:first").css("display","block");
-				//console.log($(".sliderWrap img:first").attr("style"));
 				selectProduct();
 				selectProductStock();
 				$("#selectColor ul li").click(function(){
@@ -78,7 +80,6 @@ $(function(){
 			url:"selectProduct.action?productName="+$("#pro-title").text()+"&version="+version+"&color="+color,	
 			success:function(data){
 				$(".pro-price").text(data.productPrice);
-				//$("span.price").text(data.productPrice+"元");
 				//更新选中产品信息
 				var prolist = data.productName + " "+ data.version + " " + data.color + " " + data.size +"<span>  "+data.productPrice+"元</span><p id=\"productId\" style=\"display:none\">"+data.productId+"</p>";
 				$("#totalName").html(prolist);
@@ -86,8 +87,6 @@ $(function(){
 				//显示对应图片
 				var imgs = $(".sliderWrap").children();				
 				console.log(imgs);
-				//console.log(imgs[0].src);
-				//console.log(imgs[1].src);
                 for(var i = 0; i < imgs.length; i++){
                 	var myUrl = "/"+data.picUrl.substr(data.picUrl.lastIndexOf("/")+1);
                 	var url = $(imgs[i]).attr("src");
@@ -235,6 +234,19 @@ $(function(){
 			$("#img").removeClass("fix");
 		}
 	});
+	/*var headOffset = $(".product-head-info").offset();
+	var headHeight = $(".product-head-info").height();
+	console.log(headOffset.top);
+	console.log(headHeight);
+	$(window).scroll(function(){
+		var scrollTop = $(window).scrollTop();
+		console.log(scrollTop);
+		if(scrollTop >= (headOffset.top+headHeight)){
+			$(".product-head-info").css({"top":"70px","position":"fix"});
+		}else{
+			$(".product-head-info").css({"top":"0","position":"relative"});
+		}
+	});*/
 	
 	//判断登录
 	function checkLoginState(){

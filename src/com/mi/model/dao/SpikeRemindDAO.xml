@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.SpikeRemindDAO">
+
+    <select id="selectSpikeRemind" parameterType="map" resultType="int" >
+        select remindStatus from spikeremind 
+        where spikeProductId=#{spikeProductId} and userId=#{userId} and remindTime=#{remindTime}
+    </select>
+    
+    <insert id="addSpikeRemind" parameterType="map" >
+        insert into spikeremind(spikeProductId,userId,remindTime) 
+        values(#{spikeProductId},#{userId},#{remindTime})
+    </insert>
+    
+
+</mapper>

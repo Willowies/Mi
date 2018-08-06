@@ -81,7 +81,7 @@ public class ProductInfoService {
 			couponDAO.updateReceiveCoupon(map);	
 			isSucceed = "领取成功";
 		}else{
-			isSucceed = "领取失败(已领取过)";
+			isSucceed = "您已领取过";
 		}
 		return isSucceed;
 	}
@@ -124,8 +124,17 @@ public class ProductInfoService {
 		map.put("userId", userId);
 		map.put("productId", productId);
 		//检查是否设置过
-		if(noticeOfArrivalDAO.selectProductArrivalNotice(map) == 1){
-			isSetted = "已设置过";
+		List<Integer> list = noticeOfArrivalDAO.selectProductArrivalNotice(map);
+		if(list.size() != 0){
+			for(int i = 0; i < list.size(); i++){
+				if(list.get(i) == 1){
+					isSetted = "您已设置过了";					
+				}else{
+					//设置提醒
+					noticeOfArrivalDAO.addProductArrivalNotice(map);
+					isSetted = "到货通知设置成功!";
+				}
+			}
 		}else{
 			//设置提醒
 			noticeOfArrivalDAO.addProductArrivalNotice(map);
@@ -133,12 +142,12 @@ public class ProductInfoService {
 		}		
 		return isSetted;
 	}
-	public void deleteProductArrivalNotice(int userId, int productId){
+	/*public void deleteProductArrivalNotice(int userId, int productId){
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userId);
 		map.put("productId", productId);
 		noticeOfArrivalDAO.deleteProductArrivalNotice(map);
-	}
+	}*/
 	
 	public List<Product> selectProductColor(String productName, String version){
 		Map<String,Object> map = new HashMap<String,Object>();
