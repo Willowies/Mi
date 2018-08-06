@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.SpikeProductDAO">
+    <select id="selectSpikeProduct" parameterType="date" resultMap="resultMap">
+        select * from spikeproduct s,product p  
+        where s.startTime=#{startTime} and s.productId=p.productId
+    </select>
+    <resultMap type="SpikeProduct" id="resultMap">
+        <result property="previousPrice" column="productPrice"/>
+    </resultMap>
+    
+    <select id="selectSpikeProductById" parameterType="int" resultMap="productMap">
+        select * from spikeproduct s,product p 
+        where s.productId=p.productId and s.spikeProductId=#{spikeProductId}
+    </select>
+    <resultMap type="SpikeProduct" id="productMap">
+        <result property="previousPrice" column="productPrice"/>
+    </resultMap>
+    
+    <select id="selectIndexSpikeProduct" parameterType="date" resultMap="spikeProductMap">
+        select * from spikeproduct s,product p 
+        where s.startTime>=#{currentDate} and s.productId=p.productId
+    </select>
+    <resultMap type="spikeProduct" id="spikeProductMap">
+        <result property="previousPrice" column="productPrice"/>
+    </resultMap>
+</mapper>
