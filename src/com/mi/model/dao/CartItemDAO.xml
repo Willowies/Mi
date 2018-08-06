@@ -13,25 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteCartItem" parameterType="int" flushCache="true">
     	delete from cartitem where cartItemId=#{cartItemId}
     </delete>
-    
-    <resultMap id="cartItemResult" type="CartItem">
-    	<id column="cartItemId" property="cartItem"  />
-    	<result column="quantity" property="quantity"  />
-    	<result column="userId" property="userId"  />
-    	<result column="state" property="state"  />
-    	<association property="product" column="productId" javaType="Product">
-    		<id column="productId" property="productId" />
-    		<result column="productName" property="productName" />
-    		<result column="description" property="description" />
-    		<result column="productPrice" property="productPrice" />
-    		<result column="color" property="color" />
-    		<result column="version" property="version" />
-    		<result column="size" property="size" />
-    		<result column="picUrl" property="picUrl" />
-    		<result column="maxQuantity" property="maxQuantity" />
-    	</association>
-    </resultMap>
-    
+       
     <select id="findCartItem"  parameterType="int" resultMap="cartItemResult" >
     	select * 
     	from cartitem c,product p 
@@ -71,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where a.userId=#{userId} and a.productId=b.productId
     </select> -->
     
-    <resultMap type="CartItem" id="cartItemResult">
+    <!-- <resultMap type="CartItem" id="cartItemResult">
     	<result property="cartItemId" column="cartItemId"/>
     	<result property="quantity" column="quantity"/>
     	<result property="userId" column="userId"/>
@@ -90,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	<result property="size" column="size" />
     	<result property="picUrl" column="picUrl" />
     	<result property="maxQuantity" column="maxQuantity" />
-    </resultMap> 
+    </resultMap>  -->
     
     <update id="deleteItem" parameterType="int">
     	update cartitem  
@@ -119,5 +101,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select *
     	from product
     </select>
+    
+    <resultMap id="cartItemResult" type="CartItem">
+    	<id column="cartItemId" property="cartItem"  />
+    	<result column="quantity" property="quantity"  />
+    	<result column="userId" property="userId"  />
+    	<result column="state" property="state"  />
+    	<association property="product" column="productId" javaType="Product">
+    		<id column="productId" property="productId" />
+    		<result column="productName" property="productName" />
+    		<result column="description" property="description" />
+    		<result column="productPrice" property="productPrice" />
+    		<result column="color" property="color" />
+    		<result column="version" property="version" />
+    		<result column="size" property="size" />
+    		<result column="picUrl" property="picUrl" />
+    		<result column="maxQuantity" property="maxQuantity" />
+    	</association>
+    </resultMap>
     
 </mapper>
