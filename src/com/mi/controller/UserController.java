@@ -69,7 +69,7 @@ public class UserController extends BaseController {
 				
     //登录
 	@RequestMapping("login.action")
-	public String login(User user, HttpSession session) {
+	public String login(User user, HttpSession session,HttpServletRequest request) {
 		String userPhone=user.getUserPhone();
 		String userPassword=user.getUserPassword();
 		User user1=userService.login(user);
@@ -77,7 +77,7 @@ public class UserController extends BaseController {
 			session.setAttribute("user", user1);
 			return "homepage";
 		}else {
-			session.setAttribute("loginError", "用户名或密码不正确,请重新输入");
+			request.setAttribute("loginError", "用户名或密码不正确,请重新输入");
 			return "login";
 		}					
 	}
@@ -163,9 +163,9 @@ public class UserController extends BaseController {
 			userService.updatePassword(userId, userPassword);
 			return "login";
 		}else {
-			if(oldPassword!=(userService.selectPasswordByUserId(userId))) {
+			if(!oldPassword.equals(userService.selectPasswordByUserId(userId))) {
 				request.setAttribute("oldPasswordMsg", "原始密码有误");	
-			}if(userPassword!=(reUserPassword)) {
+			}if(!userPassword.equals(reUserPassword)) {
 				request.setAttribute("rePasswordMsg", "两次密码不一致");	
 			}
 			return "updatePassword";
