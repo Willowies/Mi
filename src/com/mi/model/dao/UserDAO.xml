@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.UserDAO">
+     
+     <!--  注册用户 -->
+    <insert id="addUser" parameterType="User"  flushCache="true" >
+    	<selectKey keyProperty="userId" resultType="int" order="BEFORE">
+    		select ifnull(max(userId),0)+1 from user as userId  <!-- 最大值加1的方式 -->
+    	</selectKey>
+    	
+    	insert into user (userId,userName,userPhone,userPassword)
+		values(#{userId},#{userId},#{userPhone},#{userPassword})
+    </insert>
+    
+    <!-- 登录 -->
+    <select id="selectUserPhoneAndPwd" parameterType="User" resultType="User">
+    	select * from user where userPhone=#{userPhone} and userPassword=#{userPassword}
+    </select>
+    
+    
+    <!-- 查询显示用户个人信息 -->
+    <select id="selectUser" parameterType="int" resultType="User">
+    	select *
+    	from user
+    	where userId=#{userId}
+    </select>
+    
+    <!-- 查询已注册的用户（手机号） -->
+    <select id="selectUserPhone" resultType="User">
+    	select * from user where userPhone=#{phone}
+    </select>
+        
+    <!-- 修改个人信息 -->
+   <update id="updateUser" parameterType="User">
+		update user
+		<set>
+			<if test="userName!=null and userName!='' ">
+				userName=#{userName},
+			</if>
+			<if test="userBirth!=null and userBirth!='' ">
+				userBirth=#{userBirth},
+			</if>
+			<if test="userSex!=null and userSex!='' ">
+				userSex=#{userSex},
+			</if>
+			<if test="userEmail!=null and userEmail!='' ">
+				userEmail=#{userEmail},
+			</if>
+			<if test="userCard!=null and userCard!='' ">
+				userCard=#{userCard},
+			</if>
+		</set>
+		where userId=#{userId}
+	</update>
+     
+     <!-- 上传头像 -->
+    <update id="updateUserHead" >
+        update user set userHead=#{1} where userId=#{0}
+    </update>
+        	
+ 	<!-- 查询密码 -->
+ 	<select id="selectPasswordByUserId" parameterType="int" resultType="String">
+ 		select userPassword from user where userId=#{userId}
+ 	</select>
+ 	
+    <!-- 修改密码  -->
+    <update id="updatePassword">
+    		update user set userPassword=#{1} where userId=#{0}
+    </update> 
+       
+    
+</mapper>
+
+
+
+
+
+
+
+
+

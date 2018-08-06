@@ -1,0 +1,130 @@
+body{
+	margin: 0px;
+	padding: 0px;	
+	font-size: 14px;	
+}
+#wrapper{
+	width: 100%;
+	height: 100%;
+	background: #f9f9f9;
+}
+
+#upside{
+	height: 80px;
+    margin: 0 auto;
+   /* background: aqua;*/
+}
+#upside img{
+	margin-top: 40px;
+	margin-left: 170px;
+	float: left;
+}
+
+#upside #return a{
+	text-decoration: none;
+	float: left;
+	font-size: 14px;
+	color: #46639c;
+	padding-top: 45px;
+	margin-left: 860px;
+	
+}
+#middleside{
+	width: 1000px;
+	height: 550px;
+    margin: 0 auto;
+
+    
+}
+#middleside #title-item{
+	width: 1000px;
+	height: 100px;
+	background: #f9f9f9;
+}
+#middleside #title-item .div1{
+	float: left;
+	margin-left: 150px;
+	margin-top: 50px;
+	font-size: 15px;
+	font-weight: bold;
+}
+#middleside #title-item .div1 a{
+	text-decoration: none;
+	color: #333;
+}
+#middleside #title-item .div1 a:hover{
+	color: #ff7e00;
+}
+#middleside #title-item .div2{
+	float: left;
+	margin-left: 330px;
+	margin-top: 50px;
+	font-size: 15px;
+	font-weight: bold;
+}
+#middleside #title-item .div3 img{
+	width:100px;
+    height:100px;
+	border-radius:100px;
+}
+#middleside #main-item{
+	width: 1000px;
+	height: 450px;
+	border-radius: 20px;
+	background: white;
+}
+#middleside #main-item #main-left{
+	width: 350px;
+	float: left;
+	margin-top: 160px;
+}
+#middleside #main-item #main-left img{
+	width:100px;
+    height:100px;
+	border-radius:100px;
+	margin-left: 110px;
+}
+#middleside #main-item #main-left #setHead{
+	margin-left: 70px;
+}
+#middleside #main-item #main-left button{
+	margin-left: 120px;
+	margin-top: 20px;
+}
+#middleside #main-item #main-right{
+	width: 650px;
+	height: 450px;
+	float: left;
+	
+}
+#middleside #main-item #main-right .text0{
+	height: 30px;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 30px;
+	margin-top: 40px;
+}
+#middleside #main-item #main-right .text0 a{
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 16px;
+	padding-left: 470px;
+}
+#middleside #main-item #main-right .text1{
+	height: 30px;
+	line-height: 30px;
+}
+#middleside #main-item #main-right .text1 span{
+	font-size: 15px;
+	color: #666;;
+}
+hr{
+	border: none;
+	height: 2px;
+	background-color: aliceblue;
+}
+#footer{
+	height: 50px;
+	text-align: center;
+	padding-top: 10px;
+}
