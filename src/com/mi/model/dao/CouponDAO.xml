@@ -23,4 +23,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		select * from coupon left join clientCoupon using (couponId) 
    		where userId = #{userId} and couponStatus = #{couponStatus}
    	</select>
+   	
+   	<select id="findCoupons" parameterType="map" resultType="Coupon">
+		select * 
+		from coupon a,clientcoupon b
+		where a.couponId = b.couponId
+			and b.userId = #{userId}
+			and b.couponStatus = 1
+			and a.productId in 
+			<foreach collection="products" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+	</select>   
+	
+	<update id="updateUsedCoupon" parameterType="map">
+		update clientcoupon
+		set couponStatus=2
+		where couponId = #{couponId}
+			and userId = #{userId}
+	</update> 
 </mapper>

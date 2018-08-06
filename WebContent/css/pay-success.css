@@ -1,0 +1,165 @@
+.page-main {
+    padding: 38px 0;
+}
+
+.pay-success-box{
+    background-color: #8bc34a;
+}
+
+.pay-success-box .succ {
+    float: left;
+    width: 506px;
+    height: 400px;
+    text-align: center;
+}
+
+.pay-success-box .succ .title {
+    font-size: 48px;
+    color: #fff;
+    line-height: 1;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+.pay-success-box .succ .price {
+    margin: 20px 0 30px;
+    color: #ffff00;
+}
+
+.pay-success-box .succ .price em {
+    font-style: normal;
+    font-size: 24px;
+}
+
+.pay-success-box .succ .btn {
+    margin-bottom: 30px;
+    border-color: #fff;
+    background: none;
+    color: #fff;
+}
+
+.pay-success-box .succ .state {
+    font-size: 12px;
+    color: #333;
+}
+
+.pay-success-box .info {
+    float: left;
+    width: 660px;
+    min-height: 400px;
+    padding-left: 60px;
+    font-size: 12px;
+    background-color: #fff;
+    position: relative;
+}
+
+.pay-success-box ul, .pay-success-box li {
+    margin: 0;
+    padding: 0;
+}
+
+.pay-success-box .info ul {
+    width: 480px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 14px;
+}
+
+.pay-success-box li {
+    list-style: none;
+}
+
+.pay-success-box .info li {
+    line-height: 24px;
+    margin-bottom: 8px;
+}
+
+.pay-success-box .info li .label {
+    float: left;
+    color: #b0b0b0;
+}
+
+.pay-success-box .info li .content {
+    float: left;
+    color: #757575;
+}
+
+.pay-success-recommend {
+    margin-top: 100px;
+}
+
+.recommond ul li{
+	margin-bottom: 14px;
+	height: 300px;
+	background-color: #fff;
+	text-align: center;
+	position: relative;
+}
+
+.carousel-list li{
+	float: left;
+	width: 234px;
+}
+
+.recommond-list{
+	margin-right: 14px;
+}
+
+
+.pages-wapper{
+	text-align: center;
+}
+
+.recommond ul{
+	padding: 0;
+	margin-top: 0;
+	list-style: none;
+}
+
+.pagers{
+	margin: 0;
+	padding-left: 0;
+}
+
+.recommond ul li pager{
+	background-color: transparent;
+}
+
+.pager{
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	width: 10px;
+	height: 10px;
+	padding: 10px;
+	margin: 0 2px;
+	cursor: pointer;
+}
+
+.pager-active{
+	cursor: default;
+}
+
+.pager-active .dot{
+	border-color: #ff6700;
+	background-color: transparent;
+}
+
+.dot{
+	display: block;
+	width: 6px;
+	height: 6px;
+	border: 2px solid #f5f5f5;
+	border-radius: 6px;
+	text-align: left;
+	text-indent: -9999em;
+	overflow: hidden;
+	background-color: #b0b0b0;
+}
+
+.dot:hover{
+	border-color:#ff6700;
+	background-color:#f5f5f5;
+	background-color:transparent;
+}

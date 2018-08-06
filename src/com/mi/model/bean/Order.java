@@ -19,9 +19,15 @@ public class Order {
 	private float actualTotal;
 	private Date createDate;
 	private Group group;
+	private int groupId;
 	
 	
-	
+	public int getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
 	public Group getGroup() {
 		return group;
 	}

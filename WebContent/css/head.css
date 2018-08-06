@@ -1,0 +1,42 @@
+.head{
+    position: relative;
+    z-index: 20;
+    height: 100px;
+    font-size: 12px;
+	border-bottom: 2px solid #ff6700;
+	background: #fff;
+	color: #b0b0b0;
+	margin: 0;
+}
+
+.head-container{
+	position: relative;
+	width: 1226px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.head-logo{
+	width: 93px;
+	margin-top: 26px;
+	float: left;
+}
+
+.logo{
+	position: relative;
+	overflow: hidden;
+	float: left;
+}
+
+.head-title{
+	float: left;
+	margin-top: 26px;
+}
+
+.head-content{
+	font-size: 28px;
+	line-height: 48px;
+	font-weight: normal;
+	color: #424242;
+	margin: 0;
+}

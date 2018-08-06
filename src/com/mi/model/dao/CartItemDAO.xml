@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteCartItem" parameterType="int" flushCache="true">
     	delete from cartitem where cartItemId=#{cartItemId}
     </delete>
+    
     <resultMap id="cartItemResult" type="CartItem">
     	<id column="cartItemId" property="cartItem"  />
     	<result column="quantity" property="quantity"  />
@@ -30,5 +31,93 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		<result column="maxQuantity" property="maxQuantity" />
     	</association>
     </resultMap>
+    
+    <select id="findCartItem"  parameterType="int" resultMap="cartItemResult" >
+    	select * 
+    	from cartitem c,product p 
+    	where c.productId = p.productId 
+    	  and c.userId = #{userId} 
+    	  and c.state = 1  
+    </select>
+    
+    <select id="getItemById" parameterType="int" resultMap="cartItemResult">
+    	select * 
+    	from cartitem c,product p 
+    	where c.productId = p.productId 
+    	  and c.cartItemId = #{cartItemId}
+    </select>
+    
+    <select id="getItemByProductId" parameterType="map" resultMap="cartItemResult">
+    	select * 
+    	from mi.cartitem c,product p 
+    	where c.productId = p.productId 
+    	  and c.productId = #{productId} 
+    	  and c.userId = #{userId} 
+    </select>
+    
+    <select id="getstate1ItemByPId" parameterType="map" resultMap="cartItemResult">
+    	select * 
+    	from mi.cartitem c,product p 
+    	where c.productId = p.productId 
+    	  and c.productId = #{productId} 
+    	  and c.userId = #{userId} 
+    	  and c.state = 1
+    </select>
+    
+    
+   <!-- <select id="getCartItems"  parameterType="int" resultMap="cartItemResult" flushCache="true" >
+		select a.cartItemId, a.quantity, a.state, a.userId, b.* 
+		from cartitem as a, product as b 
+		where a.userId=#{userId} and a.productId=b.productId
+    </select> -->
+    
+    <resultMap type="CartItem" id="cartItemResult">
+    	<result property="cartItemId" column="cartItemId"/>
+    	<result property="quantity" column="quantity"/>
+    	<result property="userId" column="userId"/>
+    	<result property="state" column="state"/>
+    	<association property="product" column="productId"
+    		javaType="Product" resultMap="productResult"/>
+    </resultMap>
+    
+    <resultMap type="Product" id="productResult">
+    	<result property="productId" column="productId" />
+    	<result property="productName" column="productName" />
+    	<result property="description" column="description" />
+    	<result property="productPrice" column="productPrice" />
+    	<result property="color" column="color" />
+    	<result property="version" column="version" />
+    	<result property="size" column="size" />
+    	<result property="picUrl" column="picUrl" />
+    	<result property="maxQuantity" column="maxQuantity" />
+    </resultMap> 
+    
+    <update id="deleteItem" parameterType="int">
+    	update cartitem  
+    	set state = 0  
+    	where cartItemId=#{cartItemId} 
+    </update>
+    
+    <update id="updateItemQuantity" parameterType="map">
+    	update cartitem
+    	set quantity=quantity+#{num}
+    	where cartItemId = #{cartItemId}
+    </update>
+    
+    <insert id="addCartItem"  parameterType="CartItem">
+    	insert into mi.cartitem(productId,quantity,state,userId)
+    	values(#{product.productId},#{quantity},#{state},#{userId})
+    </insert>
+    
+    <update id="updateItemState" parameterType="int">
+    	update cartItem
+    	set state = 2
+    	where cartItemId=#{cartItemId}
+    </update>
+    
+    <select id="recommendProduct" resultType="Product">
+    	select *
+    	from product
+    </select>
     
 </mapper>

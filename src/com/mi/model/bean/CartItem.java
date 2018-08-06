@@ -1,18 +1,18 @@
 package com.mi.model.bean;
 
 public class CartItem {
-	private int cartItem;
+	private int cartItemId;
 	private Product product;
 	private int quantity;
 	private float amount;
 	private int userId;
 	private int state;
 	
-	public int getCartItem() {
-		return cartItem;
+	public int getCartItemId() {
+		return cartItemId;
 	}
-	public void setCartItem(int cartItem) {
-		this.cartItem = cartItem;
+	public void setCartItemId(int cartItemId) {
+		this.cartItemId = cartItemId;
 	}
 	public Product getProduct() {
 		return product;
