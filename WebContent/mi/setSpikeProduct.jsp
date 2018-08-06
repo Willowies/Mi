@@ -17,112 +17,115 @@
 		<link href="../css/manageSelf.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript">
-				function changeSecondClass(id) {
-					$.post("getProductSecondClassInManage.action", {
-						"id": id
-					}, function(json) {
-						$(".secondClass").html(""); //清空下拉框  
-						for(var i = 0; i < json.length; i++) {
-							//添加一个secondClass  
-							$(".secondClass").append(
-								"<option value='" + json[i].secondClassId + "'>" + json[i].secondClassName +
-								"</option>");
-						}
-						changeProduct($(".secondClass").val());
-					}, 'json');
-				}
+			function changeSecondClass(id) {
+				$.post("getProductSecondClassInManage.action", {
+					"id": id
+				}, function(json) {
+					$(".secondClass").html(""); //清空下拉框  
+					for(var i = 0; i < json.length; i++) {
+						//添加一个secondClass  
+						$(".secondClass").append(
+							"<option value='" + json[i].secondClassId + "'>" + json[i].secondClassName +
+							"</option>");
+					}
+					changeProduct($(".secondClass").val());
+				}, 'json');
+			}
 
-				function changeProduct(id) {
-					$.post("getProductInfoInManageByTime.action", {
-						"id": id,
-						"date": "${date}",
-						"time": "${time}"
-					}, function(json) {
-						$(".product").html(""); //清空下拉框  
+			function changeProduct(id) {
+				$.post("getProductInfoInManageByTime.action", {
+					"id": id,
+					"date": "${date}",
+					"time": "${time}"
+				}, function(json) {
+					$(".product").html(""); //清空下拉框  
+					$(".product").append(
+						"<option value=''></option>");
+					for(var i = 0; i < json.length; i++) {
+						//添加一个product  
 						$(".product").append(
-							"<option value=''></option>");
-						for(var i = 0; i < json.length; i++) {
-							//添加一个product  
-							$(".product").append(
-								"<option value='" + json[i].productId + "'>" + json[i].extremeName +
-								"</option>");
-						}
-					}, 'json');
-				}
+							"<option value='" + json[i].productId + "'>" + json[i].extremeName +
+							"</option>");
+					}
+				}, 'json');
+			}
 
-				$(function() {
-					//初始化firstClass下拉框  
-					$.post("getProductFirstClassInManage.action", null, function(json) {
-						for(var i = 0; i < json.length; i++) {
-							//添加一个教师  
-							$(".firstClass").append(
-								"<option value='" + json[i].firstClassId + "'>" + json[i].firstClassName + "</option>");
-						}
-						changeSecondClass($(".firstClass").val());
-					}, 'json');
-					//注册firstClass下拉框事件   
-					$(".firstClass").change(function() {
-						changeSecondClass($(this).val());
-					});
+			$(function() {
+				//初始化firstClass下拉框  
+				$.post("getProductFirstClassInManage.action", null, function(json) {
+					for(var i = 0; i < json.length; i++) {
+						//添加一个教师  
+						$(".firstClass").append(
+							"<option value='" + json[i].firstClassId + "'>" + json[i].firstClassName + "</option>");
+					}
+					changeSecondClass($(".firstClass").val());
+				}, 'json');
+				//注册firstClass下拉框事件   
+				$(".firstClass").change(function() {
+					changeSecondClass($(this).val());
+				});
 
-					$(".secondClass").change(function() {
-						changeProduct($(this).val());
-					});
+				$(".secondClass").change(function() {
+					changeProduct($(this).val());
+				});
 
-					<%
+				<%
 		if(request.getAttribute("alertMsg")!=null){
 		%>
-					alert("${alertMsg}");
-					<%
+				alert("${alertMsg}");
+				<%
 		}
 		%>
 
-				});
+			});
 
-				function changeProductInfo(value) {
-					var id = value.options[value.selectedIndex].value;
-					$.post("getProductInfoInManage.action", {
-						"id": id
-					}, function(json) {
-						$("#pAll").css("display","block");
-						$("#pName").html("商品名称："+json.extremeName); //清空下拉框  
-						$("#pUrl").attr("src",json.picUrl);
-						$("#pPrice").html(json.productPrice);
-						$("#pStock").html(json.stock);
-						$("input[name='productId']").val(json.productId);
-						$("input[name='spikeQuantity']").attr("max", json.stock);
+			function changeProductInfo(value) {
+				var id = value.options[value.selectedIndex].value;
+				$.post("getProductInfoInManage.action", {
+					"id": id
+				}, function(json) {
+					if(json.stock <= 0) {
+						alert("商品缺货");
+						$(".product option[value='']").attr("selected", "selected");
+						return;
+					}
+					
+					$("#pAll").css("display", "flex");
+					$("#pName").html("商品名称：" + json.extremeName); //清空下拉框  
+					$("#pUrl").attr("src", "../" + json.picUrl);
+					$("#pPrice").html(json.productPrice);
+					$("#pStock").html(json.stock);
+					$("input[name='productId']").val(json.productId);
+					$("input[name='spikeQuantity']").attr("max", json.stock);
 
-						if(json.stock <= 0) {
-							alert("商品缺货");
-							$("input[name='spikeButton']").removeAttr("onclick");
-						}
+					
 
-					}, 'json');
-				}
+				}, 'json');
+			}
 
-				function setProductStock() {
+			function setProductStock() {
 
-					$.ajax({
-						type: "POST", //方法类型
-						dataType: "json", //预期服务器返回的数据类型
-						url: "setProductStock.action", //url
-						data: $('#stockForm').serialize(),
-						success: function(result) {
-							var c = parseInt($("#pStock").html()) + parseInt($("input[name='stock']").val());
-							console.log(c);
-							if(result.stock == c) {
-								alert("添加成功");
-								$("#pStock").html(result.stock);
-							} else {
-								alert("添加失败");
-							}
-						},
-						error: function() {
+				$.ajax({
+					type: "POST", //方法类型
+					dataType: "json", //预期服务器返回的数据类型
+					url: "setProductStock.action", //url
+					data: $('#stockForm').serialize(),
+					success: function(result) {
+						var c = parseInt($("#pStock").html()) + parseInt($("input[name='stock']").val());
+						console.log(c);
+						if(result.stock == c) {
+							alert("添加成功");
+							$("#pStock").html(result.stock);
+						} else {
 							alert("添加失败");
 						}
-					});
-				}
-			</script>
+					},
+					error: function() {
+						alert("添加失败");
+					}
+				});
+			}
+		</script>
 	</head>
 
 	<body>
@@ -171,72 +174,110 @@
 						<button class="btn btn-default" type="submit">搜索场次</button>
 					</form>
 				</div>
-					<%
-	if(request.getAttribute("state")!=null){
-		
-	if(request.getAttribute("productList")!=null){
-		List l = (List) request.getAttribute("productList");
-		if (!l.isEmpty()) {
-	%>
-				<c:forEach items="${productList}" var="product">
-				<div class="productlist">
-					<div class="productitem">
-						<img src="../images/54e35fdd-bc68-4a89-bad7-c9c3bb2fc6fe.jpeg" height="150px" />
-						<div class="productinfo">
-							<p>商品名称：${product.productName}</p>
-							<form action="modifySpikeProduct.action" method="post">
-								<div>
-									<span>商品数量:${product.spikeQuantity}</span>&nbsp;&nbsp;&nbsp;<input type="number" name="spikeQuantity" value="2" required="required" min="1" max="${product.stock}" />
-								</div>
-								<div>
-									<span>商品价格:${product.spikePrice}</span>&nbsp;&nbsp;&nbsp;<input type="number" name="spikePrice" value="2099" required="required" min="1" />
-								</div>
-								<input name="spikeProductId" value="${product.spikeProductId}" style="display: none;" />
-								<input type="date" name="date" value="${date}" required="required" style="display: none;">
-								<input name="time" value="${time}" style="display: none;">
-								<div class="productinfoform">
-									<button class="btn btn-default" type="submit">修改</button>
-									<button class="btn btn-default" type="button" onclick="window.location.href='deleteSpikeProduct.action?spikeProductId=0&productId=0'">删除</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				</c:forEach>
 				<%
-		} else {
+	if(request.getAttribute("state")!=null){
+	if(request.getAttribute("productList")!=null){
+	
 	%>
-		<p style="margin-left: 170px;">未查询到数据</p3>
-			<%
-		}
-	}
-	}
-	%>
-				<div class="choosetime">
-					<select class="firstClass"></select>
-					<select class="secondClass"></select>
-					<select class="product" onclick="changeProductInfo(this)"></select>
-				</div>
-				<div class="productitem" id="pAll">
+				<c:if test="${state == 'ableChange'}">
+					<div class="choosetime">
+						<span>选择商品进行添加 </span>
+						<select class="firstClass"></select>
+						<select class="secondClass"></select>
+						<select class="product" onclick="changeProductInfo(this)"></select>
+					</div>
+					<div class="productitem" id="pAll" style="display: none;">
 						<img id="pUrl" src="../images/54e35fdd-bc68-4a89-bad7-c9c3bb2fc6fe.jpeg" height="150px" />
 						<div class="productinfo">
 							<p id="pName">商品名称</p>
 							<form action="addSpikeProduct.action" method="post">
 								<div>
-									<span>商品库存:</span>&nbsp;&nbsp;&nbsp;<p id="pStock">123</p>&nbsp;&nbsp;&nbsp;<input id="quantity"  placeholder="抢购量"  name="spikeQuantity" type="number" min="1" max="100" />
+									<span>商品库存:</span>&nbsp;&nbsp;&nbsp;
+									<p id="pStock">123</p>&nbsp;&nbsp;&nbsp;<input id="quantity" placeholder="抢购量" name="spikeQuantity" type="number" min="1" max="100" />
 								</div>
 								<div>
-									<span>商品价格:</span>&nbsp;&nbsp;&nbsp;<p id="pPrice"></p>&nbsp;&nbsp;&nbsp;<input placeholder="抢购价格" name="spikePrice" type="number" min="1" />
+									<span>商品价格:</span>&nbsp;&nbsp;&nbsp;
+									<p id="pPrice"></p>&nbsp;&nbsp;&nbsp;<input placeholder="抢购价格" name="spikePrice" type="number" min="1" />
 								</div>
 								<input name="productId" value="" style="display: none;" />
 								<input type="date" name="date" value="${date}" required="required" style="display: none;">
 								<input name="time" value="${time}" style="display: none;">
 								<div class="productinfoform">
-									<button class="btn btn-default"  type="submit">增加抢购商品</button>
+									<button class="btn btn-default" type="submit">增加抢购商品</button>
 								</div>
 							</form>
 						</div>
 					</div>
+				</c:if>
+				<%
+		List l = (List) request.getAttribute("productList");
+		if (!l.isEmpty()) {
+	%>
+				<c:if test="${state == 'ableChange'}">
+					<c:forEach items="${productList}" var="product">
+						<div class="productlist">
+							<div class="productitem">
+								<img src="../${product.picUrl}" height="150px" />
+								<div class="productinfo">
+									<p>商品名称：${product.productName}</p>
+									<form action="modifySpikeProduct.action" method="post">
+										<input name="productId" value="${product.productId}" style="display: none;" />
+										<div>
+											<span>商品数量:</span>&nbsp;&nbsp;&nbsp;<input type="number" name="spikeQuantity" value="${product.spikeQuantity}" required="required" min="1" max="${product.stock + product.spikeQuantity}" />
+										</div>
+										<div>
+											<span>商品价格:</span>&nbsp;&nbsp;&nbsp;<input type="number" name="spikePrice" value="${product.spikePrice}" required="required" min="1" />
+										</div>
+										<input name="spikeProductId" value="${product.spikeProductId}" style="display: none;" />
+										<input type="date" name="date" value="${date}" required="required" style="display: none;">
+										<input name="time" value="${time}" style="display: none;">
+										<div class="productinfoform">
+											<button class="btn btn-default" type="submit">修改</button>
+											<button class="btn btn-default" type="button" onclick="window.location.href='deleteSpikeProduct.action?spikeProductId=${product.spikeProductId}&productId=${product.productId}&date=${date}&time=${time}'">删除</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
+				<c:if test="${state == 'unableChange'}">
+					<c:forEach items="${productList}" var="product">
+						<div class="productlist">
+							<div class="productitem">
+								<img src="../${product.picUrl}" height="150px" />
+								<div class="productinfo">
+									<p>商品名称：${product.productName}</p>
+									<form action="modifySpikeProduct.action" method="post">
+										<div>
+											<span>商品数量:${product.spikeQuantity}</span>&nbsp;&nbsp;&nbsp;
+										</div>
+										<div>
+											<span>商品价格:${product.spikePrice}</span>&nbsp;&nbsp;&nbsp;
+										</div>
+										<input name="spikeProductId" value="${product.spikeProductId}" style="display: none;" />
+										<input type="date" name="date" value="${date}" required="required" style="display: none;">
+										<input name="time" value="${time}" style="display: none;">
+										<div class="productinfoform">
+
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
+				<%
+		} else {
+	%>
+				<p style="margin-left: 170px;">未查询到数据</p3>
+					<%
+		}
+	
+	}
+	}
+	%>
+
 			</div>
 		</div>
 

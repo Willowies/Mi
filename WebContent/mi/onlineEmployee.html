@@ -20,21 +20,36 @@
 					async: false
 				}).responseText;
 				var obj = JSON.parse(html);
+
 				if(html == "true") {
 
 				} else {
 					alert("请先登录");
 				}
 			}
+			
+			function inputEmployeeId(){
+				var id = $("input[name='empId']").val();
+				if (id>0 && id<99999999) {
+					employeeId = id;
+					$("#jump-block").fadeOut();
+					testWebSocket();
+				}else{
+					alert("输入有误");
+				}
+			}
 
+			
 			var wsUri = "ws://localhost:8080/Mi/communication";
 			var output;
 			var sendable = false;
 			var employeeId = 0;
+			var userAccount = ["", "", "", "", ""];
+			var nowCus = 0;
 
 			function init() {
 				output = document.getElementById("output");
-				testWebSocket();
+				
 			}
 
 			function testWebSocket() {
@@ -54,11 +69,12 @@
 			}
 
 			function onOpen(evt) {
-				writeToScreen("连接服务器成功，等待匹配客服");
+				writeToScreen("连接服务器成功");
+				sendable = true;
 				var row = {
 					state: 'start',
-					account: '10002',
-					type: '1'
+					account: ""+employeeId,
+					type: '2'
 				};
 				doSend(JSON.stringify(row));
 			}
@@ -70,29 +86,103 @@
 			function onMessage(evt) {
 				var obj = JSON.parse(evt.data);
 				switch(obj.state) {
-					case "matchFail":
-						writeToScreen(obj.message);
-						websocket.close();
-						$(".function-btn").html("重连");
-						break;
 					case "match":
-						employeeId = obj.message;
-						sendable = true;
-						writeToScreen("客服" + obj.message + "号 为你服务");
+						if($("#li1").css("display") == "none") {
+							$("#li1").find("span").html(obj.message);
+							$("#li1").fadeIn();
+						} else if($("#li2").css("display") == "none") {
+							$("#li2").find("span").html(obj.message);
+							$("#li2").css("display", "block");
+						} else if($("#li3").css("display") == "none") {
+							$("#li3").find("span").html(obj.message);
+							$("#li3").css("display", "block");
+						} else if($("#li4").css("display") == "none") {
+							$("#li4").find("span").html(obj.message);
+							$("#li4").css("display", "block");
+						} else if($("#li5").css("display") == "none") {
+							$("#li5").find("span").html(obj.message);
+							$("#li5").css("display", "block");
+						}
 						break;
 					case "record":
-						writeToScreen("客服" + employeeId + "号:" + obj.message);
+						if($("#li1").find("span").html() == obj.account) {
+							userAccount[0] += "客户：" + obj.account + "号:" + obj.message + "\n";
+							if(nowCus == 0) {
+								writeToScreen("客户：" + obj.account + "号:" + obj.message);
+							}
+						}
+						if($("#li2").find("span").html() == obj.account) {
+							userAccount[1] += "客户：" + obj.account + "号:" + obj.message + "\n";
+							if(nowCus == 1) {
+								writeToScreen("客户：" + obj.account + "号:" + obj.message);
+							}
+						}
+						if($("#li3").find("span").html() == obj.account) {
+							userAccount[2] += "客户：" + obj.account + "号:" + obj.message + "\n";
+							if(nowCus == 2) {
+								writeToScreen("客户：" + obj.account + "号:" + obj.message);
+							}
+						}
+						if($("#li4").find("span").html() == obj.account) {
+							userAccount[3] += "客户：" + obj.account + "号:" + obj.message + "\n";
+							if(nowCus == 3) {
+								writeToScreen("客户：" + obj.account + "号:" + obj.message);
+							}
+						}
+						if($("#li15").find("span").html() == obj.account) {
+							userAccount[4] += "客户：" + obj.account + "号:" + obj.message + "\n";
+							if(nowCus == 4) {
+								writeToScreen("客户：" + obj.account + "号:" + obj.message);
+							}
+						}
 						break;
 					case "close":
-						writeToScreen("客服" + obj.message + "号:下线");
-						employeeId = 0;
-						sendable = false;
-						$(".function-btn").html("匹配客服");
+						if($("#li1").find("span").html() == obj.account) {
+							userAccount[0] = "";
+							$("#li1").find("span").html("1");
+							$("#li1").fadeOut();
+							if(nowCus == 0) {
+								writeToScreen("客户：" + obj.account + "号:断开连接");
+							}
+						}
+						if($("#li2").find("span").html() == obj.account) {
+							userAccount[1] = "";
+							$("#li2").find("span").html("1");
+							$("#li2").css("display", "none");
+							if(nowCus == 1) {
+								writeToScreen("客户：" + obj.account + "号:断开连接");
+							}
+						}
+						if($("#li3").find("span").html() == obj.account) {
+							userAccount[2] = "";
+							$("#li3").find("span").html("1");
+							$("#li3").css("display", "none");
+							if(nowCus == 2) {
+								writeToScreen("客户：" + obj.account + "号:断开连接");
+							}
+						}
+						if($("#li4").find("span").html() == obj.account) {
+							userAccount[3] = "";
+							$("#li4").find("span").html("1");
+							$("#li4").css("display", "none");
+							if(nowCus == 3) {
+								writeToScreen("客户：" + obj.account + "号:断开连接");
+							}
+						}
+						if($("#li15").find("span").html() == obj.account) {
+							userAccount[4] = "";
+							$("#li5").find("span").html("1");
+							$("#li5").css("display", "none");
+							if(nowCus == 4) {
+								writeToScreen("客户：" + obj.account + "号:断开连接");
+							}
+						}
 						break;
 					case "error":
 						writeToScreen(obj.message);
 						break;
 				}
+
 			}
 
 			function onError(evt) {
@@ -107,21 +197,57 @@
 				$(".onlinecontent").append(message + "\n");
 			}
 
+			function changeScreen(index) {
+				nowCus = index;
+				$(".onlinecontent").html(userAccount[index]);
+			}
+
+			function changeCus(i) {
+
+				var id = $(i).attr("id");
+				switch(id) {
+					case "li1":
+						changeScreen(0);
+						break;
+					case "li2":
+						changeScreen(1);
+						break;
+					case "li3":
+						changeScreen(2);
+						break;
+					case "li4":
+						changeScreen(3);
+						break;
+					case "li5":
+						changeScreen(4);
+						break;
+					default:
+						break;
+				}
+			}
+
 			function sendText() {
 				var text = $(".onlineinput").val();
 				if(text == null || text == "") {
 					alert("请输入消息");
 				} else {
 					if(sendable) {
-						writeToScreen("我: " + text);
-						var row = {
-							state: 'record',
-							account: ""+employeeId,
-							type: '1',
-							message: text
-						};
-						websocket.send(JSON.stringify(row));
-						$(".onlineinput").val("");
+						var idT = $("#li" + (nowCus + 1)).find("span").html();
+						if(idT == 1 || idT == 0) {
+							alert("请先选择客户再发送消息");
+						} else {
+							writeToScreen("我: " + text);
+							var row = {
+								state: 'record',
+								account: "" + idT,
+								type: '2',
+								message: text
+							};
+							userAccount[nowCus] += "我: " + text +"\n";
+							websocket.send(JSON.stringify(row));
+							$(".onlineinput").val("");
+						}
+
 					} else {
 						alert("不能发送消息");
 					}
@@ -137,10 +263,6 @@
 				} else if($(i).html() == "重连") {
 					init();
 					$(i).html("关闭");
-				} else if($(i).html() == "匹配客服") {
-					websocket.close();
-					init();
-					$(i).html("关闭");
 				}
 
 			}
@@ -153,132 +275,54 @@
 		<div class="site-topbar">
 			<div class="container">
 				<div class="topbar-nav">
-					<a rel="nofollow" href="../mi/homepage.jsp">小米商城</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="https://www.miui.com/" target="_blank">MIUI</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="">IoT</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" target="_blank">云服务</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" target="_blank">金融</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" target="_blank">有品</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" target="_blank">小爱开放平台</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" target="_blank">政企服务</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
-				</div>
-				<div class="topbar-cart" id="J_miniCartTrigger">
-					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
-						<i class="fa fa-shopping-cart"></i> 购物车
-						<span class="cart-mini-num">（0）</span>
-					</a>
-					<div class="cart-menu" id="J_miniCartMenu">
-					</div>
+
 				</div>
 				<div class="topbar-info">
-
+					<a rel="nofollow" class="link">管理员</a>
+					</span>
 				</div>
 			</div>
 		</div>
 		<div class="site-header">
 			<div class="container">
 				<div class="header-logo">
-					<a href="homepage.jsp"><img src="../images/logo-footer.png" alt="小米logo" /></a>
+					<a href="manageHome.html"><img src="../images/logo-footer.png" alt="小米logo" /></a>
 				</div>
 				<div class="header-nav">
-					<ul class="nav-list">
-						<li id="J_navCategory" class="nav-category">
-							<a href="" class="link-category" style="visibility: visible;">
-								<span class="text">全部商品分类</span>
-							</a>
-							<div class="site-category" style="display:none;">
-								<ul id="J_categoryList" class="site-category-list">
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=1" class="title">手机<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=2" class="title">平板<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=3" class="title">电视机<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=4" class="title">笔记本<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=5" class="title">空气净化器<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=6" class="title">插线板<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li id="navItem1" class="nav-item">小米手机
-							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
-								<div class="container">
-									<ul class="children-list clearfix"></ul>
-								</div>
-							</div>
-						</li>
-						<li id="navItem2" class="nav-item">红米
-							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
-								<div class="container">
-									<ul class="children-list clearfix"></ul>
-								</div>
-							</div>
-						</li>
-						<li id="navItem3" class="nav-item">电视
-							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
-								<div class="container">
-									<ul class="children-list clearfix"></ul>
-								</div>
-							</div>
-						</li>
-						<li id="navItem4" class="nav-item">笔记本
-							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
-								<div class="container">
-									<ul class="children-list clearfix"></ul>
-								</div>
-							</div>
-						</li>
-						<li id="navItem5" class="nav-item">盒子</li>
-						<li id="navItem6" class="nav-item">新品</li>
-						<li id="navItem7" class="nav-item">路由器</li>
-						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item">服务</li>
-						<li id="navItem10" class="nav-item">社区</li>
-					</ul>
+					<p style="margin: 30px 0 0 20%;width: 200px;font-size: 30px;">在线客服系统</p>
 				</div>
-				<div class="header-search">
-					<form id="J_searchForm" class="search-form" method="post" action="searchProduct.action">
-						<input class="search-text" type="search" id="search" name="text">
-						<input type="submit" class="search-btn" value="">
-					</form>
-				</div>
+
 			</div>
 		</div>
 
 		<div class="menu-bar">
 			<div class="container ">
-				<a href='../mi/homepage.jsp'>首页</a><span class="sep">&gt;</span>
-				<a>在线客服</a>
+				<a>
+					</span>
+					<a>在线客服</a>
+			</div>
+		</div>
+		<div id="jump-block" >
+			<div class="big-block">
+				<p>请输入客服号</p>
+				<input name="empId" type="number" min="1" />
+				<button class="search-btn" style="margin: 20px auto;" onclick="inputEmployeeId()">确认</button>
 			</div>
 		</div>
 		<div class="grey-back-div">
 			<p class="online-head"> 在线客服 </p>
 			<div class="online-block">
-				<textarea cols="100" rows="25" class="onlinecontent" readonly="readonly"></textarea>
+				<div class="textandcus">
+					<textarea cols="100" rows="25" class="onlinecontent" readonly="readonly"></textarea>
+					<ul>
+						<li id="li1" onclick="changeCus(this)" style="display: none;">客户<span>1</span></li>
+						<li id="li2" onclick="changeCus(this)" style="display: none;">客户<span>1</span></li>
+						<li id="li3" onclick="changeCus(this)" style="display: none;">客户<span>1</span></li>
+						<li id="li4" onclick="changeCus(this)" style="display: none;">客户<span>1</span></li>
+						<li id="li5" onclick="changeCus(this)" style="display: none;">客户<span>1</span></li>
+					</ul>
+				</div>
+
 				<div>
 					<input class="onlineinput" type="text" required="required" />
 					<button class="search-btn" onclick="sendText()">发送</button>
@@ -286,6 +330,7 @@
 				</div>
 
 			</div>
+
 		</div>
 
 		<div class="site-footer">

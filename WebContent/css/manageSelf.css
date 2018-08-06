@@ -148,7 +148,8 @@ online .btn {
 
 .choosetime{
 	width: 500px;
-	    margin: 0 auto;
+	    font-size: 15px;
+    margin: 20px auto;
 }
 
 .row-form{

@@ -56,7 +56,12 @@ public class BackgroundManageService {
 
 	public Product addProductStock(Integer stock, Integer id) {
 		manageDAO.addStock((int)stock, (int)id);
-		return manageDAO.getProductById((int)id);
+		Product p = manageDAO.getProductById((int)id);
+		if (p.getStock() == stock) {
+			manageDAO.addNotice(new Date(),id);
+			manageDAO.modifyNotice(id);
+		}
+		return p;
 	}
 
 	public Map<String, Object> getProductBySecondClassIdAndTime(Integer id, Date d) {
@@ -101,13 +106,13 @@ public class BackgroundManageService {
 		int quantity = manageDAO.getGroupQuantity(p.getGroupProductId());
 		manageDAO.modifyGroupProduct(p.getGroupProductId(), p.getGroupPrice(), p.getLeastGroupNum(), p.getMaxGroupProductNum());
 		if (p.getMaxGroupProductNum()!=quantity) {
-			manageDAO.modifyStock(p.getMaxGroupProductNum()-quantity, p.getGroupProductId());
+			manageDAO.modifyStock(p.getMaxGroupProductNum()-quantity, p.getProduct().getProductId());
 		}
 	}
 
 	public void deleteGroupProduct(GroupProduct p) {
 		int quantity = manageDAO.getGroupQuantity(p.getGroupProductId());
-		manageDAO.deleteGrorupProduct(p.getGroupProductId());
+		manageDAO.deleteGroupProduct(p.getGroupProductId()); 
 		manageDAO.modifyStock(-quantity, p.getGroupProductId());
 	}
 
