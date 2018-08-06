@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getPhoneProducts" resultMap="phoneProductResult" flushCache="true" >
 		select e.*, f.couponId, f.discountAmount, f.startDate, f.endDate, f.couponName 
 		from product as e left join coupon as f on e.productId=f.productId where e.secondClassId=1
+		group by e.productName
     </select>
     <select id="getApplianceProducts" resultMap="applianceProductResult" flushCache="true">
     	select l.*, u.userName 

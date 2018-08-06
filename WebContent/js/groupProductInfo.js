@@ -18,8 +18,11 @@ function initData2(){
 			for(var i=0;i<data.length;i++){
 				var str="<div class='groupitem'><span id='groupId"+i+"' style='width:0px; height:0px; visibility:hidden;'>"
 					+data[i].groupId+"</span>"+"<p class='num'>"+(i+1)+"</p><div class='info'><p>创建者："+data[i].creator+"</p>"
-					+"<p>当前人数："+data[i].groupMember.length+"人 / "+data[i].groupProduct.leastGroupNum+"人</p></div><select class='person'>"
-					+"<option></option></select><input type='button' id='joinGroup"+i+"' class='joinGroup' value='我要参团'></div>";
+					+"<p>当前人数："+data[i].groupMember.length+"人 / "+data[i].groupProduct.leastGroupNum+"人</p></div><select class='person'>";
+				for(var j=0;j<data[i].groupMember.length;j++){
+					str += "<option value='"+data[i].groupMember[j].userName+"'>"+data[i].groupMember[j].userName+"</option>";
+				}
+				str += "</select><input type='button' id='joinGroup"+i+"' class='joinGroup' value='我要参团'></div>";
 				$(".groupList").append(str);
 				/*
 				 * join in group button
@@ -110,7 +113,16 @@ $(document).ready(function(){
 			},
 		});
 	});
-	
+	$(".link-category").hover(function(){
+		$(".site-category").css("display","block");
+	},function(){
+		$(".site-category").css("display","none");
+	});
+	$(".site-category").hover(function(){
+		$(".site-category").css("display","block");
+	},function(){
+		$(".site-category").css("display","none");
+	});
 	
 });
 
@@ -161,7 +173,7 @@ function updateClearing(){
 		async:true,
 		data:{
 			groupProductId:$("#groupProductId").text(),
-			userId:$.session.get('user').userId
+//			userId:$.session.get('user').userId
 		},
 		dataType:"json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 

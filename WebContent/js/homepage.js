@@ -11,7 +11,7 @@ function initData(){
 		url:"checkLoginState2.action",
 		success:function(data){
 			console.log(data);
-			if(data.userId==1){
+			if(data.userId!=0){
 				var str = "<span class='user'><a class='username'>"
 						+"<span class='name'>"+data.userName+" </span>"
 						+"<i class='fa fa-angle-down fa-lg'></i></a><ul class='user-menu' style='display:none;'>"
@@ -23,7 +23,7 @@ function initData(){
 				console.log("Has logged in!");
 			}
 			if(data.userId==0){
-				var str = "<a rel='nofollow' class='link' href='' >登录</a><span class='sep'>|</span><a rel='nofollow' class='link' href='' >注册</a>"
+				var str = "<a rel='nofollow' class='link' href='login.jsp' >登录</a><span class='sep'>|</span><a rel='nofollow' class='link' href='addUser.jsp' >注册</a>"
 					+"<span class='sep'>|</span><span class='message'><a rel='nofollow' href=''>消息通知</a></span>";
 				$(".topbar-info").append(str);
 				console.log("Has not logged in!");
@@ -334,25 +334,6 @@ $(document).ready(function(){
 		$("#J_miniCartMenu").empty();
 		$("#J_miniCartTrigger").removeClass("topbar-cart-active");
 	});
-//	$(".delete").click(function(){
-//		var cartItemId = $(this).siblings("a.cartItemId");
-//		console.log("log  cartItemId:"+cartItemId.val());
-//		$(this).parent().remove();
-////		$.ajax({
-////			type:"POST",
-////			async:true, 
-////			data:{
-////				cartItemId:cartItemId
-////				},
-////			dataType:"json",
-////			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-////			url:"deleteCartItem.action",
-////			success:function(data){
-//////					console.log(data+"delete success");
-////				console.log("delete finished--shopping cartItem");
-////			},
-////		});
-//	});
 	
 	/* navigator */
 	$("ul.nav-list li.nav-item").hover(function(){
@@ -403,7 +384,7 @@ $(document).ready(function(){
 				console.log(data);
 				for(var i=0;i<data.length;i++){
 					var str="<div class='childrenItem'><a class='link' href=''>"
-						+"<img alt='"+data[i].productName+"' src='../"+data[i].picUrl+"' width='40' height='40'><span class='text1'>"
+						+"<img alt='"+data[i].productName+"' src='../"+data[i].picUrl+"' width='40' height='40' style='float:left;'><span class='text1'>"
 						+data[i].productName+"</span></a></div>";
 					_this.append(str);
 				}

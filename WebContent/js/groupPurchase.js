@@ -14,7 +14,7 @@ function initData2(){
 			console.log(data);
 			//
 			for(var i=0;i<data.length;i++){
-				var quantity = judgeCurrentQuantity(data[i].groupProductId);
+				var quantity = judgeCurrentQuantity(data[i].groupProductId);//check quantity of people
 				var nowDate = new Date();
 				var nowTime = nowDate.getTime();
 				console.log("nowDate:"+nowDate);
@@ -32,7 +32,7 @@ function initData2(){
 				//end date
 				var endDateTime = data[i].endDate;
 				console.log("endDate:"+(new Date(endDateTime))+"  endTime:"+endDateTime);
-				var countDown = endDateTime-serverDate.getTime()-ajaxInterval;
+				var countDown = endDateTime-serverDate.getTime()-ajaxInterval;//check time of product
 				//活动未过期，并且人数还够，显示
 				if(countDown>=0 && quantity==1){
 					var str="<div class='groupProductItem'><div class='gpImg'><a href='groupProductInfo.jsp?groupProductId="
@@ -78,4 +78,15 @@ function judgeCurrentQuantity(groupProductId){
 		},
 	});
 }
-
+$(document).ready(function(){
+	$(".link-category").hover(function(){
+		$(".site-category").css("display","block");
+	},function(){
+		$(".site-category").css("display","none");
+	});
+	$(".site-category").hover(function(){
+		$(".site-category").css("display","block");
+	},function(){
+		$(".site-category").css("display","none");
+	});
+});
