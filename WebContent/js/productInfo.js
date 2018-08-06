@@ -22,7 +22,7 @@ $(function(){
 	var versionlist = $("#selectVersion").children("li");
 	for(var i = 0; i < versionlist.length; i++){
 		var price = $(versionlist[i]).find(".productPrice").text();
-		console.log(price);
+		//console.log(price);
 		$(versionlist[i]).find(".price").text(parseInt(price)+"元");
 	}
  	//根据版本刷新颜色	
@@ -86,12 +86,12 @@ $(function(){
 				$(".totalPrice").text("  总计  ："+data.productPrice+"元 ");
 				//显示对应图片
 				var imgs = $(".sliderWrap").children();				
-				console.log(imgs);
+				//console.log(imgs);
                 for(var i = 0; i < imgs.length; i++){
                 	var myUrl = "/"+data.picUrl.substr(data.picUrl.lastIndexOf("/")+1);
                 	var url = $(imgs[i]).attr("src");
                 	url = url.substr(url.lastIndexOf("/"));
-            		console.log(myUrl+" "+url);
+            		//console.log(myUrl+" "+url);
 					if(myUrl == url){
 						$(imgs[i]).parent().addClass("active");
 					}else{
@@ -103,6 +103,7 @@ $(function(){
 	}
 	//获取选中的参数发送至后台返回库存信息
 	function selectProductStock(){
+		alert("stock");
 		var version = $("#selectVersion li.active span.name").text();
 		var color = $("#selectColor ul li.active a").text();
 		$.ajax({
@@ -110,6 +111,7 @@ $(function(){
 				astnc:true,
 				url:"selectProductStock.action?productName="+$("#pro-title").text()+"&version="+version+"&color="+color,	
 				success:function(data){
+					console.log("库存信息"+data);
 					if(data == "有货"){
 						$("span.sale").css("display","inline-block");
 						$("span.over").css("display","none");
@@ -146,7 +148,7 @@ $(function(){
 				url:"noticeArrival.action?productName="+$("#pro-title").text()+"&version="+version+"&color="+color,
 				success:function(data){
 					$("#modalNoticeArrival").modal("show");
-					console.log($("h4.isSetted").length);
+					//console.log($("h4.isSetted").length);
 					$("h4.isSetted").text(data);
 					$("a.known").click(function(){
 						$("#buyOrNotice").css({"pointer-events":"none","opacity":"0.4"});
