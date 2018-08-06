@@ -1,0 +1,103 @@
+.coupon-content{
+	margin: 0 48px;
+}
+.coupon-content .coupon-hd .title{
+	margin: 0;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 68px;
+    color: #757575;
+}
+.coupon-content .more{
+	border-bottom: 1px solid #e0e0e0;
+	content: " ";
+    display: table;
+    min-width: 882px;
+}
+.coupon-content .filiter-list{
+	float: left;
+    margin: 0;
+    padding: 18px 0;
+    list-style-type: none;
+    font-size: 16px;
+    line-height: 1.25;	
+}
+.coupon-content .filiter-list li{
+	display: block;
+	float: left;
+    padding: 0 20px;
+    float: left;
+    padding: 0 20px;
+    border-left: 1px solid #e0e0e0;
+    color: #757575;
+}
+.coupon-content .filiter-list li.active{
+	color: #ff6700;
+}
+.coupon-content .filiter-list li.first{
+	padding-left: 0;
+    border-left: 0;
+}
+
+.tag-container{
+	min-height: 200px;
+}
+.coupon-list{
+	width: 906px;
+    margin: 0;
+    padding: 30px 0 0;
+    list-style-type: none
+}
+.conpon-card{
+	float: left;
+    width: 280px;
+    height: 360px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: #ff6700;
+    color: #fff
+}
+.conpon-card-content{
+	height: 140px;
+    word-break: break-all;
+    padding: 32px 40px 0 40px;
+}
+.conpon-card-content .coupon-item .item-value {
+    font-size: 16px;
+    color: #fff;
+    padding: 0px 0 15px 0;
+    border-bottom: 2px solid #fff;
+    height: 60px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    _zoom: 1;
+}
+.conpon-card-content .coupon-item .item-value .value {
+    font-size: 60px;
+    font-weight: 200;
+    line-height: 1;
+}
+.conpon-card-content .coupon-item .item-desc {
+    padding-top: 15px;
+    height: 45px;
+}
+.coupon-list .item-description {
+    font-size: 12px;
+    color: #fff;
+    height: 110px;
+    background: #ff6700;
+    border: 1px solid #ff6700;
+    padding: 0 20px;
+    display: table-cell;
+    vertical-align: middle;
+    width: 238px;
+    line-height: 18px;
+}
+.coupon-list .item-description p {
+    overflow: hidden;
+    _zoom: 1;
+    margin: 0;
+    word-break: break-all;
+}

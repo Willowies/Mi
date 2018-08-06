@@ -172,7 +172,7 @@
 		<div class="breadcrumbs">
 			<div class="container2">
 				<a href="homepage.jsp">首页</a>
-				<soan class="sep">></span>
+				<span class="sep">></span>
 					<span>个人中心</span>
 			</div>
 		</div>
