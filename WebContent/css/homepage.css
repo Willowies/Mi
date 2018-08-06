@@ -348,13 +348,13 @@
 	color:#333;
 	-webkit-transition: color .2s;
 	transition: color .2s;
+	height: 40px;
 }
 .site-category-list .childrenItem .text1{
-	width: 100px;
-    float: right;
+    float: left;
     display: block;
-    margin-right: 75px;
     margin-top: 10px;
+    margin-left:12px;
 }
 
 .site-header .search-form {

@@ -107,7 +107,7 @@ a:hover,a:focus {
     text-decoration: none !important;
 }
 a:-webkit-any-link {
-    color: -webkit-link;   
+    color: #b0b0b0;   
     cursor: auto;
 }
 .spike-banner li em {
