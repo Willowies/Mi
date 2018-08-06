@@ -18,4 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         values(#{couponId},#{userId},1)
     </insert>
     
+<!--     周伟祥附加的方法 -->
+    <select id="selectCouponByUserId" resultType="Coupon">
+   		select * from coupon left join clientCoupon using (couponId) 
+   		where userId = #{userId} and couponStatus = #{couponStatus}
+   	</select>
 </mapper>
