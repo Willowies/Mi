@@ -30,6 +30,10 @@ public class BackgroundManageController extends BaseController{
 	@Autowired
 	private BackgroundManageService backgroundManageService;
 	
+	
+	/**   
+	* 通过日期得到该场次的抢购商品信息
+	*/
 	@RequestMapping("getSpikeProductByTime")
 	public String getSpikeProductByTime(HttpSession session, HttpServletRequest request,Date date,String time) {
 		
@@ -52,6 +56,9 @@ public class BackgroundManageController extends BaseController{
 		return "forward:setSpikeProduct.jsp";
 	}
 	
+	/**   
+	* 得到所有的抢购商品信息
+	*/
 	@RequestMapping("getGroupProduct")
 	public String getGroupProduct(HttpSession session, HttpServletRequest request) {
 		
@@ -66,6 +73,9 @@ public class BackgroundManageController extends BaseController{
 		return "forward:setGroupProduct.jsp";
 	}
 	
+	/**   
+	* 得到所有的商品一级分类信息
+	*/
 	@RequestMapping("getProductFirstClassInManage")
 	public @ResponseBody List<ProductFirstClass> getProductFirstClassInManage(HttpSession session, HttpServletRequest request) {
 		
@@ -75,6 +85,10 @@ public class BackgroundManageController extends BaseController{
 		return list;
 	}
 	
+	
+	/**   
+	* 得到所有的商品二级分类信息
+	*/
 	@RequestMapping("getProductSecondClassInManage")
 	public @ResponseBody List<ProductSecondClass> getProductSecondClassInManage(HttpSession session, HttpServletRequest request,Integer id) {
 		
@@ -88,6 +102,9 @@ public class BackgroundManageController extends BaseController{
 		return list;
 	}
 	
+	/**   
+	* 通过二级分类得到商品信息
+	*/
 	@RequestMapping("getProductInManage")
 	public @ResponseBody List<Product> getProductInManage(HttpSession session, HttpServletRequest request,Integer id) {
 		
@@ -105,6 +122,10 @@ public class BackgroundManageController extends BaseController{
 		return list;
 	}
 	
+	/**   
+	* 对于抢购商品，因为一场抢购里不能有重复商品
+	* 所以通过二级分类和场次信息得到商品信息
+	*/
 	@RequestMapping("getProductInfoInManageByTime")
 	public @ResponseBody List<Product> getProductInfoInManageByTime(HttpSession session, HttpServletRequest request,Integer id,Date date,String time) {
 		
@@ -125,6 +146,9 @@ public class BackgroundManageController extends BaseController{
 		return list;
 	}
 	
+	/**   
+	* 通过id得到商品的具体信息
+	*/
 	@RequestMapping("getProductInfoInManage")
 	public @ResponseBody Product getProductInfoInManage(HttpSession session, HttpServletRequest request,Integer id) {
 		
@@ -139,6 +163,10 @@ public class BackgroundManageController extends BaseController{
 		return p;
 	}
 	
+	/**   
+	* 通过商品id和增加的库存量
+	* 改变库存
+	*/
 	@RequestMapping("setProductStock")
 	public @ResponseBody Product setProductStock(HttpSession session, HttpServletRequest request,Integer productId,Integer stock) {
 		
@@ -156,6 +184,10 @@ public class BackgroundManageController extends BaseController{
 		return p;
 	}
 	
+	/**   
+	* 获得抢购的场次和商品信息
+	* 添加抢购商品 
+	*/
 	@RequestMapping("addSpikeProduct")
 	public String addSpikeProduct(HttpSession session, HttpServletRequest request,SpikeProduct p,Date date,String time) {
 		
@@ -178,6 +210,10 @@ public class BackgroundManageController extends BaseController{
 		return getSpikeProductByTime(session, request, date, time);
 	}
 	
+	/**   
+	* 通过商品id和抢购的场次和修改后的商品信息
+	* 改变抢购商品
+	*/
 	@RequestMapping("modifySpikeProduct")
 	public String modifySpikeProduct(HttpSession session, HttpServletRequest request,SpikeProduct p,Date date,String time) {
 		
@@ -192,6 +228,10 @@ public class BackgroundManageController extends BaseController{
 		return getSpikeProductByTime(session, request, date, time);
 	}
 	
+	/**   
+	* 通过抢购商品id和商品id
+	* 删除抢购商品同时修改库存
+	*/
 	@RequestMapping("deleteSpikeProduct")
 	public String deleteSpikeProduct(HttpSession session, HttpServletRequest request,SpikeProduct p,Date date,String time) {
 		
@@ -206,13 +246,25 @@ public class BackgroundManageController extends BaseController{
 		return getSpikeProductByTime(session, request, date, time);
 	}
 	
+	/**   
+	* 通过商品信息
+	* 增加团购商品
+	*/
 	@RequestMapping("addGroupProduct")
-	public String addGroupProduct(HttpSession session, HttpServletRequest request,GroupProduct p) {
+	public String addGroupProduct(HttpSession session, HttpServletRequest request,GroupProduct p,Integer productId) {
 		
-		if (p==null || p.getProduct().getProductId()==0) {
+		if (p==null ) {
 			request.setAttribute("alertMsg", "添加失败");
 			return getGroupProduct(session, request);
 		}
+		if (productId ==null || productId==0) {
+			request.setAttribute("alertMsg", "添加失败");
+			return getGroupProduct(session, request);
+		}
+		Product pro = new Product();
+		pro.setProductId(productId);
+		p.setProduct(pro);
+		
 
 		backgroundManageService.addGroupProduct(p);
 		
@@ -220,13 +272,24 @@ public class BackgroundManageController extends BaseController{
 		return getGroupProduct(session, request);
 	}
 	
+	/**   
+	* 通过商品信息
+	* 修改团购商品
+	*/
 	@RequestMapping("modifyGroupProduct")
-	public String modifyGroupProduct(HttpSession session, HttpServletRequest request,GroupProduct p) {
+	public String modifyGroupProduct(HttpSession session, HttpServletRequest request,GroupProduct p,Integer productId) {
 		
 		if (p==null || p.getGroupProductId()==0) {
 			request.setAttribute("alertMsg", "修改失败");
 			return getGroupProduct(session, request);
 		}
+		if (productId ==null || productId==0) {
+			request.setAttribute("alertMsg", "修改失败");
+			return getGroupProduct(session, request);
+		}
+		Product pro = new Product();
+		pro.setProductId(productId);
+		p.setProduct(pro);
 		
 		backgroundManageService.modifyGroupProduct(p);
 		
@@ -234,6 +297,10 @@ public class BackgroundManageController extends BaseController{
 		return getGroupProduct(session, request);
 	}
 	
+	/**   
+	* 通过商品信息
+	* 删除团购商品
+	*/
 	@RequestMapping("deleteGroupProduct")
 	public String deleteGroupProduct(HttpSession session, HttpServletRequest request,GroupProduct p) {
 		

@@ -96,6 +96,12 @@ public class CommunicationWebSocket {
 		}
 	}
 
+	public void testConnection() {
+		for (CommunicationWebSocket c : connections) {
+			System.out.println("type:"+type+" userAccount:"+userAccount+" employeeId:"+employeeAccount);
+		}
+	}
+	
 	@OnMessage
 	public void inComing(String message) {
 		System.out.println(message);
@@ -149,6 +155,7 @@ public class CommunicationWebSocket {
 				employeeAccount = account1;
 			}
 			connections.add(this);
+			testConnection();
 			if (type == 1) {
 				matchStaff(account1, this);
 			}
@@ -187,7 +194,7 @@ public class CommunicationWebSocket {
 		for (CommunicationWebSocket c : connections) {
 			if (c.type == 2) {
 				for (int i = 0; i < c.empToCus.length; i++) {
-					if (c.empToCus[i] != 0) {
+					if (c.empToCus[i] == 0) {
 						c.empToCus[i] = account;
 						Gson gson = new Gson();
 						Map<String, Object> t = new HashMap<>();

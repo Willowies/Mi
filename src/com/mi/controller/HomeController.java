@@ -133,61 +133,25 @@ public class HomeController {
 	 * delete cart item data
 	 */
 	@RequestMapping("deleteCartItem")
-	public void deleteCartItem(HttpServletRequest request, HttpSession session) {
-		int cartItemId = Integer.parseInt((String) request.getAttribute("cartItemId"));
-		List<CartItem> list = (ArrayList<CartItem>) session.getAttribute("cartItems");
-		for(int i=0;i<list.size();i++) {
-			if(list.get(i).getCartItem()==cartItemId) {
-				list.remove(i);
-			}
-		}
+	public void deleteCartItem(HttpServletRequest request) {
+		int cartItemId = Integer.parseInt((String) request.getParameter("cartItemId"));
+		homeservice.deleteCartItem(cartItemId);
 	}
 	/*
 	 * get nav products data
 	 */
 	@RequestMapping("getNavmenu")
 	public @ResponseBody List<Product> getNavProducts(HttpServletRequest request) {
-		String productName = (String)request.getParameter("productName");
-		System.out.println("getNavmenu------"+productName);
-		String navColumnName;
-		switch(productName) {
-		case "小米手机":
-			navColumnName = "小米";
-			break;
-		case "红米":
-			navColumnName = "红米";
-			break;
-		case "电视":
-			navColumnName = "电视";
-			break;
-		case "笔记本":
-			navColumnName = "";
-			break;
-		case "盒子":
-			navColumnName = "";
-			break;
-		case "新品":
-			navColumnName = "";
-			break;
-		case "路由器":
-			navColumnName = "路由器";
-			break;
-		case "智能硬件":
-			navColumnName = "";
-			break;
-		default:
-			navColumnName = "";
-			break;
-		}
-		System.out.println("navColumnName:::"+navColumnName);
+		String navColumnName = (String)request.getParameter("navColumnName");
 		return homeservice.getNavProducts(navColumnName);
 	}
 	/*
 	 * get categorymenu product data 
 	 */
 	@RequestMapping("getCategorymenu")
-	public @ResponseBody List<Product> getSecondClassProducts(){
-		return homeservice.getSecondClassProducts();
+	public @ResponseBody List<Product> getSecondClassProducts(HttpServletRequest request){
+		String categoryItemName = request.getParameter("categoryItemName");
+		return homeservice.getSecondClassProducts(categoryItemName);
 	}
 	
 	

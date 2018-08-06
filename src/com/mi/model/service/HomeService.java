@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mi.model.bean.CartItem;
 import com.mi.model.bean.GroupProduct;
@@ -39,6 +38,10 @@ public class HomeService {
 				extremeName += " "+list.get(i).getProduct().getSize();
 			}
 			list.get(i).getProduct().setExtremeName(extremeName);
+			//
+			int quantity = list.get(i).getQuantity();
+			float productPrice = list.get(i).getProduct().getProductPrice();
+			list.get(i).setAmount(quantity*productPrice);
 		}
 		return list;
 	}
@@ -102,10 +105,58 @@ public class HomeService {
 		return list;
 	}
 	public List<Product> getNavProducts(String navColumnName){
-		return productDAO.getNavProducts(navColumnName);
+		String productType = "";
+		int secondClassId = 0;
+		switch (navColumnName) {
+		case "小米手机":
+			productType = "小米";
+			secondClassId = 1;
+			break;
+		case "红米":
+			productType = "红米";
+			secondClassId = 1;
+			break;
+		case "电视":
+			productType = "电视";
+			secondClassId = 3;
+			break;
+		case "笔记本":
+			productType = "笔记本";
+			secondClassId = 4;
+			break;
+		default:
+			productType = "小红电笔";
+			secondClassId = 0;
+			break;
+		}
+		return productDAO.getNavProducts(productType, secondClassId);
 	}
-	public List<Product> getSecondClassProducts(){
-		return productDAO.getSecondClassProducts();
+	public List<Product> getSecondClassProducts(String categoryItemName){
+		int categoryItemId = 0;
+		switch (categoryItemName) {
+		case "手机":
+			categoryItemId=1;
+			break;
+		case "平板":
+			categoryItemId=2;
+			break;
+		case "电视机":
+			categoryItemId=3;
+			break;
+		case "笔记本":
+			categoryItemId=4;
+			break;
+		case "空气净化器":
+			categoryItemId=5;
+			break;
+		case "插线板":
+			categoryItemId=6;
+			break;
+		default:
+			categoryItemId=0;
+			break;
+		}
+		return productDAO.getSecondClassProducts(categoryItemId);
 	}
 	public List<Product> getRecommendProducts(){
 		List<Product> list = commentDAO.getRecommendProducts();
@@ -157,6 +208,9 @@ public class HomeService {
 			list.get(i).setExtremeName(extremeName);
 		}
 		return list;
+	}
+	public void deleteCartItem(int cartItemId) {
+		cartItemDAO.deleteCartItem(cartItemId);
 	}
 	
 }

@@ -17,15 +17,16 @@
 		<link href="../css/search.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
+		<script type="text/javascript" src="../js/myOwnHeadJs.js" ></script>
 		<script>
-			function changePic(i,id) {
+			function changePic(i, id) {
 				var like = $(i).parent().find("p").html();
 				var v = $(i).attr("src");
-				if(like == "0"){
-					$(i).parent().parent().parent().find("[class='actions clearfix']").find("a").find("i").attr("class","fa fa-heart-o");
+				if(like == "0") {
+					$(i).parent().parent().parent().find("[class='actions clearfix']").find("a").find("i").attr("class", "fa fa-heart-o");
 					$(i).parent().parent().parent().find("[class='actions clearfix']").find("a").find("p").html(id);
-				}else if(like == "1"){
-					$(i).parent().parent().parent().find("[class='actions clearfix']").find("a").find("i").attr("class","fa fa-heart");
+				} else if(like == "1") {
+					$(i).parent().parent().parent().find("[class='actions clearfix']").find("a").find("i").attr("class", "fa fa-heart");
 					$(i).parent().parent().parent().find("[class='actions clearfix']").find("a").find("p").html(id);
 				}
 				$(i).parent().parent().parent().find("[class='figure figure-img']").find("a").find("img").attr("src", v);
@@ -33,9 +34,9 @@
 
 			function like(i) {
 				var id = $(i).parent().find("p").html();
-				if ($(i).attr("class") == "fa fa-heart") {
+				if($(i).attr("class") == "fa fa-heart") {
 					unlike(i);
-					return ;
+					return;
 				}
 				//Ajax调用处理
 				$.ajax({
@@ -44,18 +45,18 @@
 					data: "productId=" + id,
 					success: function(data) {
 						alert(data);
-						if(data == "成功"){
-							var pId = "p"+id;
-							var heart = $("#"+pId).find("p");
+						if(data == "成功") {
+							var pId = "p" + id;
+							var heart = $("#" + pId).find("p");
 							$(heart).html(1);
-							$(i).attr("class","fa fa-heart");
-						}else{
+							$(i).attr("class", "fa fa-heart");
+						} else {
 							alert(data);
 						}
 					}
 				});
-			} 
-			
+			}
+
 			function unlike(i) {
 				var id = $(i).parent().find("p").html();
 				//Ajax调用处理
@@ -65,42 +66,40 @@
 					data: "productId=" + id,
 					success: function(data) {
 						alert(data);
-						if(data == "成功"){
-							var pId = "p"+id;
-							var heart = $("#"+pId).find("p");
+						if(data == "成功") {
+							var pId = "p" + id;
+							var heart = $("#" + pId).find("p");
 							$(heart).html(0);
-							$(i).attr("class","fa fa-heart-o");
-						}else{
+							$(i).attr("class", "fa fa-heart-o");
+						} else {
 							alert(data);
 						}
 					}
 				});
 			}
 
-			var searchType = $("input[name='searchType']");
-			var requireCondition = $("input[name='requireCondition']");
-			var secondClassName = $("input[name='secondClassName']");
+		
 			function searchProduct(i, t) {
-				if(t < 10){
-					if ($(i).html() == "全部") {
-						$("input[name='secondClassName']").attr("value","");
-					}else{
-						$("input[name='secondClassName']").attr("value",$(i).html());
+				if(t < 10) {
+					if($(i).html() == "全部") {
+						$("input[name='secondClassName']").attr("value", "");
+					} else {
+						$("input[name='secondClassName']").attr("value", $(i).html());
 					}
-				
-				}else if (t <20) {
-					$("input[name='searchType']").attr("value",$(i).html());
-				}else if (t<30) {
+
+				} else if(t < 20) {
+					$("input[name='searchType']").attr("value", $(i).html());
+				} else if(t < 30) {
 					alert(t == 21);
-					if (t == 21) {
-						$("input[name='requireCondition']").attr("value","评价");
-					} else if(t == 22){
-						$("input[name='requireCondition']").attr("value","有货");
+					if(t == 21) {
+						$("input[name='requireCondition']").attr("value", "评价");
+					} else if(t == 22) {
+						$("input[name='requireCondition']").attr("value", "有货");
 					}
 				}
 				$("#searchformId").submit();
-				
-			} 
+
+			}
 		</script>
 	</head>
 
@@ -108,7 +107,7 @@
 		<form id="searchformId" action="searchProduct.action" method="post" style="display: none;">
 			<input value="${searchType}" name="searchType"></input>
 			<input value="${requireCondition}" name="requireCondition"></input>
-			<input name="secondClassName" value="${secondClassName}" type="text"  />
+			<input name="secondClassName" value="${secondClassName}" type="text" />
 			<input name="text" value="${text}" />
 			<button type="submit">搜索</button>
 		</form>
@@ -139,114 +138,81 @@
 						<span class="cart-mini-num">（0）</span>
 					</a>
 					<div class="cart-menu" id="J_miniCartMenu">
-
 					</div>
 				</div>
 				<div class="topbar-info">
-					<a rel="nofollow" class="link" href="">登录</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" class="link" href="">注册</a>
-					<span class="sep">|</span>
-					<span class="message">
-					<a rel="nofollow" href="">消息通知</a>
-				</span>
+
 				</div>
 			</div>
 		</div>
 		<div class="site-header">
 			<div class="container">
 				<div class="header-logo">
-					<a href="../mi/homepage.jsp"><img src="../images/logo-footer.png" alt="小米logo" /></a>
+					<a href="homepage.jsp"><img src="../images/logo-footer.png" alt="小米logo" /></a>
 				</div>
 				<div class="header-nav">
 					<ul class="nav-list">
 						<li id="J_navCategory" class="nav-category">
-							<a class="link-category">
+							<a href="" class="link-category" style="visibility: visible;">
 								<span class="text">全部商品分类</span>
 							</a>
+							<div class="site-category" style="display:none;">
+								<ul id="J_categoryList" class="site-category-list">
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=1" class="title">手机<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=2" class="title">平板<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=3" class="title">电视机<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=4" class="title">笔记本<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=5" class="title">空气净化器<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=6" class="title">插线板<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+								</ul>
+							</div>
 						</li>
 						<li id="navItem1" class="nav-item">小米手机
 							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
 								<div class="container">
-									<ul class="children-list clearfix">
-										<li class="first">
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8se.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8 SE</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-									</ul>
+									<ul class="children-list clearfix"></ul>
 								</div>
 							</div>
 						</li>
-						<li id="navItem2" class="nav-item">红米</li>
-						<li id="navItem3" class="nav-item">电视</li>
-						<li id="navItem4" class="nav-item">笔记本</li>
+						<li id="navItem2" class="nav-item">红米
+							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
+								<div class="container">
+									<ul class="children-list clearfix"></ul>
+								</div>
+							</div>
+						</li>
+						<li id="navItem3" class="nav-item">电视
+							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
+								<div class="container">
+									<ul class="children-list clearfix"></ul>
+								</div>
+							</div>
+						</li>
+						<li id="navItem4" class="nav-item">笔记本
+							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
+								<div class="container">
+									<ul class="children-list clearfix"></ul>
+								</div>
+							</div>
+						</li>
 						<li id="navItem5" class="nav-item">盒子</li>
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
@@ -256,13 +222,14 @@
 					</ul>
 				</div>
 				<div class="header-search">
-					<form id="J_searchForm" class="search-form">
-						<input class="search-text" type="search" id="search" name="keyword">
+					<form id="J_searchForm" class="search-form" method="post" action="searchProduct.action">
+						<input class="search-text" type="search" id="search" name="text">
 						<input type="submit" class="search-btn" value="">
 					</form>
 				</div>
 			</div>
 		</div>
+
 		<div class="menu-bar">
 			<div class="container ">
 				<a href='../mi/homepage.jsp'>首页</a><span class="sep">&gt;</span>
@@ -283,9 +250,9 @@
 		<div class="grey-back-div">
 			<div class="middle-content">
 				<div class="order-list-box clearfix">
-					<ul class="order-list"> 
+					<ul class="order-list">
 						<li <c:if test="${searchType == ''}"> class="active first"</c:if>>
-							<a onclick="searchProduct(this,11)" >推荐</a>
+							<a onclick="searchProduct(this,11)">推荐</a>
 						</li>
 						<li <c:if test="${searchType == '价格高'}"> class="active first"</c:if>>
 							<a onclick="searchProduct(this,12)">价格高</a>
@@ -297,7 +264,7 @@
 							<a onclick="searchProduct(this,14)">评价多</a>
 						</li>
 					</ul>
-					<ul class="type-list"> 
+					<ul class="type-list">
 						<li class="light">
 							<input type="checkbox" <c:if test="${requireCondition == '评价'}"> checked="true"</c:if> onclick="searchProduct(this,21)" />
 							<a>显示评价</a>
@@ -311,76 +278,92 @@
 				<div class="goods-list-box">
 					<div class="goods-list clearfix">
 						<c:forEach items="${searchResults}" var="result">
-						<c:if test="${commentFormat == 0}">
-						<div class="goods-item">
-							<div class="figure figure-img">
-								<a href=""><img src="../${result.picUrl}" width="200" height="200" alt=""></a>
-							</div>
-							<p class="desc"></p>
-							<h2 class="title"><a href="${result.productOriginalName}" >${result.productName}</a></h2>
-							<p class="price">${result.productPrice}</p>
-							<div class="thumbs">
-								<c:forEach items="${result.products}" var="product">
-								<a id="p${product.productId}"><p style="display: none;"><c:if test="${product.likeProduct == 0}">0</c:if><c:if test="${product.likeProduct == 1}">1</c:if></p><img src="../${product.picUrl}" width="34" height="34" onmouseover="changePic(this,${product.productId})"></a>
-								</c:forEach>
-							</div>
-							<div class="actions clearfix">
-								<c:forEach items="${result.products}" var="product" varStatus="i">
-								<c:if test="${i.index < 1}">
-								<c:if test="${product.likeProduct == 0}">
-								<a class="btn-like J_likeGoods"><i class="fa fa-heart-o" aria-hidden="true" style="color:#e53935;cursor: pointer;" onclick="like(this)"></i><p style="display: none;">${product.productId}</p></a>
-								</c:if>
-								<c:if test="${product.likeProduct == 1}">
-								<a class="btn-like J_likeGoods"><i class="fa fa-heart" aria-hidden="true" style="color:#e53935;cursor: pointer;" onclick="like(this)"></i><p style="display: none;">${product.productId}</p></a>
-								</c:if>
-								</c:if>
-								</c:forEach>
-							</div>
-						</div>
-						</c:if>
-						<c:if test="${commentFormat == 1}">
-						<div class="goods-item">
-							<div class="figure figure-img">
-								<a href=""><img src="../${result.picUrl}" width="200" height="200" alt=""></a>
-							</div>
-							<p class="desc"></p>
-							<h2 class="title"><a href="${result.productOriginalName}" >${result.productName}</a></h2>
-							<p class="price">${result.productPrice}</p>
-							<div class="thumbs">
-								<c:forEach items="${result.products}" var="product">
-								<a><p style="display: none;"><c:if test="${product.likeProduct == 0}">0</c:if><c:if test="${product.likeProduct == 1}">1</c:if></p><img src="../${product.picUrl}" width="34" height="34" onmouseover="changePic(this)"></a>
-								</c:forEach>
-							</div>
-							<div class="actions clearfix">
-								<c:forEach items="${result.products}" var="product" varStatus="i">
-								<c:if test="${i.index < 1}">
-								<c:if test="${product.likeProduct == 0}">
-								<a class="btn-like J_likeGoods"><i class="fa fa-heart-o" aria-hidden="true" style="color:#e53935;cursor: pointer;" onclick="like(this)"></i><p style="display: none;">${product.productId}</p></a>
-								</c:if>
-								<c:if test="${product.likeProduct == 1}">
-								<a class="btn-like J_likeGoods"><i class="fa fa-heart" aria-hidden="true" style="color:#e53935;cursor: pointer;" onclick="like(this)"></i><p style="display: none;">${product.productId}</p></a>
-								</c:if>
-								</c:if>
-								</c:forEach>
-							</div>
-						</div>
-						<div class="goods-item" style="margin-left: -14px;background: #fafafa;padding: 50px;">
-							<c:forEach items="${result.products}" var="product" varStatus="i">
-							<c:if test="${i.index < 1}">
-							<c:if test="${not empty prproduct.comment.commentContent}">
-							<p style="float: left;">小米用户：</p>
-							<p class="desc" style="width: 100%;"></p>
-							<p>${product.comment.commentContent}</p>
+							<c:if test="${commentFormat == 0}">
+								<div class="goods-item">
+									<div class="figure figure-img">
+										<a href=""><img src="../${result.picUrl}" width="200" height="200" alt=""></a>
+									</div>
+									<p class="desc"></p>
+									<h2 class="title"><a href="${result.productOriginalName}" >${result.productName}</a></h2>
+									<p class="price">${result.productPrice}</p>
+									<div class="thumbs">
+										<c:forEach items="${result.products}" var="product">
+											<a id="p${product.productId}">
+												<p style="display: none;">
+													<c:if test="${product.likeProduct == 0}">0</c:if>
+													<c:if test="${product.likeProduct == 1}">1</c:if>
+												</p><img src="../${product.picUrl}" width="34" height="34" onmouseover="changePic(this,${product.productId})"></a>
+										</c:forEach>
+									</div>
+									<div class="actions clearfix">
+										<c:forEach items="${result.products}" var="product" varStatus="i">
+											<c:if test="${i.index < 1}">
+												<c:if test="${product.likeProduct == 0}">
+													<a class="btn-like J_likeGoods"><i class="fa fa-heart-o" aria-hidden="true" style="color:#e53935;cursor: pointer;" onclick="like(this)"></i>
+														<p style="display: none;">${product.productId}</p>
+													</a>
+												</c:if>
+												<c:if test="${product.likeProduct == 1}">
+													<a class="btn-like J_likeGoods"><i class="fa fa-heart" aria-hidden="true" style="color:#e53935;cursor: pointer;" onclick="like(this)"></i>
+														<p style="display: none;">${product.productId}</p>
+													</a>
+												</c:if>
+											</c:if>
+										</c:forEach>
+									</div>
+								</div>
 							</c:if>
-							<c:if test="${empty prproduct.comment.commentContent}">
-							<p style="float: left;"> </p>
-							<p class="desc" style="width: 100%;"></p>
-							<p>暂无评价</p>
+							<c:if test="${commentFormat == 1}">
+								<div class="goods-item">
+									<div class="figure figure-img">
+										<a href=""><img src="../${result.picUrl}" width="200" height="200" alt=""></a>
+									</div>
+									<p class="desc"></p>
+									<h2 class="title"><a href="${result.productOriginalName}" >${result.productName}</a></h2>
+									<p class="price">${result.productPrice}</p>
+									<div class="thumbs">
+										<c:forEach items="${result.products}" var="product">
+											<a>
+												<p style="display: none;">
+													<c:if test="${product.likeProduct == 0}">0</c:if>
+													<c:if test="${product.likeProduct == 1}">1</c:if>
+												</p><img src="../${product.picUrl}" width="34" height="34" onmouseover="changePic(this)"></a>
+										</c:forEach>
+									</div>
+									<div class="actions clearfix">
+										<c:forEach items="${result.products}" var="product" varStatus="i">
+											<c:if test="${i.index < 1}">
+												<c:if test="${product.likeProduct == 0}">
+													<a class="btn-like J_likeGoods"><i class="fa fa-heart-o" aria-hidden="true" style="color:#e53935;cursor: pointer;" onclick="like(this)"></i>
+														<p style="display: none;">${product.productId}</p>
+													</a>
+												</c:if>
+												<c:if test="${product.likeProduct == 1}">
+													<a class="btn-like J_likeGoods"><i class="fa fa-heart" aria-hidden="true" style="color:#e53935;cursor: pointer;" onclick="like(this)"></i>
+														<p style="display: none;">${product.productId}</p>
+													</a>
+												</c:if>
+											</c:if>
+										</c:forEach>
+									</div>
+								</div>
+								<div class="goods-item" style="margin-left: -14px;background: #fafafa;padding: 50px;">
+									<c:forEach items="${result.products}" var="product" varStatus="i">
+										<c:if test="${i.index < 1}">
+											<c:if test="${not empty product.comment.commentContent}">
+												<p style="float: left;">小米用户：</p>
+												<p class="desc" style="width: 100%;"></p>
+												<p>${product.comment.commentContent}</p>
+											</c:if>
+											<c:if test="${empty product.comment.commentContent}">
+												<p style="float: left;"> </p>
+												<p class="desc" style="width: 100%;"></p>
+												<p>暂无评价</p>
+											</c:if>
+										</c:if>
+									</c:forEach>
+								</div>
 							</c:if>
-							</c:if>
-							</c:forEach>
-						</div>
-						</c:if>
 						</c:forEach>
 					</div>
 					<div class="result-foot">

@@ -79,7 +79,7 @@
 				}, function(json) {
 					$("#pAll").css("display", "flex");
 					$("#pName").html(json.extremeName); //清空下拉框  
-					$("#pUrl").attr("src", json.picUrl);
+					$("#pUrl").attr("src", "../"+json.picUrl);
 					$("#pStock").html(json.stock);
 					$("input[name='productId']").val(json.productId);
 

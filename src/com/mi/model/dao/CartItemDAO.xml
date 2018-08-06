@@ -10,6 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from cartitem as a, product as b 
 		where a.userId=#{userId} and a.productId=b.productId
     </select>
+    <delete id="deleteCartItem" parameterType="int" flushCache="true">
+    	delete from cartitem where cartItemId=#{cartItemId}
+    </delete>
     <resultMap id="cartItemResult" type="CartItem">
     	<id column="cartItemId" property="cartItem"  />
     	<result column="quantity" property="quantity"  />

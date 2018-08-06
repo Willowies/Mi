@@ -11,22 +11,26 @@
 		<link href="../css/onlineService.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
+		<script type="text/javascript" src="../js/myOwnHeadJs.js"></script>
 		<script language="javascript">
 			function checkLogin() {
 				var html = $.ajax({
 					type: "POST",
-					url: "checkLoginState.action",
+					url: "checkLoginState2.action",
 					async: false
 				}).responseText;
-				if(html == "true"){
-					window.location.href = "./onlineCustom.html";
-				}else{
+				var obj = JSON.parse(html);
+				if(html == "true") {
+
+				} else {
 					alert("请先登录");
 				}
 			}
-			
+
 			var wsUri = "ws://localhost:8080/Mi/communication";
 			var output;
+			var sendable = false;
+			var employeeId = 0;
 
 			function init() {
 				output = document.getElementById("output");
@@ -50,39 +54,95 @@
 			}
 
 			function onOpen(evt) {
-				writeToScreen("CONNECTED");
+				writeToScreen("连接服务器成功，等待匹配客服");
 				var row = {
 					state: 'start',
-					account: '1',
+					account: '10002',
 					type: '1'
 				};
-
 				doSend(JSON.stringify(row));
 			}
 
 			function onClose(evt) {
-				writeToScreen("DISCONNECTED");
+				writeToScreen("连接断开");
 			}
 
 			function onMessage(evt) {
-				writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>');
-				websocket.close();
+				var obj = JSON.parse(evt.data);
+				switch(obj.state) {
+					case "matchFail":
+						writeToScreen(obj.message);
+						websocket.close();
+						$(".function-btn").html("重连");
+						break;
+					case "match":
+						employeeId = obj.message;
+						sendable = true;
+						writeToScreen("客服" + obj.message + "号 为你服务");
+						break;
+					case "record":
+						writeToScreen("客服" + employeeId + "号:" + obj.message);
+						break;
+					case "close":
+						writeToScreen("客服" + obj.message + "号:下线");
+						employeeId = 0;
+						sendable = false;
+						$(".function-btn").html("匹配客服");
+						break;
+					case "error":
+						writeToScreen(obj.message);
+						break;
+				}
 			}
 
 			function onError(evt) {
-				writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+				writeToScreen('产生错误:' + evt.data);
 			}
 
 			function doSend(message) {
-				writeToScreen("SENT: " + message);
 				websocket.send(message);
 			}
 
 			function writeToScreen(message) {
-				var pre = document.createElement("p");
-				pre.style.wordWrap = "break-word";
-				pre.innerHTML = message;
-				output.appendChild(pre);
+				$(".onlinecontent").append(message + "\n");
+			}
+
+			function sendText() {
+				var text = $(".onlineinput").val();
+				if(text == null || text == "") {
+					alert("请输入消息");
+				} else {
+					if(sendable) {
+						writeToScreen("我: " + text);
+						var row = {
+							state: 'record',
+							account: ""+employeeId,
+							type: '1',
+							message: text
+						};
+						websocket.send(JSON.stringify(row));
+						$(".onlineinput").val("");
+					} else {
+						alert("不能发送消息");
+					}
+				}
+			}
+
+			function operate(i) {
+				if($(i).html() == "关闭") {
+					websocket.close();
+					sendable = false;
+					employeeId = 0;
+					$(i).html("重连");
+				} else if($(i).html() == "重连") {
+					init();
+					$(i).html("关闭");
+				} else if($(i).html() == "匹配客服") {
+					websocket.close();
+					init();
+					$(i).html("关闭");
+				}
+
 			}
 
 			window.addEventListener("load", init, false);
@@ -117,114 +177,81 @@
 						<span class="cart-mini-num">（0）</span>
 					</a>
 					<div class="cart-menu" id="J_miniCartMenu">
-
 					</div>
 				</div>
 				<div class="topbar-info">
-					<a rel="nofollow" class="link" href="">登录</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" class="link" href="">注册</a>
-					<span class="sep">|</span>
-					<span class="message">
-					<a rel="nofollow" href="">消息通知</a>
-				</span>
+
 				</div>
 			</div>
 		</div>
 		<div class="site-header">
 			<div class="container">
 				<div class="header-logo">
-					<a href="../mi/homepage.jsp"><img src="../images/logo-footer.png" alt="小米logo" /></a>
+					<a href="homepage.jsp"><img src="../images/logo-footer.png" alt="小米logo" /></a>
 				</div>
 				<div class="header-nav">
 					<ul class="nav-list">
 						<li id="J_navCategory" class="nav-category">
-							<a class="link-category">
+							<a href="" class="link-category" style="visibility: visible;">
 								<span class="text">全部商品分类</span>
 							</a>
+							<div class="site-category" style="display:none;">
+								<ul id="J_categoryList" class="site-category-list">
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=1" class="title">手机<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=2" class="title">平板<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=3" class="title">电视机<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=4" class="title">笔记本<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=5" class="title">空气净化器<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+									<li class="category-item">
+										<a href="selectClassfiedProduct.action?secondClassId=6" class="title">插线板<i class="fa fa-chevron-right"></i></a>
+										<div class="children"></div>
+									</li>
+								</ul>
+							</div>
 						</li>
 						<li id="navItem1" class="nav-item">小米手机
 							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
 								<div class="container">
-									<ul class="children-list clearfix">
-										<li class="first">
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8se.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8 SE</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-									</ul>
+									<ul class="children-list clearfix"></ul>
 								</div>
 							</div>
 						</li>
-						<li id="navItem2" class="nav-item">红米</li>
-						<li id="navItem3" class="nav-item">电视</li>
-						<li id="navItem4" class="nav-item">笔记本</li>
+						<li id="navItem2" class="nav-item">红米
+							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
+								<div class="container">
+									<ul class="children-list clearfix"></ul>
+								</div>
+							</div>
+						</li>
+						<li id="navItem3" class="nav-item">电视
+							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
+								<div class="container">
+									<ul class="children-list clearfix"></ul>
+								</div>
+							</div>
+						</li>
+						<li id="navItem4" class="nav-item">笔记本
+							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
+								<div class="container">
+									<ul class="children-list clearfix"></ul>
+								</div>
+							</div>
+						</li>
 						<li id="navItem5" class="nav-item">盒子</li>
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
@@ -234,13 +261,14 @@
 					</ul>
 				</div>
 				<div class="header-search">
-					<form id="J_searchForm" class="search-form">
-						<input class="search-text" type="search" id="search" name="keyword">
+					<form id="J_searchForm" class="search-form" method="post" action="searchProduct.action">
+						<input class="search-text" type="search" id="search" name="text">
 						<input type="submit" class="search-btn" value="">
 					</form>
 				</div>
 			</div>
 		</div>
+
 		<div class="menu-bar">
 			<div class="container ">
 				<a href='../mi/homepage.jsp'>首页</a><span class="sep">&gt;</span>
@@ -250,7 +278,13 @@
 		<div class="grey-back-div">
 			<p class="online-head"> 在线客服 </p>
 			<div class="online-block">
-				
+				<textarea cols="100" rows="25" class="onlinecontent" readonly="readonly"></textarea>
+				<div>
+					<input class="onlineinput" type="text" required="required" />
+					<button class="search-btn" onclick="sendText()">发送</button>
+					<button class="function-btn" onclick="operate(this)">关闭</button>
+				</div>
+
 			</div>
 		</div>
 

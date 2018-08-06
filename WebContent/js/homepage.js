@@ -47,7 +47,7 @@ function initData(){
 		success:function(data){
 			console.log(data);
 //			$("#J_miniCartMenu").append(str);
-			$(".cart-mini-num").html("&nbsp;("+data+") ");
+			$(".cart-mini-num").html("（"+data+"）");
 			console.log("Load finished--shopping cart number");
 		},
 	});
@@ -62,9 +62,9 @@ function initData(){
 			//images/T1bXKjBQAT1RXrhCrK.jpg 彩虹7号电池（10粒装）无汞无镉 环保电池
 			for(var i=0;i<data.length;i++){
 				var str="<div class='goods-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-					+"<img src='../"+ data[i].product.picUrl +"' width='160px' height='160px'></div>"
-					+"<h3 class='title'><a>"+data[i].product.extremeName+"</a></h3><p class='desc'>"+data[i].product.description+"</p>"
-					+"<p class='price'><span>"+data[i].groupPrice+"</span>&nbsp;<span>元&nbsp;</span><del>"
+					+"<a href='groupPurchase.jsp' style='height:160px; display:block;'><img src='../"+ data[i].product.picUrl +"' width='160px' height='160px'></div>"
+					+"<h3 class='title'><a href='groupPurchase.jsp'>"+data[i].product.extremeName+"</a></h3><p class='desc'>"+data[i].product.description+"</p>"
+					+"<p class='price'><span>"+data[i].groupPrice+"</span>&nbsp;<span>元&nbsp;</span><del style='color:#b0b0b0;'>"
 					+data[i].product.productPrice+"元</del></p></div></div>";
 				$("#addGoodItem").append(str);
 			}
@@ -252,6 +252,7 @@ $(document).ready(function(){
 		$("#J_miniCartTrigger").addClass("topbar-cart-active");
 		$("#J_miniCartMenu").slideDown();
 		$("#J_miniCartMenu").css("display","flex");
+		
 		//insert load.gif
 		//get data
 		$.ajax({
@@ -264,16 +265,67 @@ $(document).ready(function(){
 				console.log(data);
 //				$("#J_miniCartMenu").append(str);
 				//delete load.gif
+				var str="<ul class='cartList'></ul>";
+				$("#J_miniCartMenu").append(str);
+				var totalQuantity=0;
+				var totalAmount=0;
 				for(var i=0;i<data.length;i++){
-					var str = "<div id='cartItem"+i+"'>"+"<p id='cartItemId"+i+"'>"+data[i].cartItem+"</p>"+"<p>&nbsp;&nbsp;"+data[i].product.picUrl
-					+"&nbsp;&nbsp;"+data[i].product.extremeName
-					+"&nbsp;&nbsp;"+data[i].product.productPrice+" x "
-					+data[i].quantity+"&nbsp;&nbsp;"+data[i].amount+"</p>"
-					+"<a href='javascript:void(0);' onclick='deleteCartItem"+i+"'()' ><i class='fa fa-close'></i></a></div>";
-//					console.log(str);
-					$("#J_miniCartMenu").append(str);
+					var cartItem="<li><div class='cartItem'><a class='cartItemId' style='visibility:hidden;width:0px;'>"+data[i].cartItem+"</a>"
+						+"<a href='' class='image'><img src='../images/"
+						+data[i].product.picUrl+"' width='60' height='60'></a><a href='' class='name'>"
+						+data[i].product.extremeName+"</a><span class='price'>"
+						+data[i].product.productPrice+"元 x "+data[i].quantity
+						+"</span><a class='delete' style='display:none'><i class='fa fa-close'></i></a></div></li>";
+					$("#J_miniCartMenu").children().append(cartItem);
+					totalQuantity+=data[i].quantity;
+					totalAmount+=data[i].amount;
 				}
+				$("div.cartItem:first").css("border-top","0");
+				var total = "<div class='clear'><span class='total'><span>共"
+					+totalQuantity+"件商品</span><span style='color:#ff6700;'><strong class='totalPrice'>"
+					+totalAmount+"</strong>元</span></span><a class='clearBtn' href=''>去购物车结算</a></div>";
+				$("#J_miniCartMenu").append(total);
+				$(".cart-mini-num").html("（"+totalQuantity+"）");
 				console.log("Get finished--shopping cart items");
+				
+				$("div.cartItem").hover(function(e){
+					var cartItem = $(this);
+					var cartItemLength = $("div.cartItem").length; 
+					cartItem.children("a.name").css("color","#ff6700");
+					cartItem.children("a.delete").css("display","block");
+					
+					cartItem.children("a.delete").click(function(){
+						var cartItemId = cartItem.children("a.cartItemId");
+						
+//						console.log("log  cartItemId:"+cartItemId.text());
+						cartItem.parent().remove();
+						$.ajax({
+							type:"POST",
+							async:true, 
+							data:{
+								cartItemId:cartItemId.text()
+								},
+							dataType:"json",
+							contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+							url:"deleteCartItem.action",
+							success:function(data){
+								console.log("delete success");
+								console.log("delete finished--shopping cartItem");
+							},
+						});
+						$(".cart-mini-num").html("（"+(cartItemLength-1)+"）");
+						if(cartItemLength==1){
+							$("#J_miniCartMenu").empty();
+							$("#J_miniCartMenu").slideUp();
+							$("#J_miniCartTrigger").removeClass("topbar-cart-active");
+						}
+					});
+					e.stopPropagation();
+				},function(e){
+					$(this).children("a.name").css("color","#333");
+					$(this).children("a.delete").css("display","none");
+					e.stopPropagation();
+				});
 			},
 		});
 	},function(){
@@ -282,23 +334,35 @@ $(document).ready(function(){
 		$("#J_miniCartMenu").empty();
 		$("#J_miniCartTrigger").removeClass("topbar-cart-active");
 	});
-	
-	$("#J_miniCartMenu").hover(function(){
-//		var ev = $(".cart-menu").children()?window.event:e;
-//		var v_id = $(ev.target);
-//		v_id.css("color","#000");
-		$("#J_miniCartMenu i").css("color","#000");
-	},function(){
-		$("#J_miniCartMenu i").css("color","#b0b0b0");
-	});
+//	$(".delete").click(function(){
+//		var cartItemId = $(this).siblings("a.cartItemId");
+//		console.log("log  cartItemId:"+cartItemId.val());
+//		$(this).parent().remove();
+////		$.ajax({
+////			type:"POST",
+////			async:true, 
+////			data:{
+////				cartItemId:cartItemId
+////				},
+////			dataType:"json",
+////			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+////			url:"deleteCartItem.action",
+////			success:function(data){
+//////					console.log(data+"delete success");
+////				console.log("delete finished--shopping cartItem");
+////			},
+////		});
+//	});
 	
 	/* navigator */
-	$("#navItem1").hover(function(){
+	$("ul.nav-list li.nav-item").hover(function(){
+//		console.log($(this).text());
+		var _this = $(this).children().children().children();//children-list
 		$.ajax({
 			type:"POST",
 			async:true,
 			data:{
-				productName:"小米手机"
+				navColumnName:$(this).text()
 				},
 			dataType:"json",
 			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
@@ -309,26 +373,28 @@ $(document).ready(function(){
 					var str = "<li class='first'><div class='figure figure-thumb'><a href='javascript:void(0)'>"
 						+"<img src='../"+data[i].picUrl+"' alt='"+data[i].productName+"' width='160' height='110'>"
 						+"</a></div><div class='title'><a href='' >"+data[i].productName+"</a></div>"
-				        +"<p class='price'>"+data[i].productPrice+"</p></li>";
-					$(".children-list").append(str);
+				        +"<p class='price'>"+data[i].productPrice+"起</p></li>";
+					_this.append(str);
 				}
 				console.log("get Navmenu finished--nav product ");
 			},
 		});
-		$("#navItem1>div.header-nav-menu").slideDown();
+		$(this).children().slideDown();
 	},function(){
-		$("#navItem1>div.header-nav-menu").slideUp();
-		$(".children-list").empty();
+		$(this).children().slideUp();
+		$(this).children().children().children().empty();
 	});
 	/* category-item */
-	$("#category-item1").hover(function(){
-		$("#category-item1").addClass("category-item-active");
-		$("#category-item1>div.children").css("display","flex");
+	$("ul#J_categoryList li").hover(function(){
+		$(this).addClass("category-item-active");
+		$(this).children("div.children").css("display","flex");
+		var _this = $(this).children("div.children");
+//		console.log($(this).children("a.title").text());
 		$.ajax({
 			type:"POST",
 			async:true,
 			data:{
-				cartItemId:$("#cartItemId0").html()
+				categoryItemName:$(this).children("a.title").text()
 				},
 			dataType:"json",
 			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
@@ -339,44 +405,45 @@ $(document).ready(function(){
 					var str="<div class='childrenItem'><a class='link' href=''>"
 						+"<img alt='"+data[i].productName+"' src='../"+data[i].picUrl+"' width='40' height='40'><span class='text1'>"
 						+data[i].productName+"</span></a></div>";
-					$(".children").append(str);
+					_this.append(str);
 				}
 				console.log("get Categorymenu finished--category menu product");
 			},
 		});
 	},function(){
-		$("#category-item1").removeClass("category-item-active");
-		$("#category-item1>div.children").css("display","none");
-		$(".children").empty();
+		$(this).removeClass("category-item-active");
+		$(this).children("div.children").css("display","none");
+		$(this).children("div.children").empty();
 	});
-	/*
-	 * user-info
-	 */
-//	$(".user").hover(function(){
-//		$(".username").css("background","#fff");
-//		$(".user-menu").css("display","block");
-//	},function(){
-//		$(".username").css("background","#333");
-//		$(".user-menu").css("display","none");
-//	});
-	
+	/* cartItem delete */
+	$("div.cartItem").hover(function(){
+		var cartItem = $(this);
+		$(this).children("a.name").css("color","#ff6700");
+		$(this).children("a.delete").css("display","block");
+	},function(){
+		$(this).children("a.name").css("color","#333");
+		$(this).children("a.delete").css("display","none");
+	});
 	
 });
 
-function deleteCartItem0(){
-	$("#cartItem0").remove();
-	$.ajax({
-		type:"POST",
-		async:true,
-		data:{
-			cartItemId:$("#cartItemId0").html()
-			},
-		dataType:"json",
-		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"deleteCartItem.action",
-		success:function(data){
-//				console.log(data+"delete success");
-			console.log("delete finished--shopping cartItem");
-		},
-	});
+function deleteCartItem(obj){
+	var cart = obj;
+	var cartItemId = $(obj).children("a.cartItemId");
+	console.log("log  cartItemId:"+cartItemId);
+	$(obj).remove();
+//	$.ajax({
+//		type:"POST",
+//		async:true, 
+//		data:{
+//			cartItemId:cartItemId
+//			},
+//		dataType:"json",
+//		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+//		url:"deleteCartItem.action",
+//		success:function(data){
+////				console.log(data+"delete success");
+//			console.log("delete finished--shopping cartItem");
+//		},
+//	});
 }

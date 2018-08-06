@@ -133,4 +133,100 @@ online .btn {
 	width: 1220px;
 	height: 550px;
 	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.onlinecontent{
+	width: 800px;
+	height: 400px;
+	margin-left: 40px;
+	resize:none;
+}
+
+.onlineinput{
+	width: 500px;
+	height: 30px;
+	margin: 20px;
+	margin-left: 40px;
+	
+}
+
+.search-btn{
+	width: 100px;
+    height: 30px;
+    border: 1px solid #888;
+    font-size: 14px;
+    margin-left: 20px;
+    background: #fff;
+}
+
+.function-btn{
+	width: 100px;
+    height: 30px;
+    border: 1px solid #888;
+    font-size: 14px;
+    margin-left: 50px;
+    background: #fff;
+}
+.customs{
+	float: right;
+	
+}
+
+.textandcus{
+	display: flex;
+	flex-direction: row;
+}
+
+.textandcus ul{
+	text-decoration: none;
+	list-style: none;
+	text-align: center;
+}
+
+.textandcus ul li{
+	cursor: pointer;
+	text-decoration: none;
+	height: 40px;
+	width: 150px;
+	align-content: center;
+	margin: 10px;
+	line-height: 40px;
+	border: 1px solid #BBBBBB;
+}
+
+#jump-block {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 50;
+	background: rgba(0, 0, 0, 0.5);
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	position: fixed;
+	align-content: center;
+}
+
+.big-block {
+	margin: 100px auto;
+	width: 600px;
+	height: 200px;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	padding: 50px;
+}
+
+.big-block p{
+	
+}
+
+.big-block input{
+	width: 500px;
+    height: 30px;
+    margin: 20px;
+    margin-left: 40px;
 }
