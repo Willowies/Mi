@@ -103,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <resultMap id="cartItemResult" type="CartItem">
-    	<id column="cartItemId" property="cartItem"  />
+    	<id column="cartItemId" property="cartItemId"  />
     	<result column="quantity" property="quantity"  />
     	<result column="userId" property="userId"  />
     	<result column="state" property="state"  />
