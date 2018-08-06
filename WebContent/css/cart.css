@@ -1,0 +1,336 @@
+.page-main {
+    padding-top: 38px;
+    padding-bottom: 38px;
+}
+
+.cart-goods-list {
+    background-color: #fff;
+}
+
+.cart-goods-list .list-head {
+    height: 70px;
+    line-height: 70px;
+    padding-right: 26px;
+    color: #424242;
+}
+
+.cart-goods-list .list-head .col {
+    float: left;
+}
+
+.cart-goods-list .col-check {
+    width: 110px;
+}
+
+.cart-goods-list .col-check .icon-checkbox {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border: 1px solid #e0e0e0;
+    margin-left: 24px;
+    background-color: #fff;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    cursor: pointer;
+}
+
+.cart-goods-list .col-check .icon-checkbox:hover {
+    color: #757575;
+}
+
+.cart-goods-list .list-head .icon-checkbox {
+    margin-right: 15px;
+}
+
+.cart-goods-list .list-head .col-img {
+    width: 120px;
+}
+
+.cart-goods-list .list-head .col-name {
+    width: 380px;
+    margin-left: 120px;
+}
+
+.cart-goods-list .col-price {
+    width: 75px;
+    padding-right: 84px;
+    text-align: right;
+    color: #424242;
+}
+
+.cart-goods-list .col-num {
+    width: 150px;
+    text-align: center;
+    color: #424242;
+}
+
+.cart-goods-list .col-total {
+    width: 120px;
+    padding-right: 81px;
+    text-align: right;
+}
+
+.cart-goods-list .col-action {
+    width: 80px;
+    text-align: center;
+}
+
+.cart-goods-list .item-table {
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.cart-goods-list .item-box {
+    padding: 15px 26px 15px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.cart-goods-list .item-table .item-row {
+    display: table-row;
+    *zoom: 1;
+}
+
+.cart-goods-list .item-table .col {
+    display: table-cell;
+    vertical-align: middle;
+    *float: left;
+
+}
+
+.cart-goods-list .item-box .col-img {
+    width: 80px;
+    height: 80px;
+    padding-right: 40px;
+    overflow: hidden;
+    zoom: 1;
+
+}
+
+.cart-goods-list .col-name .name, .cart-goods-list .col-name .desc {
+    width: 380px;
+    margin: 0;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+}
+
+.cart-goods-list .col-name .name {
+
+    line-height: 1;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    _zoom: 1;
+
+}
+
+.change-goods-num {
+    width: 148px;
+    height: 38px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+    background-color: #fff;
+    position: relative;
+    zoom: 1;
+}
+
+.change-goods-num a {
+    float: left;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    color: #757575;
+    font-size: 20px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+
+}
+
+.change-goods-num .num {
+    float: left;
+    width: 72px;
+    height: 38px;
+    line-height: 38px;
+    padding: 0;
+    border-width: 0;
+    color: #424242;
+    font-size: 16px;
+    text-align: center;
+    font-style: normal;
+    cursor: default;
+}
+
+.cart-goods-list .item-box .col-total{
+    color: #ff6700;
+    font-size: 16px;
+}
+
+.cart-goods-list .item-box .col-action .del {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 12px;
+    color: #757575;
+    font-size: 16px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+
+.cart-bar {
+    height: 50px;
+    text-align: right;
+    background-color: #fff;
+    -webkit-transition: background .3s ease, top .3s ease;
+    transition: background .3s ease, top .3s ease;
+    position: relative;
+    margin-top: 20px;
+}
+
+.cart-bar .section-left {
+    float: left;
+}
+
+.cart-bar .back-shopping {
+    line-height: 50px;
+    margin-left: 32px;
+    cursor: pointer;
+}
+
+.cart-bar a {
+    -webkit-transition: color .3s;
+    transition: color .3s;
+}
+
+.cart-bar .cart-total {
+    margin-left: 16px;
+    padding-left: 16px;
+    border-left: 1px solid #eee;
+    color: #757575;
+}
+
+.cart-bar .cart-total i {
+    color: #ff6700;
+}
+.cart-bar i {
+    font-style: normal;
+}
+
+.cart-bar .total-price {
+    padding-left: 13px;
+    color: #ff6700;
+}
+
+.cart-bar .total-price em {
+    font-style: normal;
+    font-size: 30px;
+}
+
+.btn-primary {
+    background: #ff6700;
+    border-color: #ff6700 !important;
+    color: #fff !important;
+}
+
+.btn-primary:hover {
+    background-color: #f25807 !important;
+    border-color: #f25807 !important;
+    color: #fff !important;
+}
+
+.cart-bar .btn{
+	width: 200px;
+	height: 48px;
+	line-height: 48px;
+	font-size: 18px;
+	margin-left: 50px;
+	vertical-align: top;
+}
+
+.cart-recommond {
+    margin: 60px 0 0;
+}
+
+.recommond ul li{
+	margin-bottom: 14px;
+	height: 300px;
+	background-color: #fff;
+	text-align: center;
+	position: relative;
+}
+
+.isSelect{
+	margin-left:30px;
+	margin-right: 10px;
+}
+
+.item-box .del{
+    cursor: pointer;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+
+.item-box .del:hover {
+    color: #fff !important;
+    background-color: #e53935;
+}
+
+.cart-bar .no-select-tip {
+    width: 200px;
+    height: 48px;
+    line-height: 48px;
+    position: absolute;
+    top: -58px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ff6700;
+    color: #ff6700;
+    text-align: center;
+}
+
+.cart-bar .no-select-tip .arrow-a {
+    bottom: -8px;
+    margin-left: -10px;
+    border-width: 8px 10px 0;
+    border-color: #ff6700 transparent transparent;
+    z-index: 1;
+}
+
+.cart-bar .no-select-tip .arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid dashed dashed;
+    overflow: hidden;
+    _zoom: 1;
+    position: absolute;
+    left: 50%;
+}
+
+.cart-bar i {
+    font-style: normal;
+}
+
+.cart-bar .no-select-tip .arrow-b {
+    bottom: -7px;
+    margin-left: -8px;
+    border-width: 7px 8px 0;
+    border-color: #fff transparent transparent;
+    z-index: 2;
+}

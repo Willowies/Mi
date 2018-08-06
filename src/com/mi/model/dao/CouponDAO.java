@@ -16,4 +16,7 @@ public interface CouponDAO {
 	public void updateReceiveCoupon(Map<String, Object> map);
 	
 	public List<Coupon> selectCouponByUserId(@Param("userId") int userId,@Param("couponStatus") int couponStatus);
+	
+	public List<Coupon> findCoupons(Map<String,Object> map);
+	public void updateUsedCoupon(Map<String,Object> map);
 }

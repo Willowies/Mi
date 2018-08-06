@@ -16,4 +16,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set allocatableStock = allocatableStock+#{changeStock}
 		where productId in (select p.productId from groupproduct as p where p.groupProductId=#{groupProductId})
 	</update>
+	
+	<select id="selectStock" resultType="int">
+    	select allocatableStock
+    	from stock
+    	where productId=#{productId}
+    </select>
+    <update id="updateStock" parameterType="map">
+    	update stock
+    	set totalStock=totalStock-#{quantity}, allocatableStock=allocatableStock-#{quantity}
+    	where productId=#{productId}
+    </update>
+    
+    <update id="updateSpikeStock" parameterType="map">
+    	update stock
+    	set totalStock=totalStock-#{quantity}
+    	where productId=#{productId}
+    </update>
 </mapper>

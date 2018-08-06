@@ -178,7 +178,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	<result column="userHead" property="userHead" />
     </resultMap>
     
+    <insert id="createOrder" parameterType="Order">
+    	insert into mi.order(orderId,invoiceId,userId,receiverName,
+    	receiverPhone,receiverAddress ,sendPeroid ,orderType,
+    	orderState,couponId,createDate,deliveryFee,actualTotal,groupId)
+    	values(#{orderId},#{orderId},#{user.userId},#{receiverName},#{receiverPhone},#{receiverAddress},#{sendPeroid},#{orderType},#{orderState},#{coupon.couponId},#{createDate},#{deliveryFee},#{actualTotal},#{groupId})
+    </insert>
     
+    <select id="selectOrderId" resultType="int">
+    	select max(orderId) from mi.order
+    </select>
+    
+    <insert id="addOrderProduct" parameterType="map">
+    	insert into orderproduct(orderItemId,productId,quantity,sn,productPrice,orderId)
+    	values(#{orderItemId},#{cartItem.product.productId},#{cartItem.quantity},#{orderItemId},#{cartItem.product.productPrice},#{orderId})
+    </insert>
+    
+    <insert id="addGroupOrderProduct">
+    	insert into orderproduct(orderItemId,productId,quantity,sn,productPrice,orderId)
+    	values(#{orderItemId},#{orderProduct.product.productId},#{orderProduct.quantity},#{orderItemId},#{orderProduct.product.productPrice},#{orderId})
+    </insert>
+    
+    <select id="selectOrderItemId" resultType="int">
+    	select max(orderItemId) from orderProduct
+    </select>
+    
+    <update id="updatePayOrder" parameterType="int">
+    	update mi.order
+    	set orderState=2
+    	where orderId=#{orderId}
+    </update>
+    
+    <update id="closePayOrder" parameterType="int">
+    	update mi.order
+    	set orderState=0
+    	where orderId=#{orderId}
+    </update>
+    
+    <update id="updatePayGroupOrder" parameterType="int">
+    	update mi.order
+    	set orderState=4
+    	where orderId=#{orderId}
+    </update>
+    
+    <update id="updateGroup" parameterType="int"> 
+    	update mi.group
+    	set state=1,currentQuantity=currentQuantity+1
+    	where groupId=#{groupId}
+    </update>
+    
+    <select id="getSpikeProduct" parameterType="int">
+    	select *
+    	from spikeproduct
+    	where spikeProductId =#{spikeProductId}
+    </select>
+    
+    <update id="updateSpikeProduct" parameterType="int">
+    	update spikeproduct
+    	set currentSpikeNum=currentSpikeNum+1
+    	where spikeProductId =#{spikeProductId}
+    </update>
     
 </mapper>
 
