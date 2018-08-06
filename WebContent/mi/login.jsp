@@ -40,7 +40,6 @@
 					<div class="div3">
 						<a href="addUser.jsp">立即注册？</a>
 					</div>
-					<div class="div3" style="color:red">${loginError }</div>
 				</div>
 			</div>
 			<div id="footer">
