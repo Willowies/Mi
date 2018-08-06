@@ -3,7 +3,49 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mi.model.dao.ReceiverAddressDAO">
-    <select id="selectAddress" parameterType="Integer" resultType="ReceiverAddress">
-    select * from receiveraddress where userId=#{userId}
+	<!-- ylm写的方法？ -->
+	<select id="selectAddress" parameterType="Integer" resultType="ReceiverAddress">
+   	 	select * from receiveraddress where userId=#{userId}
     </select>
+    
+	<select id="selectReceiverAddressByUserId" resultType="ReceiverAddress">
+		select * from receiverAddress where userId = #{userId}
+	</select>
+	<insert id="addReceiverAddress" parameterType="ReceiverAddress"
+		useGeneratedKeys="true" keyProperty="receiverAddressId">
+		insert into receiverAddress
+		values(receiverAddressId,#{user.userId},#{receiverName},#{receiverPhone},#{receiverProvince},#{receiverCity},#{receiverDistrict},#{address},#{addressLabel})
+	</insert>
+	<delete id="deleteReceiverAddressById">
+		delete from
+		receiverAddress where receiverAddressId = #{receiverAddressId}
+	</delete>
+
+	<update id="updateReceiverAddress" parameterType="ReceiverAddress">
+		update receiverAddress
+		<set>
+			<if test="receiverName != null and receiverName !=''">
+				receiverName = #{receiverName},
+			</if>
+			<if test="receiverPhone != null and receiverPhone !=''">
+				receiverPhone = #{receiverPhone},
+			</if>
+			<if test="receiverProvince != null and receiverProvince !=''">
+				receiverProvince = #{receiverProvince},
+			</if>
+			<if test="receiverCity != null and receiverCity !=''">
+				receiverCity = #{receiverCity},
+			</if>
+			<if test="receiverDistrict != null and receiverDistrict !=''">
+				receiverDistrict = #{receiverDistrict},
+			</if>
+			<if test="address != null and address !=''">
+				address = #{address},
+			</if>
+			<if test="addressLabel != null and addressLabel !=''">
+				addressLabel = #{addressLabel},
+			</if>
+		</set>
+		where receiverAddressId = #{receiverAddressId}
+	</update>
 </mapper>

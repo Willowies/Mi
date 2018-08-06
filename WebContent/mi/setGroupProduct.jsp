@@ -17,6 +17,49 @@
 		<link href="../css/manageSelf.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script>
+			function date1(){
+            var myDate = new Date();  //获取当前时间对象，精确到当前的时、分、秒
+            var this_time=$('input[name="beginDate"]').val();//获取用户选择后的时间值
+
+            var this_datetime=new Date(this_time);//获取用户选择的时间，生成时间对象  具体时间为时间8:00:00
+            var year = myDate.getFullYear();    //获取当前时间的年份 格式xxxx 如：2016
+            var month =myDate.getMonth()+1;     //获取当前时间的月份 格式1-9月为x， 10-12月为xx 如：11
+            var date = myDate.getDate();        //获取当前时间的日期 格式同月份 如11
+             myDate=new Date(year+'-'+month+'-'+date);  //获取根据上述时间生成的时间对象 具体时间为0:00:00  
+            var now=new Date(year+'-'+month+'-'+date+' 8:00:00'); 
+            myDate.setDate(now.getDate()-7); //设置now对象相应日期的七天前日期 具体时间为0:00:00
+            if(this_datetime<now){    //时间对象可以直接比较大小
+                alert('时间需选择今天以后');
+                $('input[name="beginDate"]').val('');   
+            };
+         };
+			
+			function dateEnd(){
+            var myDate = new Date();  //获取当前时间对象，精确到当前的时、分、秒
+            var this_time=$('input[name="beginDate"]').val();//获取用户选择后的时间值
+            var end_time=$('input[name="endDate"]').val();
+            if(this_time == null || this_time == ""){
+            	alert('先选择开始时间');
+            	$('input[name="endDate"]').val('');   
+            }else{
+            	var this_datetime=new Date(end_time);//获取用户选择的时间，生成时间对象  具体时间为时间8:00:00
+          	 	var start_datetime = new Date(this_time);
+          	 	
+          	 	var year = myDate.getFullYear();    //获取当前时间的年份 格式xxxx 如：2016
+            var month =myDate.getMonth()+1;     //获取当前时间的月份 格式1-9月为x， 10-12月为xx 如：11
+            var date = myDate.getDate();        //获取当前时间的日期 格式同月份 如11
+             myDate=new Date(year+'-'+month+'-'+date);  //获取根据上述时间生成的时间对象 具体时间为0:00:00  
+            var now=new Date(year+'-'+month+'-'+date+' 8:00:00'); 
+          	 	
+           	 if(this_datetime<=start_datetime || this_datetime<=now){    //时间对象可以直接比较大小
+           	     alert('时间需选择开始时间之后,并在当前日期之前');
+           	     $('input[name="endDate"]').val('');   
+           	 };
+            }
+
+           
+         };
+			
 			function changeSecondClass(id) {
 				$.post("getProductSecondClassInManage.action", {
 					"id": id
@@ -79,35 +122,22 @@
 				}, function(json) {
 					$("#pAll").css("display", "flex");
 					$("#pName").html(json.extremeName); //清空下拉框  
-					$("#pUrl").attr("src", json.picUrl);
+					$("#pUrl").attr("src", "../"+json.picUrl);
 					$("#pStock").html(json.stock);
+					$("#pMax").attr("max",json.stock);
+					$("#pPrice").html(json.productPrice);
 					$("input[name='productId']").val(json.productId);
 
 				}, 'json');
 			}
 
-			function setProductStock() {
-
-				$.ajax({
-					type: "POST", //方法类型
-					dataType: "json", //预期服务器返回的数据类型
-					url: "setProductStock.action", //url
-					data: $('#stockForm').serialize(),
-					success: function(result) {
-						var c = parseInt($("#pStock").html()) + parseInt($("input[name='stock']").val());
-						console.log(c);
-						if(result.stock == c) {
-							alert("添加成功");
-							$("#pStock").html(result.stock);
-						} else {
-							alert("添加失败");
-						}
-					},
-					error: function() {
-						alert("添加失败");
-					}
-				});
-			}
+						<%
+		if(request.getAttribute("alertMsg")!=null){
+		%>
+					alert("${alertMsg}");
+					<%
+		}
+		%>
 		</script>
 	</head>
 
@@ -148,26 +178,25 @@
 					<select class="secondClass"></select>
 					<select class="product" onclick="changeProductInfo(this)"></select>
 				</div>
-				<div class="productitem" id="pAll" style="display: flex;">
+				<div class="productitem" id="pAll" style="display: none;">
 					<img id="pUrl" src="../images/54e35fdd-bc68-4a89-bad7-c9c3bb2fc6fe.jpeg" height="150px" />
 					<div class="productinfo">
 						<p id="pName">商品名称</p>
-						<form action="addSpikeProduct.action" method="post">
+						<form action="addGroupProduct.action" method="post">
 							<div>
 								<span>商品库存:</span>&nbsp;&nbsp;&nbsp;
 								<p id="pStock">123</p>&nbsp;&nbsp;&nbsp;<span>商品价格:</span>&nbsp;&nbsp;&nbsp;
 								<p id="pPrice"></p>
 							</div>
 							<div>
-								<input placeholder="成团最低数" name="leastGroupNum" type="number" min="1" /> &nbsp;&nbsp;&nbsp;
-								<input placeholder="团购商品总数" name="maxGroupProductNum" type="number" min="1" max="100" /> &nbsp;&nbsp;&nbsp;
-								<input placeholder="团购价格" name="groupPrice" type="number" min="1" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<span>开始时间:</span><input placeholder="开始时间" name="beginDate" type="datetime-local" /> &nbsp;&nbsp;&nbsp;
-								<span>结束时间:</span><input placeholder="结束时间" name="endDate" type="datetime-local" />
+								
+								<input placeholder="成团最低数" name="leastGroupNum" type="number" min="1" required="required"/> &nbsp;&nbsp;&nbsp;
+								<input id="pMax" placeholder="团购商品总数" name="maxGroupProductNum" type="number" min="1" max="100" required="required" /> &nbsp;&nbsp;&nbsp;
+								<input placeholder="团购价格" name="groupPrice" type="number" min="1"  required="required"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span>开始时间:</span><input placeholder="开始时间" name="beginDate" type="date" required="required" onblur="date1()"/> &nbsp;&nbsp;&nbsp;
+								<span>结束时间:</span><input placeholder="结束时间" name="endDate" type="date" required="required" onblur="dateEnd()" />
 							</div>
-							<input name="productId" value="${productId}" style="display: none;" />
-							<input type="date" name="date" value="${date}" required="required" style="display: none;">
-							<input name="time" value="${time}" style="display: none;">
+							<input name="productId" value="" style="display: none;" />
 							<div class="productinfoform">
 								<button class="btn btn-default" type="submit">增加团购商品</button>
 							</div>
@@ -185,25 +214,26 @@
 						<img src="../${product.product.picUrl}" height="150px" />
 						<div class="productinfo">
 							<p>商品名称：${product.product.productName}</p>
-							<form action="modifySpikeProduct.action" method="post">
+							<form action="modifyGroupProduct.action" method="post">
+								<input name="productId" value="${product.product.productId}" style="display: none;" />
 								<div>
-									<span>成团最低数:${product.leastGroupNum}</span>&nbsp;&nbsp;&nbsp;<input type="number" name="leastGroupNum" value="2" required="required" min="1" />
+									<span>成团最低数:</span>&nbsp;&nbsp;&nbsp;<input type="number" name="leastGroupNum" value="${product.leastGroupNum}" required="required" min="1" />
 								</div>
 								<div>
-									<span>团购商品总数:${product.maxGroupProductNum}</span>&nbsp;&nbsp;&nbsp;<input type="number" name="maxGroupProductNum" value="2" required="required" min="1" />
+									<span>团购商品总数:</span>&nbsp;&nbsp;&nbsp;<input type="number" name="maxGroupProductNum" value="${product.maxGroupProductNum}" required="required" min="1" max="${product.maxGroupProductNum+product.stock}" />
 								</div>
 								<div>
-									<span>团购价格:${product.groupPrice}</span>&nbsp;&nbsp;&nbsp;<input type="number" name="groupPrice" value="2099" required="required" min="1" />
+									<span>团购价格:</span>&nbsp;&nbsp;&nbsp;<input type="number" name="groupPrice" value="${product.groupPrice}" required="required" min="1" />
 								</div>
 								<input name="groupProductId" value="${product.groupProductId}" style="display: none;" />
 								<div class="productinfoform">
 									<div style="flex-direction: column;align-items: center;display: flex; margin: 10px 200px 0 0;">
-										<p>开始日期:<fmt:formatDate type="date" value="${beginDate}" /> </p>
-										<p>开始日期:<fmt:formatDate type="date" value="${endDate}" /></p>
+										<p>开始日期:<fmt:formatDate type="date" value="${product.beginDate}" /> </p>
+										<p>开始日期:<fmt:formatDate type="date" value="${product.endDate}" /></p>
 									</div>
 
 									<button class="btn btn-default" type="submit">修改</button>
-									<button class="btn btn-default" type="button" onclick="window.location.href='deleteSpikeProduct.action?spikeProductId=0&productId=0'">删除</button>
+									<button class="btn btn-default" type="button" onclick="window.location.href='deleteGroupProduct.action?groupProductId=${product.groupProductId}&productId=${product.product.productId}'">删除</button>
 								</div>
 							</form>
 						</div>
@@ -213,7 +243,7 @@
 	<%
 		} else {
 	%>
-		<p style="margin-left: 170px;">未设置团购商品</p3>
+		<p style="margin: 50px auto;">未设置团购商品</p3>
 			<%
 		}
 	}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.LikeProductDAO">
+    <!-- 我喜欢商品查询模块 -->
+    <resultMap type="com.mi.model.bean.LikeProduct" id ="LikeProductResultMap" >
+    	<id column ="likeProductId" property="likeProductId"/>
+    	<result column ="userId" property="userId"/>
+    	
+<!--     	<association property="user" javaType="com.mi.model.bean.User">
+    		<id column="userId" property="userId"/>
+    		<result column="userName" property="userName"/>
+    		<result column="userBirth" property="userBirth"/>
+    		<result column="userSex" property="userSex"/>
+    		<result column="userPhone" property="userPhone"/>
+    		<result column="userEmail" property="userEmail"/>
+    		<result column="userPassword" property="userPassword"/>
+    		<result column="userCard" property="userCard"/>
+    		<result column="userHead" property="userHead"/>
+    	</association> -->
+    	
+    	<association property="product" javaType="com.mi.model.bean.Product">
+    		<id column="productId" property="productId"/>
+    		<result column="productName" property="productName"/>
+    		<result column="extremeName" property="extremeName"/>
+    		<result column="productPrice" property="productPrice"/>
+    		<result column="description" property="description"/>
+    		<result column="color" property="color"/>
+    		<result column="version" property="version"/>
+    		<result column="size" property="size"/>
+    		<result column="picUrl" property="picUrl"/>
+    	</association>
+    </resultMap>
+    
+    <select id="selectLikeProductByUserId"  resultMap="LikeProductResultMap" flushCache="true" >
+    	select * 
+    	from likeProduct left join product using(productId) 
+    	where userId = #{userId}
+    </select>
+    <select id="selectLikeProductCount"  resultType="Integer" flushCache="true" >
+    	select count(*) from  likeProduct
+    </select>
+    
+    <select id="selectUnpayOrderCount"  resultType="Integer" flushCache="true" >
+    	select count(*) from `order` where orderState = 1
+    </select>
+    <select id="selectPendingOrderCount"  resultType="Integer" flushCache="true" >
+    	select count(*) from `order` where orderState = 2
+    </select>
+    <select id="selectUncommentOrderCount"  resultType="Integer" flushCache="true" >
+    	select count(*) from(
+  			select distinct productId from `order` LEFT JOIN orderproduct USING(orderId)
+			where userId = 10001 and productId not in (
+				select distinct productId FROM `comment` where userId = 10001
+			)
+		) as T
+    	<!-- select count(*) from(
+			select 
+	    		a.*,e.commentId
+	    	from mi.product a left join mi.comment e on a.productId=e.productId
+	    	where a.productId in
+		    	 (select d.productId 
+		    	 from mi.order c left join orderproduct d on c.orderId=d.orderId
+		    	 where  c.userId=10001 and d.productId not in 
+		    		 (select b.productId from mi.comment b where b.userId=10001 )
+		    	  )
+		) T GROUP BY productId  -->
+    </select>
+    <select id="selectClassfiedProductBySecondClassId"  resultType="Product" flushCache="true" >
+    	select * from product where secondClassId = #{secondClassId}
+    </select>
+</mapper>
+
+
+

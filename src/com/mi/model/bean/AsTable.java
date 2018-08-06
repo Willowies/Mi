@@ -4,34 +4,82 @@ import java.util.Date;
 
 public class AsTable {
 	private String asId;
-	private String asProId;
-	private String asSn;
+	private int asProId;
+	private int asSn;
 	private String asWay;
 	private String asBack;
 	private String asDescription;
 	private String asAddress;
 	private String asPerson;
 	private String asPhone;
-	private int asState;
+	private String asState;
 	private String asRepairProUrl;
 	private String asInvoiceUrl;
-	private Date asTime;
+	private String asTime;
+	//商品信息
+	private String productName;
+	private String version; 
+	private String color;
+	//private int productId; 
+	//private int sn;
+	private String picUrl;
+
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+/*	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	public int getSn() {
+		return sn;
+	}
+	public void setSn(int sn) {
+		this.sn = sn;
+	}*/
+	public String getPicUrl() {
+		return picUrl;
+	}
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
+	
+	
+	
+	//table信息
 	public String getAsId() {
 		return asId;
 	}
 	public void setAsId(String asId) {
 		this.asId = asId;
 	}
-	public String getAsProId() {
+	public int getAsProId() {
 		return asProId;
 	}
-	public void setAsProId(String asProId) {
+	public void setAsProId(int asProId) {
 		this.asProId = asProId;
 	}
-	public String getAsSn() {
+	public int getAsSn() {
 		return asSn;
 	}
-	public void setAsSn(String asSn) {
+	public void setAsSn(int asSn) {
 		this.asSn = asSn;
 	}
 	public String getAsWay() {
@@ -70,10 +118,10 @@ public class AsTable {
 	public void setAsPhone(String asPhone) {
 		this.asPhone = asPhone;
 	}
-	public int getAsState() {
+	public String getAsState() {
 		return asState;
 	}
-	public void setAsState(int asState) {
+	public void setAsState(String asState) {
 		this.asState = asState;
 	}
 	public String getAsRepairProUrl() {
@@ -88,10 +136,10 @@ public class AsTable {
 	public void setAsInvoiceUrl(String asInvoiceUrl) {
 		this.asInvoiceUrl = asInvoiceUrl;
 	}
-	public Date getAsTime() {
+	public String  getAsTime() {
 		return asTime;
 	}
-	public void setAsTime(Date asTime) {
+	public void setAsTime(String asTime) {
 		this.asTime = asTime;
 	}
 	

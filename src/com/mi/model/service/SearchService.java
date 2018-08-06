@@ -112,12 +112,12 @@ public class SearchService {
 		List<SearchResult> results = new ArrayList<SearchResult>();
 		for (Product p : list) {
 			int flag = 0;
-			String tempName = p.getProductName() + (p.getSize()==null?"":p.getSize()) + (p.getVersion()==null?"":p.getVersion()) ;
+			String tempName = p.getProductName() +" "+ (p.getSize()==null?"":p.getSize()) +" "+ (p.getVersion()==null?"":p.getVersion()) ;
 			for (SearchResult r : results) {
 				if (r.getProductName().equals(tempName)) {
 					flag = 1;
 					if (r.getProducts() == null) {
-						List<Product> t = new ArrayList<Product>();
+						List<Product> t = new ArrayList<Product>(); 
 						t.add(p);
 						r.setProducts(t);
 					} else {

@@ -44,6 +44,10 @@ public interface ManageDAO {
 
 	public int getGroupQuantity(int groupProductId);
 
-	public void deleteGrorupProduct(int groupProductId);
+	public void deleteGroupProduct(int groupProductId);
+
+	public void addNotice(Date date, Integer id);
+
+	public void modifyNotice(Integer id);
 
 }

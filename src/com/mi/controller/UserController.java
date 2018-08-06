@@ -1,27 +1,23 @@
 package com.mi.controller;
 
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mi.model.bean.User;
 import com.mi.model.bean.UserInfo;
 import com.mi.model.service.UserService;
 
-
-
-@Controller
 public class UserController {
-	@Autowired
 	private UserService userService;
 	
 	@RequestMapping("selectUser")
-	public ModelAndView selectUser() {
-		List<UserInfo> list = userService.selectUsers();
+	public ModelAndView selectUser(Integer userId) {
+		User user = userService.selectUsersById(userId);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("resultList",list);
+		mav.addObject("user",user);
 		mav.setViewName("selectUser");
 		return mav;
 	}
