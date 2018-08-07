@@ -1,6 +1,6 @@
 body {
     font: 14px/1.5 "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif !important;
-    font-family: sans-serif !important;
+    /* font-family: sans-serif !important; */
     color: #333;
     background-color: #fff;
     min-width: 1226px !important;
