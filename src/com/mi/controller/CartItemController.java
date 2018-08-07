@@ -63,8 +63,9 @@ public class CartItemController extends BaseController{
 	}
 	
 	@RequestMapping("addCartItem")
-	public String addCartItem(int productId,HttpSession session,Model model){
+	public String addCartItem(String productIdString,HttpSession session,Model model){
 		User user = (User)session.getAttribute("user");
+		int productId = Integer.parseInt(productIdString);
 		int result = cartItemService.addCartItem(productId,user.getUserId());
 		if(result==2){
 			//达到商品最大限购数量

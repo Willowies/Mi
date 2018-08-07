@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$.ajax({
+	/*$.ajax({
 		type:"post",
 		async:false,
 		url:"getAddress.action",
@@ -20,32 +20,32 @@ $(document).ready(function(){
 		           $("#userAddress").append(addressHtml);
 		     }
 		}
-	});
+	});*/
 	
 	$("#noLimit").click(function(){
 		$("#sPeroid").val(1);
-		alert($("#sPeroid").val());
+		//alert($("#sPeroid").val());
 		$("#deliveryTime li").removeClass("selected");
 		$(this).addClass("selected");
 	});
 	
 	$("#workday").click(function(){
 		$("#sPeroid").val(2);
-		alert($("#sPeroid").val());
+		//alert($("#sPeroid").val());
 		$("#deliveryTime li").removeClass("selected");
 		$(this).addClass("selected");
 	});
 	
 	$("#weekday").click(function(){
 		$("#sPeroid").val(3);
-		alert($("#sPeroid").val());
+		//alert($("#sPeroid").val());
 		$("#deliveryTime li").removeClass("selected");
 		$(this).addClass("selected");
 	});
 	
 	$("#eInvoice").click(function(){
 		$("#iType").val(1);
-		alert($("#iType").val());
+		//alert($("#iType").val());
 		$("#pInvoice").removeClass("selected");
 		$(this).addClass("selected");
 		$("#pInvoiceTip").hide();
@@ -56,7 +56,7 @@ $(document).ready(function(){
 	
 	$("#pInvoice").click(function(){
 		$("#iType").val(2);
-		alert($("#iType").val());
+		//alert($("#iType").val());
 		$("#eInvoice").removeClass("selected");
 		$(this).addClass("selected");
 		$("#eInvoiceTip").hide();
@@ -67,7 +67,7 @@ $(document).ready(function(){
 	
 	$("#personInvoice").click(function(){
 		$("#rType").val(1);
-		alert($("#rType").val());
+		//alert($("#rType").val());
 		$("#companyInvoice").removeClass("selected");
 		$(this).addClass("selected");
 		$("#taxBlock").hide();
@@ -75,7 +75,7 @@ $(document).ready(function(){
 	
 	$("#companyInvoice").click(function(){
 		$("#rType").val(2);
-		alert($("#rType").val());
+		//alert($("#rType").val());
 		$("#personInvoice").removeClass("selected");
 		$(this).addClass("selected");
 		$("#taxBlock").show();
@@ -126,9 +126,9 @@ $(document).ready(function(){
 		$("#rPhone").val($(this).find("#aPhone").text());
 		var address = " "+$(this).find("#aProvince").text()+$(this).find("#aCity").text()+$(this).find("#aDistrict").text()+$(this).find("#aAddress").text()
 		$("#rAddress").val(address);
-		alert($("#rName").val());
-		alert($("#rPhone").val());
-		alert($("#rAddress").val());
+		//alert($("#rName").val());
+		//alert($("#rPhone").val());
+		//alert($("#rAddress").val());
 	});
 	
 	$("#addAddressButton").click(function(){
@@ -145,8 +145,8 @@ $(document).ready(function(){
 				$("#userAddress").text("");
 				 //var jsonData = JSON.parse(data); //jsonData是该下路下的所有区间（json格式） 
 			     for (var i = 0; i < data.length; i++) {
-			    	   alert(data[i].receiverAddressId);
-			    	   alert("数组长度为"+data.length);
+			    	   //alert(data[i].receiverAddressId);
+			    	   //alert("数组长度为"+data.length);
 			           var addressHtml ="<div class=\"address-item address\"><dl><dt><span class=\"tag\"></span><em class=\"uname\" id=\"aName\">"
 			        	   		+data[i].receiverName+"</em></dt><dd class=\"utel\" id=\"aPhone\">"
 			        	   		+data[i].receiverPhone+"</dd><dd class=\"uaddress\"><em style=\"font-style:normal;\" id=\"aProvince\">"
