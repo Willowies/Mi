@@ -140,7 +140,7 @@
 					<div class="pro-view span10">
 						<!--左侧轮播图-->
 						<div class="imgload hide"></div>
-						<div id="img" class="img-con" style="left: 62.5px; margin-top: 0px;">
+						<div id="img" class="img-con" style="margin-top: 0px;">
 							<div id="myCarousel" class="ui-wrapper carousel slide" data-ride="carousel" style="max-width: 100%;">
 							    <!-- 轮播指标 -->
 							    <ol class="carousel-indicators">

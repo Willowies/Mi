@@ -25,9 +25,6 @@ public class ProductInfoController {
 	private ProductInfoService productInfoService;
 	
 	public User getUser(HttpSession session){
-		User u = new User();
-		u.setUserId(2);
-		session.setAttribute("user", u);
 		User user = (User) session.getAttribute("user");
 		return user;
 	}
