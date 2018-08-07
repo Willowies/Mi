@@ -50,7 +50,8 @@ public class ProductSpikeController {
 	public @ResponseBody String buySpikeProduct(HttpServletRequest request, int spikeProductId, HttpSession session){
 		spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
 		session.setAttribute("spikeProductId", spikeProductId);
-		String buySucceed = productSpikeService.selectBuySpikeProduct(spikeProductId);		
+		String buySucceed = productSpikeService.selectBuySpikeProduct(spikeProductId);
+		System.out.println(buySucceed);
 		return buySucceed;
 	}
 	//封装商品信息

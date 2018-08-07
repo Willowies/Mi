@@ -279,8 +279,10 @@ $(function(){
 		$.ajax({
 			type:post,
 			astnc:true,
+			dataType:"text",
 			url:"buySpikeProduct.action?spikeProductId="+spikeProductId,
 			function(data){
+				console.log(data);
 				if(data == "超过上限"){
 					$("#modalMax").modal("show");
 				}
@@ -291,6 +293,7 @@ $(function(){
 					$.ajax({
 						type:post,
 						astnc:true,
+						dataType:"json",
 						url:"findSpikeProduct.action?spikeProductId="+spikeProductId,
 						function(data){
 							window.location.href = "updateSpikeOrder.action?orderProduct="+data;
