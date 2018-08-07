@@ -161,7 +161,7 @@
 						<div class="section-header clearfix">
 							<h3 class="title">商品</h3>
 							<div class="more">
-								<a>返回购物车</a>
+								<a href="findCartItem.action">返回购物车</a>
 							</div>
 						</div>
 						<div class="section-body2">

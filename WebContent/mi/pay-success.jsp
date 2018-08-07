@@ -123,10 +123,10 @@
 				<div class="succ">
 					<h2 class="title">支付成功</h2>
 					<p class="price">
-						<em>${orderResult.actualTotal }</em>
+						<em>${orderResult.actualTotal}</em>
 						元
 					</p>
-					<a class="btn">查看订单详情</a>
+					<a class="btn" href="getOrderDetailsById.action?orderId=${orderResult.orderId}">查看订单详情</a>
 					<p class="state">
 						小米公司不会以任何理由要求您提供银行卡信息或支付额外费用
 						<br />
