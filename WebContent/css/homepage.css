@@ -499,6 +499,13 @@
 	position:relative;
 	-webkit-font-smoothing: antialiased;
 }
+.xm-groupPurchase .titleG .more{
+	width:70px;
+	height:25px;
+	float:right;
+	margin:20px 0 10px 0;
+	position:relative;
+}
 .xm-groupPurchase .content{
 	width:100%;
 	height:340px;

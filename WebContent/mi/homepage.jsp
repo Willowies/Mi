@@ -112,7 +112,11 @@
 	
 	<div class="xm-groupPurchase">
 		<div class="titleG" style="background:#c16666;">
-			<h3>小米团购</h3>
+			<h3 style="display:inline-block; margin:15px 0; float:left;">小米团购</h3>
+			<div class="more">
+				<a></a>
+				<a></a>
+			</div>
 		</div>
 		<div class="content" style="background:#b68df9;">
 			<div class="goods-list">

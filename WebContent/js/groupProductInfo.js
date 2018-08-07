@@ -156,7 +156,7 @@ $(document).ready(function(){
 	function provideOrderProduct(){
 		$.ajax({
 			type:"POST",
-			async:true,
+			async:false,
 			data:{
 				groupProductId:$("#groupProductId").text()
 			},
