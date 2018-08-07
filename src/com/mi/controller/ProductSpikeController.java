@@ -23,9 +23,9 @@ public class ProductSpikeController {
 	private ProductSpikeService productSpikeService;	
 	
 	public User getUser(HttpSession session){
-		User u = new User();
+		/*User u = new User();
 		u.setUserId(2);
-		session.setAttribute("user", u);
+		session.setAttribute("user", u);*/
 		User user = (User) session.getAttribute("user");
 		return user;
 	}
@@ -39,33 +39,32 @@ public class ProductSpikeController {
 	}
 	//设置秒杀提醒
 	@RequestMapping("addSpikeRemind")
-	public @ResponseBody String addSpikeRemind(HttpServletRequest request, int spikeProductId, Date remindTime, HttpSession session){
+	public @ResponseBody String addSpikeRemind(HttpServletRequest request, String spikeProductId, Date remindTime, HttpSession session){
 		User user = getUser(session);
-		spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
-		String isSetted = productSpikeService.addSpikeRemind(spikeProductId, user.getUserId(), remindTime);
+		//spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
+		String isSetted = productSpikeService.addSpikeRemind(Integer.parseInt(spikeProductId), user.getUserId(), remindTime);
 		return isSetted;
 	}
 	//抢购商品
 	@RequestMapping("buySpikeProduct")
-	public @ResponseBody String buySpikeProduct(HttpServletRequest request, int spikeProductId, HttpSession session){
-		spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
-		session.setAttribute("spikeProductId", spikeProductId);
-		String buySucceed = productSpikeService.selectBuySpikeProduct(spikeProductId);		
+	public @ResponseBody String buySpikeProduct(HttpServletRequest request, String spikeProductId, HttpSession session){
+		//session.setAttribute("spikeProductId", spikeProductId);
+		String buySucceed = productSpikeService.selectBuySpikeProduct(Integer.parseInt(spikeProductId));		
 		return buySucceed;
 	}
 	//封装商品信息
 	@RequestMapping("findSpikeProduct")
-	public @ResponseBody OrderProduct findSpikeProduct(HttpServletRequest request, int spikeProductId){
-		spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
-		OrderProduct orderProduct = productSpikeService.findSpikeProduct(spikeProductId);
+	public @ResponseBody OrderProduct findSpikeProduct(HttpServletRequest request, String spikeProductId){
+		//spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
+		OrderProduct orderProduct = productSpikeService.findSpikeProduct(Integer.parseInt(spikeProductId));
 		return orderProduct;
 	}
 	//发送消息提醒秒杀
 	@RequestMapping("addSpikeMessage")
-	public void addSpikeMessage(HttpServletRequest request, int spikeProductId, Date sendTime, HttpSession session){
+	public void addSpikeMessage(HttpServletRequest request, String spikeProductId, Date sendTime, HttpSession session){
 		User user = getUser(session);
-		spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
-		productSpikeService.addSpikeMessage(spikeProductId, user.getUserId(), sendTime);
+		//spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
+		productSpikeService.addSpikeMessage(Integer.parseInt(spikeProductId), user.getUserId(), sendTime);
 	}
 	//返回首页查找的秒杀商品列表
 	@RequestMapping("selectIndexSpikeProduct")
