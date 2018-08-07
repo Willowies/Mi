@@ -31,7 +31,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from spikeproduct s,product p 
         where s.startTime=#{startTime} and s.productId=p.productId
     </select>
-    <resultMap type="spikeProduct" id="spikeResultMap">
-        <result property="previousPrice" column="productPrice"/>
-    </resultMap>    
 </mapper>
