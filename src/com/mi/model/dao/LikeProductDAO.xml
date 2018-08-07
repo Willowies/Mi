@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select * 
     	from (
    		 select * from product group by productName
-    	) as base
+    	) as base where secondClassId = #{secondClassId}
 		ORDER by productId ASC
     </select>
 </mapper>

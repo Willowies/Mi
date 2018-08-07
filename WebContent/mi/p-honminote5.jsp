@@ -8,7 +8,7 @@
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
 		<link href="../css/font-awesome.css" rel="stylesheet">
-		<link href="../css/p-nofound.css" rel="stylesheet">
+		<link href="../css/p-honminote5.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
 		<script type="text/javascript" src="../js/p-xiaomi8.js" ></script>
@@ -112,7 +112,7 @@
 	
 	<div class="product-head-info">
 			<div class="product-head-box">
-				<div class="product-name">这个商品没有参数页面</div>
+				<div class="product-name">红米note5</div>
 				<div class="con">
 					<a href="displayProductSummary.action?productName=${productName}">概述</a>&nbsp; |&nbsp;
 					<a href="displayProductParameter.action?productName=${productName}">参数</a>&nbsp; |&nbsp;
@@ -123,10 +123,71 @@
 	</div>
 	
 	<div class="parameter-container">
+		<div class="img f1" id="j_colorPreview">
+			<ul>
+				<li class="pic pic1 active" id="p-img-1"></li>
+				<li class="pic pic2" id="p-img-2"></li>
+				<li class="pic pic3" id="p-img-3"></li>
+				<li class="pic pic4" id="p-img-4"></li>
+				<li class="pic pic5" id="p-img-5"></li>
+			</ul>
+		</div>
 		<div class="context">
 			<h3 class="webfont">
-				您可以尝试去咨询客服……
+				红米
+				<span>note5</span>
 			</h3>
+			<div class="sup">
+				<dl class="left pt">
+					<dd class="name">骁龙 845 旗舰处理器</dd>
+					<dd>骁龙845 最高主频 2.8GHz</dd>
+				</dl>
+				<dl class="pt">
+					<dd class="name">6GB+256GB </dd>
+					<dd>小米8 最高可选</dd>
+				</dl>
+				<dl class="left">
+					<dd class="name">6.21英寸  </dd>
+					<dd>三星 AMOLED 屏幕 </dd>
+				</dl>
+				<dl>
+					<dd class="name">AI 超感光双摄 </dd>
+					<dd>12MP 广角镜头，f/1.8</dd>
+				</dl>
+				<dl class="left pb">
+					<dd class="name">全网通 5.0 </dd>
+					<dd>支持双卡不限运营商</dd>
+				</dl>
+				<dl class="pb">
+					<dd class="name">2+1 卡槽  </dd>
+					<dd>最高可扩展256GB</dd>
+				</dl>
+			</div>
+			<div class="sub">
+				<ul class="clearfix">
+					<li class="icon icon1 " onclick="changImg(1,5)" >
+						<div></div>
+						<p>蓝色</p>
+					</li>
+					
+					<li class="icon icon2 " onclick="changImg(2,5)">
+						<div></div>
+						<p>玫瑰金</p>
+					</li>
+					<li class="icon icon3 " onclick="changImg(3,5)">
+						<div ></div>
+						<p>金色</p>
+					</li>
+					<li class="icon icon4 " onclick="changImg(4,5)">
+						<div ></div>
+						<p>红色</p>
+					</li>
+					<li class="icon icon4 " onclick="changImg(5,5)">
+						<div ></div>
+						<p>黑色</p>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 			

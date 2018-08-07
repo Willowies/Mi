@@ -1,0 +1,189 @@
+.parameter-container {
+	position: relative;
+    border-bottom: 1px solid #e0e0e0;
+    width: 1226px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+.parameter-container dd{
+	padding: 0;
+    margin: 0;
+}
+.img .f1{
+	display: table;
+	float: left;
+}
+.img .pic1{
+	background: url(../images/xiaomi81.png) 50% 0 no-repeat;
+    
+}
+.img .pic2{
+	background: url(../images/xiaomi82.png) 50% 0 no-repeat;
+    
+}
+.img .pic3{
+	background: url(../images/xiaomi83.png) 50% 0 no-repeat;
+    
+}
+.img .pic4{
+	background: url(../images/xiaomi84.png) 50% 0 no-repeat;
+    
+}
+.img .active{
+	opacity: 1;
+    filter: alpha(opacity=100)\9;
+}
+
+.img li{
+	width: 474px;
+    height: 625px;
+    position: absolute;
+    list-style: none;
+    top: 29px;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0)\9;
+    -webkit-transition: opacity 0.5s ease-out;
+    transition: opacity 0.5s ease-out;
+}
+.webfont{
+	font-family: 'F82c8d';
+}
+h3 span{
+	display: inline-block;
+    border: 2px solid #111111;
+    padding: 0px 6px;
+    margin-left: 2px;
+    border-radius: 5px;
+}
+.context{
+	padding: 20px 0 80px 625px;
+	line-height: 40px;
+    font-size: 16px;
+    color: #333;
+}
+.context h3{
+	color: #111111;
+    line-height: 1;
+    margin-top: 10px;
+    font-size: 43px;
+    margin-bottom: 30px
+}
+.context .sup{
+	overflow: hidden;
+}
+.context dd.name{
+	color: #333;
+    font-size: 22px;
+    line-height: 40px;
+}
+.context dl{
+	width: 255px;
+    padding: 30px 0;
+    text-align: left;
+    float: left;
+    padding-left: 50px;
+    margin: 0px;
+    border-top: 1px solid #e0e0e0;
+}
+.context dl.pt{
+	padding-top: 0;
+    border-top: 0;
+}
+.context .left{
+	border-right: 1px solid #e0e0e0;
+    padding-left: 0;
+}
+.context .sub{
+	margin-top: 30px;
+}
+.context ul{
+	padding: 0;
+    margin: 0;
+}
+.sub ul{
+	margin-top: 20px;
+}
+.sub ul li{
+	display: list-item;
+	text-align: center;
+    list-style: none;
+    margin-right: 80px;
+    float: left;
+    position: relative;
+    cursor: pointer
+}
+.sub p{
+	line-height: 54px;
+    color: #333;
+    margin: 0;
+    font-size: 12px
+}
+
+.sub div{
+	width: 46px;
+    height: 46px;
+}
+
+.sub .icon{
+    border: none;
+    width: 40px;
+    height: 40px;
+    margin-right: 40px;
+}
+.sub .icon1{
+	background: 0px 5px no-repeat;
+	background-image: url(//i1.mifile.cn/f/i/2018/mi8/specs/icon-1.png);
+}
+.sub .icon2{
+	background: 0px 5px no-repeat;
+	background-image: url(//i1.mifile.cn/f/i/2018/mi8/specs/icon-2.png);
+}
+.sub .icon3{
+	background: 0px 5px no-repeat;
+	background-image: url(//i1.mifile.cn/f/i/2018/mi8/specs/icon-3.png);
+}
+.sub .icon4{
+	background: 0px 5px no-repeat;
+	background-image: url(//i1.mifile.cn/f/i/2018/mi8/specs/icon-4.png);
+}
+.clearfix{
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+/*顶栏部分css*/
+.product-head-info {
+	height: 70px;
+	margin: 0 auto;
+	border-top: 1px solid #ccc;
+}
+
+.product-head-box {
+	width: 1226px;
+	margin: 0 auto;
+}
+
+.product-name {
+	float: left;
+	margin: 0;
+	margin-top: 20px;
+	font-size: 20px;
+}
+.con {
+	float: right;
+	margin: 0;
+	margin-top: 20px;
+}
+
+.con .btn-toBuy {
+	padding: 8px 35px;
+	font-size: 12px;
+	line-height: 28px;
+	background: #ff6700;
+	border-color: #ff6700;
+	color: #fff;
+	margin-left: 5px;
+	vertical-align: inherit;
+}

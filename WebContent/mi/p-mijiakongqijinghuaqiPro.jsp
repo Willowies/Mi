@@ -8,7 +8,7 @@
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
 		<link href="../css/font-awesome.css" rel="stylesheet">
-		<link href="../css/p-nofound.css" rel="stylesheet">
+		<link href="../css/p-mijiakongqijinghuaqiPro.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
 		<script type="text/javascript" src="../js/p-xiaomi8.js" ></script>
@@ -112,7 +112,7 @@
 	
 	<div class="product-head-info">
 			<div class="product-head-box">
-				<div class="product-name">这个商品没有参数页面</div>
+				<div class="product-name">米家空气净化器Pro</div>
 				<div class="con">
 					<a href="displayProductSummary.action?productName=${productName}">概述</a>&nbsp; |&nbsp;
 					<a href="displayProductParameter.action?productName=${productName}">参数</a>&nbsp; |&nbsp;
@@ -123,10 +123,45 @@
 	</div>
 	
 	<div class="parameter-container">
+		<div class="img f1" id="j_colorPreview">
+			<ul>
+				<li class="pic pic1 active" id="p-img-1"></li>
+				<li class="pic pic2" id="p-img-2"></li>
+				<li class="pic pic3" id="p-img-3"></li>
+				<li class="pic pic4" id="p-img-4"></li>
+			</ul>
+		</div>
 		<div class="context">
 			<h3 class="webfont">
-				您可以尝试去咨询客服……
+				米家空气净化器
+				<span>Pro</span>
 			</h3>
+			<div class="sup">
+				<dl class="left pt">
+					<dd class="name">净化效能</dd>
+					<dd>500m3/h</dd>
+				</dl>
+				<dl class="pt">
+					<dd class="name">智能模块 </dd>
+					<dd>WIFI连接</dd>
+				</dl>
+				<dl class="left">
+					<dd class="name">46.21英寸  </dd>
+					<dd>三星 AMOLED 屏幕 </dd>
+				</dl>
+				<dl>
+					<dd class="name">AI 超感光双摄 </dd>
+					<dd>12MP 广角镜头，f/1.8</dd>
+				</dl>
+				<dl class="left pb">
+					<dd class="name">全网通 5.0 </dd>
+					<dd>支持双卡不限运营商</dd>
+				</dl>
+				<dl class="pb">
+					<dd class="name">2+1 卡槽  </dd>
+					<dd>最高可扩展256GB</dd>
+				</dl>
+			</div>
 		</div>
 	</div>
 			
