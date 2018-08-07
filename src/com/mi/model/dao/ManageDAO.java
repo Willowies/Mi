@@ -2,6 +2,7 @@ package com.mi.model.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.mi.model.bean.GroupProduct;
 import com.mi.model.bean.Product;
@@ -49,5 +50,6 @@ public interface ManageDAO {
 	public void addNotice(Date date, Integer id);
 
 	public void modifyNotice(Integer id);
+	
 
 }

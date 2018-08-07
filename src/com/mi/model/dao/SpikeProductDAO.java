@@ -13,5 +13,6 @@ public interface SpikeProductDAO {
 	
 	public List<SpikeProduct> selectIndexSpikeProduct(Date currentDate);
 	
+	public List<SpikeProduct> selectSpikeStock(Date startTime);
 
 }

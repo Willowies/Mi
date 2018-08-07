@@ -8,4 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select * from message where UserId = #{userId}
     </select>
 	
+    <insert id="addMessage" parameterType="map">
+        insert into message(messageTitle,message,userId,sendTime,messageType,picUrl) 
+        values(#{messageTitle},#{message},#{userId},#{sendTime},1,#{picUrl})
+    </insert>
 </mapper>
