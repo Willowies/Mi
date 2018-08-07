@@ -43,7 +43,7 @@
 			  	<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 			</div>
 			<div class="topbar-cart" id="J_miniCartTrigger">
-				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 					<i class="fa fa-shopping-cart"></i>
 					购物车
 					<span class="cart-mini-num">（0）</span>
@@ -81,7 +81,7 @@
 							<h2 class="title">订单提交成功！去付款咯 ~</h2>
 							<p class="order-time">
 								请在
-								<span class="pay-time-tip">48小时0分</span>
+								<span class="pay-time-tip">15分钟</span>
 								内完成支付，超时后将取消订单
 							</p>
 							<p class="post-info">
