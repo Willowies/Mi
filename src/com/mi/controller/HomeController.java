@@ -28,9 +28,9 @@ public class HomeController {
 	 */
 	@RequestMapping("load_cart")
 	public @ResponseBody int getCartItemsNum(HttpSession session){
-//		User userTemp = (User) session.getAttribute("user");//notice
-		User userTemp = new User();
-		userTemp.setUserId(1);
+		User userTemp = (User) session.getAttribute("user");//notice
+//		User userTemp = new User();
+//		userTemp.setUserId(1);
 		int totalQuantityOfShopcart = 0;
 		if(userTemp!=null) {
 			List<CartItem> list = homeservice.getCartItems(userTemp.getUserId());
@@ -42,9 +42,9 @@ public class HomeController {
 	}
 	@RequestMapping("load_cartItem")
 	public @ResponseBody List<CartItem> getCartItems(HttpSession session){
-//		User userTemp = (User) session.getAttribute("user");//notice
-		User userTemp = new User();
-		userTemp.setUserId(1);
+		User userTemp = (User) session.getAttribute("user");//notice
+//		User userTemp = new User();
+//		userTemp.setUserId(1);
 		List<CartItem> list = null;
 		if(userTemp!=null) {
 			list = homeservice.getCartItems(userTemp.getUserId());

@@ -1,5 +1,6 @@
 package com.mi.model.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,9 @@ public class HomeService {
 		}
 		return list;
 	}
-	public List<GroupProduct> getGroupProducts(){
-		List<GroupProduct> list = groupProductDAO.getGroupProducts();
+	public List<GroupProduct> getGroupProducts() {
+		Date currentDate = new Date();
+		List<GroupProduct> list = groupProductDAO.getGroupProducts(currentDate);
 		for(int i=0;i<list.size();i++) {
 			String extremeName = list.get(i).getProduct().getProductName();
 			if(list.get(i).getProduct().getVersion()!=null) {

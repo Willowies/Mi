@@ -33,7 +33,9 @@
 		</mvc:message-converters> 
     </mvc:annotation-driven>
     <!-- 定时任务的设置 -->
-    <task:annotation-driven/>
+    <task:annotation-driven scheduler="myScheduler"/>
+    <!-- 定时任务线程池 -->
+    <task:scheduler id="myScheduler" pool-size="10" />
      <!-- 配置文件上传解析器 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     	<property name="maxUploadSize">

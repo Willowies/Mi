@@ -4,17 +4,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mi.model.dao.GroupProductDAO">
      
-    
-    <select id="getGroupProducts" resultMap="groupProductResult" flushCache="true" >
+    <!-- 获取当前正在进行的活动，通过获取服务器时间，作参数。不要过期的，也不要未开始的。LIMIT 8，首页不需要全部的 -->
+    <select id="getGroupProducts"  parameterType="Date" resultMap="groupProductResult" flushCache="true" >
 		select c.groupProductId, c.groupPrice, c.leastGroupNum, c.maxGroupProductNum, c.beginDate, c.endDate, d.* 
 		from groupproduct as c, product as d 
-		where c.productId=d.productId
+		where c.productId=d.productId and c.endDate &gt; #{current, jdbcType=TIMESTAMP} and c.beginDate &lt; #{current, jdbcType=TIMESTAMP} 
 		LIMIT 8
     </select>
+    <!-- 获取当前正在进行的活动，通过获取服务器时间，作参数。不要过期的，也不要未开始的。  -->
     <select id="getAllGroupProducts" resultMap="groupProductResult" flushCache="true" >
 		select c.groupProductId, c.groupPrice, c.leastGroupNum, c.maxGroupProductNum, c.beginDate, c.endDate, d.* 
 		from groupproduct as c, product as d 
-		where c.productId=d.productId
+		where c.productId=d.productId and c.endDate &gt; #{current, jdbcType=TIMESTAMP} and c.beginDate &lt; #{current, jdbcType=TIMESTAMP} 
+    </select>
+    <!-- 当没有团的信息，团购商品详情页至少需要团购商品的信息 -->
+    <select id="getGroupProductById" parameterType="int"  resultMap="groupProductResult" flushCache="true">
+    	select c.groupProductId, c.groupPrice, c.leastGroupNum, c.maxGroupProductNum, c.beginDate, c.endDate, d.* 
+		from groupproduct as c, product as d 
+		where c.productId=d.productId and c.groupProductId=#{groupProductId}
     </select>
     <resultMap id="groupProductResult" type="GroupProduct">
     	<id column="groupProductId" property="groupProductId"  />

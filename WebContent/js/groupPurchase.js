@@ -15,6 +15,7 @@ function initData2(){
 			//
 			for(var i=0;i<data.length;i++){
 				var quantity = judgeCurrentQuantity(data[i].groupProductId);//check quantity of people
+				console.log("quantity "+quantity);
 				var nowDate = new Date();
 				var nowTime = nowDate.getTime();
 				console.log("nowDate:"+nowDate);
@@ -63,9 +64,10 @@ function getServerDate(){
     return new Date($.ajax({async: false}).getResponseHeader("Date"));
 }
 function judgeCurrentQuantity(groupProductId){
+	var quantity;
 	$.ajax({
 		type:"POST",
-		async:true,
+		async:false,
 		data:{
 			groupProductId:groupProductId
 		},
@@ -73,10 +75,13 @@ function judgeCurrentQuantity(groupProductId){
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
 		url:"judgeCurrentQuantity.action",
 		success:function(data){
-//			console.log(data);
-			return data;
+//			console.log("judgeCurrentQuantity "+data);
+			quantity = data;
+//			return data;
 		},
 	});
+//	console.log("judgeCurrentQuantityfunction "+quantity);
+	return quantity;
 }
 $(document).ready(function(){
 	$(".link-category").hover(function(){

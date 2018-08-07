@@ -1,7 +1,6 @@
 .groupProductInfo{
 	width:100%;
 	height:600px;
-	background:#e3d9ff;
 }
 .groupProductInfo .container{
 	display:flex;
@@ -10,12 +9,10 @@
 .groupProductInfo .groupProduct_show{
 	width:50%;
 	height:600px;
-	background:#85a5ff;
 }
 .groupProductInfo .groupProduct_info{
 	width:50%;
 	height:600px;
-	background:#c5ecff;
 	display:flex;
 	flex-direction:column;
 }
@@ -115,7 +112,6 @@
 .create{
 	width:100%;
 	height:58px;
-	background:#faa;
 	display:flex;
 	flex-direction:column;
 }

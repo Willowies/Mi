@@ -200,13 +200,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <!-- 最好要去除商品名重复的，即使配置不同 -->
     <!-- 推荐商品不需要指定种类，也不需要user信息 -->
-    <!-- 降序，取评价数前10 -->
+    <!-- 降序，取评价数前10，必须好评 -->
     <select id="getRecommendProducts" resultMap="recommendProductResult" flushCache="true">
     	select l.*, count(commentId) as productCommentNum 
 		from(select j.*, k.commentId, k.userId, k.commentContent, k.commentRank, k.commentUrl, k.commentDate 
 				 from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
 							 from product as g left join coupon as h on g.productId=h.productId)as j left join `comment` as k 
-							 on j.productId=k.productId) as l 
+							 on j.productId=k.productId and k.commentRank in (4,5)) as l 
 		group by l.productId
 		order by productCommentNum desc
 		LIMIT 10
@@ -230,7 +230,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 from(select z.*, i.secondClassName, i.firstClassId 
 							from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
 										from product as g left join coupon as h on g.productId=h.productId) as z, productsecondclass as i 
-							where z.secondClassId=i.secondClassId and i.firstClassId=1) as j left join `comment` as k
+							where z.secondClassId=i.secondClassId and i.firstClassId=2) as j left join `comment` as k
 							on j.productId=k.productId) as l left join `user` as u 
 		on l.userId=u.userId
 		group by l.productId
@@ -243,7 +243,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 from(select z.*, i.secondClassName, i.firstClassId 
 							from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
 										from product as g left join coupon as h on g.productId=h.productId) as z, productsecondclass as i 
-							where z.secondClassId=i.secondClassId and i.firstClassId=1) as j left join `comment` as k
+							where z.secondClassId=i.secondClassId and i.firstClassId=3) as j left join `comment` as k
 							on j.productId=k.productId) as l left join `user` as u 
 		on l.userId=u.userId
 		group by l.productId

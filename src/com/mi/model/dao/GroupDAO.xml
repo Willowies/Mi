@@ -4,29 +4,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mi.model.dao.GroupDAO">
      
-    
-    <select id="getGroupProducts" resultMap="groupProductResult" flushCache="true" >
-		select c.groupProductId, c.groupPrice, c.leastGroupNum, c.maxGroupProductNum, c.beginDate, c.endDate, d.* 
-		from groupproduct as c, product as d 
-		where c.productId=d.productId
-		LIMIT 8
-    </select>
-    <select id="getAllGroupProducts" resultMap="groupProductResult" flushCache="true" >
-		select c.groupProductId, c.groupPrice, c.leastGroupNum, c.maxGroupProductNum, c.beginDate, c.endDate, d.* 
-		from groupproduct as c, product as d 
-		where c.productId=d.productId
-    </select>
+    <!-- 团、团购商品、商品、用户信息都要，此外订单必须是团购订单2，状态必须为待成团4 -->
     <select id="getProductGroups" parameterType="int" resultMap="groupResult" flushCache="true">
     	select q.*, t.orderId, t.invoiceId, t.userId, t.receiverName, t.receiverPhone, t.receiverAddress, t.sendPeroid, t.orderType, t.orderState,
-			 		t.couponId, t.createDate, t.deliveryFee, t.actualTotal, t.userName 
+					 t.couponId, t.createDate, t.deliveryFee, t.actualTotal, t.userName 
 		from (select h.*, g.groupId, g.currentQuantity, g.creator 
 					from(select p.groupProductId, p.groupPrice, p.leastGroupNum, p.maxGroupProductNum, p.beginDate, p.endDate, k.*
 							 from groupproduct as p, product as k 
-							 where p.productId=k.productId and p.groupProductId=1) as h,`group` as g 
+							 where p.productId=k.productId and p.groupProductId=#{groupProductId}) as h,`group` as g 
 					where h.groupProductId=g.groupProductId and g.state=1) as q, (select o.*, u.userName
 																													from `order` as o, `user` as u 
 																													where o.userId=u.userId) as t 
-		where q.groupId=t.groupId and t.orderType=2 
+		where q.groupId=t.groupId and t.orderType=2 and t.orderState=4
     </select>
     <insert id="addGroup" flushCache="true">
     	insert into `group`(groupProductId, currentQuantity, creator, state) values(#{groupProductId, jdbcType=INTEGER}, 1, #{userName, jdbcType=VARCHAR}, 0)
@@ -34,25 +23,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getGroupId" flushCache="true" resultType="int">
     	select g.groupId from `group` as g where g.groupProductId=#{groupProductId, jdbcType=INTEGER} and g.creator=#{userName, jdbcType=VARCHAR}
     </select>
-    <resultMap id="groupProductResult" type="GroupProduct">
-    	<id column="groupProductId" property="groupProductId"  />
-    	<result column="groupPrice" property="groupPrice"  />
-    	<result column="leastGroupNum" property="leastGroupNum"  />
-    	<result column="maxGroupProductNum" property="maxGroupProductNum"  />
-    	<result column="beginDate" property="beginDate"  />
-    	<result column="endDate" property="endDate"  />
-    	<association property="product" column="productId" javaType="Product">
-    		<id column="productId" property="productId" />
-    		<result column="productName" property="productName" />
-    		<result column="description" property="description" />
-    		<result column="productPrice" property="productPrice" />
-    		<result column="color" property="color" />
-    		<result column="version" property="version" />
-    		<result column="size" property="size" />
-    		<result column="picUrl" property="picUrl" />
-    		<result column="maxQuantity" property="maxQuantity" />
-    	</association>
-    </resultMap>
     <resultMap id="groupResult" type="Group">
     	<id column="groupId" property="groupId"  />
     	<result column="creator" property="creator"  />

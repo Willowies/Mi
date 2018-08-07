@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 from(select z.*, i.secondClassName, i.firstClassId 
 				 		  from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
 									  from product as g left join coupon as h on g.productId=h.productId) as z, productsecondclass as i 
-						  where z.secondClassId=i.secondClassId and i.firstClassId=1) as j left join `comment` as k
+						  where z.secondClassId=i.secondClassId and i.firstClassId=2) as j left join `comment` as k
 						  on j.productId=k.productId) as l left join `user` as u 
 		on l.userId=u.userId
 		group by l.productId
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 from (select z.*, i.secondClassName, i.firstClassId
 							 from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
 										 from product as g left join coupon as h on g.productId=h.productId) as z, productsecondclass as i
-										 where z.secondClassId=i.secondClassId and i.firstClassId=1)as j left join `comment` as k 
+										 where z.secondClassId=i.secondClassId and i.firstClassId=3)as j left join `comment` as k 
 							 on j.productId=k.productId) as l left join `user` as u
 		on l.userId=u.userId
 		group by l.productId

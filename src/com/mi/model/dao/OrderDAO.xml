@@ -93,13 +93,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	and a.userId=b.userId 
     	and a.orderId=c.orderId and c.productId=d.productId and a.invoiceId=f.invoiceId
     </select>
-    
+    <!-- 成功成团，更新订单状态由4到2 -->
     <update id="updateClearingSuccessOrder" flushCache="true">
 		update `order` as o
 		set o.orderState=2
 		where o.groupId=#{groupId}
 	</update>
-	
+	<!-- 成团失败，更新订单状态由4到0，订单作废 -->
 	<update id="updateClearingFailOrder" flushCache="true">
 		update `order`
 		set orderState = 0 

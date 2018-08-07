@@ -5,7 +5,7 @@ $(function(){
 function initData2(){
 	$.ajax({
 		type:"POST",
-		async:true,
+		async:false,
 		data:{
 //			groupProductId:$("#groupProductId").text()
 			groupProductId:getQueryString("groupProductId")
@@ -32,21 +32,22 @@ function initData2(){
 //				console.log("groupProductId "+$("#groupProductId").text());
 //				console.log("groupId "+$(groupId).text());
 				$(joinGroup).click(function(){
+					provideOrderProduct();//异步
 					window.location.href="joinGroup.action?groupProductId="+$("#groupProductId").text()+"&groupId="+$(groupId).text();
 				});
 			}
-			/*
-			 *  insert groupProduct Info into page
-			 */
-			$("#groupProductId").text(data[0].groupProduct.groupProductId);
-			$(".groupProductName").text(data[0].groupProduct.product.productName);
-			$(".groupProductDesc").text(data[0].groupProduct.product.description);
-			$(".groupProductPrice").append(data[0].groupProduct.groupPrice+"元"+"&nbsp;<del class='productPrice'></del>");
-			$(".productPrice").text(data[0].groupProduct.product.productPrice+"元");
-			$(".groupProduct_show").append("<img src='data[0].groupProduct.product.picUrl' width='600px' height='600px'  />");
-			
 			//
 			if(data.length!=0){
+				/*
+				 *  insert groupProduct Info into page
+				 */
+				$("#groupProductId").text(data[0].groupProduct.groupProductId);
+				$(".groupProductName").text(data[0].groupProduct.product.productName);
+				$(".groupProductDesc").text(data[0].groupProduct.product.description);
+				$(".groupProductPrice").append(data[0].groupProduct.groupPrice+"元"+"&nbsp;<del class='productPrice'></del>");
+				$(".productPrice").text(data[0].groupProduct.product.productPrice+"元");
+				$(".groupProduct_show").append("<img src='../"+data[0].groupProduct.product.picUrl+"' width='600px' height='600px'  />");
+				
 				var beforeLocal = new Date();
 				var serverDate = getServerDate();
 				var serverTime = serverDate.getTime();//server time
@@ -63,14 +64,41 @@ function initData2(){
 				console.log("endTime:"+endTime);
 				startCount(endTime);
 			}else{
+				getSelectedGroupProduct();//没有团，单独获取团购商品信息
 				console.log("暂时没有group数据！");
-				var str="<div class='groupitem'><p style='font-size:20px;color:#b0b0b0;margin:0 auto;'>未查询到任何团信息</p></div>";
+				var str="<div class='groupitem'><p style='width:180px; font-size:20px;color:#b0b0b0;margin:26px auto;'>未查询到任何团信息</p></div>";
 				$(".groupList").append(str);
 			}
 			//
 			console.log("Load finish--groups info");
 		},
 	});
+
+	function getSelectedGroupProduct(){
+		$.ajax({
+			type:"POST",
+			async:false,
+			data:{
+				groupProductId:getQueryString("groupProductId")
+			},
+			dataType:"json",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+			url:"getGroupProductById.action",
+			success:function(data){
+				console.log(data);
+				/*
+				 *  insert groupProduct Info into page
+				 */
+				$("#groupProductId").text(data.groupProductId);
+				$(".groupProductName").text(data.product.productName);
+				$(".groupProductDesc").text(data.product.description);
+				$(".groupProductPrice").append(data.groupPrice+"元"+"&nbsp;<del class='productPrice'></del>");
+				$(".productPrice").text(data.product.productPrice+"元");
+				console.log(data.product.picUrl);
+				$(".groupProduct_show").append("<img src='../"+data.product.picUrl+"' width='600px' height='600px'  />");
+			},
+		});
+	}
 	/*
 	 * parse the argument from url
 	 */
@@ -81,7 +109,6 @@ function initData2(){
 	    }
 	    return result[1];
 	}
-	
 }
 
 $(document).ready(function(){
@@ -106,8 +133,7 @@ $(document).ready(function(){
 					alert("团数已达上限，您可以尝试参团！");
 				}else{
 					console.log("Create finish--product group");
-//					sessionStorage.setItem('groupProductId', $("#groupProductId").text());
-//					sessionStorage.setItem('groupId', data);
+					provideOrderProduct();//异步
 					window.location.href="addGroup.action?groupProductId="+$("#groupProductId").text()+"groupId="+data;
 				}
 			},
@@ -123,6 +149,24 @@ $(document).ready(function(){
 	},function(){
 		$(".site-category").css("display","none");
 	});
+	
+	/*
+	 * 参团、开团，提供数据给确认订单。
+	 */
+	function provideOrderProduct(){
+		$.ajax({
+			type:"POST",
+			async:true,
+			data:{
+				groupProductId:$("#groupProductId").text()
+			},
+			dataType:"json",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+			url:"provideOrderProduct.action",
+			success:function(data){
+			},
+		});
+	}
 	
 });
 
@@ -167,21 +211,21 @@ function getServerDate(){
  * 3.>则成团，order变成待收货
  * 4.库存stock的
  */
-function updateClearing(){
-	$.ajax({
-		type:"POST",
-		async:true,
-		data:{
-			groupProductId:$("#groupProductId").text(),
-//			userId:$.session.get('user').userId
-		},
-		dataType:"json",
-		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		url:"updateClearing.action",
-		success:function(data){
-//			console.log(data);
-			
-		},
-	});
-}
+//function updateClearing(){
+//	$.ajax({
+//		type:"POST",
+//		async:true,
+//		data:{
+//			groupProductId:$("#groupProductId").text(),
+////			userId:$.session.get('user').userId
+//		},
+//		dataType:"json",
+//		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+//		url:"updateClearing.action",
+//		success:function(data){
+////			console.log(data);
+//			
+//		},
+//	});
+//}
 

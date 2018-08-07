@@ -33,6 +33,8 @@ public interface OrderDAO {
 	
 	public void addOrderProduct(Map<String,Object> map);
 	
+	public void addOrderProduct();
+	
 	public int selectOrderId();
 	
 	public int selectOrderItemId();
