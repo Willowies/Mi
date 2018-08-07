@@ -41,7 +41,7 @@
 			  	<a rel="nofollow" href="" data-toggle="modal" style="color: #b0b0b0 !important;">Select Region</a>
 			</div>
 			<div class="topbar-cart" id="J_miniCartTrigger">
-				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 					<i class="fa fa-shopping-cart"></i>
 					购物车
 					<span class="cart-mini-num">（0）</span>
