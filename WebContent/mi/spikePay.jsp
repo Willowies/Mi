@@ -85,7 +85,7 @@
 								内完成支付，超时后将取消订单
 							</p>
 							<p class="post-info">
-								收货信息：${orderResult.receiverName } ${orderResult.receiverPhone } ${orderResult.receiverAddress }
+								收货信息：${orderResult.receiverName} ${orderResult.receiverPhone} ${orderResult.receiverAddress}
 							</p>
 						</div>
 						<div class="fr">

@@ -325,6 +325,7 @@
 	%>
 		<script type="text/javascript">
 		alert("<%=message%>");
+		window.location.href="homepage.jsp";
 		</script>
 	<%
 		}

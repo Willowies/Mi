@@ -128,7 +128,7 @@
 					</form>
 					<div class="cart-bar clearfix">
 						<div class="section-left">
-							<a class="back-shopping">继续购物</a>
+							<a class="back-shopping" href="homepage.jsp">继续购物</a>
 							<span class="cart-total">
 								共
 								<i id="totalNum"></i>

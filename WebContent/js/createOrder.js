@@ -5,12 +5,12 @@ $(document).ready(function(){
 		$("#couId").val($(".theCoupon:first").find("#cId").text());
 		$("#couAmount").val($(".theCoupon:first").find("#cAmount").text());
 		$(".theCoupon:first").addClass("selected");
-		alert($("#couId").val());
-		alert($("#couAmount").val());
+		//alert($("#couId").val());
+		//alert($("#couAmount").val());
 		$("#reduce").text($("#couAmount").val());
-		alert($("#reduce").text());
+		//alert($("#reduce").text());
 		var fee = parseFloat($("#money").text())+parseFloat($("#delivery").text())-parseFloat($("#couAmount").val());
-		alert(fee);
+		//alert(fee);
 		$("#actualFee").text(fee);
 	}else{
 		//用户没有优惠券可使用
@@ -27,28 +27,28 @@ $(document).ready(function(){
 	
 	$("#noLimit").click(function(){
 		$("#sPeroid").val(1);
-		alert($("#sPeroid").val());
+		//alert($("#sPeroid").val());
 		$("#deliveryTime li").removeClass("selected");
 		$(this).addClass("selected");
 	});
 	
 	$("#workday").click(function(){
 		$("#sPeroid").val(2);
-		alert($("#sPeroid").val());
+		//alert($("#sPeroid").val());
 		$("#deliveryTime li").removeClass("selected");
 		$(this).addClass("selected");
 	});
 	
 	$("#weekday").click(function(){
 		$("#sPeroid").val(3);
-		alert($("#sPeroid").val());
+		//alert($("#sPeroid").val());
 		$("#deliveryTime li").removeClass("selected");
 		$(this).addClass("selected");
 	});
 	
 	$("#eInvoice").click(function(){
 		$("#iType").val(1);
-		alert($("#iType").val());
+		//alert($("#iType").val());
 		$("#pInvoice").removeClass("selected");
 		$(this).addClass("selected");
 		$("#pInvoiceTip").hide();
@@ -59,7 +59,7 @@ $(document).ready(function(){
 	
 	$("#pInvoice").click(function(){
 		$("#iType").val(2);
-		alert($("#iType").val());
+		//alert($("#iType").val());
 		$("#eInvoice").removeClass("selected");
 		$(this).addClass("selected");
 		$("#eInvoiceTip").hide();
@@ -70,7 +70,7 @@ $(document).ready(function(){
 	
 	$("#personInvoice").click(function(){
 		$("#rType").val(1);
-		alert($("#rType").val());
+		//alert($("#rType").val());
 		$("#companyInvoice").removeClass("selected");
 		$(this).addClass("selected");
 		$("#taxBlock").hide();
@@ -78,7 +78,7 @@ $(document).ready(function(){
 	
 	$("#companyInvoice").click(function(){
 		$("#rType").val(2);
-		alert($("#rType").val());
+		//alert($("#rType").val());
 		$("#personInvoice").removeClass("selected");
 		$(this).addClass("selected");
 		$("#taxBlock").show();
@@ -119,9 +119,9 @@ $(document).ready(function(){
 		$("#couId").val($(this).find("#cId").text());
 		$("#couAmount").val($(this).find("#cAmount").text());
 		var fee = parseFloat($("#money").text())+parseFloat($("#delivery").text())-parseFloat($("#couAmount").val());
-		alert(fee);
-		alert($("#couId").val());
-		alert($("#couAmount").val());
+		//alert(fee);
+		//alert($("#couId").val());
+		//alert($("#couAmount").val());
 		$("#reduce").text($("#couAmount").val());
 		$("#actualFee").text(fee);
 	});
@@ -132,9 +132,9 @@ $(document).ready(function(){
 		$("#couId").val(0);
 		$("#couAmount").val(0);
 		var fee = parseFloat($("#money").text())+parseFloat($("#delivery").text())-parseFloat($("#couAmount").val());
-		alert(fee);
-		alert($("#couId").val());
-		alert($("#couAmount").val());
+		//alert(fee);
+		//alert($("#couId").val());
+		//alert($("#couAmount").val());
 		$("#reduce").text(0);
 		$("#actualFee").text(fee);
 		return false;
@@ -164,10 +164,10 @@ $(document).ready(function(){
 		$("#rPhone").val($(this).find("#aPhone").text());
 		var address = " "+$(this).find("#aProvince").text()+$(this).find("#aCity").text()+$(this).find("#aDistrict").text()+$(this).find("#aAddress").text()
 		$("#rAddress").val(address);
-		alert($("#rName").val());
-		alert($("#rPhone").val());
+		//alert($("#rName").val());
+		//alert($("#rPhone").val());
 		console.log("开头"+$("#rPhone").val()+"结尾");
-		alert($("#rAddress").val());
+		//alert($("#rAddress").val());
 	});
 	
 	$("#addAddressButton").click(function(){
@@ -184,8 +184,8 @@ $(document).ready(function(){
 				$("#userAddress").text("");
 				 //var jsonData = JSON.parse(data); //jsonData是该下路下的所有区间（json格式） 
 			     for (var i = 0; i < data.length; i++) {
-			    	   alert(data[i].receiverAddressId);
-			    	   alert("数组长度为"+data.length);
+			    	   //alert(data[i].receiverAddressId);
+			    	  // alert("数组长度为"+data.length);
 			           var addressHtml ="<div class=\"address-item address\"><dl><dt><span class=\"tag\"></span><em class=\"uname\" id=\"aName\">"
 			        	   		+data[i].receiverName+"</em></dt><dd class=\"utel\" id=\"aPhone\">"
 			        	   		+data[i].receiverPhone+"</dd><dd class=\"uaddress\"><em style=\"font-style:normal;\" id=\"aProvince\">"
