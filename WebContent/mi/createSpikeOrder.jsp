@@ -195,11 +195,11 @@
 								</li>
 								<li>
 									<label>商品总价：</label>
-									<span class="val" id="money">${total}</span>
+									<span class="val" id="money">${total}</span><span class="val">元</span>
 								</li>
 								<li>
 									<label>运费：</label>
-									<span class="val" id="delivery">10</span>
+									<span class="val" id="delivery">10</span><span class="val">元</span>
 								</li>
 								<li class="total-price">
 									<label>应付总额：</label>
