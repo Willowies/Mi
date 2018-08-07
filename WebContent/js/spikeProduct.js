@@ -208,7 +208,7 @@ $(function(){
 						var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
 						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
 						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small remind\" data-toggle=\"modal\" data-target=\"#modalRemind\">提醒我</a><p class=\"person\">已有1113人设置提醒</p></div></li>";
+						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small remind\" data-toggle=\"modal\" data-target=\"#modalRemind\">提醒我</a></div></li>";
 						$(".spike-con ul.active").html(html);
 				    }
 				}
@@ -219,7 +219,7 @@ $(function(){
 						var html = "<p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p>"+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
 						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
 						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-disabled btn-small nostart\" onclick=\"\">即将开抢</a><p class=\"person\">已有1113人设置提醒</p></div></li>";
+						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-disabled btn-small nostart\" onclick=\"\">即将开抢</a></div></li>";
 						$(".spike-con ul.active").html(html);
 										
 					}
@@ -230,10 +230,10 @@ $(function(){
 					for(var i = 0; i < data.length; i++){
 						var percent = 10 * data[i].currentSpikeNum / data[i].spikeQuantity;	
 						console.log(percent);
-						var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
+						var html = ""+" <li><p style=\"display:none;\" class=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
 						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
-						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width:"+percent+"></span><em>"+percent+"%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small remind\" data-toggle=\"modal\" data-target=\"#startModal\">立即抢购</a></div></li>";
+						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width:"+percent+"px;\"></span><em>"+percent+"%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
+						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small start\" data-toggle=\"modal\" data-target=\"#startModal\">立即抢购</a></div></li>";
 						$(".spike-con ul.active").html(html);
 				    }
 				}
@@ -267,7 +267,8 @@ $(function(){
 	}
 	
 	//抢购商品
-	$("#startModal").click(function(){
+	$(".start").click(function(){
+		alert($(".start").text());
 		var isLogin = checkLoginState();//判断登录
 		if(isLogin == "true"){
 			//已登录
@@ -275,12 +276,15 @@ $(function(){
 		}else{
 			//未登录
 		}
-		var spikeProductId = $("#spikeProductId");
+		var spikeProductId = $(this).parent().find(".spikeProductId").text();
+		console.log("商品ID"+spikeProductId);
 		$.ajax({
 			type:post,
 			astnc:true,
+			dataType:"text",
 			url:"buySpikeProduct.action?spikeProductId="+spikeProductId,
 			function(data){
+				console.log(data);
 				if(data == "超过上限"){
 					$("#modalMax").modal("show");
 				}
@@ -291,9 +295,10 @@ $(function(){
 					$.ajax({
 						type:post,
 						astnc:true,
+						dataType:"json",
 						url:"findSpikeProduct.action?spikeProductId="+spikeProductId,
 						function(data){
-							//window.location.href = "updateSpikeOrder.action?orderProduct="+data;
+							window.location.href = "updateSpikeOrder.action?orderProduct="+data;
 						}
 					});
 				}

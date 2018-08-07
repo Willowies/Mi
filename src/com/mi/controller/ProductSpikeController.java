@@ -47,10 +47,11 @@ public class ProductSpikeController {
 	}
 	//抢购商品
 	@RequestMapping("buySpikeProduct")
-	public @ResponseBody String buySpikeProduct(HttpServletRequest request, int spikeProductId, HttpSession session){
-		spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
-		session.setAttribute("spikeProductId", spikeProductId);
-		String buySucceed = productSpikeService.selectBuySpikeProduct(spikeProductId);		
+	public @ResponseBody String buySpikeProduct(HttpServletRequest request, String spikeProductId, HttpSession session){
+		
+		//session.setAttribute("spikeProductId", Integer.parseInt(spikeProductId));
+		String buySucceed = productSpikeService.selectBuySpikeProduct(Integer.parseInt(spikeProductId));
+		System.out.println(buySucceed);
 		return buySucceed;
 	}
 	//封装商品信息
