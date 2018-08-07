@@ -120,9 +120,9 @@
 			<div class="product-head-box">
 				<div class="product-name">${productName}</div>
 				<div class="con">
-					<a href="//www.mi.com/huosai3/">概述</a>&nbsp; |&nbsp;
-					<a href="//www.mi.com/huosai3/">参数</a>&nbsp; |&nbsp;
-					<a href="//www.mi.com/huosai3/">用户评价</a>&nbsp;					
+					<a href="displayProductSummary.action?productName=${productName}">概述</a>&nbsp; |&nbsp;
+					<a href="displayProductParameter.action?productName=${productName}">参数</a>&nbsp; |&nbsp;
+					<a href="getCommentPage.action?productName=${productName}">用户评价</a>&nbsp;					
 				</div>
 			</div>
 		</div>
