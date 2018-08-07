@@ -208,7 +208,7 @@ $(function(){
 						var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
 						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
 						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small remind\" data-toggle=\"modal\" data-target=\"#modalRemind\">提醒我</a><p class=\"person\">已有1113人设置提醒</p></div></li>";
+						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small remind\" data-toggle=\"modal\" data-target=\"#modalRemind\">提醒我</a></div></li>";
 						$(".spike-con ul.active").html(html);
 				    }
 				}
@@ -219,7 +219,7 @@ $(function(){
 						var html = "<p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p>"+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
 						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
 						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-disabled btn-small nostart\" onclick=\"\">即将开抢</a><p class=\"person\">已有1113人设置提醒</p></div></li>";
+						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-disabled btn-small nostart\" onclick=\"\">即将开抢</a></div></li>";
 						$(".spike-con ul.active").html(html);
 										
 					}
@@ -293,7 +293,7 @@ $(function(){
 						astnc:true,
 						url:"findSpikeProduct.action?spikeProductId="+spikeProductId,
 						function(data){
-							//window.location.href = "updateSpikeOrder.action?orderProduct="+data;
+							window.location.href = "updateSpikeOrder.action?orderProduct="+data;
 						}
 					});
 				}
