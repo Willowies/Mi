@@ -22,10 +22,10 @@
 			function changePic(i, id) {
 				var like = $(i).parent().find("p").html();
 				var v = $(i).attr("src");
-				if(like == "0") {
+				if(like.indexOf("0") != -1) {
 					$(i).parent().parent().parent().find("[class='actions clearfix']").find("a").find("i").attr("class", "fa fa-heart-o");
 					$(i).parent().parent().parent().find("[class='actions clearfix']").find("a").find("p").html(id);
-				} else if(like == "1") {
+				} else if(like.indexOf("1") != -1) {
 					$(i).parent().parent().parent().find("[class='actions clearfix']").find("a").find("i").attr("class", "fa fa-heart");
 					$(i).parent().parent().parent().find("[class='actions clearfix']").find("a").find("p").html(id);
 				}
@@ -44,12 +44,12 @@
 					url: "likeProductInSeachPage.action",
 					data: "productId=" + id,
 					success: function(data) {
-						alert(data);
 						if(data == "成功") {
 							var pId = "p" + id;
 							var heart = $("#" + pId).find("p");
 							$(heart).html(1);
 							$(i).attr("class", "fa fa-heart");
+							alert("喜欢成功");
 						} else {
 							alert(data);
 						}
@@ -65,12 +65,12 @@
 					url: "unlikeProductInSeachPage.action",
 					data: "productId=" + id,
 					success: function(data) {
-						alert(data);
 						if(data == "成功") {
 							var pId = "p" + id;
 							var heart = $("#" + pId).find("p");
 							$(heart).html(0);
 							$(i).attr("class", "fa fa-heart-o");
+							alert("取消喜欢成功");
 						} else {
 							alert(data);
 						}
@@ -79,7 +79,7 @@
 			}
 
 		
-			function searchProduct(i, t) {
+			function searchProduct(i, t ,page) {
 				if(t < 10) {
 					if($(i).html() == "全部") {
 						$("input[name='secondClassName']").attr("value", "");
@@ -90,12 +90,24 @@
 				} else if(t < 20) {
 					$("input[name='searchType']").attr("value", $(i).html());
 				} else if(t < 30) {
-					alert(t == 21);
 					if(t == 21) {
-						$("input[name='requireCondition']").attr("value", "评价");
+						var isChecked = $(i).prop('checked'); 
+						if (!isChecked) {
+							$("input[name='requireCondition']").attr("value", "");
+						}else {
+							$("input[name='requireCondition']").attr("value", "评价");
+						}
+						
 					} else if(t == 22) {
-						$("input[name='requireCondition']").attr("value", "有货");
+						var isChecked = $(i).prop('checked'); 
+						if (!isChecked) {
+							$("input[name='requireCondition']").attr("value", "");
+						}else {
+							$("input[name='requireCondition']").attr("value", "有货");
+						}
 					}
+				}else if(t < 40) {
+					$("input[name='page']").attr("value", page);
 				}
 				$("#searchformId").submit();
 
@@ -109,6 +121,7 @@
 			<input value="${requireCondition}" name="requireCondition"></input>
 			<input name="secondClassName" value="${secondClassName}" type="text" />
 			<input name="text" value="${text}" />
+			<input name="page" value="0" />
 			<button type="submit">搜索</button>
 		</form>
 		<div class="site-topbar">
@@ -133,7 +146,7 @@
 					<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 				</div>
 				<div class="topbar-cart" id="J_miniCartTrigger">
-					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 						<i class="fa fa-shopping-cart"></i> 购物车
 						<span class="cart-mini-num">（0）</span>
 					</a>
@@ -217,7 +230,9 @@
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
 						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item">服务</li>
+						<li id="navItem9" class="nav-item">
+							<a href="Service.jsp">服务</a>
+						</li>
 						<li id="navItem10" class="nav-item">社区</li>
 					</ul>
 				</div>
@@ -281,10 +296,10 @@
 							<c:if test="${commentFormat == 0}">
 								<div class="goods-item">
 									<div class="figure figure-img">
-										<a href=""><img src="../${result.picUrl}" width="200" height="200" alt=""></a>
+										<a href="selectProductInfo.action?productName=${result.productOriginalName}"><img src="../${result.picUrl}" width="200" height="200" alt=""></a>
 									</div>
 									<p class="desc"></p>
-									<h2 class="title"><a href="${result.productOriginalName}" >${result.productName}</a></h2>
+									<h2 class="title"><a href="selectProductInfo.action?productName=${result.productOriginalName}" >${result.productName}</a></h2>
 									<p class="price">${result.productPrice}</p>
 									<div class="thumbs">
 										<c:forEach items="${result.products}" var="product">
@@ -316,10 +331,10 @@
 							<c:if test="${commentFormat == 1}">
 								<div class="goods-item">
 									<div class="figure figure-img">
-										<a href=""><img src="../${result.picUrl}" width="200" height="200" alt=""></a>
+										<a href="selectProductInfo.action?productName=${result.productOriginalName}"><img src="../${result.picUrl}" width="200" height="200" alt=""></a>
 									</div>
 									<p class="desc"></p>
-									<h2 class="title"><a href="${result.productOriginalName}" >${result.productName}</a></h2>
+									<h2 class="title"><a href="selectProductInfo.action?productName=${result.productOriginalName}" >${result.productName}</a></h2>
 									<p class="price">${result.productPrice}</p>
 									<div class="thumbs">
 										<c:forEach items="${result.products}" var="product">
@@ -367,20 +382,43 @@
 						</c:forEach>
 					</div>
 					<div class="result-foot">
-						<div class="page-turner" style="width: 1350px;">
-							<ul class="pagination pagination-lg">
-								<li class="disabled">
-									<a href="#"><i class="fa fa-angle-left"></i></a>
-								</li>
-								<li class="active">
-									<a href="#">1</a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-angle-right"></i></a>
-								</li>
-							</ul>
+							<div class="page-turner" style="width: 1220px;">
+								<%
+							if(request.getAttribute("searchResults")!=null){
+							List l = (List) request.getAttribute("searchResults");
+						if (!l.isEmpty()) {
+						%>
+								<ul class="pagination pagination-lg ">
+									<li <c:if test="${page eq 1}">class="disabled "</c:if>>
+										<a onclick="searchProduct(this,31,${page-1})"><i class="fa fa-angle-left "></i></a>
+									</li>
+									<c:forEach begin="1" end="${pageTotal}" var="p">
+										<c:if test="${p==page}">
+											<li class="active ">
+												<a>${p}</a>
+											</li>
+										</c:if>
+										<c:if test="${p!=page}">
+											<li>
+												<a onclick="searchProduct(this,31,${page})">${p}</a>
+											</li>
+										</c:if>
+										&nbsp;&nbsp;
+									</c:forEach>
+									<li <c:if test="${page eq pageTotal}">class="disabled "</c:if>>
+										<a onclick="searchProduct(this,31,${page+1})"><i class="fa fa-angle-right "></i></a>
+									</li>
+
+								</ul>
+									<%
+		} else {
+	%>
+	<%
+		}
+	}
+	%>
+							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 		</div>

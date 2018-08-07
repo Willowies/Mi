@@ -2,6 +2,7 @@ package com.mi.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import com.itextpdf.text.pdf.PdfObject;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.mi.model.bean.Order;
+import com.mi.model.bean.OrderProduct;
 import com.mi.model.bean.User;
 import com.mi.model.service.OrderCenterService;
 import com.mi.utils.BaseController;
@@ -44,7 +46,7 @@ public class OrderCenterController extends BaseController {
 			String orderType, Integer page) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 		int type = 0;
 		if (orderType != null && orderType.equals("3")) {
@@ -72,7 +74,7 @@ public class OrderCenterController extends BaseController {
 	@RequestMapping("getOrderDetailsById")
 	public String getOrderDetailsById(HttpSession session, HttpServletRequest request, Integer orderId) {
 		if (orderId == null || orderId == 0) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 		Order order = orderCenterService.getOrderDetailsById(orderId);
 
@@ -85,7 +87,7 @@ public class OrderCenterController extends BaseController {
 	public String getAllOrder(HttpSession session, HttpServletRequest request, Integer page) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (page == null || page == 0) {
@@ -106,7 +108,7 @@ public class OrderCenterController extends BaseController {
 	public String getOrderWaitPaid(HttpSession session, HttpServletRequest request, Integer page) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (page == null || page == 0) {
@@ -126,7 +128,7 @@ public class OrderCenterController extends BaseController {
 	public String getOrderWaitTaken(HttpSession session, HttpServletRequest request, Integer page) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (page == null || page == 0) {
@@ -146,7 +148,7 @@ public class OrderCenterController extends BaseController {
 	public String getOrderClosed(HttpSession session, HttpServletRequest request, Integer page) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (page == null || page == 0) {
@@ -166,7 +168,7 @@ public class OrderCenterController extends BaseController {
 	public String getAllGroupOrder(HttpSession session, HttpServletRequest request, Integer page) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (page == null || page == 0) {
@@ -186,7 +188,7 @@ public class OrderCenterController extends BaseController {
 	public String getGroupOrderWaitPaid(HttpSession session, HttpServletRequest request, Integer page) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (page == null || page == 0) {
@@ -206,7 +208,7 @@ public class OrderCenterController extends BaseController {
 	public String getGroupOrderWaitTaken(HttpSession session, HttpServletRequest request, Integer page) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (page == null || page == 0) {
@@ -226,7 +228,7 @@ public class OrderCenterController extends BaseController {
 	public String getGroupOrderWaitBuilt(HttpSession session, HttpServletRequest request, Integer page) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (page == null || page == 0) {
@@ -246,7 +248,7 @@ public class OrderCenterController extends BaseController {
 	public String getGroupOrderClosed(HttpSession session, HttpServletRequest request, Integer page) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (page == null || page == 0) {
@@ -263,7 +265,9 @@ public class OrderCenterController extends BaseController {
 	}
 
 	@RequestMapping("getInvoicePdf")
-	public ResponseEntity<byte[]> getInvoicePdf(HttpServletRequest request) throws Exception {
+	public ResponseEntity<byte[]> getInvoicePdf(HttpServletRequest request,Integer orderId) throws Exception {
+		Order order = orderCenterService.getOrderDetailsById(orderId);
+		
 		//创建一个pdf读入流  
         PdfReader reader = new PdfReader("D:/data/pdf/order.pdf");   
         //根据一个pdfreader创建一个pdfStamper.用来生成新的pdf.  
@@ -298,11 +302,14 @@ public class OrderCenterController extends BaseController {
             //设置字体的输出位置  
             over.setTextMatrix(107, 275);   
             //要输出的text  
-            over.showText("个人 " );    
+            if (order.getInvoice().getInvoiceType()==1) {
+            	 over.showText("个人 " );  
+			}else {
+				over.showText("单位 " );  
+			}
             over.endText();  
             
-            
-            //开始写入文本  
+          //开始写入文本  
             over.beginText();  
             //设置字体和大小  
             over.setFontAndSize(font.getBaseFont(), 10);
@@ -311,7 +318,7 @@ public class OrderCenterController extends BaseController {
             //设置字体的输出位置  
             over.setTextMatrix(50, 200);   
             //要输出的text  
-            over.showText("小米8 " );    
+            over.showText("运费" );    
             over.endText();  
             
             //开始写入文本  
@@ -335,7 +342,7 @@ public class OrderCenterController extends BaseController {
             //设置字体的输出位置  
             over.setTextMatrix(400, 200);   
             //要输出的text  
-            over.showText("2699" );    
+            over.showText("10" );    
             over.endText(); 
             
           //开始写入文本  
@@ -347,56 +354,66 @@ public class OrderCenterController extends BaseController {
             //设置字体的输出位置  
             over.setTextMatrix(500, 200);   
             //要输出的text  
-            over.showText("2699" );    
-            over.endText(); 
-            
-          //开始写入文本  
-            over.beginText();  
-            //设置字体和大小  
-            over.setFontAndSize(font.getBaseFont(), 10);
-            //设置字体颜色
-            over.setColorFill(BaseColor.BLACK); 
-            //设置字体的输出位置  
-            over.setTextMatrix(50, 190);   
-            //要输出的text  
-            over.showText("运费" );    
-            over.endText();  
-            
-            //开始写入文本  
-            over.beginText();  
-            //设置字体和大小  
-            over.setFontAndSize(font.getBaseFont(), 10);
-            //设置字体颜色
-            over.setColorFill(BaseColor.BLACK); 
-            //设置字体的输出位置  
-            over.setTextMatrix(250, 190);   
-            //要输出的text  
-            over.showText("1"+".00" );    
-            over.endText(); 
-            
-          //开始写入文本  
-            over.beginText();  
-            //设置字体和大小  
-            over.setFontAndSize(font.getBaseFont(), 10);
-            //设置字体颜色
-            over.setColorFill(BaseColor.BLACK); 
-            //设置字体的输出位置  
-            over.setTextMatrix(400, 190);   
-            //要输出的text  
             over.showText("10" );    
             over.endText(); 
             
-          //开始写入文本  
-            over.beginText();  
-            //设置字体和大小  
-            over.setFontAndSize(font.getBaseFont(), 10);
-            //设置字体颜色
-            over.setColorFill(BaseColor.BLACK); 
-            //设置字体的输出位置  
-            over.setTextMatrix(500, 190);   
-            //要输出的text  
-            over.showText("10" );    
-            over.endText(); 
+            float totalPrice = 10;
+            int ind = 0;
+            for (OrderProduct oP : order.getProducts()) {
+            	ind++;
+            	//开始写入文本  
+                over.beginText();  
+                //设置字体和大小  
+                over.setFontAndSize(font.getBaseFont(), 10);
+                //设置字体颜色
+                over.setColorFill(BaseColor.BLACK); 
+                //设置字体的输出位置  
+                over.setTextMatrix(50, 200-ind*10);   
+                //要输出的text  
+                over.showText(oP.getProduct().getProductName());    
+                over.endText();  
+                
+                //开始写入文本  
+                over.beginText();  
+                //设置字体和大小  
+                over.setFontAndSize(font.getBaseFont(), 10);
+                //设置字体颜色
+                over.setColorFill(BaseColor.BLACK); 
+                //设置字体的输出位置  
+                over.setTextMatrix(250, 200-ind*10);   
+                //要输出的text  
+                over.showText(oP.getQuantity()+".00" );    
+                over.endText(); 
+                
+              //开始写入文本  
+                over.beginText();  
+                //设置字体和大小  
+                over.setFontAndSize(font.getBaseFont(), 10);
+                //设置字体颜色
+                over.setColorFill(BaseColor.BLACK); 
+                //设置字体的输出位置  
+                over.setTextMatrix(400, 200-ind*10);   
+                //要输出的text  
+                over.showText(oP.getProductPrice()+"" );    
+                over.endText(); 
+                
+              //开始写入文本  
+                over.beginText();  
+                //设置字体和大小  
+                over.setFontAndSize(font.getBaseFont(), 10);
+                //设置字体颜色
+                over.setColorFill(BaseColor.BLACK); 
+                //设置字体的输出位置  
+                over.setTextMatrix(500, 200-ind*10);   
+                //要输出的text  
+                over.showText(oP.getProductPrice()*oP.getQuantity()+"" );    
+                over.endText();
+                
+                totalPrice += oP.getProductPrice()*oP.getQuantity();
+			}
+            
+            
+          
             
             //开始写入文本  
             over.beginText();  
@@ -407,7 +424,7 @@ public class OrderCenterController extends BaseController {
             //设置字体的输出位置  
             over.setTextMatrix(500, 330);   
             //要输出的text  
-            over.showText("2" );    
+            over.showText(order.getInvoice().getInvoiceId()+"" );    
             over.endText(); 
             
           //开始写入文本  
@@ -417,9 +434,10 @@ public class OrderCenterController extends BaseController {
             //设置字体颜色
             over.setColorFill(BaseColor.BLACK); 
             //设置字体的输出位置  
-            over.setTextMatrix(500, 310);   
-            //要输出的text  
-            over.showText("2018-07-06" );    
+            over.setTextMatrix(500, 315);   
+            //要输出的text 
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            over.showText(format.format(order.getInvoice().getCreateDate()));    
             over.endText(); 
             
             //开始写入文本  
@@ -431,7 +449,7 @@ public class OrderCenterController extends BaseController {
             //设置字体的输出位置  
             over.setTextMatrix(520, 100);   
             //要输出的text  
-            over.showText("2709" );    
+            over.showText(totalPrice+"" );    
             over.endText(); 
             
         }  
@@ -448,10 +466,8 @@ public class OrderCenterController extends BaseController {
 	}
 
 	public User getUser(HttpSession session) {
-		// User user = (User)session.getAttribute("user");
+		 User user = (User)session.getAttribute("user");
 
-		User user = new User();
-		user.setUserId(10002);
 		return user;
 	}
 

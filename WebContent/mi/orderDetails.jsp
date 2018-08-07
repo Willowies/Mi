@@ -27,6 +27,7 @@
 			var s = ${order.createDate.time} + 1000 * 60 * 15;
 			startCount(s);
 
+			<c:if test="${order.orderState == 1}">
 			function startCount(endTime) {
 				var countTimer = setInterval(function() {
 					var nowDate = new Date();
@@ -51,6 +52,7 @@
 					}
 				}, 1000);
 			}
+			</c:if>
 		</script>
 	</head>
 
@@ -77,7 +79,7 @@
 					<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 				</div>
 				<div class="topbar-cart" id="J_miniCartTrigger">
-					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 						<i class="fa fa-shopping-cart"></i> 购物车
 						<span class="cart-mini-num">（0）</span>
 					</a>
@@ -161,7 +163,9 @@
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
 						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item">服务</li>
+						<li id="navItem9" class="nav-item">
+							<a href="Service.jsp">服务</a>
+						</li>
 						<li id="navItem10" class="nav-item">社区</li>
 					</ul>
 				</div>
@@ -208,19 +212,19 @@
 						<div class="box-body">
 							<ul class="list">
 								<li>
-									<a href="../mi/myPersonalCenter.jsp">我的个人中心</a>
+									<a href="disPlayMyPersonalCenter.action">我的个人中心</a>
 								</li>
 								<li>
-									<a href="../mi/messageNotice.jsp">消息通知</a>
+									<a href="displayMessage.action">消息通知</a>
 								</li>
 								<li>
-									<a href="../mi/likeProduct.jsp">喜欢的商品</a>
+									<a href="displayLikeProduct.action">喜欢的商品</a>
 								</li>
 								<li>
-									<a href="../mi/myCoupon.jsp">优惠券</a>
+									<a href="displayCoupon.action">优惠券</a>
 								</li>
 								<li>
-									<a href="../mi/receiverAddress.jsp">收货地址</a>
+									<a href="displayReceiverAddress.action">收货地址</a>
 								</li>
 							</ul>
 						</div>
@@ -266,14 +270,30 @@
 								</li>
 							</ul>
 							<c:if test="${order.orderState == 1}">
-							<form id="searchOrder" class="search-order" action="" method="post">
+							<c:if test="${order.orderType == 1}">
+							<form id="searchOrder" class="search-order" action="payOrder.action" method="post">
 								<input class="search-text" type="search" id="" name="orderId" value="${order.orderId}" style="display: none;" />
 								<input type="submit" class="search-btn" value="立即支付" style="width: 100px;height: 30px;float: right;border-color: #aaa;" />
 							</form>
 							<div style="float: left;margin: 50px 0 20px -50px;color: #ff6700;"><span>订单关闭时间：</span><span id="_h"></span><span id="_m"></span><span id="_s"></span></div>
 							</c:if>
+							<c:if test="${order.orderType == 2}">
+							<form id="searchOrder" class="search-order" action="payGroupOrder.action" method="post">
+								<input class="search-text" type="search" id="" name="orderId" value="${order.orderId}" style="display: none;" />
+								<input type="submit" class="search-btn" value="立即支付" style="width: 100px;height: 30px;float: right;border-color: #aaa;" />
+							</form>
+							<div style="float: left;margin: 50px 0 20px -50px;color: #ff6700;"><span>订单关闭时间：</span><span id="_h"></span><span id="_m"></span><span id="_s"></span></div>
+							</c:if>
+							<c:if test="${order.orderType == 3}">
+							<form id="searchOrder" class="search-order" action="paySpikeOrder.action" method="post">
+								<input class="search-text" type="search" id="" name="orderId" value="${order.orderId}" style="display: none;" />
+								<input type="submit" class="search-btn" value="立即支付" style="width: 100px;height: 30px;float: right;border-color: #aaa;" />
+							</form>
+							<div style="float: left;margin: 50px 0 20px -50px;color: #ff6700;"><span>订单关闭时间：</span><span id="_h"></span><span id="_m"></span><span id="_s"></span></div>
+							</c:if>
+							</c:if>
 							<c:if test="${order.orderState == 3}">
-							<form id="searchOrder" class="search-order" action="" method="post">
+							<form id="searchOrder" class="search-order" action="showOrderPro.action" method="post">
 								<input class="search-text" type="search" id="" name="orderId" value="${order.orderId}" style="display: none;" />
 								<input type="submit" class="search-btn" value="申请售后" style="width: 100px;height: 30px;float: right;border-color: #aaa;" />
 							</form>
@@ -345,10 +365,10 @@
 															<c:forEach items="${order.products}" var="product">
 															<li>
 																<div class="goods-image">
-																	<a href="" target="_blank"> <img src="../${product.product.picUrl}" width="80" height="80"> </a>
+																	<a href="selectProductInfo.action?productName=${product.product.productName}" target="_blank"> <img src="../${product.product.picUrl}" width="80" height="80"> </a>
 																</div>
 																<p class="name">
-																	<a href="" target="_blank">${product.product.productName}</a>
+																	<a href="selectProductInfo.action?productName=${product.product.productName}" target="_blank">${product.product.productName}</a>
 																</p>
 																<p class="price">${product.productPrice}元 × ${product.quantity}</p>
 															</li>

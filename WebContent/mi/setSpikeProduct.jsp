@@ -89,7 +89,7 @@
 						$(".product option[value='']").attr("selected", "selected");
 						return;
 					}
-					
+					$("#pAll").fadeIn();
 					$("#pAll").css("display", "flex");
 					$("#pName").html("商品名称：" + json.extremeName); //清空下拉框  
 					$("#pUrl").attr("src", "../" + json.picUrl);

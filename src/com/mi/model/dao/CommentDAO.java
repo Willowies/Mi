@@ -44,5 +44,7 @@ public interface CommentDAO {
 	public List<Product> getPopularProductsOfAppliance();
 	
 	public List<Product> getPopularProductsOfCollocation();
+
+	public List<Comment> getCommentsByNameRankPage(@Param(value = "productName")String productName, @Param(value = "rank")int rank,@Param(value = "page") int page);
 	
 }

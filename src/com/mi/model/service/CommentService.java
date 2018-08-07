@@ -98,6 +98,15 @@ public class CommentService {
 		return map;
 		
 	}
+
+	public Map<String, Object> getCommentsByNameRankPage(String productName, int rank, int page) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Comment> comments = commentDAO.getCommentsByNameRankPage(productName,rank,page);
+		
+		map.put("comments", comments);
+		
+		return map;
+	}
 	
 	
 }

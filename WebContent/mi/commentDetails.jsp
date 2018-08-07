@@ -33,6 +33,21 @@
 				$('#jump-block').css("display", "none");
 
 			}
+			
+			function validateUser(){
+				var html = $.ajax({
+					type: "POST",
+					url: "checkLoginState.action",
+					async: false
+				}).responseText;
+				var obj = JSON.parse(html);
+				if(html == "true") {
+					return true;
+				} else {
+					alert("请先登录");
+					return false;
+				}
+			}
 		</script>
 	</head>
 
@@ -59,7 +74,7 @@
 					<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 				</div>
 				<div class="topbar-cart" id="J_miniCartTrigger">
-					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 						<i class="fa fa-shopping-cart"></i> 购物车
 						<span class="cart-mini-num">（0）</span>
 					</a>
@@ -143,7 +158,9 @@
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
 						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item">服务</li>
+						<li id="navItem9" class="nav-item">
+							<a href="Service.jsp">服务</a>
+						</li>
 						<li id="navItem10" class="nav-item">社区</li>
 					</ul>
 				</div>
@@ -201,7 +218,7 @@
 										</div>
 									</div>
 								</c:if>
-								<div class="comment-input">
+								<div class="comment-input" onsubmit="return validateUser();">
 									<form action="responseComment.action" method="post">
 										<input name="commentId" value="${comment.commentId}" style="display: none;" />
 										<input name="productId" value="${comment.product.productId}" style="display: none;" />
@@ -235,7 +252,7 @@
 				</div>
 				<div class="comment-details">
 					<img src="../${comment.product.picUrl}" alt="" height="160px" width="auto">
-					<a href="">
+					<a href="selectProductInfo.action?productName=${comment.product.productName}">
 						<h4 class="product-name">${comment.product.productName}</h4></a>
 					<div class="product-price">${comment.product.productPrice} 元 </div>
 				</div>

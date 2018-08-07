@@ -261,6 +261,7 @@ public class BackgroundManageController extends BaseController{
 			request.setAttribute("alertMsg", "ÃÌº” ß∞‹");
 			return getGroupProduct(session, request);
 		}
+		p.setEndDate(new Date(p.getEndDate().getTime()+1000*60*60*24-1));
 		Product pro = new Product();
 		pro.setProductId(productId);
 		p.setProduct(pro);

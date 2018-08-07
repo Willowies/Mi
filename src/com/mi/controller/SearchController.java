@@ -121,10 +121,8 @@ public class SearchController {
 	}
 	
 	public User getUser(HttpSession session) {
-		// User user = (User)session.getAttribute("user");
+		 User user = (User)session.getAttribute("user");
 
-		User user = new User();
-		user.setUserId(10002);
 		return user;
 	}
 }

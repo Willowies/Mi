@@ -15,6 +15,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.util.WebUtils;
@@ -37,7 +38,7 @@ public class CommentController {
 	public String getWaitCommentProduct(HttpSession session, HttpServletRequest request) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		Map<String, Object> map = commentService.getWaitCommentProduct(user);
@@ -50,7 +51,7 @@ public class CommentController {
 	public String getCommentedProduct(HttpSession session, HttpServletRequest request) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		Map<String, Object> map = commentService.getCommentedProduct(user);
@@ -63,7 +64,7 @@ public class CommentController {
 	public String userToCommentProduct(HttpSession session, HttpServletRequest request, Product product) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (product == null || product.getProductId() == 0) {
@@ -78,7 +79,7 @@ public class CommentController {
 	public String commentProduct(HttpSession session, HttpServletRequest request, Comment comment) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		if (comment == null || comment.getProductId() == 0) {
@@ -124,7 +125,7 @@ public class CommentController {
 	public String userToCommentDetails(HttpSession session, HttpServletRequest request,Integer productId) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 
 		Comment comment = commentService.getCommentByUserAndProduct(user.getUserId(),productId);
@@ -145,7 +146,7 @@ public class CommentController {
 	@RequestMapping("getCommentPage")
 	public String getCommentPage(HttpSession session, HttpServletRequest request,String productName) {
 		if (productName == null || productName.equals("")) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 		
 		Map<String, Object> map = commentService.getCommentsByName(productName);
@@ -167,16 +168,19 @@ public class CommentController {
 	}
 	
 	@RequestMapping("responseComment")
-	public String responseComment(HttpSession session, HttpServletRequest request,CommentResponse commentResponse) {
+	public String responseComment(HttpSession session, HttpServletRequest request,CommentResponse commentResponse,Integer commentId) {
 		User user = getUser(session);
 		if (user == null) {
-			return "homepage.jsp";
+			return "homepage";
+		}
+		if (commentId == null || commentId ==0) {
+			return "homepage";
 		}
 		commentResponse.setUserId(user.getUserId());
 		commentResponse.setCommentDate(new Date());
 		commentService.addCommentResponse(commentResponse);
 	
-		Comment comment = commentService.getCommentByUserAndProduct(user.getUserId(),commentResponse.getProductId());
+		Comment comment = commentService.getCommentById(commentId);
 		request.setAttribute("comment", comment);
 		return "forward:commentDetails.jsp";
 	}
@@ -184,12 +188,13 @@ public class CommentController {
 	@RequestMapping("getGoodCommentPage")
 	public String getGoodCommentPage(HttpSession session, HttpServletRequest request,String productName) {
 		if (productName == null || productName.equals("")) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 		
 		Map<String, Object> map = commentService.getCommentsByNameAndRank(productName,1);
 		
 		List<Comment> comments = (List<Comment>) map.get("comments");
+		System.out.println("size"+comments.size());
 		int goodNum = (Integer)map.get("goodNum");
 		int middleNum = (Integer)map.get("middleNum");
 		int badNum =(Integer) map.get("badNum");
@@ -206,7 +211,7 @@ public class CommentController {
 	@RequestMapping("getMiddleCommentPage")
 	public String getMiddleCommentPage(HttpSession session, HttpServletRequest request,String productName) {
 		if (productName == null || productName.equals("")) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 		
 		Map<String, Object> map = commentService.getCommentsByNameAndRank(productName,2);
@@ -228,7 +233,7 @@ public class CommentController {
 	@RequestMapping("getBadCommentPage")
 	public String getBadCommentPage(HttpSession session, HttpServletRequest request,String productName) {
 		if (productName == null || productName.equals("")) {
-			return "homepage.jsp";
+			return "homepage";
 		}
 		
 		Map<String, Object> map = commentService.getCommentsByNameAndRank(productName,3);
@@ -247,12 +252,29 @@ public class CommentController {
 		return "forward:commentProductPage.jsp";
 	}
 	
+	@RequestMapping("getMoreComment")
+	public @ResponseBody List<Comment> getMoreComment(HttpSession session, HttpServletRequest request,String productName,Integer page,Integer type) {
+		if (productName == null || productName.equals("")) {
+			return null;
+		}
+		if (page == null || page==0) {
+			return null;
+		}
+		if (type == null || type==0) {
+			return null;
+		}
+		
+		Map<String, Object> map = commentService.getCommentsByNameRankPage(productName,type,page*5);
+		
+		List<Comment> comments = (List<Comment>) map.get("comments");
+		
+		return comments;
+	}
+	
 	
 	public User getUser(HttpSession session) {
-		// User user = (User)session.getAttribute("user");
+		User user = (User)session.getAttribute("user");
 
-		User user = new User();
-		user.setUserId(10002);
 		return user;
 	}
 }

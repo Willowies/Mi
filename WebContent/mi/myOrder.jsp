@@ -42,7 +42,7 @@
 					<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 				</div>
 				<div class="topbar-cart" id="J_miniCartTrigger">
-					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 						<i class="fa fa-shopping-cart"></i> 购物车
 						<span class="cart-mini-num">（0）</span>
 					</a>
@@ -126,7 +126,9 @@
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
 						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item">服务</li>
+						<li id="navItem9" class="nav-item">
+							<a href="Service.jsp">服务</a>
+						</li>
 						<li id="navItem10" class="nav-item">社区</li>
 					</ul>
 				</div>
@@ -173,19 +175,19 @@
 						<div class="box-body">
 							<ul class="list">
 								<li>
-									<a href="../mi/myPersonalCenter.jsp">我的个人中心</a>
+									<a href="disPlayMyPersonalCenter.action">我的个人中心</a>
 								</li>
 								<li>
-									<a href="../mi/messageNotice.jsp">消息通知</a>
+									<a href="displayMessage.action">消息通知</a>
 								</li>
 								<li>
-									<a href="../mi/likeProduct.jsp">喜欢的商品</a>
+									<a href="displayLikeProduct.action">喜欢的商品</a>
 								</li>
 								<li>
-									<a href="../mi/myCoupon.jsp">优惠券</a>
+									<a href="displayCoupon.action">优惠券</a>
 								</li>
 								<li>
-									<a href="../mi/receiverAddress.jsp">收货地址</a>
+									<a href="displayReceiverAddress.action">收货地址</a>
 								</li>
 							</ul>
 						</div>
@@ -285,10 +287,10 @@
 																<c:forEach items="${order.products}" var="product">
 																	<li>
 																		<div class="goods-image"> 
-																			<a href="" target="_blank"> <img src="../${product.product.picUrl}" width="80" height="80"> </a>
+																			<a href="selectProductInfo.action?productName=${product.product.productName}" target="_blank"> <img src="../${product.product.picUrl}" width="80" height="80"> </a>
 																		</div>
 																		<p class="name">
-																			<a href="" target="_blank">${product.product.productName} ${product.product.version} ${product.product.color}</a>
+																			<a href="selectProductInfo.action?productName=${product.product.productName}" target="_blank">${product.product.productName} ${product.product.version} ${product.product.color}</a>
 																		</p>
 																		<p class="price">${product.productPrice}元 × ${product.quantity}</p>
 																	</li>
@@ -298,7 +300,15 @@
 														<td class="order-actions">
 															<a class="btn" href="getOrderDetailsById.action?orderId=${order.orderId}">订单详情</a>
 															<c:if test="${order.orderState == 1}">
-																<a class="btn" href="">立即支付</a>
+															<c:if test="${order.orderType == 1}">
+																<a class="btn" href="payOrder.action?orderId=${order.orderId}">立即支付</a>
+															</c:if>
+															<c:if test="${order.orderType == 3}">
+																<a class="btn" href="paySpikeOrder.action?orderId=${order.orderId}">立即支付</a>
+															</c:if>
+															</c:if>
+															<c:if test="${order.orderState == 3}">
+																<a class="btn" href="showOrderPro.action?orderId=${order.orderId}">申请售后</a>
 															</c:if>
 														</td>
 													</tr>

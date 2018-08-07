@@ -41,7 +41,7 @@
 					<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 				</div>
 				<div class="topbar-cart" id="J_miniCartTrigger">
-					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 						<i class="fa fa-shopping-cart"></i> 购物车
 						<span class="cart-mini-num">（0）</span>
 					</a>
@@ -125,7 +125,9 @@
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
 						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item">服务</li>
+						<li id="navItem9" class="nav-item">
+							<a href="Service.jsp">服务</a>
+						</li>
 						<li id="navItem10" class="nav-item">社区</li>
 					</ul>
 				</div>
@@ -172,19 +174,19 @@
 						<div class="box-body">
 							<ul class="list">
 								<li>
-									<a href="../mi/myPersonalCenter.jsp">我的个人中心</a>
+									<a href="disPlayMyPersonalCenter.action">我的个人中心</a>
 								</li>
 								<li>
-									<a href="../mi/messageNotice.jsp">消息通知</a>
+									<a href="displayMessage.action">消息通知</a>
 								</li>
 								<li>
-									<a href="../mi/likeProduct.jsp">喜欢的商品</a>
+									<a href="displayLikeProduct.action">喜欢的商品</a>
 								</li>
 								<li>
-									<a href="../mi/myCoupon.jsp">优惠券</a>
+									<a href="displayCoupon.action">优惠券</a>
 								</li>
 								<li>
-									<a href="../mi/receiverAddress.jsp">收货地址</a>
+									<a href="displayReceiverAddress.action">收货地址</a>
 								</li>
 							</ul>
 						</div>
@@ -247,9 +249,9 @@
 									<c:forEach items="${productList}" var="product">
 										<li class="xm-goods-item">
 											<div class="figure figure-img">
-												<a href=""><img src="../${product.picUrl}" /></a>
+												<a href="selectProductInfo.action?productName=${product.productName}"><img src="../${product.picUrl}" /></a>
 											</div>
-											<h3 class="title"><a href="" >${product.productName}</a></h3>
+											<h3 class="title"><a href="selectProductInfo.action?productName=${product.productName}" >${product.productName}</a></h3>
 											<p class="price">${product.productPrice}元</p>
 											<p class="rank">${product.productCommentNum}人评价</p>
 											<div class="actions">

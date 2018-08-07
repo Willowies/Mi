@@ -77,7 +77,7 @@ public class SearchService {
 				}
 			});
 		}
-		if (searchType.equals("ÆÀÂÛ")) {
+		if (searchType.equals("ÆÀ¼Û")) {
 			Collections.sort(results, new Comparator<SearchResult>() {
 
 				@Override

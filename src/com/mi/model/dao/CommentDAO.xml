@@ -184,7 +184,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 (select 
 		c.commentId,c.commentResponseId,c.userId as userId2,c.commentContent as commentContent2,c.commentDate as commentDate2,e.userName as userName2,e.userBirth as userBirth2,e.userSex as userSex2,e.userPhone as userPhone2,e.userEmail as userEmail2,
     		e.userPassword as userPassword2,e.userCard as userCard2,e.userHead as userHead2
-			from mi.commentresponse c left join mi.user e on c.userId=e.userId) 
+			from mi.commentresponse c left join mi.user e on c.userId=e.userId GROUP BY commentId ) 
 			 T on a.commentId=T.commentId 
     	where a.productId in (select productId from mi.product f where f.productName=#{productName} )
     	<if test="rank==1 ">
@@ -198,6 +198,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	</if>
     	limit 0,5
     </select>
+    
+        <select id="getCommentsByNameRankPage" resultMap="commentResult" flushCache="true" > 
+    	select 
+    		a.*,
+    		d.productName,d.description,d.productPrice,d.color,d.version,d.size,d.picUrl,d.maxQuantity,
+    		T.commentResponseId,T.userId2,T.commentContent2,T.commentDate2,
+    		b.userName,b.userBirth,b.userSex,b.userPhone,b.userEmail,b.userPassword,b.userCard,b.userHead,
+    		T.userName2,T.userBirth2,T.userSex2,T.userPhone2,T.userEmail2,
+    		T.userPassword2,T.userCard2,T.userHead2
+    	from mi.comment a left join mi.user b on a.userId=b.userId
+    	 left join mi.product d on a.productId=d.productId 
+    	 left join 
+			 (select 
+		c.commentId,c.commentResponseId,c.userId as userId2,c.commentContent as commentContent2,c.commentDate as commentDate2,e.userName as userName2,e.userBirth as userBirth2,e.userSex as userSex2,e.userPhone as userPhone2,e.userEmail as userEmail2,
+    		e.userPassword as userPassword2,e.userCard as userCard2,e.userHead as userHead2
+			from mi.commentresponse c left join mi.user e on c.userId=e.userId  GROUP BY commentId) 
+			 T on a.commentId=T.commentId 
+    	where a.productId in (select productId from mi.product f where f.productName=#{productName} )
+    	<if test="rank==1 ">
+    		and (a.commentRank=4 or a.commentRank=5)
+    	</if>
+    	<if test="rank==2 ">
+    		and (a.commentRank=2 or a.commentRank=3)
+    	</if>
+    	<if test="rank==3 ">
+    		and a.commentRank=1
+    	</if>
+    	limit #{page},5
+    </select>
+    
     <!-- 最好要去除商品名重复的，即使配置不同 -->
     <!-- 推荐商品不需要指定种类，也不需要user信息 -->
     <!-- 降序，取评价数前10，必须好评 -->

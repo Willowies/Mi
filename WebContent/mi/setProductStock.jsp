@@ -77,6 +77,7 @@
 				$.post("getProductInfoInManage.action", {
 					"id": id
 				}, function(json) {
+					$("#pAll").fadeIn();
 					$("#pAll").css("display", "flex");
 					$("#pName").html(json.extremeName); //清空下拉框  
 					$("#pUrl").attr("src", "../"+json.picUrl);

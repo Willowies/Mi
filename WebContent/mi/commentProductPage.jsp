@@ -16,15 +16,103 @@
 		<link href="../css/model.css" rel="stylesheet">
 		<link href="../css/commentPage.css" rel="stylesheet">
 		<style>
-			a{
+			a {
 				color: #555;
 			}
 		</style>
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../js/myOwnHeadJs.js" ></script>
+		<script type="text/javascript" src="../js/myOwnHeadJs.js"></script>
 		<script>
+			var page = 1;
+
+			function getMoreC(p) {
+				if($(p).html() == "已加载完全部") {
+					return;
+				}
+				var html = $.ajax({
+					type: "POST",
+					url: "getMoreComment.action",
+					data: "productName=${productName}&type=${commentType-1}&page=" + page,
+					async: false
+				}).responseText;
+				var obj = JSON.parse(html);
+				if(html == null || html == "null" || html == "[]") {
+					$(p).html("已加载完全部");
+					$(p).css("cursor", "auto");
+					return;
+				} else {
+					page++;
+					for(var i = 0; i < obj.length; i++) {
+						var str = "";
+						if (obj[i].commentUrl != null && obj[i].commentUrl != "") {
+							str = '<div class="m-img-list clearfix h-img-list"><div class="img-item img-item1 item-one showimg"><img class="J_resetImgItem J_canZoom" src="../'+obj[i].commentUrl+'" height="160px" width="auto" style="cursor: pointer;" onclick="showPic(this)"></div></div>';
+						}
+						
+						$(".moreComment").append('<div i="'+"c"+obj[i].commentId+'" class="product-info" style="dispaly:none"><div class="span13 comment-detail" style="width:700px"><ul class="m-comment-list"><li class="com-item J_resetImgCon J_canZoomBox" data-id="154912845"><a class="user-img"> <img src="../' +
+							obj[i].user.userHead +
+							'"> </a><div class="comment-info"><a class="user-name">' +
+							obj[i].user.userName +
+							'</a><p class="time">' +
+							getMyDate(obj[i].commentDate) +
+							'</p></div><div class="comment-eval"><i class="fa fa-smile-o" aria-hidden="true"></i>'+
+							getRank(obj[i].commentRank) +
+							'</div><div class="comment-txt"><p>'+
+							obj[i].commentContent+
+							'</p></div>'+
+							str+
+							'<div class="comment-detail-btn"><a href="commentDetails.action?commentId='+
+							obj[i].commentId+
+							'">查看评价详情</a></div></li></ul></div></div>');
+						$("#c"+obj[i].commentId).fadeIn(2000);
+						$("#c"+obj[i].commentId).css("display","flex");
+					}
+				}
+			}
+			
+			function getRank(rank){
+				switch (rank){
+					case 1:
+						return "失望";
+						break;
+					case 2:
+						return "一般";
+						break;
+					case 3:
+						return "满意";
+						break;
+					case 4:
+						return "喜欢";
+						break;
+					case 5:
+						return "超爱 ";
+						break;
+					default:
+						break;
+				}
+			}
+
+			//获得年月日      得到日期oTime
+			function getMyDate(str) {
+				var oDate = new Date(str),
+					oYear = oDate.getFullYear(),
+					oMonth = oDate.getMonth() + 1,
+					oDay = oDate.getDate(),
+					oHour = oDate.getHours(),
+					oMin = oDate.getMinutes(),
+					oSen = oDate.getSeconds(),
+					oTime = oYear + '-' + getzf(oMonth) + '-' + getzf(oDay) + ' ' + getzf(oHour) + ':' + getzf(oMin) + ':' + getzf(oSen); //最后拼接时间
+				return oTime;
+			};
+			//补0操作
+			function getzf(num) {
+				if(parseInt(num) < 10) {
+					num = '0' + num;
+				}
+				return num;
+			}
+
 			function showPic(i) {
 				var src = i.src;
 				if(src != null && src != '') {
@@ -63,7 +151,7 @@
 					<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 				</div>
 				<div class="topbar-cart" id="J_miniCartTrigger">
-					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 						<i class="fa fa-shopping-cart"></i> 购物车
 						<span class="cart-mini-num">（0）</span>
 					</a>
@@ -147,7 +235,9 @@
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
 						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item">服务</li>
+						<li id="navItem9" class="nav-item">
+							<a href="Service.jsp">服务</a>
+						</li>
 						<li id="navItem10" class="nav-item">社区</li>
 					</ul>
 				</div>
@@ -164,10 +254,10 @@
 			<div class="product-head-box">
 				<div class="product-name">${productName}</div>
 				<div class="con">
-					<a href="//www.mi.com/huosai3/">概述</a>&nbsp; |&nbsp;
-					<a href="//www.mi.com/huosai3/">参数</a>&nbsp; |&nbsp;
-					<a href="//www.mi.com/huosai3/">用户评价</a>&nbsp; |&nbsp;
-					<a href="//www.mi.com/huosai3/" class="btn-toBuy">立即购买</a>
+					<a href="displayProductSummary.action?productName=${productName}">概述</a>&nbsp; |&nbsp;
+					<a href="displayProductParameter.action?productName=${productName}">参数</a>&nbsp; |&nbsp;
+					<a href="getCommentPage.action?productName=${productName}">用户评价</a>&nbsp; |&nbsp;
+					<a href="selectProductInfo.action?productName=${productName}" class="btn-toBuy">立即购买</a>
 				</div>
 			</div>
 		</div>
@@ -180,10 +270,10 @@
 		<div class="grey-back-div" style="padding-top: 20px;    box-shadow: inset 0px 5px 5px rgba(0,0,0,0.07);">
 			<div class="middle-content">
 				<div class="choose-comment">
-					<a href="getCommentPage.action?${productName}" <c:if test="${commentType==1}"> class="choosed"</c:if>>热门</a>
-					<a href="getGoodCommentPage.action?${productName}" <c:if test="${commentType==2}"> class="choosed"</c:if>>好评(${goodNum})</a>
-					<a href="getMiddleCommentPage.action?${productName}" <c:if test="${commentType==3}"> class="choosed"</c:if>>中评(${middleNum})</a>
-					<a href="getBadCommentPage.action?${productName}" <c:if test="${commentType==4}"> class="choosed"</c:if>> 差评(${badNum})</a>
+					<a href="getCommentPage.action?productName=${productName}" <c:if test="${commentType==1}"> class="choosed"</c:if>>热门</a>
+					<a href="getGoodCommentPage.action?productName=${productName}" <c:if test="${commentType==2}"> class="choosed"</c:if>>好评(${goodNum})</a>
+					<a href="getMiddleCommentPage.action?productName=${productName}" <c:if test="${commentType==3}"> class="choosed"</c:if>>中评(${middleNum})</a>
+					<a href="getBadCommentPage.action?$productName=${productName}" <c:if test="${commentType==4}"> class="choosed"</c:if>> 差评(${badNum})</a>
 				</div>
 				<c:if test="${not empty newComments}">
 					<div class="comment-details" style="float: right;">
@@ -241,15 +331,15 @@
 									<div class="comment-answer">
 										<c:forEach items="${comment.commentResponses}" var="response" varStatus="i">
 											<c:if test="${i.index < 1}">
-											<div class="answer-item">
-												<c:if test="${not empty response.user.userHead}">
-													<img class="answer-img" src="../${response.user.userHead}">
-												</c:if>
-												<div class="answer-content">
-													<h3 class="">${response.user.userName}</h3>
-													<p> ${response.commentContent} </p>
+												<div class="answer-item">
+													<c:if test="${not empty response.user.userHead}">
+														<img class="answer-img" src="../${response.user.userHead}">
+													</c:if>
+													<div class="answer-content">
+														<h3 class="">${response.user.userName}</h3>
+														<p> ${response.commentContent} </p>
+													</div>
 												</div>
-											</div>
 											</c:if>
 										</c:forEach>
 									</div>
@@ -293,15 +383,15 @@
 									<div class="comment-answer">
 										<c:forEach items="${comment.commentResponses}" var="response" varStatus="i">
 											<c:if test="${i.index < 1}">
-											<div class="answer-item">
-												<c:if test="${not empty response.user.userHead}">
-													<img class="answer-img" src="../${response.user.userHead}">
-												</c:if>
-												<div class="answer-content">
-													<h3 class="">${response.user.userName}</h3>
-													<p> ${response.commentContent} </p>
+												<div class="answer-item">
+													<c:if test="${not empty response.user.userHead}">
+														<img class="answer-img" src="../${response.user.userHead}">
+													</c:if>
+													<div class="answer-content">
+														<h3 class="">${response.user.userName}</h3>
+														<p> ${response.commentContent} </p>
+													</div>
 												</div>
-											</div>
 											</c:if>
 										</c:forEach>
 									</div>
@@ -313,6 +403,16 @@
 						</div>
 					</div>
 				</c:forEach>
+				<div class="moreComment">
+
+				</div>
+				<c:if test="${not empty rankComments}">
+					<div class="product-info">
+						<div class="span13 comment-detail" style="padding: 20px;">
+							<p style="cursor: pointer;color: #E42A27;" onclick="getMoreC(this)">加载更多</p>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</div>
 
