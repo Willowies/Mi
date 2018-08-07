@@ -202,21 +202,14 @@ $(function(){
 			//判断登录
 			var isLogin = checkLoginState();
 			if(isLogin == "true"){
-				//已登录
-				
+				//已登录 进行购买
+				window.location.href = "addCartItem.action?productIdString="+$("#productId").text();
 			}else{
-				//未登录
+				//未登录 跳转到登录界面
+				window.location.href = "login.jsp";
 			}
 				
-			//没登录跳转到登录界面
-			//否则进行购买
-			//window.location.href = "addCartItem.action?productId="+$("#productId").text();
-			/*$.ajax({
-				type:"post",
-			    astnc:false,
-			    url:"receiveCoupon.action?productId="+$("#productId").text(),
-			    
-			});*/
+
 		});
 	}
 	//设置图片滚动样式
