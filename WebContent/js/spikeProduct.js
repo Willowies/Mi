@@ -36,6 +36,7 @@ $(function(){
 	var liList = $(".spike-banner ul").children("li");
 	var countIndex = 0;  //定位要显示的秒杀场次
 	var flag = "";  //标记”即将开始“or”正在进行“
+	var lastSpikeTime = null;
 	setSpikeBanner();
 	var focusSpikeTime = $(".spike-banner ul li.active button").attr("id");//选中的秒杀时间
 	//console.log(focusSpikeTime);
@@ -55,6 +56,7 @@ $(function(){
 	function setSpikeBanner(){				
 		var lastDate = $(".spike-banner ul li:last").find(".focustime").attr("value");//最晚的秒杀时间
 		var lastTime = Date.parse(lastDate.replace(/-/g,"/"));
+		lastSpikeTime = lastTime + 60*60*1000;
 		var serverDate = new Date($.ajax({async: false}).getResponseHeader("Date"));
 		var serverTime = serverDate.getTime();
 		var gapTime = lastTime + 60*60*1000 - serverTime;//最大秒杀时间与当前时间间隔		
@@ -104,6 +106,7 @@ $(function(){
 		//定时一秒执行一次倒计时
 		var countTimer = setInterval(function(){
 			var nowTime = new Date().getTime();
+
 			var remainTime = Math.abs(period - nowTime);
 			if(flag == "正在进行"){
 				remainTime = 60*60*1000 - remainTime;
@@ -134,6 +137,12 @@ $(function(){
 				for(var i = countIndex+1; i < liList.length; i++){
 					$(liList[i]).find("span").html("即将开始");
 				}
+				if(nowTime >= lastSpikeTime){
+					for(var i = 0; i < liList.length; i++){
+						$(liList[i]).find("span").empty();
+						$(liList[i]).find("span").html("已结束");
+					}
+				}
 			}
 			
 		},1000);
@@ -158,64 +167,73 @@ $(function(){
 				var isLogin = checkLoginState();
 				if(isLogin == "true"){
 					//已登录
-					
+					//可设置提醒但不可抢购		
+					if(diffMinute > 15 && focusDate > nowDate){
+						$(".spike-con ul.active").empty();
+						for(var i = 0; i < data.length; i++){
+							var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
+							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
+							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
+							+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small remind\" data-toggle=\"modal\" data-target=\"#modalRemind\">提醒我</a></div></li>";
+							$(".spike-con ul.active").append(html);
+					    }
+					}
+					//不可设置提醒也不可抢购
+					if(diffMinute > 0 && diffMinute <= 15 && focusDate > nowDate){
+						$(".spike-con ul.active").empty();
+						for(var i = 0; i < data.length; i++){
+							var html = "<p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p>"+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
+							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
+							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
+							+(data[i].previousPrice)+"元 </del></p><a class=\"but btn-green btn-disabled btn-small nostart\" onclick=\"\">即将开抢</a></div></li>";
+							$(".spike-con ul.active").append(html);
+											
+						}
+					}
+					//可以抢购
+					if(diffMinute <= 60 && diffMinute >= 0 && focusDate < nowDate){
+						$(".spike-con ul.active").empty();
+						for(var i = 0; i < data.length; i++){
+							var percent = 10 * data[i].currentSpikeNum / data[i].spikeQuantity;	
+							console.log(percent);
+							var html = ""+" <li><p style=\"display:none;\" class=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
+							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
+							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width:"+percent+"px;\"></span><em>"+percent+"%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
+							+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small start\" style=\"background: #ff6700 !important; border-color: #ff6700 !important; data-toggle=\"modal\">立即抢购</a></div></li>";
+							$(".spike-con ul.active").append(html);
+					    }
+					}
+					//抢购已结束
+					if(diffMinute > 60 && focusDate < nowDate){
+						$(".spike-con ul.active").empty();
+						for(var i = 0; i < data.length; i++){
+							var percent = 10 * data[i].currentSpikeNum / data[i].spikeQuantity;	
+							console.log(percent);
+							var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
+							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
+							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width:"+percent+"px;\"></span><em>"+percent+"%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
+							+(data[i].previousPrice)+"元 </del></p><a class=\"but btn-green btn-disabled btn-small over\" onclick=\"\">已结束</a></div></li>";
+							$(".spike-con ul.active").append(html);
+					    }
+					}
 				}else{
 					//未登录
-					/*for(var i = 0; i < data.length; i++){
-						var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
-						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
-						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-						+(data[i].previousPrice)+"元 </del></p><a href=\"login.jsp\" class=\"but btn-green btn-remind btn-small remind\" style=\"background: #ff6700 !important; border-color: #ff6700 !important;\">登录后抢购</a></div></li>";
-						$(".spike-con ul.active").html(html);
-				    }*/
-				}
-				//可设置提醒但不可抢购		
-				if(diffMinute > 15 && focusDate > nowDate){
 					$(".spike-con ul.active").empty();
 					for(var i = 0; i < data.length; i++){
 						var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
 						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
 						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small remind\" data-toggle=\"modal\" data-target=\"#modalRemind\">提醒我</a></div></li>";
-						$(".spike-con ul.active").html(html);
+						+(data[i].previousPrice)+"元 </del></p><a href=\"login.jsp\" class=\"but btn-green btn-remind btn-small login\" style=\"background: #ff6700 !important; border-color: #ff6700 !important;\">登录后抢购</a></div></li>";
+						$(".spike-con ul.active").append(html);
 				    }
-				}
-				//不可设置提醒也不可抢购
-				if(diffMinute > 0 && diffMinute <= 15 && focusDate > nowDate){
-					$(".spike-con ul.active").empty();
-					for(var i = 0; i < data.length; i++){
-						var html = "<p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p>"+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
-						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
-						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-						+(data[i].previousPrice)+"元 </del></p><a class=\"but btn-green btn-disabled btn-small nostart\" onclick=\"\">即将开抢</a></div></li>";
-						$(".spike-con ul.active").html(html);
-										
+					//秒杀结束 按钮显示已结束
+					var activityStatus = $(".spike-banner ul li.active span").text();
+					if(activityStatus == "已结束"){
+						$(".spike-con.login").text("已结束");
 					}
+					
 				}
-				//可以抢购
-				if(diffMinute <= 60 && diffMinute >= 0 && focusDate < nowDate){
-					$(".spike-con ul.active").empty();
-					for(var i = 0; i < data.length; i++){
-						var percent = 10 * data[i].currentSpikeNum / data[i].spikeQuantity;	
-						console.log(percent);
-						var html = ""+" <li><p style=\"display:none;\" class=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
-						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
-						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width:"+percent+"px;\"></span><em>"+percent+"%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-						+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small start\" data-toggle=\"modal\">立即抢购</a></div></li>";
-						$(".spike-con ul.active").html(html);
-				    }
-				}
-				//抢购已结束
-				if(diffMinute > 60 && focusDate < nowDate){
-					$(".spike-con ul.active").empty();
-					for(var i = 0; i < data.length; i++){
-						var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
-						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
-						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width: 100%;\"></span><em>100%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-						+(data[i].previousPrice)+"元 </del></p><a class=\"but btn-green btn-disabled btn-small over\" onclick=\"\">已结束</a></div></li>";
-						$(".spike-con ul.active").html(html);
-				    }
-				}
+
 			}
 		});
 	}
@@ -251,7 +269,7 @@ $(function(){
 			astnc:false,
 			dataType:"text",
 			url:"buySpikeProduct.action?spikeProductId="+spikeProductId,
-			function(data){
+			success:function(data){
 				if(data == "超过上限"){
 					$("#modalMax").modal("show");
 				}
@@ -266,7 +284,7 @@ $(function(){
 						astnc:false,
 						dataType:"json",
 						url:"findSpikeProduct.action?spikeProductId="+spikeProductId,
-						function(data){
+						success:function(data){
 							window.location.href = "updateSpikeOrder.action?orderProduct="+data;
 						}
 					});
