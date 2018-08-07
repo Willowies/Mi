@@ -100,7 +100,7 @@
 					<li id="navItem6" class="nav-item">新品</li>
 					<li id="navItem7" class="nav-item">路由器</li>
 					<li id="navItem8" class="nav-item">智能硬件</li>
-					<li id="navItem9" class="nav-item">服务</li>
+					<li id="navItem9" class="nav-item-service"><a href="Service.jsp">服务</a></li>
 					<li id="navItem10" class="nav-item">社区</li>
 				</ul>
 			</div>
@@ -231,7 +231,8 @@
 										</p>
 										<div class="actions">
 											<a class="btn btn-line-gray btn-small">删除</a>
-											<a class="btn btn-primary btn-small">查看详情</a>
+											<!-- 跳转到立即购买页面 -->
+											<a class="btn btn-primary btn-small" href="selectProductInfo?productName=${likeProduct.product.productName}">查看详情</a>
 										</div>
 									</li>
 									</c:forEach>

@@ -68,7 +68,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) T GROUP BY productId  -->
     </select>
     <select id="selectClassfiedProductBySecondClassId"  resultType="Product" flushCache="true" >
-    	select * from product where secondClassId = #{secondClassId}
+    	<!-- 仅适用于mysql中select*会在每组出现多条数据时自动选择第一条数据 -->
+    	select * 
+    	from (
+   		 select * from product group by productName
+    	) as base
+		ORDER by productId ASC
     </select>
 </mapper>
 

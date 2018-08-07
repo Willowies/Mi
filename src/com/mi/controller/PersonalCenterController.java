@@ -45,9 +45,14 @@ public class PersonalCenterController {
 		if(user==null){
 			return "homePage";
 		}*/
-		User user = new User();
-		user.setUserId(1);
+		/*User user = new User();
+		user.setUserId(1);*/
+		User user = (User)session.getAttribute("user");
+		if(user==null){
+			return "forward:homepage.jsp";
+		}
 		int userId = user.getUserId();
+		
 		int likeProductCount = likeProductService.selectLikeProductCount(userId);
 		int unpayOrderCount = likeProductService.selectUnpayOrderCount(userId);
 		int pendingOrderCount = likeProductService.selectPendingOrderCount(userId);
@@ -62,9 +67,11 @@ public class PersonalCenterController {
 		return "forward:myPersonalCenter.jsp";
 	}
 	@RequestMapping("displayMessage")
-	public String disPlayMessage(Model model,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
-		User user = new User();
-		user.setUserId(1);
+	public String disPlayMessage(Model model,HttpSession session,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
+		User user = (User)session.getAttribute("user");
+		if(user==null){
+			return "forward:homepage.jsp";
+		}
 		int userId = user.getUserId();
 		
 		Map<String, Object> map = messageService.selectMessageByUserId(userId, pageNum, 5);
@@ -74,9 +81,11 @@ public class PersonalCenterController {
 		return "forward:myMessage.jsp";
 	}
 	@RequestMapping("displayLikeProduct")
-	public String displayLikeProduct(Model model,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum) {
-		User user = new User();
-		user.setUserId(10001);
+	public String displayLikeProduct(Model model,HttpSession session,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum) {
+		User user = (User)session.getAttribute("user");
+		if(user==null){
+			return "forward:homepage.jsp";
+		}
 		int userId = user.getUserId();
 		
 		Map<String, Object> map = likeProductService.selectLikeProductByUserId(userId, pageNum, 5);
@@ -86,9 +95,11 @@ public class PersonalCenterController {
 		return "forward:likeProduct.jsp";
 	}
 	@RequestMapping("displayCoupon")
-	public String disPlayCoupon(Model model,@RequestParam(value="couponType",defaultValue="1")Integer couponType,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
-		User user = new User();
-		user.setUserId(2);
+	public String disPlayCoupon(Model model,HttpSession session,@RequestParam(value="couponType",defaultValue="1")Integer couponType,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
+		User user = (User)session.getAttribute("user");
+		if(user==null){
+			return "forward:homepage.jsp";
+		}
 		int userId = user.getUserId();
 		
 		Map<String, Object> map = couponService.selectCouponByUserId(userId,couponType, pageNum, 5);
@@ -98,24 +109,27 @@ public class PersonalCenterController {
 		return "forward:myCoupon.jsp";
 	}
 	@RequestMapping("displayReceiverAddress")
-	public String displayReceiverAddress(Model model,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
-		User user = new User();
+	public String displayReceiverAddress(Model model,HttpSession session,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
+		User user = (User)session.getAttribute("user");
+		if(user==null){
+			return "forward:homePage.jsp";
+		}
+		int userId = user.getUserId();
+		
 		Map<String, Object> map = receiverAddressService.selectReceiverAddress(user.getUserId(),pageNum,5);
 		List<ReceiverAddress> resultList = (List<ReceiverAddress>) map.get("list");
 		model.addAttribute("resultList", resultList);
 		model.addAttribute("pageTotal", (int)map.get("pageTotal"));
 		return "forward:receiverAddress.jsp";
 	}
+	
 	@RequestMapping("addReceiverAddress")
-	public String addReceiverAddress(Model model,HttpSession httpSession,ReceiverAddress receiverAddress) {
-		/*User user = (User)httpSession.getAttribute("user");
+	public String addReceiverAddress(Model model,HttpSession session,ReceiverAddress receiverAddress) {
+		User user = (User)session.getAttribute("user");
 		if(user==null){
-			return "homePage";
+			return "forward:homepage.jsp";
 		}
-		从session中获取登录的USER
-		*/
-		//临时代替
-		User user = new User();
+		
 		receiverAddress.setUser(user);
 		receiverAddressService.addReceiverAddress(receiverAddress);
 		
@@ -141,27 +155,5 @@ public class PersonalCenterController {
 		model.addAttribute("pageTotal", (int)map.get("pageTotal"));
 		return "forward:classifiProduct.jsp";
 	}
-	
-/*	@RequestMapping("selectLikeProductCount")
-	public ModelAndView tttt() {
-		List<LikeProduct> list = likeProductService.selectLikeProduct();
-		ModelAndView mav = new ModelAndView();
-		//LikeProduct likeProduct = new LikeProduct();
-		System.out.println(list.get(0).getLikeProductId());
-		mav.addObject("resultList",list);
-		mav.setViewName("selectLikeProduct");
-		return mav;
-	}
-	@RequestMapping("selectLikeProduct2")
-	public ModelAndView dddd() {
-		int likeProductCount = 0;
-		likeProductCount = likeProductService.selectLikeProductCount();
-		
-		ModelAndView mav = new ModelAndView();
-		//LikeProduct likeProduct = new LikeProduct();
-		mav.addObject("likeProductCount",likeProductCount);
-		mav.setViewName("selectLikeProduct");
-		return mav;
-	}*/
 	
 }
