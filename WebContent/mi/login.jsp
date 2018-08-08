@@ -22,7 +22,7 @@
 		<div id="wrapper">
 			<div id="upside">
 				<div id="logo-item">
-					<img src="../images/logo.jpg"/>
+					<a href="homepage.jsp"><img src="../images/logo.jpg"/></a>
 				</div>
 				<div id="title-item">
 					小米账号登录

@@ -24,7 +24,7 @@
 			<div id="middleside">
 				<div id="title-item">
 					<div class="div1"><a href="updatePassword.jsp">修改密码</a></div>
-					<div class="div1"><a href="selectUser.jsp">个人信息</a></div>
+					<div class="div1"><a href="selectUser.jsp" style="color:#ff7e00;">个人信息</a></div>
 					<div class="div2">${sessionScope.user.userName}</div>
 					<div class="div3">
 						<img src="../${sessionScope.user.userHead}" />
