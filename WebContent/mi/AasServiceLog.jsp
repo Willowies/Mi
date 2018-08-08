@@ -189,18 +189,18 @@
     <li class="uc-order-item uc-order-item-shipping ">
         <div class="order-detail ">
             <div class="order-summary ">
-            <c:choose>
-               <c:when test="${tableList.asState == '7002'}">
+               <c:if test="${tableList.asState == '7002'}">
              	  <div class="order-status ">正在审核 <small>${tableList.asWay} - ${tableList.asBack}</small></div>
-               </c:when>
-               <c:when test="${tableList.asState == '7003'}">
+               </c:if>
+               <c:if test="${tableList.asState == '7003'}">
                   <div class="order-status ">已取消 <small>${tableList.asWay} - ${tableList.asBack}</small></div>
-               </c:when>
-               <c:otherwise>
+               </c:if>
+               <c:if test="${tableList.asState == '7001'}">
                   <div class="order-status ">已完成 <small>${tableList.asWay} - ${tableList.asBack}</small></div>
-               </c:otherwise>
-            </c:choose>
-                <%-- <div class="order-status ">${tableList.asState} <small>${tableList.asWay} - ${tableList.asBack}</small></div> --%>
+               </c:if>
+               <c:if test="${tableList.asState == '7004'}">
+                  <div class="order-status ">审核完成 <small>${tableList.asWay} - ${tableList.asBack}</small></div>
+               </c:if>
             </div>
             <table class="order-detail-table ">
                 <thead>

@@ -195,7 +195,7 @@
 										<div class="actions ">
                                              <c:choose>
                                                 <c:when test="${asTable.asState == 7002 }">
-                                                     <a class="btn btn-small btn-line-gray J_cancelOrder " href="asChangeTableState.action?asId=${asTable.asId}">取消订单</a>
+                                                     <a class="btn btn-small btn-line-gray J_cancelOrder " href="asChangeTableState.action?asId=${asTable.asId}">取消服务单</a>
                                                       </c:when>
                                                          <c:otherwise>
                                                              <p></p>
@@ -222,14 +222,36 @@
 												</div> 
 												-->
 
+                                        
 												<div class="order-progress ">
 													<ol class='progress-list progress-list-col-3 clearfix'>
-														<li class='step step-first  step-done step-active '>
-															<div class='progress'><span class='text'>小米审核</span></div>
-															<div class='info'>${asTable.asTime}</div>
-														</li>
+													    <!-- 7002为正在审核 -->
+										                     <c:if test="${asTable.asState == 7002 }">
+										                         <li class="step step-first step-active">
+															        <div class='progress'><span class='text'>小米审核</span></div>
+															         <div class='info'>${asTable.asTime}</div>
+														         </li>
+										                     </c:if>
+										                   <!-- 7003 为 售后申请已取消 -->  
+										                     <c:if test="${asTable.asState == 7003 }">
+										                          <li class="step step-first step-active">
+															        <div class='progress'><span class='text'>已取消</span></div>
+															         <div class='info'>${asTable.asTime}</div>
+														          </li> 
+										                     </c:if>
+										                     <!-- 7004 为 审核已经完成 -->  
+										                     <c:if test="${asTable.asState == 7004 }">
+										                          <li class="step step-first step-done">
+															        <div class='progress'><span class='text'>小米审核</span></div>
+															         <div class='info'>${asTable.asTime}</div>
+														          </li>
+														          <li class="step step-done step-active">
+															        <div class='progress'><span class='text'>审核完成</span></div>
+														          </li> 
+										                     </c:if>										                  
 													</ol>
 												</div>
+												
 											</div>
 											<table class="order-items-table ">
 												<tbody>

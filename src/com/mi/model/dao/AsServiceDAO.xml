@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      <!-- 根据asId自动修改服务表状态 -->
      <update id="updateStateAuto" parameterType="String"  >
          update mi.aftersale_service 
-         set asState= 7001
+         set asState= 7004
          where asId=#{asId}
      </update>
  

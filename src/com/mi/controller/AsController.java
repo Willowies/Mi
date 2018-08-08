@@ -322,7 +322,7 @@ public class AsController {
 	
 	/**
 	 * 自动改变申请单的状态
-	 * 由正在审核（7002），变为已完成（7001）
+	 * 由正在审核（7002），变为审核完成（7004）
 	 */
     public void  updateStateAuto(String asId){
     	Date asAutoDate = new Date();
@@ -330,7 +330,7 @@ public class AsController {
     		public void run(){
     			while(true){
     				Date now = new Date();
-    				//if(now.getTime() - orderDate.getTime()>1000*60*15){
+    				//三天内自动审核完成
     				if(now.getTime() - asAutoDate.getTime()>1000*60*60*24*3){
     					asService.updateStateAuto(asId);
     					break;
