@@ -129,21 +129,58 @@
 <div class="page-main user-main">
     <div class="container">
         <div class="row">
-            <div class="span4">
-                <div class="uc-box uc-sub-box">
+				<div class="span4">
+					<div class="uc-box uc-sub-box">
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">订单中心</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                               <li><a href="getAllOrder.action">我的订单</a></li>
+								<li><a href="../mi/getAllGroupOrder.action">团购订单</a></li>
+								<li><a href="../mi/getWaitCommentProduct.action">评价晒单</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">个人中心</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                               <li><a href="disPlayMyPersonalCenter.action">我的个人中心</a></li>
+								<li><a href="displayMessage.action">消息通知</a></li>
+								<li><a href="displayLikeProduct.action">喜欢的商品</a></li>
+								<li><a href="displayCoupon.action">优惠券</a></li>
+								<li><a href="displayReceiverAddress.action">收货地址</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="uc-nav-box">
                         <div class="box-hd">
                             <h3 class="title">售后服务</h3>
                         </div>
                         <div class="box-bd">
                             <ul class="uc-nav-list">
-                                <li><a href="asSelectTables.action">服务记录</a></li>
-								<li class="active "><a href="AasApplyWay.jsp">申请服务</a></li>
+                                <li><a href="asSelectTables.action">服务记录</a> </li>
+								<li> <a href="AasApplyWay.jsp">申请服务</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">账户管理</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li><a href="../mi/selectUser.jsp">个人信息</a></li>
+								<li><a href="../mi/updatePassword.jsp">修改密码</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-            </div>
+				</div>
     <div class="span16">
 
     <div class="service-box service-main-box">
@@ -176,7 +213,7 @@
                             <c:forEach items="${tableList}"  var="tList">
                                 <ul class="xm-goods-list service-goods-list clearfix">
                                         <li class="xm-goods-item">
-                                            <div class="figure figure-img"><img src="${tList.picUrl}" /></div>
+                                            <div class="figure figure-img"><img src="../${tList.picUrl}" /></div>
                                             <h3 class="title">${tList.productName}&nbsp;&nbsp;&nbsp;${tList.version}</h3>
                                             <p class="imei"></p>
                                             <p class="rank"></p>

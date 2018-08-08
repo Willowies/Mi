@@ -93,6 +93,7 @@ public class AsController {
 	    		asTableChoosePro.setProductName(proInfo.getProductName());
 	    		asTableChoosePro.setVersion(proInfo.getVersion());
 	    		asTableChoosePro.setColor(proInfo.getColor());
+	    		asTableChoosePro.setPicUrl(proInfo.getPicUrl());
 	    		
 	    		session.setAttribute("asTableChoosePro", asTableChoosePro);
 	        }else {
@@ -128,52 +129,10 @@ public class AsController {
     		asTableChoosePro.setProductName(proInfo.getProductName());
     		asTableChoosePro.setVersion(proInfo.getVersion());
     		asTableChoosePro.setColor(proInfo.getColor());
-    		
-    		session.setAttribute("asTableChoosePro", asTableChoosePro);
-		}
-/*		
-		String oldName;
-		if(asInvoiceUrl == null) {
-		     oldName = "";
-		}else {
-			oldName = asInvoiceUrl.getOriginalFilename();
-		}
-		 //测试在asInvoiceUrl为null的时候，能否正常插入数据
-        if(oldName == null || "" == oldName) {
-        	// 通过sn取得商品的信息
-        	AsProInfo proInfo = asService.getProBySn(asSn);
-    		
-    		AsTable asTableChoosePro = new AsTable();
-    		asTableChoosePro.setAsSn(asSn);
-    		
-    		asTableChoosePro.setAsProId(proInfo.getProductId());
-    		asTableChoosePro.setProductName(proInfo.getProductName());
-    		asTableChoosePro.setVersion(proInfo.getVersion());
-    		asTableChoosePro.setColor(proInfo.getColor());
-    		
-    		session.setAttribute("asTableChoosePro", asTableChoosePro);
-        }else {
-        	// 构建新的文件名
-    		String newName = System.currentTimeMillis() + oldName.substring(oldName.indexOf("."));
-    		// 文件的保存路径
-    		File file = new File("E:/invioceUrl/", newName);
-    		// 上传
-    		asInvoiceUrl.transferTo(file);
-    		
-    		// 通过sn取得商品的信息
-    	    AsProInfo proInfo = asService.getProBySn(asSn);
-    		
-    		AsTable asTableChoosePro = new AsTable();
-    		asTableChoosePro.setAsSn(asSn);
-    		asTableChoosePro.setAsInvoiceUrl(newName);
-    		
-    		asTableChoosePro.setAsProId(proInfo.getProductId());
-    		asTableChoosePro.setProductName(proInfo.getProductName());
-    		asTableChoosePro.setVersion(proInfo.getVersion());
-    		asTableChoosePro.setColor(proInfo.getColor());
     		asTableChoosePro.setPicUrl(proInfo.getPicUrl());
+    		
     		session.setAttribute("asTableChoosePro", asTableChoosePro);
-        }*/
+		}
         
         return "forward:AasChooseService.jsp";//跳转到新界面的jsp
 	}
@@ -334,11 +293,13 @@ public class AsController {
 	public String getOrderPro(int orderId,HttpSession session) {
 		List<OrderProduct> orderProducts = asService.getOrderProById(orderId);
 		
-	    AsTable asTable = new AsTable();
+	    
 	    List<AsTable> tableList = new ArrayList();
 		//遍历orderProducts，把他的元素加载到astable里面去
 		for(OrderProduct orderProduct : orderProducts) {
 			Product product =  asService.getProductById(orderProduct.getProduct().getProductId());
+			
+			AsTable asTable = new AsTable();
 			
 			asTable.setAsSn(orderProduct.getSn());
 			asTable.setAsProId(product.getProductId());

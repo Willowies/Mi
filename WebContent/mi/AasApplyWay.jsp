@@ -5,7 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>申请售后服务</title>
-        <link rel="stylesheet" href="../css/as-aftersaleService.css" />
+        <link href="../css/as-base.min.css" rel="stylesheet" type=" text/css" />
+        <link href="../css/as-main.min.css " rel="stylesheet" type="text/css" />
+		<link href="../css/as-serviceMain.min.css" rel="stylesheet" type=" text/css" />
         
         <link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
@@ -127,18 +129,55 @@
 				<!-- 左侧任务栏 -->
 				<div class="span4">
 					<div class="uc-box uc-sub-box">
-						<div class="uc-nav-box">
-							<div class="box-hd">
-								<h3 class="title">售后服务</h3>
-							</div>
-							<div class="box-hd">
-								<ul class="uc-nav-list">
-									<li><a href="asSelectTables.action">服务记录</a></li>
-									<li class="active "><a href="AasApplyWay.jsp">申请服务</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">订单中心</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                               <li><a href="getAllOrder.action">我的订单</a></li>
+								<li><a href="../mi/getAllGroupOrder.action">团购订单</a></li>
+								<li><a href="../mi/getWaitCommentProduct.action">评价晒单</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">个人中心</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                               <li><a href="disPlayMyPersonalCenter.action">我的个人中心</a></li>
+								<li><a href="displayMessage.action">消息通知</a></li>
+								<li><a href="displayLikeProduct.action">喜欢的商品</a></li>
+								<li><a href="displayCoupon.action">优惠券</a></li>
+								<li><a href="displayReceiverAddress.action">收货地址</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">售后服务</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li><a href="asSelectTables.action">服务记录</a> </li>
+								<li> <a href="AasApplyWay.jsp">申请服务</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="uc-nav-box">
+                        <div class="box-hd">
+                            <h3 class="title">账户管理</h3>
+                        </div>
+                        <div class="box-bd">
+                            <ul class="uc-nav-list">
+                                <li><a href="../mi/selectUser.jsp">个人信息</a></li>
+								<li><a href="../mi/updatePassword.jsp">修改密码</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 				</div>
 				<!-- 左侧任务栏 END-->
 
@@ -155,7 +194,7 @@
 										<h3>快速申请</h3>
 										<p>
 											小米网 / 小米商城App购买的订单 <br /> 支持通过订单快速申请
-										</p> <a class="btn btn-line-green" href="getAllOrders.action">前往订单</a></li>
+										</p> <a class="btn btn-line-green" href="getAllOrder.action">前往订单</a></li>
 									<li><i class="icon icon-fill"></i>
 										<h3>填写申请单</h3>
 										<p>
