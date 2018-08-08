@@ -154,7 +154,7 @@ $(document).ready(function(){
 	})
 	
 	//选择地址样式变化
-	$(".address-item").click(function(){
+	$("body").on("click",".address-item",function(){
 		$(".address-item").removeClass("selected");
 		$(this).addClass("selected");
 	});

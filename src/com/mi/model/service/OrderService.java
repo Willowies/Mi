@@ -25,6 +25,7 @@ import com.mi.model.dao.CouponDAO;
 import com.mi.model.dao.InvoiceDAO;
 import com.mi.model.dao.OrderDAO;
 import com.mi.model.dao.ReceiverAddressDAO;
+import com.mi.model.dao.SpikeProductDAO;
 import com.mi.model.dao.StockDAO;
 
 @Service
@@ -41,6 +42,8 @@ public class OrderService {
 	private ReceiverAddressDAO receiverAddressDAO;
 	@Autowired
 	private InvoiceDAO invoiceDAO;
+	@Autowired
+	private SpikeProductDAO spikeProductDAO;
 	
 	//查找购物车条目
 	public List<CartItem> findCartItems(int[] cartItemIds){
@@ -246,7 +249,7 @@ public class OrderService {
 	
 	public int paySpikeOrder(int orderId,int spikeProductId){
 		//判断当前秒杀人数和秒杀数量的对比
-		SpikeProduct s = orderDAO.getSpikeProduct(spikeProductId);
+		SpikeProduct s = spikeProductDAO.selectSpikeProductById(spikeProductId);
 		if(s.getCurrentSpikeNum()==s.getSpikeQuantity()){
 			orderDAO.closePayOrder(orderId);
 			return 1;
