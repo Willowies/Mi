@@ -96,4 +96,29 @@ public class CartItemController extends BaseController{
 		model.addAttribute("products", products);
 		return "gotoCart";
 	}
+	
+	@RequestMapping("displayProductSummary")
+	public String displayProductSummary(String productName){
+		if(productName=="小米8"){
+			return "xiaomi8";
+		}else if(productName=="小米平板4"){
+			return "miPad4";
+		}else if(productName=="小米电视4"){
+			return "TV4";
+		}else if(productName=="红米note5"){
+			return "miNote5";
+		}else if(productName=="小米游戏本"){
+			return "gameBook";
+		}else if(productName=="米家空气净化器Pro"){
+			return "airClean";
+		}else if(productName=="小米6X 极简保护壳"){
+			return "mi6X";
+		}else if(productName=="红米S2 标准高透膜"){
+			return "miS2";
+		}else if(productName=="小米USB充电器快充版（18W）"){
+			return "miUsbCharger";
+		}else{
+			return "miUsbCharger";
+		}
+	}
 }

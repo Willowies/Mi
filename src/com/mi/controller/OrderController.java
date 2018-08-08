@@ -20,6 +20,7 @@ import com.mi.model.bean.Product;
 import com.mi.model.bean.ReceiverAddress;
 import com.mi.model.bean.User;
 import com.mi.model.service.HomeService;
+import com.mi.model.service.LikeProductService;
 import com.mi.model.service.OrderService;
 import com.mi.utils.BaseController;
 
@@ -30,6 +31,8 @@ public class OrderController extends BaseController{
 	private OrderService orderService;
 	@Autowired
 	private HomeService homeService;
+	@Autowired
+	private LikeProductService likeProductService;
 	
 	@RequestMapping("updateCalCartItems")
 	public String updateCalCartItems(int[] cartItemIds,Model model,HttpSession session){
@@ -163,6 +166,27 @@ public class OrderController extends BaseController{
 			model.addAttribute("orderResult",orderResult);
 			List<Product> products = homeService.getRecommendProducts();
 			model.addAttribute("recommendProduct", products);
+		
+			Date orderDate = new Date();
+			new Thread(new Runnable(){
+				public void run(){
+					System.out.println("进入线程");
+					while(true){
+						Date now = new Date();
+						//if(now.getTime() - orderDate.getTime()>1000*60*15){
+						if(now.getTime() - orderDate.getTime()>1000*60*2){
+							likeProductService.addLogisticsMessage(orderId);
+							break;
+						}
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}).start();
 			return "pay-success";
 		}
 	}
