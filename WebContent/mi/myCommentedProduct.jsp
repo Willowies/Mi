@@ -125,7 +125,7 @@
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
 						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item">
+						<li id="navItem9" class="nav-item-service">
 							<a href="Service.jsp">服务</a>
 						</li>
 						<li id="navItem10" class="nav-item">社区</li>

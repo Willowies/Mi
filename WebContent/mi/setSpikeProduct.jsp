@@ -180,7 +180,7 @@
 	
 	%>
 				<c:if test="${state == 'ableChange'}">
-					<div class="choosetime">
+					<div class="choosetime" style="width: 520px;">
 						<span>选择商品进行添加 </span>
 						<select class="firstClass"></select>
 						<select class="secondClass"></select>
@@ -270,7 +270,7 @@
 				<%
 		} else {
 	%>
-				<p style="margin-left: 170px;">未查询到数据</p3>
+				<p style="    margin: 50px auto;">当前场次没有抢购商品</p3>
 					<%
 		}
 	

@@ -126,7 +126,7 @@
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
 						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item">
+						<li id="navItem9" class="nav-item-service">
 							<a href="Service.jsp">服务</a>
 						</li>
 						<li id="navItem10" class="nav-item">社区</li>
@@ -247,7 +247,7 @@
 								</li>
 
 							</ul>
-							<form id="searchOrder" class="search-order" action="getOrderByProductName.action" method="post">4
+							<form id="searchOrder" class="search-order" action="getOrderByProductName.action" method="post">
 								<input class="search-text" type="search" id="" name="productName" autocomplete="off" placeholder="输入商品名称 搜索订单" /> <input name="orderType" value="3" style="display: none;" />
 								<input type="submit" class="search-btn" value="搜索" />
 							</form>
@@ -357,7 +357,7 @@
 										</c:if>
 										<c:if test="${p!=page}">
 											<li>
-												<a href='<c:if test="${page != 1}"><c:if test="${type == 1}">getAllGroupOrder</c:if><c:if test="${type == 2}">getGroupOrderWaitPaid</c:if><c:if test="${type == 3}">getOrderGroupWaitTaken</c:if><c:if test="${type == 4}">getGroupOrderClosed</c:if><c:if test="${type == 5}">getGroupOrderWaitBuilt</c:if>.action?page=${p}</c:if>'>${p}</a>
+												<a href='<c:if test="${type == 0}">getOrderByProductName</c:if><c:if test="${type == 1}">getAllGroupOrder</c:if><c:if test="${type == 2}">getGroupOrderWaitPaid</c:if><c:if test="${type == 3}">getOrderGroupWaitTaken</c:if><c:if test="${type == 4}">getGroupOrderClosed</c:if><c:if test="${type == 5}">getGroupOrderWaitBuilt</c:if>.action?page=${p}<c:if test="${type == 0}">&orderType=3</c:if>'>${p}</a>
 											</li>
 										</c:if>
 										&nbsp;&nbsp;

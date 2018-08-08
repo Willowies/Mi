@@ -126,7 +126,7 @@
 						<li id="navItem6" class="nav-item">新品</li>
 						<li id="navItem7" class="nav-item">路由器</li>
 						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item">
+						<li id="navItem9" class="nav-item-service">
 							<a href="Service.jsp">服务</a>
 						</li>
 						<li id="navItem10" class="nav-item">社区</li>
@@ -346,13 +346,14 @@
 										</c:if>
 										<c:if test="${p!=page}">
 											<li>
-												<a href='<c:if test="${page != 1}"><c:if test="${type == 1}">getAllOrder</c:if><c:if test="${type == 2}">getOrderWaitPaid</c:if><c:if test="${type == 3}">getOrderWaitTaken</c:if><c:if test="${type == 4}">getOrderClosed</c:if>.action?page=${p}</c:if>'>${p}</a>
+												<a href='<c:if test="${type == 0}">getOrderByProductName</c:if><c:if test="${type == 1}">getAllOrder</c:if><c:if test="${type == 2}">getOrderWaitPaid</c:if><c:if test="${type == 3}">getOrderWaitTaken</c:if><c:if test="${type == 4}">getOrderClosed</c:if>.action?page=${p}'>
+												${p}</a>
 											</li>
 										</c:if>
 										&nbsp;&nbsp;
 									</c:forEach>
 									<li <c:if test="${page eq pageTotal}">class="disabled "</c:if>>
-										<a href='<c:if test="${page != 1}"><c:if test="${type == 1}">getAllOrder</c:if><c:if test="${type == 2}">getOrderWaitPaid</c:if><c:if test="${type == 3}">getOrderWaitTaken</c:if><c:if test="${type == 4}">getOrderClosed</c:if>.action?page=${page+1}</c:if>'><i class="fa fa-angle-right "></i></a>
+										<a href='<c:if test="${page != pageTotal}"><c:if test="${type == 1}">getAllOrder</c:if><c:if test="${type == 2}">getOrderWaitPaid</c:if><c:if test="${type == 3}">getOrderWaitTaken</c:if><c:if test="${type == 4}">getOrderClosed</c:if>.action?page=${page+1}</c:if>'><i class="fa fa-angle-right "></i></a>
 									</li>
 
 								</ul>

@@ -193,7 +193,7 @@
 								
 								<input placeholder="成团最低数" name="leastGroupNum" type="number" min="1" required="required"/> &nbsp;&nbsp;&nbsp;
 								<input id="pMax" placeholder="团购商品总数" name="maxGroupProductNum" type="number" min="1" max="100" required="required" /> &nbsp;&nbsp;&nbsp;
-								<input placeholder="团购价格" name="groupPrice" type="number" min="1"  required="required"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input placeholder="团购价格" name="groupPrice" type="number" min="1"  required="required"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<span>开始时间:</span><input placeholder="开始时间" name="beginDate" type="date" required="required" onblur="date1()"/> &nbsp;&nbsp;&nbsp;
 								<span>结束时间:</span><input placeholder="结束时间" name="endDate" type="date" required="required" onblur="dateEnd()" />
 							</div>
@@ -244,7 +244,7 @@
 	<%
 		} else {
 	%>
-		<p style="margin: 50px auto;">未设置团购商品</p3>
+		<p style="margin: 50px auto;">没有还未开始的团购商品</p3>
 			<%
 		}
 	}
