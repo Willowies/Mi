@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="java.util.List"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -121,7 +120,7 @@
 			<div class="container2">
 				<a href="homepage.jsp">首页</a>
 				<span class="sep"></span>
-					<span>个人中心</span>
+					<span>>分类页面</span>
 			</div>
 		</div>
 		
@@ -147,7 +146,7 @@
 							"元起"
 						</p>
 						<p class="link">
-							<a href="selectProductInfo.action?productName=#{p.productName} } ">了解产品 &gt;</a>
+							<a href="selectProductInfo.action?productName=${p.productName}">了解产品</a>
 						</p>
 					</div>
 				</div>

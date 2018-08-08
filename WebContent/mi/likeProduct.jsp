@@ -218,7 +218,7 @@
 										<li class="goods-item">
 										<div class="figure-img">
 											<a>
-												<img src="../${likeProduct.product.picUrl}">
+												<img src="../${likeProduct.product.picUrl};h=200,w=200">
 											</a>
 										</div>
 										<h3 class="goods-item-title">
@@ -230,9 +230,9 @@
 											${likeProduct.product.productPrice}
 										</p>
 										<div class="actions">
-											<a class="btn btn-line-gray btn-small">删除</a>
+											<a class="btn btn-line-gray btn-small" href="deleteLikeProduct.action?likeProductId=${likeProduct.likeProductId}">删除</a>
 											<!-- 跳转到立即购买页面 -->
-											<a class="btn btn-primary btn-small" href="selectProductInfo.aciton?productName=${likeProduct.product.productName}">查看详情</a>
+											<a class="btn btn-primary btn-small" href="selectProductInfo.action?productName=${likeProduct.product.productName}">查看详情</a>
 										</div>
 									</li>
 									</c:forEach>

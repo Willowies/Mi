@@ -143,11 +143,15 @@ public class PersonalCenterController {
 		
 		return "redirect:displayReceiverAddress.action";
 	}
-	
 	@RequestMapping("deleteReceiverAddress")
 	public String deleteReceiverAddress(Integer receiverAddressId) {
 		receiverAddressService.deleteReceiverAddress(receiverAddressId);
 		return "redirect:displayReceiverAddress.action";
+	}
+	@RequestMapping("deleteLikeProduct")
+	public String deleteLikeProduct(Integer likeProductId) {
+		likeProductService.deleteLikeProduct(likeProductId);
+		return "redirect:displayLikeProduct.action";
 	}
 	@RequestMapping("updateReceiverAddress")
 	public String updateReceiverAddress(ReceiverAddress receiverAddress) {

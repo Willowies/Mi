@@ -83,3 +83,7 @@
     font-size: 12px;
     line-height: 28px;
 }
+.figure-img a img{
+	height: 200px;
+	width: 200px;
+}
