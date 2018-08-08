@@ -70,5 +70,12 @@ public class GroupPurchaseController {
 		OrderProduct result = groupPurchaseService.getOrderProduct(groupProductId); 
 		session.setAttribute("orderProduct", result);
 	}
-	
+	@RequestMapping("provideOrderProductForJoin")
+	public void getOrderProductForJoin(HttpServletRequest request, HttpSession session) {
+		int groupProductId = Integer.parseInt((String)request.getParameter("groupProductId"));
+		int groupId = Integer.parseInt((String)request.getParameter("groupId"));
+		session.setAttribute("groupId", groupId);
+		OrderProduct result = groupPurchaseService.getOrderProduct(groupProductId); 
+		session.setAttribute("orderProduct", result);
+	}
 }

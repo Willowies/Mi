@@ -15,7 +15,7 @@ function initData(){
 				var str = "<span class='user'><a class='username'>"
 						+"<span class='name'>"+data.userName+" </span>"
 						+"<i class='fa fa-angle-down fa-lg'></i></a><ul class='user-menu' style='display:none;'>"
-						+"<li><a href=''>个人中心</a></li><li><a href=''>评价晒单</a></li><li><a href=''>我的喜欢</a></li>"
+						+"<li><a href='disPlayMyPersonalCenter.action'>个人中心</a></li><li><a href=''>评价晒单</a></li><li><a href=''>我的喜欢</a></li>"
 						+"<li><a href=''>小米账户</a></li><li><a href=''>退出登录</a></li></ul></span><span class='sep'>|</span>"
 						+"<span class='message'><a rel='nofollow' href=''>消息通知</a></span><span class='sep'>|</span>"
 						+"<a rel='nofollow' href='' class='myOrder'>我的订单</a>";
@@ -114,6 +114,12 @@ function initData(){
 					+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
 				$(".elecInfo").children("div").eq(0).append(str);
 			}
+			//浮动特效
+			$(".elecInfoEle div.phoneInfo-item").hover(function(){
+				$(this).addClass("brick-item-active");
+			},function(){
+				$(this).removeClass("brick-item-active");
+			});
 			console.log("Load finished--popular applianceproduct");
 		},
 	});
@@ -173,6 +179,12 @@ function initData(){
 				}
 				$(".accessoryInfo").children("div").eq(0).append(str);
 			}
+			//浮动特效
+			$(".elecInfoEle div.phoneInfo-item").hover(function(){
+				$(this).addClass("brick-item-active");
+			},function(){
+				$(this).removeClass("brick-item-active");
+			});
 			console.log("Load finished--popular collocationproduct");
 		},
 	});

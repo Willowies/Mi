@@ -32,7 +32,7 @@ function initData2(){
 //				console.log("groupProductId "+$("#groupProductId").text());
 //				console.log("groupId "+$(groupId).text());
 				$(joinGroup).click(function(){
-					provideOrderProduct();//同步
+					provideOrderProductForJoin($(groupId).text());//同步
 					window.location.href="joinGroup.action?groupProductId="+$("#groupProductId").text()+"&groupId="+$(groupId).text();
 				});
 			}
@@ -125,6 +125,24 @@ function initData2(){
 	    }
 	    return result[1];
 	}
+	/*
+	 * 参团，提供数据给确认订单。
+	 */
+	function provideOrderProductForJoin(groupId){
+		$.ajax({
+			type:"POST",
+			async:false,
+			data:{
+				groupProductId:$("#groupProductId").text(),
+				groupId:groupId
+			},
+			dataType:"json",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+			url:"provideOrderProductForJoin.action",
+			success:function(data){
+			},
+		});
+	}
 }
 
 $(document).ready(function(){
@@ -167,7 +185,7 @@ $(document).ready(function(){
 	});
 	
 	/*
-	 * 参团、开团，提供数据给确认订单。
+	 * 开团，提供数据给确认订单。
 	 */
 	function provideOrderProduct(){
 		$.ajax({
@@ -183,6 +201,7 @@ $(document).ready(function(){
 			},
 		});
 	}
+	
 	
 });
 
