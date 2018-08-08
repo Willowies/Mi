@@ -226,7 +226,7 @@
 												<div class="section-bd ">
 
 													<ul class="service-label-list service-label-list-large clearfix ">
-														<li class="" data-toggle="step " ><label><input type="radio" onclick="showDetail() " name="asWay" value="维修"  /><i class="icon icon-11 "></i>维修</label></li>
+														<li class="" data-toggle="step " ><label class="labelActive"><input type="radio" onclick="showDetail() " name="asWay" value="维修"  /><i class="icon icon-11 "></i>维修</label></li>
 													</ul>
 													<p class="tip ">* 您的商品支持维修服务 </p>
 												</div>
@@ -262,19 +262,19 @@
 												<div class="section-bd ">
 													<ul id="J_serviceWayList " class="service-label-list service-label-list-large-detail clearfix J_labelList ">
 														<li data-toggle="step " class="sw " id=wx>
-															<label>
+															<label class="labelActive">
                                             <input type="radio" name="asBack" value="寄修" onclick="nextStep()" /> 寄修  
                                             <span class="desc ">审核通过后，寄送商品，小米售后为您服务。</span>
                                         </label>
 														</li>
 														<li data-toggle="step " class="sw " id=wx>
-															<label>
+															<label class="labelActive">
                                             <input type="radio" name="asBack" value="到家" onclick="nextStep()" /> 到家
                                             <span class="desc ">审核通过后，工程师上门为您服务。</span>
                                         </label>
 														</li>
 														<li data-toggle="step " class="sw" id=wx>
-															<label>
+															<label class="labelActive">
                                             <input type="radio" name="asBack" value="到店" onclick="nextStep()" />到店
                                             <span class="desc ">亲临授权门店，售后专家为您服务。</span>
                                         </label>
@@ -443,4 +443,12 @@
 		document.getElementById("showNextStep ").style.display="block ";
 	}
 </script>
+
+<script type="text/javascript">
+	$(".labelActive").click(function(){
+		$(".labelActive").removeClass("active");
+		$(this).addClass("active");
+	})
+</script>
+
 </html>

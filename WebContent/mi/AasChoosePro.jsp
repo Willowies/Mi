@@ -227,8 +227,8 @@
                         </div>
                         <div class="section-bd">
                             <ul class="service-label-list clearfix J_labelList J_invoiceToggle">
-                                <li><label class="active"><input type="radio" name="invoice" value="1 " checked  onclick="showInvoice()"/>有发票</label></li>
-                                <li><label><input type="radio" name="invoice" value="0" onclick="hideInvoice()" />无发票</label></li>
+                                <li><label class="labelActive active"><input type="radio" name="invoice" value="1 " onclick="showInvoice()" />有发票</label></li>
+                                <li><label class="labelActive"><input type="radio" name="invoice" value="0" onclick="hideInvoice()" />无发票</label></li>
                             </ul>
                             <div class="invoice-info J_invoiceInfo" id="invoicePic">
                                 <h3 class="label-title">发票日期</h3>
@@ -244,8 +244,8 @@
                                 <h3 class="label-title label-title-row">上传发票照片 (支持jpg、png、gif格式)</h3>
                                 <fieldset class="form-section">
                                     <div id="invoiceImgContainer" class="uploader clearfix">
-                                         <label class="btn-uploader J_btnUploader" onclick="uploadImg()" for="uploadImage">上传图片</label>
-                                                <input type="file" name="asInvoiceUrl" value="" id="uploadImage" hidden="hidden" accept="image/gif, image/jpg, image/png" >
+                                         <label class="btn-uploader J_btnUploader"  for="uploadImage">上传图片</label>
+                                         <input type="file" name="asInvoiceUrl" id="uploadImage" hidden="hidden" accept="image/gif, image/jpg, image/png" >
                                     </div>  
                                 </fieldset>
                             </div>
@@ -279,6 +279,15 @@
 		document.getElementById("invoicePic").style.display="block";
 	}
 </script>
+
+<script type="text/javascript">
+	$(".labelActive").click(function(){
+		$(".labelActive").removeClass("active");
+		$(this).addClass("active");
+	})
+</script>
+
+
 <!-- 以下是时间选择器的js代码 -->
 <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
 	<script>window.jQuery || document.write('<script src="../datePicker/dist/js/jquery-1.11.0.min.js"><\/script>')</script>

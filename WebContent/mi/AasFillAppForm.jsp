@@ -217,7 +217,7 @@
                         </div>
                         <div class="section-bd ">
                             <ul class="service-label-list service-label-list-large-detail clearfix J_labelList J_collectSwitch " data-tab-target="J_collectTypeContainer ">
-                                <li data-type="jx "><label><input type="radio" name="sendToMi" value="寄送" /><i class="icon icon-12 "></i>寄送给小米<span class="desc ">快递至小米维修中心</span></label></li>
+                                <li data-type="jx "><label class="labelActive"><input type="radio" name="sendToMi" value="寄送" /><i class="icon icon-12 "></i>寄送给小米<span class="desc ">快递至小米维修中心</span></label></li>
                             </ul>
                             <span id="to_pay_tip " style="color:red ">建议使用顺丰快递到付进行邮寄，由小米承担物流费用，其他快递暂时不支持到付 ；<br>7天无理由退货需扣取运费；保外维修会收取额外的快递费用</span>
                         </div>
@@ -237,12 +237,12 @@
                                         data-area-id=" " 
                                         data-district-id=" ">
                                             <div class="form-row clearfix ">
-                                                <fieldset class="form-section ">
+                                                <fieldset class="form-section">
                                                     <label class="input-label " for="shouhuo_user_name_2 ">姓名</label>
                                                     <input class="input-text " type="text" id="shouhuo_user_name_2 " name="asPerson" placeholder="姓名 "  required="required"/>
                                                 </fieldset>
-                                                <fieldset class="form-section ">
-                                                    <label class="input-label " for="shouhuo_tel_2 ">手机号</label>
+                                                <fieldset class="form-section">
+                                                   <label class="input-label " for="shouhuo_tel_2 ">手机号</label>
                                                     <input class="input-text " type="tel" id="shouhuo_tel_2 " name="asPhone" placeholder="输入你的手机号码 " maxlength="11 " required="required" />
                                                 </fieldset>
                                             </div>
@@ -278,11 +278,10 @@
                                                         </div>
                                                     </div>
                                                 </fieldset>     
-                                            </div>
-                                            <fieldset class="form-section ">
-                                                <label class="input-label " for="shouhuo_user_address_2 ">详细地址</label>
-                                                <textarea class="input-text" id="shouhuo_user_address_2" name="addressDetail" placeholder="详细地址，路名或街道名称，门牌号"></textarea>
-                                            </fieldset>
+                                            </div>     
+                                                <div class="other-input J_otherInput ">
+														<textarea placeholder="请输入具体问题... " class="input-text "  name="asDescription " id="issue-other " required="required"></textarea>
+												</div>        
                                         </div>
                                     </div>
                                 </div>
@@ -441,6 +440,13 @@
 
 
 </body>
+<script type="text/javascript">
+	$(".labelActive").click(function(){
+		$(".labelActive").removeClass("active");
+		$(this).addClass("active");
+	})
+</script>
+
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script src="../js/asAreaInfo.js"></script>
 <script src="../js/asSelectArea.js"></script>
