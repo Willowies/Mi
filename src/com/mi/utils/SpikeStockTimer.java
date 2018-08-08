@@ -12,8 +12,9 @@ public class SpikeStockTimer {
 	@Autowired
 	private ProductSpikeService productSpikeService;
 	
-	@Scheduled(cron="0 0 11,13,19,21,23 * * ?")
+	@Scheduled(cron="0 0 0 * * ?")
 	public void handleSpikeStock(){
+		System.out.println("进入定时任务");
 		productSpikeService.updateSpikeStock();
 	}	
 

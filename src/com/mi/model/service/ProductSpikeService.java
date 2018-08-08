@@ -218,11 +218,11 @@ public class ProductSpikeService {
 			}
 			List<SpikeProduct> spikeProductList = spikeProductDAO.selectSpikeStock(exeDate);
 			for(int j = 0; j < spikeProductList.size(); j++){
-				int remainStock = spikeProductList.get(i).getSpikeQuantity() - spikeProductList.get(i).getCurrentSpikeNum();
+				int remainStock = spikeProductList.get(j).getSpikeQuantity() - spikeProductList.get(j).getCurrentSpikeNum();
 				if(remainStock > 0){
 					//秒杀商品有剩余，加到商品库存中的可分配量中
 					Map<String, Object> map = new HashMap<String, Object>();
-					map.put("productId", spikeProductList.get(i).getProductId());
+					map.put("productId", spikeProductList.get(j).getProductId());
 					map.put("remainStock", remainStock);
 					stockDAO.updateSpikeStock1(map);
 				}
