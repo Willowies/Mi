@@ -196,7 +196,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <insert id="addGroupOrderProduct">
     	insert into orderproduct(orderItemId,productId,quantity,sn,productPrice,orderId)
-    	values(#{orderItemId},#{orderProduct.product.productId},#{orderProduct.quantity},#{orderItemId},#{orderProduct.product.productPrice},#{orderId})
+    	values(#{orderItemId},#{orderProduct.product.productId},#{orderProduct.quantity},#{orderItemId},#{orderProduct.productPrice},#{orderId})
     </insert>
     
     <select id="selectOrderItemId" resultType="int">

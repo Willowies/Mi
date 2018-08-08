@@ -203,7 +203,7 @@
 								<li class="total-price">
 									<label>应付总额：</label>
 									<span class="val">
-										<em id="actualFee"></em>
+										<em id="actualFee">${actualFee}</em>
 										元
 									</span>
 								</li>

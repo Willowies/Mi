@@ -59,9 +59,14 @@ public class OrderController extends BaseController{
 	public String joinGroup(Model model,HttpSession session){
 		//session.setAttribute("orderProduct", orderProduct);
 		OrderProduct orderProduct = (OrderProduct)session.getAttribute("orderProduct");
+		String extremeName = orderProduct.getProduct().getProductName()+" "+orderProduct.getProduct().getColor()+" "+orderProduct.getProduct().getVersion()+" "+orderProduct.getProduct().getSize();
+		extremeName = extremeName.replace("null", "");
+		orderProduct.getProduct().setExtremeName(extremeName);
 		model.addAttribute("itemNum", 1);
 		float total = orderProduct.getAmount();
 		model.addAttribute("total",total);
+		float actualFee = total+10;
+		model.addAttribute("actualFee",actualFee);
 		User user = (User)session.getAttribute("user");
 		//查找用户地址
 		List<ReceiverAddress> addresses = orderService.selectAddress(user.getUserId());
@@ -73,10 +78,16 @@ public class OrderController extends BaseController{
 	public String addGroup(Model model,HttpSession session){
 		//session.setAttribute("orderProduct", orderProduct);
 		OrderProduct orderProduct = (OrderProduct)session.getAttribute("orderProduct");
+		String extremeName = orderProduct.getProduct().getProductName()+" "+orderProduct.getProduct().getColor()+" "+orderProduct.getProduct().getVersion()+" "+orderProduct.getProduct().getSize();
+		extremeName = extremeName.replace("null", "");
+		orderProduct.getProduct().setExtremeName(extremeName);
 		model.addAttribute("itemNum", 1);
 		System.out.println(orderProduct.getProductPrice());
 		float total = orderProduct.getAmount();
+		//total = total+10;
 		model.addAttribute("total",total);
+		float actualFee = total+10;
+		model.addAttribute("actualFee",actualFee);
 		User user = (User)session.getAttribute("user");
 		//查找用户地址
 		List<ReceiverAddress> addresses = orderService.selectAddress(user.getUserId());
@@ -241,11 +252,16 @@ public class OrderController extends BaseController{
 	}
 	
 	@RequestMapping("updateSpikeOrder")
-	public String updateSpikeOrder(@RequestBody OrderProduct orderProduct,Model model,HttpSession session){
-		session.setAttribute("orderProduct", orderProduct);
+	public String updateSpikeOrder(Model model,HttpSession session){
+		OrderProduct orderProduct = (OrderProduct)session.getAttribute("orderProduct");
+		String extremeName = orderProduct.getProduct().getProductName()+" "+orderProduct.getProduct().getColor()+" "+orderProduct.getProduct().getVersion()+" "+orderProduct.getProduct().getSize();
+		extremeName = extremeName.replace("null", "");
+		orderProduct.getProduct().setExtremeName(extremeName);
 		model.addAttribute("itemNum", 1);
 		float total = orderProduct.getAmount();
 		model.addAttribute("total",total);
+		float actualFee = total+10;
+		model.addAttribute("actualFee",actualFee);
 		User user = (User)session.getAttribute("user");
 		//查找用户地址
 		List<ReceiverAddress> addresses = orderService.selectAddress(user.getUserId());
