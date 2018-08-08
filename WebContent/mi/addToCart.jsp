@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -138,7 +139,7 @@
 				<div class="recommond">
 					<div class="carousel-wrapper">
 						<ul class="carousel-list">
-							<li class="recommond-list">
+							<!-- <li class="recommond-list">
 								<dl>
 									<dt>
 										<a>
@@ -151,133 +152,23 @@
 									<dd class="recommond-price">49元</dd>
 									<dd class="recommond-tip">2万人好评</dd>
 								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt>
-										<a>
-											<img src="../images/example.jpg" />
-										</a>
-									</dt>
-									<dd class="recommond-name">
-										<a>米家感应夜灯</a>
-									</dd>
-									<dd class="recommond-price">49元</dd>
-									<dd class="recommond-tip">2万人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt>
-										<a>
-											<img src="../images/example.jpg" />
-										</a>
-									</dt>
-									<dd class="recommond-name">
-										<a>米家感应夜灯</a>
-									</dd>
-									<dd class="recommond-price">49元</dd>
-									<dd class="recommond-tip">2万人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt>
-										<a>
-											<img src="../images/example.jpg" />
-										</a>
-									</dt>
-									<dd class="recommond-name">
-										<a>米家感应夜灯</a>
-									</dd>
-									<dd class="recommond-price">49元</dd>
-									<dd class="recommond-tip">2万人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt>
-										<a>
-											<img src="../images/example.jpg" />
-										</a>
-									</dt>
-									<dd class="recommond-name">
-										<a>米家感应夜灯</a>
-									</dd>
-									<dd class="recommond-price">49元</dd>
-									<dd class="recommond-tip">2万人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt>
-										<a>
-											<img src="../images/cartpic.jpg" />
-										</a>
-									</dt>
-									<dd class="recommond-name">
-										<a>米家感应夜灯</a>
-									</dd>
-									<dd class="recommond-price">49元</dd>
-									<dd class="recommond-tip">2万人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt>
-										<a>
-											<img src="../images/cartpic.jpg" />
-										</a>
-									</dt>
-									<dd class="recommond-name">
-										<a>米家感应夜灯</a>
-									</dd>
-									<dd class="recommond-price">49元</dd>
-									<dd class="recommond-tip">2万人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt>
-										<a>
-											<img src="../images/cartpic.jpg" />
-										</a>
-									</dt>
-									<dd class="recommond-name">
-										<a>米家感应夜灯</a>
-									</dd>
-									<dd class="recommond-price">49元</dd>
-									<dd class="recommond-tip">2万人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt>
-										<a>
-											<img src="../images/cartpic.jpg" />
-										</a>
-									</dt>
-									<dd class="recommond-name">
-										<a>米家感应夜灯</a>
-									</dd>
-									<dd class="recommond-price">49元</dd>
-									<dd class="recommond-tip">2万人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt>
-										<a>
-											<img src="../images/cartpic.jpg" />
-										</a>
-									</dt>
-									<dd class="recommond-name">
-										<a>米家感应夜灯</a>
-									</dd>
-									<dd class="recommond-price">49元</dd>
-									<dd class="recommond-tip">2万人好评</dd>
-								</dl>
-							</li>
+							</li> -->
+							<c:forEach items="${recommendProduct}" var="rProduct">
+								<li class="recommond-list">
+									<dl>
+										<dt>
+											<a>
+												<img src="../${rProduct.picUrl}" />
+											</a>
+										</dt>
+										<dd class="recommond-name">
+											<a>${rProduct.productName}</a>
+										</dd>
+										<dd class="recommond-price">${rProduct.productPrice}元</dd>
+										<dd class="recommond-tip">2万人好评</dd>
+									</dl>
+								</li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>

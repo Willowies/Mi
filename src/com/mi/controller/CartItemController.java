@@ -14,6 +14,7 @@ import com.mi.model.bean.Product;
 import com.mi.model.bean.User;
 import com.mi.model.dao.CartItemDAO;
 import com.mi.model.service.CartItemService;
+import com.mi.model.service.HomeService;
 import com.mi.utils.BaseController;
 
 @Controller
@@ -21,6 +22,8 @@ import com.mi.utils.BaseController;
 public class CartItemController extends BaseController{
 	@Autowired
 	private CartItemService cartItemService;
+	@Autowired
+	private HomeService homeService;
 	
 	//待删，向session中加入userId
 	@RequestMapping("addUserId")
@@ -37,6 +40,9 @@ public class CartItemController extends BaseController{
 		User user = (User)session.getAttribute("user");
 		List<CartItem> list = cartItemService.findCartItem(user.getUserId());
 		model.addAttribute("resultList",list);
+		List<Product> products = homeService.getRecommendProducts();
+		model.addAttribute("recommendProduct", products);
+		System.out.println("获得了推荐商品，且推荐商品的数量为"+products.size());
 		return "cart";
 	}
 	
@@ -78,6 +84,8 @@ public class CartItemController extends BaseController{
 			CartItem cartItem = cartItemService.selectCartItem(productId,user.getUserId());
 			model.addAttribute("cartItem", cartItem);
 			//model.addAttribute("message", "商品已加入购物车");
+			List<Product> products = homeService.getRecommendProducts();
+			model.addAttribute("recommendProduct", products);
 			return "addToCart";
 		}
 	}

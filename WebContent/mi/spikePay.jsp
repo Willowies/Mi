@@ -323,6 +323,7 @@
 	%>
 		<script type="text/javascript">
 		alert("<%=message%>");
+		window.location.href="spikeProduct.jsp";
 		</script>
 	<%
 		}

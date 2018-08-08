@@ -173,7 +173,7 @@
 											<a>${orderProduct.product.extremeName}</a>
 										</div>
 										<div class="col col-price">
-											${orderProduct.product.productPrice}元  × 1
+											${orderProduct.productPrice}元  × 1
 										</div>
 										<div class="col col-status">
 										
@@ -303,31 +303,31 @@
 					<div class="form-box clearfix">
 						<div class="form-section form-name">
 							<div class="input-label">姓名</div>
-							<input class="input-text" type="text"  id="inputReceiverName" />
+							<input class="input-text" type="text"  id="inputReceiverName" maxLength="12"/>
 						</div>
 						<div class="form-section form-phone">
 							<div class="input-label">手机号</div>
-							<input class="input-text" type="text"  id="inputReceiverPhone" />
+							<input class="input-text" type="text"  id="inputReceiverPhone" maxLength="15"/>
 						</div>
 						<div class="form-section form-province">
 							<div class="input-label">省</div>
-							<input class="input-text" type="text"  id="inputReceiverProvince" />
+							<input class="input-text" type="text"  id="inputReceiverProvince" maxLength="5"/>
 						</div>
 						<div class="form-section form-city">
 							<div class="input-label">市</div>
-							<input class="input-text" type="text"  id="inputReceiverCity" />
+							<input class="input-text" type="text"  id="inputReceiverCity" maxLength="5"/>
 						</div>
 						<div class="form-section form-district">
 							<div class="input-label">区</div>
-							<input class="input-text" type="text"  id="inputReceiverDistrict" />
+							<input class="input-text" type="text"  id="inputReceiverDistrict" maxLength="5"/>
 						</div>
 						<div class="form-section form-detail">
 							<div class="input-label">详细地址</div>
-							<input class="input-text" type="text"  id="inputAddress" />
+							<input class="input-text" type="text"  id="inputAddress" maxLength="200"/>
 						</div>
 						<div class="form-section form-label">
 							<div class="input-label">地址标签</div>
-							<input class="input-text" type="text"  id="inputAddressLabel" />
+							<input class="input-text" type="text"  id="inputAddressLabel" maxLength="5"/>
 						</div>
 					</div>
 				</div>

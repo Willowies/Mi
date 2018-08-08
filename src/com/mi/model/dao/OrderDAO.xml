@@ -186,7 +186,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <select id="selectOrderId" resultType="int">
-    	select max(orderId) from mi.order
+    	select ifnull(max(orderId),0)+1 from mi.order
     </select>
     
     <insert id="addOrderProduct" parameterType="map">

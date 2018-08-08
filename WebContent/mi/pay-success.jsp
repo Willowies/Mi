@@ -183,7 +183,7 @@
 				<div class="recommond">
 					<div class="carousel-wrapper" style="height: 320px;overflow: hidden;">
 						<ul class="carousel-list clearfix" style="width: 2480px;margin-left: 0px;transition: margin-left 0.5s ease 0s;">
-							<li class="recommond-list">
+							<!-- <li class="recommond-list">
 								<dl>
 									<dt><a><img src="../images/cartpic.jpg"/></a></dt>
 									<dd class="recommond-name">
@@ -192,97 +192,17 @@
 									<dd class="recommond-price">3299元</dd>
 									<dd class="recommond-tip">2741人好评</dd>
 								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt><a><img src="../images/cartpic.jpg"/></a></dt>
-									<dd class="recommond-name">
-										小米8 全网通版 6GB内存 256GB
-									</dd>
-									<dd class="recommond-price">3299元</dd>
-									<dd class="recommond-tip">2741人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt><a><img src="../images/cartpic.jpg"/></a></dt>
-									<dd class="recommond-name">
-										小米8 全网通版 6GB内存 256GB
-									</dd>
-									<dd class="recommond-price">3299元</dd>
-									<dd class="recommond-tip">2741人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt><a><img src="../images/cartpic.jpg"/></a></dt>
-									<dd class="recommond-name">
-										小米8 全网通版 6GB内存 256GB
-									</dd>
-									<dd class="recommond-price">3299元</dd>
-									<dd class="recommond-tip">2741人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt><a><img src="../images/cartpic.jpg"/></a></dt>
-									<dd class="recommond-name">
-										小米8 全网通版 6GB内存 256GB
-									</dd>
-									<dd class="recommond-price">3299元</dd>
-									<dd class="recommond-tip">2741人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt><a><img src="../images/example.jpg"/></a></dt>
-									<dd class="recommond-name">
-										小米8 全网通版 6GB内存 256GB
-									</dd>
-									<dd class="recommond-price">3299元</dd>
-									<dd class="recommond-tip">2741人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt><a><img src="../images/example.jpg"/></a></dt>
-									<dd class="recommond-name">
-										小米8 全网通版 6GB内存 256GB
-									</dd>
-									<dd class="recommond-price">3299元</dd>
-									<dd class="recommond-tip">2741人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt><a><img src="../images/example.jpg"/></a></dt>
-									<dd class="recommond-name">
-										小米8 全网通版 6GB内存 256GB
-									</dd>
-									<dd class="recommond-price">3299元</dd>
-									<dd class="recommond-tip">2741人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt><a><img src="../images/example.jpg"/></a></dt>
-									<dd class="recommond-name">
-										小米8 全网通版 6GB内存 256GB
-									</dd>
-									<dd class="recommond-price">3299元</dd>
-									<dd class="recommond-tip">2741人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list">
-								<dl>
-									<dt><a><img src="../images/example.jpg"/></a></dt>
-									<dd class="recommond-name">
-										小米8 全网通版 6GB内存 256GB
-									</dd>
-									<dd class="recommond-price">3299元</dd>
-									<dd class="recommond-tip">2741人好评</dd>
-								</dl>
-							</li>
+							</li> -->
+							<c:forEach items="${recommendProduct}" var="rProduct">
+								<li class="recommond-list">
+									<dl>
+										<dt><a><img src="../${rProduct.picUrl}"/></a></dt>
+										<dd class="recommond-name">${rProduct.productName}</dd>
+										<dd class="recommond-price">${rProduct.productPrice}元</dd>
+										<dd class="recommond-tip">2741人好评</dd>
+									</dl>
+								</li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>

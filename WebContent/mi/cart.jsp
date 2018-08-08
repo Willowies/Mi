@@ -156,7 +156,7 @@
 					</h2>
 					<div class="recommond">
 						<ul class="row clearfix">
-							<li class="recommond-list span4">
+							<!-- <li class="recommond-list span4">
 								<dl>
 									<dt>
 										<a><img src="../images/recommend.png"/></a>
@@ -167,115 +167,19 @@
 									<dd class="recommond-price">3499元</dd>
 									<dd class="recommond-tip">777人好评</dd>
 								</dl>
-							</li>
-							<li class="recommond-list span4">
+							</li> -->
+							<c:forEach items="${recommendProduct}" var="rProduct">
+								<li class="recommond-list span4">
 								<dl>
 									<dt>
-										<a><img src="../images/recommend.png"/></a>
+										<a><img src="../${rProduct.picUrl}"/></a>
 									</dt>
-									<dd class="recommond-name">
-										九号平衡车 Plus
-									</dd>
-									<dd class="recommond-price">3499元</dd>
+									<dd class="recommond-name">${rProduct.productName}</dd>
+									<dd class="recommond-price">${rProduct.productPrice}元</dd>
 									<dd class="recommond-tip">777人好评</dd>
 								</dl>
 							</li>
-							<li class="recommond-list span4">
-								<dl>
-									<dt>
-										<a><img src="../images/recommend.png"/></a>
-									</dt>
-									<dd class="recommond-name">
-										九号平衡车 Plus
-									</dd>
-									<dd class="recommond-price">3499元</dd>
-									<dd class="recommond-tip">777人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list span4">
-								<dl>
-									<dt>
-										<a><img src="../images/recommend.png"/></a>
-									</dt>
-									<dd class="recommond-name">
-										九号平衡车 Plus
-									</dd>
-									<dd class="recommond-price">3499元</dd>
-									<dd class="recommond-tip">777人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list span4">
-								<dl>
-									<dt>
-										<a><img src="../images/recommend.png"/></a>
-									</dt>
-									<dd class="recommond-name">
-										九号平衡车 Plus
-									</dd>
-									<dd class="recommond-price">3499元</dd>
-									<dd class="recommond-tip">777人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list span4">
-								<dl>
-									<dt>
-										<a><img src="../images/recommend.png"/></a>
-									</dt>
-									<dd class="recommond-name">
-										九号平衡车 Plus
-									</dd>
-									<dd class="recommond-price">3499元</dd>
-									<dd class="recommond-tip">777人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list span4">
-								<dl>
-									<dt>
-										<a><img src="../images/recommend.png"/></a>
-									</dt>
-									<dd class="recommond-name">
-										九号平衡车 Plus
-									</dd>
-									<dd class="recommond-price">3499元</dd>
-									<dd class="recommond-tip">777人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list span4">
-								<dl>
-									<dt>
-										<a><img src="../images/recommend.png"/></a>
-									</dt>
-									<dd class="recommond-name">
-										九号平衡车 Plus
-									</dd>
-									<dd class="recommond-price">3499元</dd>
-									<dd class="recommond-tip">777人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list span4">
-								<dl>
-									<dt>
-										<a><img src="../images/recommend.png"/></a>
-									</dt>
-									<dd class="recommond-name">
-										九号平衡车 Plus
-									</dd>
-									<dd class="recommond-price">3499元</dd>
-									<dd class="recommond-tip">777人好评</dd>
-								</dl>
-							</li>
-							<li class="recommond-list span4">
-								<dl>
-									<dt>
-										<a><img src="../images/recommend.png"/></a>
-									</dt>
-									<dd class="recommond-name">
-										九号平衡车 Plus
-									</dd>
-									<dd class="recommond-price">3499元</dd>
-									<dd class="recommond-tip">777人好评</dd>
-								</dl>
-							</li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>

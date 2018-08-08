@@ -173,30 +173,41 @@ $(document).ready(function(){
 	$("#addAddressButton").click(function(){
 		$(".edit-address").hide();
 		$("#mask").hide();
-		$.ajax({
-			type:"post",
-			async:false,
-			contentType: "application/json; charset=utf-8",
-		    data:JSON.stringify(getAddressJson()),
-			dataType:"json",
-			url:"addAddress.action",
-			success:function(data){
-				$("#userAddress").text("");
-				 //var jsonData = JSON.parse(data); //jsonData是该下路下的所有区间（json格式） 
-			     for (var i = 0; i < data.length; i++) {
-			    	   //alert(data[i].receiverAddressId);
-			    	  // alert("数组长度为"+data.length);
-			           var addressHtml ="<div class=\"address-item address\"><dl><dt><span class=\"tag\"></span><em class=\"uname\" id=\"aName\">"
-			        	   		+data[i].receiverName+"</em></dt><dd class=\"utel\" id=\"aPhone\">"
-			        	   		+data[i].receiverPhone+"</dd><dd class=\"uaddress\"><em style=\"font-style:normal;\" id=\"aProvince\">"
-			        	   		+data[i].receiverProvince+"</em><em style=\"font-style:normal;\" id=\"aCity\">" 
-			        	   		+data[i].receiverCity+"</em><em style=\"font-style:normal;\" id=\"aDistrict\">"
-			        	   		+data[i].receiverDistrict+"</em><br /><em style=\"font-style:normal;\" id=\"aAddress\">" 
-			        	   		+data[i].address+"</em></dd></dl></div>";
-			           $("#userAddress").append(addressHtml);
-			     }
-			}
-		});
+		var ok1 = $("#inputReceiverName").val() == "" && $.trim($("#inputReceiverName").val()).length == 0;
+		var ok2 = $("#inputReceiverPhone").val() == "" && $.trim($("#inputReceiverPhone").val()).length == 0;
+		var ok3 = $("#inputReceiverProvince").val() == "" && $.trim($("#inputReceiverProvince").val()).length == 0;
+		var ok4 = $("#inputReceiverCity").val() == "" && $.trim($("#inputReceiverCity").val()).length == 0;
+		var ok5 = $("#inputReceiverDistrict").val() == "" && $.trim($("#inputReceiverDistrict").val()).length == 0;
+		var ok6 = $("#inputAddress").val() == "" && $.trim($("#inputAddress").val()).length == 0;
+		var ok7 = $("#inputAddressLabel").val() == "" && $.trim($("#inputAddressLabel").val()).length == 0;
+		if(ok1||ok2||ok3||ok4||ok5||ok6||ok7){
+			alert("请填写完整地址信息");
+		}else{
+			$.ajax({
+				type:"post",
+				async:false,
+				contentType: "application/json; charset=utf-8",
+			    data:JSON.stringify(getAddressJson()),
+				dataType:"json",
+				url:"addAddress.action",
+				success:function(data){
+					$("#userAddress").text("");
+					 //var jsonData = JSON.parse(data); //jsonData是该下路下的所有区间（json格式） 
+				     for (var i = 0; i < data.length; i++) {
+				    	   //alert(data[i].receiverAddressId);
+				    	  // alert("数组长度为"+data.length);
+				           var addressHtml ="<div class=\"address-item address\"><dl><dt><span class=\"tag\"></span><em class=\"uname\" id=\"aName\">"
+				        	   		+data[i].receiverName+"</em></dt><dd class=\"utel\" id=\"aPhone\">"
+				        	   		+data[i].receiverPhone+"</dd><dd class=\"uaddress\"><em style=\"font-style:normal;\" id=\"aProvince\">"
+				        	   		+data[i].receiverProvince+"</em><em style=\"font-style:normal;\" id=\"aCity\">" 
+				        	   		+data[i].receiverCity+"</em><em style=\"font-style:normal;\" id=\"aDistrict\">"
+				        	   		+data[i].receiverDistrict+"</em><br /><em style=\"font-style:normal;\" id=\"aAddress\">" 
+				        	   		+data[i].address+"</em></dd></dl></div>";
+				           $("#userAddress").append(addressHtml);
+				     }
+				}
+			});
+		}
 		return false;
 	});
 	
