@@ -82,7 +82,8 @@ public class LikeProductService {
 				message = message + "...";
 				break;
 			}
-			message = message + ",";
+			
+			message = message + " ";
 			i++;
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
