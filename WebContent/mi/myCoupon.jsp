@@ -218,7 +218,7 @@
 						</div>
 						<div class="more">
 							<ul class="filiter-list">
-								<li class="first active"><a href="displayCoupon.action?couponStatus=1">未使用</a></li>
+								<li class="first"><a href="displayCoupon.action?couponStatus=1">未使用</a></li>
 								<li><a href="displayCoupon.action?couponStatus=2">已使用</a></li>
 								<li><a href="displayCoupon.action?couponStatus=3">已失效</a></li>
 							</ul>
