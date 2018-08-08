@@ -201,7 +201,7 @@
 									<a href="../mi/asSelectTables.action">服务记录</a>
 								</li>
 								<li>
-									<a href="../mi/asApplyWay.html">申请服务</a>
+									<a href="../mi/AasApplyWay.jsp">申请服务</a>
 								</li>
 							</ul>
 						</div>
