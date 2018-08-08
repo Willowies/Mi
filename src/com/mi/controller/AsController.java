@@ -331,7 +331,7 @@ public class AsController {
     			while(true){
     				Date now = new Date();
     				//if(now.getTime() - orderDate.getTime()>1000*60*15){
-    				if(now.getTime() - asAutoDate.getTime()>1000*60*60*24){
+    				if(now.getTime() - asAutoDate.getTime()>1000*60*60*24*3){
     					asService.updateStateAuto(asId);
     					break;
     				}
