@@ -139,6 +139,14 @@ public class OrderController extends BaseController{
 		return "pay";
 	}*/
 	
+	
+	@RequestMapping("payOrderFromUser")
+	public String payOrderFromUser(int orderId,Model model){
+		Order order = orderService.getOrderDetailsById(orderId);
+		model.addAttribute("orderResult",order);
+		return "pay";
+	}
+	
 	@RequestMapping("payOrder")
 	public String payOrder(int orderId,Model model){
 		List<OrderProduct> lack = orderService.payOrder(orderId);
@@ -394,6 +402,8 @@ public class OrderController extends BaseController{
 		}).start();
 		return "spikePay";
 	}
+	
+	
 	
 	@RequestMapping("paySpikeOrder")
 	public String paySpikeOrder(int orderId,Model model,HttpSession session){
