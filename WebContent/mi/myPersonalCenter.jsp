@@ -241,7 +241,7 @@
 										<h3> 待支付订单：
 										<span class="num"> ${unpayOrderCount} </span>
 										</h3>
-										<a>
+										<a href="getAllOrder.action">
 											查看待支付订单>
 										</a>
 										<img src="../images/mypersonalicon1.png" alt="">
@@ -250,7 +250,7 @@
 										<h3> 待收货的订单：
 										<span class="num"> ${pendingOrderCount} </span>
 										</h3>
-										<a>
+										<a href="getAllOrder.action">
 											查看待收货的订单>
 										</a>
 										<img src="../images/mypersonalicon2.png" alt="">
@@ -259,7 +259,7 @@
 										<h3> 喜欢的商品：
 										<span class="num"> ${likeProductCount} </span>
 										</h3>
-										<a>
+										<a href="displayLikeProduct.action">
 											查看喜欢的商品>
 										</a>
 										<img src="../images/mypersonalicon3.png" alt="">
@@ -268,7 +268,7 @@
 										<h3> 待评价订单：
 										<span class="num"> ${uncommentOrderCount} </span>
 										</h3>
-										<a>
+										<a href="getWaitCommentProduct.action">
 											查看待评价商品>
 										</a>
 										<img src="../images/mypersonalicon4.png" alt="">

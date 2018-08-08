@@ -218,7 +218,7 @@
 										<li class="goods-item">
 										<div class="figure-img">
 											<a>
-												<img src="${likeProduct.product.picUrl}">
+												<img src="../${likeProduct.product.picUrl}">
 											</a>
 										</div>
 										<h3 class="goods-item-title">
