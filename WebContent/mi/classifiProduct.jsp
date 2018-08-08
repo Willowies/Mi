@@ -134,7 +134,7 @@
 				<div class="product-cell shadow">
 					<div class="figure">
 						<a class="exposure">
-							<img class="J_lazy" alt="小米8" style="background-color:#CAC1D1;" src="https://i8.mifile.cn/b2c-mimall-media/489552d652f98b44580ddf73935dc00f.jpg?w=1708&amp;h=868">
+							<img class="J_lazy" alt="小米8" style="background-color:#CAC1D1;" src="../${p.picUrl};h=868">
 						</a>
 					</div>
 					<div class="content">

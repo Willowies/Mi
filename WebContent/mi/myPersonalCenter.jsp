@@ -219,7 +219,7 @@
 									<h2 class="username">${user.userName}</h2>
 									<p class="tip">下午好～</p>
 									<a class="link" href="updateUser.jsp">修改个人信息></a>
-									<img class="avatar" src="${user.userHead}" width="150" height="150" alt="周伟祥">
+									<img class="avatar" src="${user.userHead}" width="150" height="150" >
 								</div>
 								<div class="useractions">
 									<ul class="action-list">
@@ -244,7 +244,7 @@
 										<a>
 											查看待支付订单>
 										</a>
-										<img src="//s01.mifile.cn/i/user/portal-icon-1.png" alt="">
+										<img src="../images/mypersonalicon1.png" alt="">
 									</li>
 									<li>
 										<h3> 待收货的订单：
@@ -253,7 +253,7 @@
 										<a>
 											查看待收货的订单>
 										</a>
-										<img src="//s01.mifile.cn/i/user/portal-icon-2.png" alt="">
+										<img src="../images/mypersonalicon2.png" alt="">
 									</li>
 									<li>
 										<h3> 喜欢的商品：
@@ -262,7 +262,7 @@
 										<a>
 											查看喜欢的商品>
 										</a>
-										<img src="//s01.mifile.cn/i/user/portal-icon-4.png" alt="">
+										<img src="../images/mypersonalicon3.png" alt="">
 									</li>
 									<li>
 										<h3> 待评价订单：
@@ -271,7 +271,7 @@
 										<a>
 											查看待评价商品>
 										</a>
-										<img src="//s01.mifile.cn/i/user/portal-icon-3.png" alt="">
+										<img src="../images/mypersonalicon4.png" alt="">
 									</li>
 								</ul>
 							</div>

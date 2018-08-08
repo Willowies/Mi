@@ -18,6 +18,7 @@
 	height:434px;
 }
 .product-cell {
+	margin-top: 40px;
 	position: relative;
 	height: 100%;
     background: #fff;
@@ -30,7 +31,7 @@
     height: 100%;
 }
 .channel-product-top img{
-	width: 854px;
+	width: auto;
     height: 100%;
 }
 .channel-product-top .content {
