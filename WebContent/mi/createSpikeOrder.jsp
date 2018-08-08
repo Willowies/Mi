@@ -174,7 +174,7 @@
 											<a>${orderProduct.product.extremeName}</a>
 										</div>
 										<div class="col col-price">
-											${orderProduct.product.productPrice}元  × ${c.quantity}
+											${orderProduct.product.productPrice}元  × 1
 										</div>
 										<div class="col col-status">
 										

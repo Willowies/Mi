@@ -56,9 +56,10 @@ public class OrderController extends BaseController{
 	
 	
 	@RequestMapping("joinGroup")
-	public String joinGroup(@RequestBody OrderProduct orderProduct,Model model,HttpSession session){
-		session.setAttribute("orderProduct", orderProduct);
-		session.setAttribute("itemNum", 1);
+	public String joinGroup(Model model,HttpSession session){
+		//session.setAttribute("orderProduct", orderProduct);
+		OrderProduct orderProduct = (OrderProduct)session.getAttribute("orderProduct");
+		model.addAttribute("itemNum", 1);
 		float total = orderProduct.getAmount();
 		model.addAttribute("total",total);
 		User user = (User)session.getAttribute("user");
@@ -69,9 +70,11 @@ public class OrderController extends BaseController{
 	}
 	
 	@RequestMapping("addGroup")
-	public String addGroup(@RequestBody OrderProduct orderProduct,Model model,HttpSession session){
-		session.setAttribute("orderProduct", orderProduct);
-		session.setAttribute("itemNum", 1);
+	public String addGroup(Model model,HttpSession session){
+		//session.setAttribute("orderProduct", orderProduct);
+		OrderProduct orderProduct = (OrderProduct)session.getAttribute("orderProduct");
+		model.addAttribute("itemNum", 1);
+		System.out.println(orderProduct.getProductPrice());
 		float total = orderProduct.getAmount();
 		model.addAttribute("total",total);
 		User user = (User)session.getAttribute("user");
@@ -240,7 +243,7 @@ public class OrderController extends BaseController{
 	@RequestMapping("updateSpikeOrder")
 	public String updateSpikeOrder(@RequestBody OrderProduct orderProduct,Model model,HttpSession session){
 		session.setAttribute("orderProduct", orderProduct);
-		session.setAttribute("itemNum", 1);
+		model.addAttribute("itemNum", 1);
 		float total = orderProduct.getAmount();
 		model.addAttribute("total",total);
 		User user = (User)session.getAttribute("user");
