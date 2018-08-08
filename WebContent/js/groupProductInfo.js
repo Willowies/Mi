@@ -32,7 +32,7 @@ function initData2(){
 //				console.log("groupProductId "+$("#groupProductId").text());
 //				console.log("groupId "+$(groupId).text());
 				$(joinGroup).click(function(){
-					provideOrderProduct();//异步
+					provideOrderProduct();//同步
 					window.location.href="joinGroup.action?groupProductId="+$("#groupProductId").text()+"&groupId="+$(groupId).text();
 				});
 			}
@@ -96,6 +96,22 @@ function initData2(){
 				$(".productPrice").text(data.product.productPrice+"元");
 				console.log(data.product.picUrl);
 				$(".groupProduct_show").append("<img src='../"+data.product.picUrl+"' width='600px' height='600px'  />");
+				//倒计时
+				var beforeLocal = new Date();
+				var serverDate = getServerDate();
+				var serverTime = serverDate.getTime();//server time
+				var afterLocal = new Date();
+				var countDown = data.endDate-serverTime;
+				console.log("endDate:"+ data.endDate);
+				console.log("serverTime:"+ serverTime);
+				console.log("serverDate:"+ serverDate);
+				console.log("afterLocal:"+afterLocal);
+				
+				var ajax = afterLocal.getTime()-beforeLocal.getTime();
+				console.log("ajax:"+ajax);
+				var endTime = afterLocal.getTime()+countDown-ajax;//remove error
+				console.log("endTime:"+endTime);
+				startCount(endTime);
 			},
 		});
 	}
@@ -133,8 +149,8 @@ $(document).ready(function(){
 					alert("团数已达上限，您可以尝试参团！");
 				}else{
 					console.log("Create finish--product group");
-					provideOrderProduct();//异步
-					window.location.href="addGroup.action?groupProductId="+$("#groupProductId").text()+"groupId="+data;
+					provideOrderProduct();//同步
+					window.location.href="addGroup.action?groupProductId="+$("#groupProductId").text()+"&groupId="+data;
 				}
 			},
 		});

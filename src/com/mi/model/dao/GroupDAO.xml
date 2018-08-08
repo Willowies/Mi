@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mi.model.dao.GroupDAO">
      
-    <!-- 团、团购商品、商品、用户信息都要，此外订单必须是团购订单2，状态必须为待成团4 -->
+    <!-- 团、团购商品、商品、用户信息都要，此外订单必须是团购订单2，状态必须为待成团4，团状态一定是1 -->
     <select id="getProductGroups" parameterType="int" resultMap="groupResult" flushCache="true">
     	select q.*, t.orderId, t.invoiceId, t.userId, t.receiverName, t.receiverPhone, t.receiverAddress, t.sendPeroid, t.orderType, t.orderState,
 					 t.couponId, t.createDate, t.deliveryFee, t.actualTotal, t.userName 
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="addGroup" flushCache="true">
     	insert into `group`(groupProductId, currentQuantity, creator, state) values(#{groupProductId, jdbcType=INTEGER}, 1, #{userName, jdbcType=VARCHAR}, 0)
     </insert>
-    <select id="getGroupId" flushCache="true" resultType="int">
+    <select id="getGroupId" flushCache="true" resultType="Integer">
     	select g.groupId from `group` as g where g.groupProductId=#{groupProductId, jdbcType=INTEGER} and g.creator=#{userName, jdbcType=VARCHAR}
     </select>
     <resultMap id="groupResult" type="Group">

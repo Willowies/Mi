@@ -111,18 +111,21 @@
 	<div style="height:500px; width:100%;"></div>
 	
 	<div class="xm-groupPurchase">
-		<div class="titleG" style="background:#c16666;">
+		<div class="titleG">
 			<h3 style="display:inline-block; margin:15px 0; float:left;">小米团购</h3>
 			<div class="more">
-				<a></a>
-				<a></a>
+				<a class="morePre"><i class="fa fa-chevron-left"></i></a>
+				<a class="moreNext"><i class="fa fa-chevron-right"></i></a>
 			</div>
 		</div>
-		<div class="content" style="background:#b68df9;">
+		<div class="content">
 			<div class="goods-list">
 				<div id="addGoodItem" class="all-goods-list" style="width: 2480px;height:340px;margin-left: 0px;transition: margin-left 0.5s ease;">
-					
-					
+					<div class="goods-item"><a href="" target="_blank"></a><div class="inner"><div class="inner-img"><a href="groupPurchase.jsp" style="height:160px; display:block;"><img src="../images/c9e0a117fd138828b13bc5ae493e90ae_pms_1527735137.81615202!560x560.jpg" width="160px" height="160px"></a></div><h3 class="title"><a href="groupPurchase.jsp">小米8 6GB 64GB 全网通 黑色</a></h3><p class="desc">全球首款双频GPS / 骁龙845处理器 / 红外人脸解锁 / AI变焦双摄 / 三星 AMOLED 屏</p><p class="price"><span>2599</span>&nbsp;<span>元&nbsp;</span><del style="color:#b0b0b0;">2699元</del></p></div></div>					
+					<div class="goods-item"><a href="" target="_blank"></a><div class="inner"><div class="inner-img"><a href="groupPurchase.jsp" style="height:160px; display:block;"><img src="../images/c9e0a117fd138828b13bc5ae493e90ae_pms_1527735137.81615202!560x560.jpg" width="160px" height="160px"></a></div><h3 class="title"><a href="groupPurchase.jsp">小米8 6GB 64GB 全网通 黑色</a></h3><p class="desc">全球首款双频GPS / 骁龙845处理器 / 红外人脸解锁 / AI变焦双摄 / 三星 AMOLED 屏</p><p class="price"><span>2599</span>&nbsp;<span>元&nbsp;</span><del style="color:#b0b0b0;">2699元</del></p></div></div>
+					<div class="goods-item"><a href="" target="_blank"></a><div class="inner"><div class="inner-img"><a href="groupPurchase.jsp" style="height:160px; display:block;"><img src="../images/c9e0a117fd138828b13bc5ae493e90ae_pms_1527735137.81615202!560x560.jpg" width="160px" height="160px"></a></div><h3 class="title"><a href="groupPurchase.jsp">小米8 6GB 64GB 全网通 黑色</a></h3><p class="desc">全球首款双频GPS / 骁龙845处理器 / 红外人脸解锁 / AI变焦双摄 / 三星 AMOLED 屏</p><p class="price"><span>2599</span>&nbsp;<span>元&nbsp;</span><del style="color:#b0b0b0;">2699元</del></p></div></div>
+					<div class="goods-item"><a href="" target="_blank"></a><div class="inner"><div class="inner-img"><a href="groupPurchase.jsp" style="height:160px; display:block;"><img src="../images/c9e0a117fd138828b13bc5ae493e90ae_pms_1527735137.81615202!560x560.jpg" width="160px" height="160px"></a></div><h3 class="title"><a href="groupPurchase.jsp">小米8 6GB 64GB 全网通 黑色</a></h3><p class="desc">全球首款双频GPS / 骁龙845处理器 / 红外人脸解锁 / AI变焦双摄 / 三星 AMOLED 屏</p><p class="price"><span>2599</span>&nbsp;<span>元&nbsp;</span><del style="color:#b0b0b0;">2699元</del></p></div></div>
+					<div class="goods-item"><a href="" target="_blank"></a><div class="inner"><div class="inner-img"><a href="groupPurchase.jsp" style="height:160px; display:block;"><img src="../images/c9e0a117fd138828b13bc5ae493e90ae_pms_1527735137.81615202!560x560.jpg" width="160px" height="160px"></a></div><h3 class="title"><a href="groupPurchase.jsp">小米8 6GB 64GB 全网通 黑色</a></h3><p class="desc">全球首款双频GPS / 骁龙845处理器 / 红外人脸解锁 / AI变焦双摄 / 三星 AMOLED 屏</p><p class="price"><span>2599</span>&nbsp;<span>元&nbsp;</span><del style="color:#b0b0b0;">2699元</del></p></div></div>
 				</div>
 			</div>
 		</div>
@@ -131,23 +134,34 @@
 	<div class="page-main home-main">
 		<div class="container">
 			<div class="phoneInfomation">
-				<div id="phone"  class="page-main-block" style="background:#c16666;">
-					<h3>手机</h3>
+				<div id="phone"  class="page-main-block" >
+					<h3 style="display:inline-block; margin:15px 0; float:left;">手机</h3>
+					<div class="moreInfo">
+						<a href="selectClassfiedProduct.action?secondClassId=1" class="watchMore">查看全部&nbsp;<i class="fa fa-chevron-circle-right"></i></a>
+					</div>
 				</div>
-				<div class="page-main-content" style="background:#b68df9;">
-					<div class="phoneAdv" style="background:#af77ad;">
+				<div class="page-main-content">
+					<div class="phoneAdv">
 						
 					</div>
-					<div class="phoneInfo" style="background:#f5f7a4;">
+					<div class="phoneInfo">
 					
 					</div>
 				</div>
 			</div>
 			<div class="elecInfomation">
-				<div id="homeelec"  class="page-main-block" style="background:#c16666;">
-					<h3>家电</h3>
+				<div id="homeelec"  class="page-main-block">
+					<h3 style="display:inline-block; margin:15px 0; float:left;">家电</h3>
+					<div class="switchmore">
+						<ul style="list-style-type:none; font-size:16px; margin:0; padding:0;">
+							<li class="tab-active">热门</li>
+							<li>电视</li>
+							<li>电脑</li>
+							<li>家居</li>
+						</ul>
+					</div>
 				</div>
-				<div class="page-main-content" style="background:#b68df9;">
+				<div class="page-main-content">
 					<div class="elecAdv" style="background:#af77ad;">
 						<div class="phoneInfo-item" style="margin-left:0;">
 							<a href="" target="_blank"></a>
@@ -176,18 +190,29 @@
 							</div>
 						</div>
 					</div>
-					<div class="elecInfo" style="background:#f5f7a4;">
-						
+					<div class="elecInfo">
+						<div class="elecInfoEle" style="display:flex;"></div>
+						<div class="elecInfoEle" style="display:none;"></div>
+						<div class="elecInfoEle" style="display:none;"></div>
+						<div class="elecInfoEle" style="display:none;"></div>
 					</div>
 				</div>
 				
 			</div>
 			<div class="accessoryInfomation">
-				<div id="accessory"  class="page-main-block" style="background:#c16666;">
-					<h3>手机配件</h3>
+				<div id="accessory"  class="page-main-block">
+					<h3 style="display:inline-block; margin:15px 0; float:left;">手机配件</h3>
+					<div class="switchmoreA">
+						<ul style="list-style-type:none; font-size:16px; margin:0; padding:0;">
+							<li class="tab-active">热门</li>
+							<li style="width:49px;">保护套</li>
+							<li>贴膜</li>
+							<li  style="width:64px;">其他配件</li>
+						</ul>
+					</div>
 				</div>
-				<div class="page-main-content" style="background:#b68df9;">
-					<div class="accessoryAdv" style="background:#af77ad;">
+				<div class="page-main-content">
+					<div class="accessoryAdv">
 						<div class="phoneInfo-item" style="margin-left:0;">
 							<a href="" target="_blank"></a>
 							<div class="inner">
@@ -217,31 +242,25 @@
 							</div>
 						</div>
 					</div>
-					<div class="accessoryInfo" style="background:#f5f7a4;">
-						
+					<div class="accessoryInfo">
+						<div class="elecInfoEle" style="display:flex;"></div>
+						<div class="elecInfoEle" style="display:none;"></div>
+						<div class="elecInfoEle" style="display:none;"></div>
+						<div class="elecInfoEle" style="display:none;"></div>
 					</div>
 				</div>
 			</div>
 			<div class="recommend">
-				<div class="titleB" style="background:#c16666;">
-					<h3>为你推荐</h3>
+				<div class="titleB">
+					<h3 style="display:inline-block; margin:15px 0; float:left;">为你推荐</h3>
+					<div class="moreSecond">
+						<a class="morePreSecond"><i class="fa fa-chevron-left"></i></a>
+						<a class="moreNextSecond"><i class="fa fa-chevron-right"></i></a>
+					</div>
 				</div>
-				<div class="content" style="background:#b68df9;">
+				<div class="content">
 					<div class="goods-list">
 						<div id="addGoodItemSecond" class="all-goods-list" style="width: 2480px;height:320px;margin-left: 0px;transition: margin-left 0.5s ease;">
-							<div class="goods-item">
-								<a href="" target="_blank"></a>
-								<div class="inner">
-									<div class="inner-img">
-										<img src="../images/pms_1528718738.78643039!280x280.jpg" width="140px" height="140px">
-									</div>
-									<h3 class="titleP"><a> 红米6 全网通版 3GB内存 32GB </a></h3>
-									<p class="price">
-										<span>769</span>&nbsp;<span>元</span>
-									</p>
-									<p class="rank">1643人好评</p>
-								</div>
-							</div>
 							
 						</div>
 					</div>
@@ -249,10 +268,10 @@
 			</div>
 			
 			<div class=comment>
-				<div class="titleC" style="background:#c16666;">
+				<div class="titleC">
 					<h2 style="font-size:22px;">热评产品</h2>
 				</div>
-				<div class="content" style="background:#b68df9;">
+				<div class="content">
 					<div class="contentin">
 						<div class="contentItem">
 							<div class="picItem">

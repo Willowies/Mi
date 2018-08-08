@@ -20,12 +20,15 @@ function initData(){
 						+"<span class='message'><a rel='nofollow' href=''>消息通知</a></span><span class='sep'>|</span>"
 						+"<a rel='nofollow' href='' class='myOrder'>我的订单</a>";
 				$(".topbar-info").append(str);
+				//for groupPurchase.jsp
+				sessionStorage.setItem("user_login","true");
 				console.log("Has logged in!");
 			}
 			if(data.userId==0){
 				var str = "<a rel='nofollow' class='link' href='login.jsp' >登录</a><span class='sep'>|</span><a rel='nofollow' class='link' href='addUser.jsp' >注册</a>"
 					+"<span class='sep'>|</span><span class='message'><a rel='nofollow' href=''>消息通知</a></span>";
 				$(".topbar-info").append(str);
+				sessionStorage.setItem("user_login","false");
 				console.log("Has not logged in!");
 			}
 			console.log("Check login state finished--shopping cart number");
@@ -86,6 +89,12 @@ function initData(){
 					+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
 				$(".phoneInfo").append(str);
 			}
+			//浮动特效
+			$(".phoneInfo div.phoneInfo-item").hover(function(){
+				$(this).addClass("brick-item-active");
+			},function(){
+				$(this).removeClass("brick-item-active");
+			});
 			console.log("Load finished--phoneproduct");
 		},
 	});
@@ -98,13 +107,13 @@ function initData(){
 		success:function(data){
 			console.log(data);
 			console.log(data.length);
-//			for(var i=0;i<data.length;i++){
-//				var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-//					+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
-//					+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
-//					+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
-//				$(".elecInfo").append(str);	
-//			}
+			for(var i=0;i<data.length;i++){
+				var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
+					+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
+					+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
+					+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
+				$(".elecInfo").children("div").eq(0).append(str);
+			}
 			console.log("Load finished--popular applianceproduct");
 		},
 	});
@@ -118,19 +127,26 @@ function initData(){
 			console.log(data);
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
-				if(data[i].secondClassId==1){
+				if(data[i].secondClassId==3){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
 						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
 						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
 						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
-					$(".elecInfo").append(str);
+					$(".elecInfo").children("div").eq(1).append(str);
 				}
-				if(data[i].secondClassId==2){
+				if(data[i].secondClassId==4){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
 						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
 						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
 						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
-					$(".elecInfo").append(str);
+					$(".elecInfo").children("div").eq(2).append(str);
+				}
+				if(data[i].secondClassId==5){
+					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
+						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
+						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
+						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
+					$(".elecInfo").children("div").eq(3).append(str);
 				}
 			}
 			console.log("Load finished--applianceproduct");
@@ -145,18 +161,18 @@ function initData(){
 		success:function(data){
 			console.log(data);
 			console.log(data.length);
-//			for(var i=0;i<data.length;i++){
-//				var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-//					+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
-//					+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
-//					+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
-//				if(data[i].productCommentNum!=0){
-//					str = str+data[i].productCommentNum+"人评价</p><div class='review-wrapper'></div></div></div></div>";
-//				}else{
-//					str = str+"</p><div class='review-wrapper'></div></div></div></div>";
-//				}
-//				$(".accessoryInfo").append(str);
-//			}
+			for(var i=0;i<data.length;i++){
+				var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
+					+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
+					+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
+					+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
+				if(data[i].productCommentNum!=0){
+					str = str+data[i].productCommentNum+"人评价</p><div class='review-wrapper'></div></div></div></div>";
+				}else{
+					str = str+"</p><div class='review-wrapper'></div></div></div></div>";
+				}
+				$(".accessoryInfo").children("div").eq(0).append(str);
+			}
 			console.log("Load finished--popular collocationproduct");
 		},
 	});
@@ -170,7 +186,7 @@ function initData(){
 			console.log(data);
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
-				if(data[i].secondClassId==1){
+				if(data[i].secondClassId==6){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
 						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
 						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
@@ -180,9 +196,9 @@ function initData(){
 					}else{
 						str = str+"</p><div class='review-wrapper'></div></div></div></div>";
 					}
-					$(".accessoryInfo").append(str);
+					$(".accessoryInfo").children("div").eq(1).append(str);
 				}
-				if(data[i].secondClassId==2){
+				if(data[i].secondClassId==7){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
 						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
 						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
@@ -192,7 +208,19 @@ function initData(){
 						}else{
 							str = str+"</p><div class='review-wrapper'></div></div></div></div>";
 						}
-					$(".accessoryInfo").append(str);
+					$(".accessoryInfo").children("div").eq(2).append(str);
+				}
+				if(data[i].secondClassId==8){
+					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
+						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
+						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
+						+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>"
+						if(data[i].productCommentNum!=0){
+							str = str+data[i].productCommentNum+"人评价</p><div class='review-wrapper'></div></div></div></div>";
+						}else{
+							str = str+"</p><div class='review-wrapper'></div></div></div></div>";
+						}
+					$(".accessoryInfo").children("div").eq(3).append(str);
 				}
 			}
 			console.log("Load finished--collocationproduct");
@@ -213,7 +241,7 @@ function initData(){
 					+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
 					+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
 				if(data[i].productCommentNum!=0){
-					str = str+data[i].productCommentNum+"人评价</p></div></div></div>";
+					str = str+data[i].productCommentNum+"人好评</p></div></div></div>";
 				}else{
 					str = str+"</p></div></div></div>";
 				}
@@ -405,26 +433,67 @@ $(document).ready(function(){
 		$(this).children("a.name").css("color","#333");
 		$(this).children("a.delete").css("display","none");
 	});
+	/*
+	 * switch groupproduct, next previous
+	 */
+	$(".moreNext").click(function(){
+		$("#addGoodItem").css("margin-left","-1240px");
+		$(this).css("pointer-events","none");
+		$(".morePre").css("pointer-events","auto");
+	});
+	$(".morePre").click(function(){
+		$("#addGoodItem").css("margin-left","0px");
+		$(this).css("pointer-events","none");
+		$(".moreNext").css("pointer-events","auto");
+	});
+	$(".moreNextSecond").click(function(){
+		$("#addGoodItemSecond").css("margin-left","-1240px");
+		$(this).css("pointer-events","none");
+		$(".morePreSecond").css("pointer-events","auto");
+	});
+	$(".morePreSecond").click(function(){
+		$("#addGoodItemSecond").css("margin-left","0px");
+		$(this).css("pointer-events","none");
+		$(".moreNextSecond").css("pointer-events","auto");
+	});
+	//查看更多
+	$(".watchMore").hover(function(){
+		$(this).css("color","#ff6700");
+		$(this).children().css("color","#ff6700");
+	},function(){
+		$(this).css("color","#424242");
+		$(this).children().css("color","#b0b0b0");
+	});
+	//切换特效——配件
+	$(".switchmore ul li").hover(function(){
+		$(this).addClass("tab-active");
+		var index = $(this).index();
+//		console.log("index+"+index);
+		$(".elecInfo").children("div").eq(index).css("display","flex");
+		for(var i=0;i<4;i++){
+			if(i!=index){
+				$(".elecInfo").children("div").eq(i).css("display","none");
+				$(".switchmore ul").children("li").eq(i).removeClass("tab-active");
+			}
+		}
+	},function(){
+	});
+	//切换特效——配件
+	$(".switchmoreA ul li").hover(function(){
+		$(this).addClass("tab-active");
+		var index = $(this).index();
+//		console.log("index+"+index);
+		$(".accessoryInfo").children("div").eq(index).css("display","flex");
+		for(var i=0;i<4;i++){
+			if(i!=index){
+				$(".accessoryInfo").children("div").eq(i).css("display","none");
+				$(".switchmoreA ul").children("li").eq(i).removeClass("tab-active");
+			}
+		}
+	},function(){
+	});
 	
 });
 
-function deleteCartItem(obj){
-	var cart = obj;
-	var cartItemId = $(obj).children("a.cartItemId");
-	console.log("log  cartItemId:"+cartItemId);
-	$(obj).remove();
-//	$.ajax({
-//		type:"POST",
-//		async:true, 
-//		data:{
-//			cartItemId:cartItemId
-//			},
-//		dataType:"json",
-//		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-//		url:"deleteCartItem.action",
-//		success:function(data){
-////				console.log(data+"delete success");
-//			console.log("delete finished--shopping cartItem");
-//		},
-//	});
-}
+
+

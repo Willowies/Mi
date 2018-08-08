@@ -123,7 +123,7 @@ public class HomeService {
 			secondClassId = 3;
 			break;
 		case "笔记本":
-			productType = "笔记本";
+			productType = "本";
 			secondClassId = 4;
 			break;
 		default:

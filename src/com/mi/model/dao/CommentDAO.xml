@@ -247,7 +247,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from(select j.*, k.commentId, k.userId, k.commentContent, k.commentRank, k.commentUrl, k.commentDate 
 				 from (select g.*, h.couponId, h.discountAmount, h.startDate, h.endDate, h.couponName 
 							 from product as g left join coupon as h on g.productId=h.productId)as j left join `comment` as k 
-							 on j.productId=k.productId) as l left join `user` as u
+							 on j.productId=k.productId and k.commentRank in(4,5)) as l left join `user` as u
 		on l.userId=u.userId
 		group by l.productId
 		having productCommentNum>0

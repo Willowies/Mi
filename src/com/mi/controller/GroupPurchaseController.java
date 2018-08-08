@@ -50,7 +50,10 @@ public class GroupPurchaseController {
 		String userName = userTemp.getUserName();
 		/*User user = new User();
 		user.setUserName("张三");*/
-		return groupPurchaseService.addGroup(groupProductId, userName);
+		int groupid = groupPurchaseService.addGroup(groupProductId, userName);
+		System.out.println("groupid Controller"+groupid);
+		session.setAttribute("groupId", groupid);
+		return groupid;
 	}
 	@RequestMapping("judgeCurrentQuantity")
 	public @ResponseBody int getCurrentQuantity(HttpServletRequest request) {

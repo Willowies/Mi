@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.mi.model.bean.Group;
 import com.mi.model.bean.GroupProduct;
 import com.mi.model.bean.OrderProduct;
+import com.mi.model.bean.User;
 import com.mi.model.dao.GroupDAO;
 import com.mi.model.dao.GroupProductDAO;
 import com.mi.model.dao.OrderDAO;
@@ -54,6 +55,17 @@ public class GroupPurchaseService {
 		List<Group> list = groupDAO.getProductGroups(groupProductId);
 		int totalNum = 0;
 		if(list.size()!=0) {
+			//judge whether the username has existed
+			for(Group group:list) {
+				List<User> users = group.getGroupMember();
+				for(User user:users) {
+					if(user.getUserName().equals(userName)) {
+						//has created the group, so can't create again
+						return 0;
+					}
+				}
+			}
+			//count up the total people
 			for(Group g:list) {
 				totalNum += g.getCurrentQuantity();
 			}
@@ -62,15 +74,19 @@ public class GroupPurchaseService {
 			if((maxGroupProductNum-totalNum)>=leastGroupNum) {
 				//can create group
 				groupDAO.addGroup(groupProductId, userName);
-				return groupDAO.getGroupId(groupProductId, userName);
+				int groupid = groupDAO.getGroupId(groupProductId, userName);
+				System.out.println("groupid1 "+groupid);
+				return groupid;
 			}else {
 				//can't create group
 				return 0;
 			}
 		}else {
 			//create first group
-			groupDAO.addGroup(groupProductId, userName);
-			return groupDAO.getGroupId(groupProductId, userName);
+			groupDAO.addGroup(groupProductId, userName);//notice!
+			int groupid = groupDAO.getGroupId(groupProductId, userName);
+			System.out.println("groupid2 "+groupid);
+			return groupid;
 		}
 	}
 	public int getCurrentQuantity(int groupProductId) {
