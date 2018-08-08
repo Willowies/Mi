@@ -153,7 +153,16 @@ public class HomeController {
 		String categoryItemName = request.getParameter("categoryItemName");
 		return homeservice.getSecondClassProducts(categoryItemName);
 	}
-	
+	/*
+	 * quit login
+	 */
+	@RequestMapping("quitLogin")
+	public void deleteUser(HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		if(user!=null) {
+			session.removeAttribute("user");
+		}
+	}
 	
 }
 

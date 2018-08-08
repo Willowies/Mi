@@ -15,18 +15,31 @@ function initData(){
 				var str = "<span class='user'><a class='username'>"
 						+"<span class='name'>"+data.userName+" </span>"
 						+"<i class='fa fa-angle-down fa-lg'></i></a><ul class='user-menu' style='display:none;'>"
-						+"<li><a href='disPlayMyPersonalCenter.action'>个人中心</a></li><li><a href=''>评价晒单</a></li><li><a href=''>我的喜欢</a></li>"
-						+"<li><a href=''>小米账户</a></li><li><a href=''>退出登录</a></li></ul></span><span class='sep'>|</span>"
-						+"<span class='message'><a rel='nofollow' href=''>消息通知</a></span><span class='sep'>|</span>"
-						+"<a rel='nofollow' href='' class='myOrder'>我的订单</a>";
+						+"<li><a href='disPlayMyPersonalCenter.action'>个人中心</a></li><li><a href='getWaitCommentProduct.action'>评价晒单</a></li><li><a href='displayLikeProduct.action'>我的喜欢</a></li>"
+						+"<li><a href='selectUser.jsp'>小米账户</a></li><li><a class='quitLogin'>退出登录</a></li></ul></span><span class='sep'>|</span>"
+						+"<span class='message'><a rel='nofollow' href='displayMessage.action'>消息通知</a></span><span class='sep'>|</span>"
+						+"<a rel='nofollow' href='getAllOrder.action' class='myOrder'>我的订单</a>";
 				$(".topbar-info").append(str);
 				//for groupPurchase.jsp
 				sessionStorage.setItem("user_login","true");
 				console.log("Has logged in!");
+				$(".quitLogin").click(function(){
+					$.ajax({
+						type:"POST",
+						async:true,
+						dataType:"json",
+						contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+						url:"quitLogin.action",
+						success:function(data){
+							console.log("Quit!!!!!!");
+							window.location.href="homepage.jsp";
+						},
+					});
+				});
 			}
 			if(data.userId==0){
 				var str = "<a rel='nofollow' class='link' href='login.jsp' >登录</a><span class='sep'>|</span><a rel='nofollow' class='link' href='addUser.jsp' >注册</a>"
-					+"<span class='sep'>|</span><span class='message'><a rel='nofollow' href=''>消息通知</a></span>";
+					+"<span class='sep'>|</span><span class='message'><a rel='nofollow' href='login.jsp'>消息通知</a></span>";
 				$(".topbar-info").append(str);
 				sessionStorage.setItem("user_login","false");
 				console.log("Has not logged in!");
@@ -84,8 +97,8 @@ function initData(){
 			console.log(data);
 			for(var i=0;i<data.length;i++){
 				var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-					+"<img src='../"+data[i].picUrl + "' width='160px' height='160px'>"
-					+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
+					+"<a style='display:inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"+data[i].picUrl + "' width='160px' height='160px'></a>"
+					+"</div><h3 class='titleP'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
 					+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
 				$(".phoneInfo").append(str);
 			}
@@ -109,9 +122,9 @@ function initData(){
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
 				var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-					+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
-					+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
-					+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
+					+"<a style='display:inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"+data[i].picUrl + "' width='150px' height='150px'></a>"
+					+"</div><h3 class='titleP'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
+					+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"+data[i].comment.commentContent+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div>";
 				$(".elecInfo").children("div").eq(0).append(str);
 			}
 			//浮动特效
@@ -135,23 +148,26 @@ function initData(){
 			for(var i=0;i<data.length;i++){
 				if(data[i].secondClassId==3){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
-						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
-						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
+						+"<a style='display:inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"+data[i].picUrl + "' width='150px' height='150px'></a>"
+						+"</div><h3 class='titleP'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
+						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p>"
+						+"<div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"+data[i].comment.commentContent+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div>";
 					$(".elecInfo").children("div").eq(1).append(str);
 				}
 				if(data[i].secondClassId==4){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
-						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
-						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
+						+"<a style='display:inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"+data[i].picUrl + "' width='150px' height='150px'></a>"
+						+"</div><h3 class='titleP'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
+						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"
+						+data[i].comment.commentContent+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div>";
 					$(".elecInfo").children("div").eq(2).append(str);
 				}
 				if(data[i].secondClassId==5){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
-						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
-						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p></div></div>";
+						+"<a style='display:inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"+data[i].picUrl + "' width='150px' height='150px'></a>"
+						+"</div><h3 class='titleP'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"+data[i].extremeName+"</a></h3><p class='desc'>"+data[i].description
+						+"</p><p class='price'><span>"+data[i].productPrice+"元</span></p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"
+						+data[i].comment.commentContent+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div>";
 					$(".elecInfo").children("div").eq(3).append(str);
 				}
 			}
@@ -175,13 +191,15 @@ function initData(){
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
 				var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-					+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
-					+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
+					+"<a style='display:inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"+data[i].picUrl + "' width='150px' height='150px'></a>"
+					+"</div><h3 class='titleP'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"+data[i].extremeName+"</a></h3><p class='price'>"
 					+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
 				if(data[i].productCommentNum!=0){
-					str = str+data[i].productCommentNum+"人评价</p><div class='review-wrapper'></div></div></div></div>";
+					str = str+data[i].productCommentNum+"人评价</p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"
+					+data[i].comment.commentContent+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div></div>";
 				}else{
-					str = str+"</p><div class='review-wrapper'></div></div></div></div>";
+					str = str+"</p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"+data[i].comment.commentContent+"</span><span class='author'>来自于 "
+					+data[i].comment.userId+" 的评价</span></a></div></div></div></div>";
 				}
 				$(".accessoryInfo").children("div").eq(0).append(str);
 			}
@@ -206,38 +224,44 @@ function initData(){
 			for(var i=0;i<data.length;i++){
 				if(data[i].secondClassId==6){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
-						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
+						+"<a style='display:inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"+data[i].picUrl + "' width='150px' height='150px'></a>"
+						+"</div><h3 class='titleP'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"+data[i].extremeName+"</a></h3><p class='price'>"
 						+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
 					if(data[i].productCommentNum!=0){
-						str = str+data[i].productCommentNum+"人评价</p><div class='review-wrapper'></div></div></div></div>";
+						str = str+data[i].productCommentNum+"人评价</p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"
+						+data[i].comment.commentContent+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div></div>";
 					}else{
-						str = str+"</p><div class='review-wrapper'></div></div></div></div>";
+						str = str+"</p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"+data[i].comment.commentContent
+						+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div></div>";
 					}
 					$(".accessoryInfo").children("div").eq(1).append(str);
 				}
 				if(data[i].secondClassId==7){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
-						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
-						+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>"
-						if(data[i].productCommentNum!=0){
-							str = str+data[i].productCommentNum+"人评价</p><div class='review-wrapper'></div></div></div></div>";
-						}else{
-							str = str+"</p><div class='review-wrapper'></div></div></div></div>";
-						}
+						+"<a style='display:inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"+data[i].picUrl + "' width='150px' height='150px'></a>"
+						+"</div><h3 class='titleP'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"+data[i].extremeName+"</a></h3><p class='price'>"
+						+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
+					if(data[i].productCommentNum!=0){
+						str = str+data[i].productCommentNum+"人评价</p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"
+						+data[i].comment.commentContent+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div></div>";
+					}else{
+						str = str+"</p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"+data[i].comment.commentContent
+						+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div></div>";
+					}
 					$(".accessoryInfo").children("div").eq(2).append(str);
 				}
 				if(data[i].secondClassId==8){
 					var str="<div class='phoneInfo-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-						+"<img src='../"+data[i].picUrl + "' width='150px' height='150px'>"
-						+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
-						+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>"
-						if(data[i].productCommentNum!=0){
-							str = str+data[i].productCommentNum+"人评价</p><div class='review-wrapper'></div></div></div></div>";
-						}else{
-							str = str+"</p><div class='review-wrapper'></div></div></div></div>";
-						}
+						+"<a style='display:inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"+data[i].picUrl + "' width='150px' height='150px'></a>"
+						+"</div><h3 class='titleP'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"+data[i].extremeName+"</a></h3><p class='price'>"
+						+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
+					if(data[i].productCommentNum!=0){
+						str = str+data[i].productCommentNum+"人评价</p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"
+						+data[i].comment.commentContent+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div></div>";
+					}else{
+						str = str+"</p><div class='review'><a href='selectProductInfo.action?productName="+data[i].productName+"'><span class='comment'>"+data[i].comment.commentContent
+						+"</span><span class='author'>来自于 "+data[i].comment.userId+" 的评价</span></a></div></div></div></div>";
+					}
 					$(".accessoryInfo").children("div").eq(3).append(str);
 				}
 			}
@@ -261,8 +285,8 @@ function initData(){
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
 				var str="<div class='goods-item'><a href='' target='_blank'></a><div class='inner'><div class='inner-img'>"
-					+"<img src='../"+data[i].picUrl + "' width='140px' height='140px'>"
-					+"</div><h3 class='titleP'><a>"+data[i].extremeName+"</a></h3><p class='price'>"
+					+"<a style='display:inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"+data[i].picUrl + "' width='140px' height='140px'></a>"
+					+"</div><h3 class='titleP'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"+data[i].extremeName+"</a></h3><p class='price'>"
 					+"<span>"+data[i].productPrice+"元</span></p><p class='rank'>";
 				if(data[i].productCommentNum!=0){
 					str = str+data[i].productCommentNum+"人好评</p></div></div></div>";
@@ -290,11 +314,11 @@ function initData(){
 			console.log(data);
 			console.log(data.length);
 			for(var i=0;i<data.length;i++){
-				var str="<div class='contentItem'><div class='picItem'><img src='../"
+				var str="<div class='contentItem'><div class='picItem'><a style='inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"
 					+data[i].picUrl+"' width='296' height='220' alt='"+data[i].productName
-					+"'></div><p class='review'>"+data[i].comment.commentContent+"</p><p class='author'>"
+					+"'></a></div><a  href='selectProductInfo.action?productName="+data[i].productName+"'><p class='review'>"+data[i].comment.commentContent+"</p></a><p class='author'>"
 					+"来自于 "+data[i].coupon.user.userName+" 的评价 </p><div class='info'><h3 class='title'>"
-					+"<a href='' >"+data[i].productName+"</a></h3><span class='sep'> | </span>"
+					+"<a  href='selectProductInfo.action?productName="+data[i].productName+"' >"+data[i].productName+"</a></h3><span class='sep'> | </span>"
 					+"<p class='price'><span class='num'>"+data[i].productPrice+"</span>元</p></div></div>";
 				$(".contentin").append(str);
 			}
@@ -409,9 +433,9 @@ $(document).ready(function(){
 			success:function(data){
 				console.log(data);
 				for(var i=0;i<data.length;i++){
-					var str = "<li class='first'><div class='figure figure-thumb'><a href='javascript:void(0)'>"
+					var str = "<li class='first'><div class='figure figure-thumb'><a href='selectProductInfo.action?productName="+data[i].productName+"'>"
 						+"<img src='../"+data[i].picUrl+"' alt='"+data[i].productName+"' width='160' height='110'>"
-						+"</a></div><div class='title'><a href='' >"+data[i].productName+"</a></div>"
+						+"</a></div><div class='title'><a href='selectProductInfo.action?productName="+data[i].productName+"' >"+data[i].productName+"</a></div>"
 				        +"<p class='price'>"+data[i].productPrice+"起</p></li>";
 					_this.append(str);
 				}
@@ -441,7 +465,7 @@ $(document).ready(function(){
 			success:function(data){
 				console.log(data);
 				for(var i=0;i<data.length;i++){
-					var str="<div class='childrenItem'><a class='link' href=''>"
+					var str="<div class='childrenItem'><a class='link' href='selectProductInfo.action?productName="+data[i].productName+"'>"
 						+"<img alt='"+data[i].productName+"' src='../"+data[i].picUrl+"' width='40' height='40' style='float:left;'><span class='text1'>"
 						+data[i].productName+"</span></a></div>";
 					_this.append(str);
@@ -529,6 +553,80 @@ $(document).ready(function(){
 		$(this).removeClass("brick-item-active");
 	});
 	console.log("Load finished--recommendproduct");
+	//轮播
+	$(".left").click(function(){
+		var length = $("div.carouselimgItem").length;
+		var carouselimgItem = $("div.carouselimgItem");//图
+		var carouselswitchItem = $("a.imgSwitch");//小圆钮
+		var currentImgIndex;
+		var nextImgIndex;
+//		console.log("length:"+length);
+		for(var i=0;i<length;i++){
+			if(carouselimgItem.eq(i).css("z-index")==50){
+				currentImgIndex = i;
+			}
+		}
+		if(currentImgIndex==0){
+			nextImgIndex=4;//确定下一个移动到的元素索引,图片和小圆钮是一样的
+		}else{
+			nextImgIndex = currentImgIndex - 1;
+		}
+		//改变图片z-index和display
+		carouselimgItem.eq(currentImgIndex).css("z-index","0");
+		carouselimgItem.eq(currentImgIndex).css("display","none");
+		carouselimgItem.eq(nextImgIndex).css("z-index","50");
+		carouselimgItem.eq(nextImgIndex).css("display","block");
+		//改变小圆钮的样式
+		carouselswitchItem.eq(currentImgIndex).removeClass("active");
+		carouselswitchItem.eq(nextImgIndex).addClass("active");
+	});
+	$(".right").click(function(){
+		var length = $("div.carouselimgItem").length;
+		var carouselimgItem = $("div.carouselimgItem");//图
+		var carouselswitchItem = $("a.imgSwitch");//小圆钮
+		var currentImgIndex;
+		var nextImgIndex;
+//		console.log("length:"+length);
+		for(var i=0;i<length;i++){
+			if(carouselimgItem.eq(i).css("z-index")==50){
+				currentImgIndex = i;
+			}
+		}
+		if(currentImgIndex==4){
+			nextImgIndex=0;//确定下一个移动到的元素索引,图片和小圆钮是一样的
+		}else{
+			nextImgIndex = currentImgIndex + 1;
+		}
+		//改变图片z-index和display
+		carouselimgItem.eq(currentImgIndex).css("z-index","0");
+		carouselimgItem.eq(currentImgIndex).css("display","none");
+		carouselimgItem.eq(nextImgIndex).css("z-index","50");
+		carouselimgItem.eq(nextImgIndex).css("display","block");
+		//改变小圆钮的样式
+		carouselswitchItem.eq(currentImgIndex).removeClass("active");
+		carouselswitchItem.eq(nextImgIndex).addClass("active");
+	});
+	$("a.imgSwitch").click(function(){
+		var nextIndex = $(this).index();//获取点击的索引
+		var carouselimgItem = $("div.carouselimgItem");//图
+		var carouselswitchItem = $("a.imgSwitch");//小圆钮
+		var length = carouselimgItem.length;
+		var currentImgIndex;
+		//获取当前的索引
+		for(var i=0;i<length;i++){
+			if(carouselimgItem.eq(i).css("z-index")==50){
+				currentImgIndex = i;
+			}
+		}
+		//改变当前索引位置的图和小圆钮
+		carouselimgItem.eq(currentImgIndex).css("z-index","0");
+		carouselimgItem.eq(currentImgIndex).css("display","none");
+		carouselswitchItem.eq(currentImgIndex).removeClass("active");
+		//改变下一个索引处的图和小圆钮
+		carouselimgItem.eq(nextIndex).css("z-index","50");
+		carouselimgItem.eq(nextIndex).css("display","block");
+		carouselswitchItem.eq(nextIndex).addClass("active");
+	});
 });
 
 

@@ -132,19 +132,6 @@
 					<div class="group">
 						<p style="margin:10px 20px; font-size:14px; color:#b0b0b0; width:573px;">已经创建的团：</p>
 						<div class="groupList">
-							<div class="groupitem">
-								<span class="groupId" style="width:0px; height: 0px; visibility: hidden; float: left;">1</span>
-								<p class="num">1</p>
-								<div class="info">
-									<p>创建者：xxx</p>
-									<p>当前人数：5人 / 10人</p>
-								</div>
-								<select class="person">
-									<option></option>
-								</select>
-								<input type="button" class="joinGroup" value="我要参团">
-							</div>
-							
 						</div>
 					</div>
 					<div class="create">

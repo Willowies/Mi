@@ -108,7 +108,42 @@
 			</div>
 		</div>
 	</div>
-	<div style="height:500px; width:100%;"></div>
+	<div class="carousel">
+		<div class="carouselBody">
+			<div class="carouselImg" style="width: 100%; overflow: hidden; position: relative; height: 460px;">
+				<div class="carouselimgItem" style="z-index: 50; display: block;">
+					<a href="javascript:void(0)"><img src="../images/xmad_15329163042455_sNOki.jpg" width="1226px" height="460px"/></a>
+				</div>
+				<div class="carouselimgItem" style="z-index: 0; display: none;">
+					<a href="javascript:void(0)"><img src="../images/xmad_15330559831596_SsvKz.jpg" width="1226px" height="460px"/></a>
+				</div>
+				<div class="carouselimgItem" style="z-index: 0; display: none;">
+					<a href="javascript:void(0)"><img src="../images/xmad_15336320121108_TDvwz.jpg" width="1226px" height="460px"/></a>
+				</div>
+				<div class="carouselimgItem" style="z-index: 0; display: none;">
+					<a href="javascript:void(0)"><img src="../images/xmad_15151497671427_UPjdu.jpg" width="1226px" height="460px"/></a>
+				</div>
+				<div class="carouselimgItem" style="z-index: 0; display: none;">
+					<a href="javascript:void(0)"><img src="../images/xmad_15293778771651_yYPSw.jpg" width="1226px" height="460px"/></a>
+				</div>
+			</div>
+			<div class="carouselBtn">
+				<div class="carouselPN">
+					<a class="left"><i class="fa fa-chevron-left"></i></a>
+					<a class="right"><i class="fa fa-chevron-right"></i></a>
+				</div>
+				<div  class="carouselCircle">
+					<div class="carouselImgSwitch">
+						<a class="imgSwitch active">1</a>
+						<a class="imgSwitch">2</a>
+						<a class="imgSwitch">3</a>
+						<a class="imgSwitch">4</a>
+						<a class="imgSwitch">5</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<div class="xm-groupPurchase">
 		<div class="titleG">
@@ -173,7 +208,8 @@
 						</div>
 					</div>
 					<div class="elecInfo">
-						<div class="elecInfoEle" style="display:flex;"></div>
+						<div class="elecInfoEle" style="display:flex;"><div class="phoneInfo-item"><a href="" target="_blank"></a><div class="inner"><div class="inner-img"><img src="../images/xmad_14972549116226_tZpod.png" width="150px" height="150px"></div><h3 class="titleP"><a>米家空气净化器Pro 第一代</a></h3><p class="desc">OLED 显示屏幕 / 激光颗粒物传感器 / 500m³/h颗粒物 CADR / 60㎡适用面积</p><p class="price"><span>1499元</span>
+						</p><div class="review"><a href=""><span class="comment">开始开始开始了算了老鼠老鼠老鼠老鼠老鼠老鼠</span><span class="author">来自于 xxx的评价</span></a></div></div></div></div>
 						<div class="elecInfoEle" style="display:none;"></div>
 						<div class="elecInfoEle" style="display:none;"></div>
 						<div class="elecInfoEle" style="display:none;"></div>
@@ -203,7 +239,8 @@
 						</div>
 					</div>
 					<div class="accessoryInfo">
-						<div class="elecInfoEle" style="display:flex;"></div>
+						<div class="elecInfoEle" style="display:flex;"><div class="phoneInfo-item"><a href="" target="_blank"></a><div class="inner"><div class="inner-img"><img src="../images/pms_1524466977.94886383!200x200.jpg" width="150px" height="150px"></div><h3 class="titleP"><a>小米6X 极简保护壳 红色 6X</a></h3><p class="price"><span>29元</span></p><p class="rank"></p>
+						<div class="review"><a href=""><span class="comment">开始开始开始了算了老鼠老鼠老鼠老鼠老鼠老鼠</span><span class="author">来自于 xxx的评价</span></a></div></div></div></div>
 						<div class="elecInfoEle" style="display:none;"></div>
 						<div class="elecInfoEle" style="display:none;"></div>
 						<div class="elecInfoEle" style="display:none;"></div>
@@ -256,6 +293,9 @@
 		</div>
 	</div>
 	
+	<div class="fixService">
+		<a href="onlineService.html"><i class="fa fa-user-o"></i></a>
+	</div>
 	
 	<div class="site-footer">
 		<div class="container">

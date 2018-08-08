@@ -484,6 +484,92 @@
 }
 /* site-header end */
 
+/* 轮播 carousel */
+.carousel{
+	width:100%;
+	height:460px;
+}
+.carousel .carouselBody{
+	width:1226px;
+	height:460px;
+	background: #e0baba;
+	margin:0 auto;
+}
+.carousel .carouselBody .carouselImg{
+    transform: translatez(0);
+}
+.carousel .carouselBody .carouselimgItem{
+    float: none;
+    list-style: none;
+    position: absolute;
+    width: 1226px;
+    height: 460px;
+}
+.carousel .carouselBody .carouselBtn .carouselPN{
+	position:relative;
+}
+.carousel .carouselBody .carouselBtn .carouselCircle{
+	position:relative;
+}
+.carousel .carouselBody .carouselBtn .left{
+	position: absolute;
+    left: 234px;
+    bottom: 180px;
+    color: #b0b0b0;
+    font-size: 24px;
+    width: 41px;
+    height: 69px;
+    line-height: 69px;
+    text-align: center;
+    z-index:999;
+}
+.carousel .carouselBody .carouselBtn .left:hover{
+	background:#000;
+	opacity:0.5;
+}
+.carousel .carouselBody .carouselBtn .right{
+	position: absolute;
+    right: 0;
+  	bottom:180px;
+    color: #b0b0b0;
+    font-size: 24px;
+    width: 41px;
+    height: 69px;
+    line-height: 69px;
+    text-align: center;
+    z-index:999;
+}
+.carousel .carouselBody .carouselBtn .right:hover{
+	background:#000;
+	opacity:0.5;
+}
+.carousel .carouselBody .carouselBtn .carouselImgSwitch{
+	width: 120px;
+    position: absolute;
+    right: 30px;
+    text-align: right;
+    bottom:20px;
+}
+.carousel .carouselBody .carouselBtn .carouselImgSwitch a{
+	height: 6px;
+    width: 6px;
+    display: block;
+    margin: 0 5px;
+    border: 2px solid #fff;
+    border-color: rgba(255,255,255,0.3);
+    background: rgba(0,0,0,0.4);
+    border-radius: 10px;
+    transition: all .2s;
+	text-align: left;
+    text-indent: -9999px;
+    float:left;
+}
+.carousel .carouselBody .carouselBtn .carouselImgSwitch a.active{
+    background: rgba(255,255,255,0.4);
+    border-color: rgba(0,0,0,0.4);
+}
+/* 轮播 end */
+
 /* groupPurchase */
 .xm-groupPurchase{
 	position: relative;
@@ -700,6 +786,10 @@
     -webkit-transform: translate3d(0, -2px, 0);
     transform: translate3d(0, -2px, 0);
 }
+.brick-item-active .review{
+	height:76px !important;
+	opacity:1 !important;
+}
 .page-main .inner{
 	width:100%;
 	height:260px;
@@ -825,7 +915,36 @@
 	color:#ff6700;
 	font-size:14px;
 }
-
+.page-main .elecInfomation .review{
+	position:absolute;
+	width:234px;
+	height:0;
+	background:#ff6700;
+	color:#fff;
+	font-size:12px;
+	bottom: 0;
+    z-index: 3;
+    overflow: hidden;
+    opacity: 0;
+    transition: all .2s linear;
+}
+.page-main .elecInfomation .review a{
+    padding: 8px 30px;
+    display: block;
+}
+.page-main .elecInfomation .review .comment{
+	width: 174px;
+    height: 36px;
+    display: inline-block;
+    margin-bottom:5px;
+    color:#fff;
+}
+.page-main .elecInfomation .review .author{
+	color: rgba(255,255,255,0.6);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 .page-main .accessoryInfomation{
 	width:100%;
 	height:686px;
@@ -903,7 +1022,36 @@
 	font-size:12px;
 	color:#b0b0b0;
 }
-
+.page-main .accessoryInfomation .review{
+	position:absolute;
+	width:234px;
+	height:0;
+	background:#ff6700;
+	color:#fff;
+	font-size:12px;
+	bottom: 0;
+    z-index: 3;
+    overflow: hidden;
+    opacity: 0;
+    transition: all .2s linear;
+}
+.page-main .accessoryInfomation .review a{
+    padding: 8px 30px;
+    display: block;
+}
+.page-main .accessoryInfomation .review .comment{
+	width: 174px;
+    height: 36px;
+    display: inline-block;
+    margin-bottom:5px;
+    color:#fff;
+}
+.page-main .accessoryInfomation .review .author{
+	color: rgba(255,255,255,0.6);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 .page-main .recommend{
 	position: relative;
     z-index: 10;
@@ -1092,6 +1240,23 @@
 }
 
 /* home-main:phone, homeelec, accessory, recommend, comment  end!*/
+
+/* service */
+.fixService{
+	position: fixed;
+    width: 23px;
+    height: 50px;
+    background: #fff;
+    border:2px solid #b0b0b0;
+    right: 0;
+    top: 50%;
+    z-index: 999;
+    text-align:center;
+}
+.fixService a{
+	line-height:50px;
+}
+/* service end*/
 
 /* footer */
 .site-footer{

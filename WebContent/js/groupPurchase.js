@@ -65,7 +65,7 @@ function initData2(){
 					+"</div><div class='gpInfo'><a class='name'>"+data[i].product.extremeName+"</a>"
 					+"<p class='desc'>"+data[i].product.description+"</p><p class='price'>"
 					+data[i].groupPrice+"元<del style='color:#b0b0b0;'>"+data[i].product.productPrice+"元</del></p>"
-					+"<a href='login.jsp' class='moreInfo' style='background:red'>请您先登录</a>"
+					+"<a href='login.jsp' class='moreInfo' style='background:red'>登录后团购</a>"
 					+"</div></div>";
 					$(".groupProductList").append(str);
 				}
