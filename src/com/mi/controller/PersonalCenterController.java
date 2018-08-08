@@ -162,5 +162,9 @@ public class PersonalCenterController {
 		model.addAttribute("pageTotal", (int)map.get("pageTotal"));
 		return "forward:classifiProduct.jsp";
 	}
-	
+	@RequestMapping("setOrderComplete")
+	public String setOrderComplete(Model model,@RequestParam(value="orderId",defaultValue="0") Integer orderId) {
+		likeProductService.addLogisticsMessage(orderId);
+		return "forward:myMessage.jsp";
+	}
 }
