@@ -196,7 +196,7 @@ public class OrderController extends BaseController{
 					while(true){
 						Date now = new Date();
 						//if(now.getTime() - orderDate.getTime()>1000*60*15){
-						if(now.getTime() - orderDate.getTime()>1000*2){
+						if(now.getTime() - orderDate.getTime()>1000*60*2){
 							likeProductService.addLogisticsMessage(orderId);
 							break;
 						}
@@ -439,6 +439,26 @@ public class OrderController extends BaseController{
 			session.removeAttribute("spikeProductId");
 			List<Product> products = homeService.getRecommendProducts();
 			model.addAttribute("recommendProduct", products);
+			Date orderDate = new Date();
+			new Thread(new Runnable(){
+				public void run(){
+					System.out.println("进入线程");
+					while(true){
+						Date now = new Date();
+						//if(now.getTime() - orderDate.getTime()>1000*60*15){
+						if(now.getTime() - orderDate.getTime()>1000*60*2){
+							likeProductService.addLogisticsMessage(orderId);
+							break;
+						}
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}).start();
 			return "pay-success";
 		}
 	}
