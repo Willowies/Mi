@@ -225,10 +225,15 @@ public class AsController {
 		asTable.setAsTime(asTime);
 		asTable.setAsId(getAsIdByUUId());
 		
+		
 		//为了下一个页面的数据，依旧把数据存到session里面
 	    session.setAttribute("asTable", asTable);
 		//存储到数据库里面
 		asService.insertAsInfo(asTable);
+		
+		//将此数据传向updateStateAuto()方法，方便去改变状态
+	    updateStateAuto(asTable.getAsId());		
+		
 		//return "forward:asFinishApply.jsp";
 		return "forward:AasFinishApp.jsp";
 	}
@@ -313,10 +318,36 @@ public class AsController {
 		session.setAttribute("tableList", tableList);
 		return "forward:AasApplyByUser.jsp";
 	}
+
+	
+	/**
+	 * 自动改变申请单的状态
+	 * 由正在审核（7002），变为已完成（7001）
+	 */
+    public void  updateStateAuto(String asId){
+    	Date asAutoDate = new Date();
+    	new Thread(new Runnable(){
+    		public void run(){
+    			while(true){
+    				Date now = new Date();
+    				//if(now.getTime() - orderDate.getTime()>1000*60*15){
+    				if(now.getTime() - asAutoDate.getTime()>1000*60*60*24){
+    					asService.updateStateAuto(asId);
+    					break;
+    				}
+    				try {
+    					Thread.sleep(1000);
+    				} catch (InterruptedException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+    			}
+    		}
+    	}).start();
+
+    }
+
 }
-
-
-
 
 
 

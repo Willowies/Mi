@@ -237,7 +237,7 @@
 														<td class="col col-thumb ">
 															<div class="figure figure-thumb ">
 																<a target="_blank ">
-																	<img src="//i1.mifile.cn/a1/pms_1524621222.66011593!80x80.jpg " width="80 " height="80 " alt=" ">
+																	<img src="../${asTable.picUrl}" width="80 " height="80 " alt=" ">
 																</a>
 															</div>
 														</td>

@@ -44,6 +44,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          where asId=#{asId}
      </update>
  
+     <!-- 根据asId自动修改服务表状态 -->
+     <update id="updateStateAuto" parameterType="String"  >
+         update mi.aftersale_service 
+         set asState= 7001
+         where asId=#{asId}
+     </update>
+ 
+ 
 	<!-- 选取所有的order里面的内容 -->
 	<select id="getAllOrder" resultType="Order" flushCache="true">
 		select * from mi.order

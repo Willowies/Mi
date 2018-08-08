@@ -29,9 +29,6 @@ public class AsService {
 		return asServiceDAO.getProInfoBySn(asSn);
 	}
 
-/*	public void insertAsnfo(AsTable asTable) {
-		asServiceDAO.insert
-	}*/
 
 	public void insertAsInfo(AsTable asTable) {
 		asServiceDAO.insertAsInfo(asTable);
@@ -76,6 +73,11 @@ public class AsService {
 
 	public Product getProductById(int productId) {
 		return asServiceDAO.getProductById(productId);
+	}
+
+	//自动改变申请表的状态，有正在审核，更新到已完成
+	public void updateStateAuto(String asId) {
+		asServiceDAO.updateStateAuto(asId);
 	}
 
 }

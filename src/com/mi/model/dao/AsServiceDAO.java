@@ -34,4 +34,6 @@ public interface AsServiceDAO {
 	public List<OrderProduct> getOrderProById(int orderId);
 
 	public Product getProductById(int productId);
+
+	public void updateStateAuto(String asId);
 }
