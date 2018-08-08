@@ -115,7 +115,7 @@ function initData(){
 				$(".elecInfo").children("div").eq(0).append(str);
 			}
 			//浮动特效
-			$(".elecInfoEle div.phoneInfo-item").hover(function(){
+			$(".elecInfo .elecInfoEle div.phoneInfo-item").hover(function(){
 				$(this).addClass("brick-item-active");
 			},function(){
 				$(this).removeClass("brick-item-active");
@@ -155,6 +155,12 @@ function initData(){
 					$(".elecInfo").children("div").eq(3).append(str);
 				}
 			}
+			//浮动特效
+			$(".elecInfo .elecInfoEle div.phoneInfo-item").hover(function(){
+				$(this).addClass("brick-item-active");
+			},function(){
+				$(this).removeClass("brick-item-active");
+			});
 			console.log("Load finished--applianceproduct");
 		},
 	});
@@ -180,7 +186,7 @@ function initData(){
 				$(".accessoryInfo").children("div").eq(0).append(str);
 			}
 			//浮动特效
-			$(".elecInfoEle div.phoneInfo-item").hover(function(){
+			$(".accessoryInfo .elecInfoEle div.phoneInfo-item").hover(function(){
 				$(this).addClass("brick-item-active");
 			},function(){
 				$(this).removeClass("brick-item-active");
@@ -235,6 +241,12 @@ function initData(){
 					$(".accessoryInfo").children("div").eq(3).append(str);
 				}
 			}
+			//浮动特效
+			$(".accessoryInfo .elecInfoEle div.phoneInfo-item").hover(function(){
+				$(this).addClass("brick-item-active");
+			},function(){
+				$(this).removeClass("brick-item-active");
+			});
 			console.log("Load finished--collocationproduct");
 		},
 	});
@@ -259,6 +271,12 @@ function initData(){
 				}
 				$("#addGoodItemSecond").append(str);
 			}
+			//浮动特效
+			$("#addGoodItemSecond div.goods-item").hover(function(){
+				$(this).addClass("brick-item-active");
+			},function(){
+				$(this).removeClass("brick-item-active");
+			});
 			console.log("Load finished--recommendproduct");
 		},
 	});
@@ -504,7 +522,13 @@ $(document).ready(function(){
 		}
 	},function(){
 	});
-	
+	//浮动特效-img
+	$("div.phoneInfo-itemImg").hover(function(){
+		$(this).addClass("brick-item-active");
+	},function(){
+		$(this).removeClass("brick-item-active");
+	});
+	console.log("Load finished--recommendproduct");
 });
 
 
