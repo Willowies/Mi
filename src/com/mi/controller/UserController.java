@@ -107,7 +107,7 @@ public class UserController extends BaseController {
 	
 	//修改个人信息
 	@RequestMapping("updateUser.action")
-	public String updateUser(@Valid User user,BindingResult errorResult,HttpSession session) {
+	public String updateUser(@Valid User user,BindingResult errorResult,HttpSession session,HttpServletRequest request) {
 		Map<String, Object> errorMap = null;
         boolean flag = errorResult.hasErrors();
         if (flag) {// 数据有错
@@ -122,7 +122,7 @@ public class UserController extends BaseController {
                 errorMap.put(fieldName, errorMessage);
             }
             //需要将错误信息和正确信息传递过去  errorMap只封装错误提示信息
-            session.setAttribute("errorMap", errorMap);
+            request.setAttribute("errorMap", errorMap);
             //user包含错误信息和正确的数据
             session.setAttribute("user", user);
             return "updateUser";
