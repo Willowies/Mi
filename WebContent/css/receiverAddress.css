@@ -180,7 +180,9 @@ textarea.input-text{
     text-align: center;
     background-color: #F5F5F5;
 }
+
 .btn{
+	font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
 	display: inline-block;
     width: 158px;
     height: 38px;

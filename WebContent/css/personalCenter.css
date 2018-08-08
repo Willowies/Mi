@@ -63,9 +63,9 @@ li {
 	float: left;
     margin-left: 14px;
     min-height: 1px;
-    
+    min-width: 975px;
 	padding: 36px 0px;
-	width: 978px;
+	width: 975px;
 	background: rgb(255, 255, 255);
 	display: block;
 }
