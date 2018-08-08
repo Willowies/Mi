@@ -39,22 +39,21 @@ public class ProductSpikeController {
 	}
 	//设置秒杀提醒
 	@RequestMapping("addSpikeRemind")
-	public @ResponseBody String addSpikeRemind(HttpServletRequest request, String spikeProductId, String remindTime, HttpSession session){
+	public @ResponseBody String addSpikeRemind(String spikeProductId, String remindTime, HttpSession session){
 		User user = getUser(session);
-		//spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
 		String isSetted = productSpikeService.addSpikeRemind(Integer.parseInt(spikeProductId), user.getUserId(), remindTime);
 		return isSetted;
 	}
 	//抢购商品
 	@RequestMapping("buySpikeProduct")
-	public @ResponseBody String buySpikeProduct(HttpServletRequest request, String spikeProductId, HttpSession session){
+	public @ResponseBody String buySpikeProduct(String spikeProductId, HttpSession session){
 		//session.setAttribute("spikeProductId", spikeProductId);
 		String buySucceed = productSpikeService.selectBuySpikeProduct(Integer.parseInt(spikeProductId));		
 		return buySucceed;
 	}
 	//封装商品信息
 	@RequestMapping("findSpikeProduct")
-	public @ResponseBody OrderProduct findSpikeProduct(HttpServletRequest request, String spikeProductId, HttpSession session){
+	public @ResponseBody OrderProduct findSpikeProduct(String spikeProductId, HttpSession session){
 		//spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
 		OrderProduct orderProduct = productSpikeService.findSpikeProduct(Integer.parseInt(spikeProductId));
 		session.setAttribute("orderProduct", orderProduct);
@@ -63,7 +62,7 @@ public class ProductSpikeController {
 	}
 	//发送消息提醒秒杀
 	@RequestMapping("addSpikeMessage")
-	public void addSpikeMessage(HttpServletRequest request, String spikeProductId, Date sendTime, HttpSession session){
+	public void addSpikeMessage(String spikeProductId, String sendTime, HttpSession session){
 		User user = getUser(session);
 		//spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
 		productSpikeService.addSpikeMessage(Integer.parseInt(spikeProductId), user.getUserId(), sendTime);
@@ -74,7 +73,12 @@ public class ProductSpikeController {
 		List<SpikeProduct> spikeList = productSpikeService.selectIndexSpikeProduct(currentDate);
 		return spikeList;
 	}
-	
+	//更改秒杀提醒的状态
+	@RequestMapping("updateSpikeRemid")
+	public void updateSpikeRemid(String spikeProductId, String remindTime, HttpSession session){
+		User user = getUser(session);
+		productSpikeService.updateSpikeRemid(Integer.parseInt(spikeProductId), user.getUserId(), remindTime);
+	}
 
 
 }

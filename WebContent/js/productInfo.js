@@ -1,4 +1,5 @@
 $(function(){
+	var checkLogin;//标记是否登录
 	$(".link-category").hover(function(){
 		$(".site-category").css("display","block");
 	},function(){
@@ -10,11 +11,8 @@ $(function(){
 		$(".site-category").css("display","none");
 	});
 	//判断登录
-	var checkLogin;//标记是否登录
 	checkLoginState();
-	if(checkLogin == true){
-		$(".login-notic").css("display","none");
-	}
+	console.log("登录状态"+checkLogin);
 	$(".proLoginClose").click(function(){
 		$(".login-notic").css("display","none");
 	});
@@ -33,7 +31,7 @@ $(function(){
 		var productName = $("#pro-title").text();
 		$.ajax({
 			type:"post",
-			astnc:true,
+			async:true,
 			url:"selectProductColor.action?productName="+productName+"&version="+version,
 			success:function(data){
 				$("#desc").text(data[0].description);
@@ -77,7 +75,7 @@ $(function(){
 		var color = $("#selectColor ul li.active a").text();
 		$.ajax({
 			type:"post",
-			astnc:true,
+			async:true,
 			url:"selectProduct.action?productName="+$("#pro-title").text()+"&version="+version+"&color="+color,	
 			success:function(data){
 				$(".pro-price").text(data.productPrice);
@@ -109,7 +107,7 @@ $(function(){
 		var color = $("#selectColor ul li.active a").text();
 		$.ajax({
 				type:"post",
-				astnc:true,
+				async:true,
 				dataType:"text",
 				url:"selectProductStock.action?productName="+$("#pro-title").text()+"&version="+version+"&color="+color,	
 				success:function(data){
@@ -143,7 +141,8 @@ $(function(){
 			$("#buyOrNotice").click(function(){			
 				$.ajax({
 					type:"post",
-					astnc:true,
+					async:true,
+					dataType:"text",
 					url:"noticeArrival.action?productName="+$("#pro-title").text()+"&version="+version+"&color="+color,
 					success:function(data){
 						$("#modalNoticeArrival").modal("show");
@@ -163,10 +162,12 @@ $(function(){
 		}
 	}
 	//领取优惠券
-	$(".getCoupon").click(function(){		
+	$("body").on("click",".getCoupon",function(){
+		alert("准备领取优惠券");
 		checkLoginState();//判断登录
 		if(checkLogin == "true"){
 			//已登录
+			alert("领取优惠券");
 			var couponId = $(this).parent().find(".couponId").text();
 			var discount = $(this).parent().find(".couponDiscount").text();
 			var range = $(this).parent().find(".couponName").text().split(" ");
@@ -179,9 +180,11 @@ $(function(){
 			var end = endDate.getFullYear() + "-" +((endDate.getMonth()+1)<10?"0":"")+(endDate.getMonth()+1)+"-"+(endDate.getDate()<10?"0":"")+endDate.getDate();
 			$.ajax({
 				type:"post",
-				astnc:true,
+				async:true,
+				dataType:"text",
 				url:"receiveCoupon.action?couponId="+couponId,
 				success:function(data){
+					alert(data);
 					$("#couponModal").modal("show");
 					$("p.tips").text(data);					
 					$(".coupon-txt span").text("适用于"+couponRange);
@@ -257,6 +260,9 @@ $(function(){
 			success:function(data){
 				//alert("判断登录内部ajax"+data);
 				checkLogin = data;
+				if(checkLogin == "true"){					
+					$(".login-notic").css("display","none");
+				}
 			}
 		});
 	    //alert("判断登录内部"+checkLogin);

@@ -13,6 +13,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,7 +83,6 @@ public class ProductSpikeService {
 	//增加秒杀提醒记录
 	public String addSpikeRemind(int spikeProductId, int userId, String remindTime){
 		long stamp = new Long(remindTime);
-		//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date remindDate = new Date(stamp);
 		System.out.println(remindDate);
 		Map<String, Object> map = new HashMap<String, Object>();		
@@ -110,16 +110,19 @@ public class ProductSpikeService {
 	}
 	
 	//定时启动秒杀提醒
-	public void addSpikeMessage(int spikeProductId, final int userId, final Date remindTime){
+	public void addSpikeMessage(int spikeProductId, final int userId, String remindTime){
 		//设置发送消息定时器
 		final SpikeProduct spikeProduct = spikeProductDAO.selectSpikeProductById(spikeProductId);
+		long stamp = new Long(remindTime);
+		Date sendDate = new Date(stamp);
 		Timer timer = new Timer();
 		TimerTask timerTask = new TimerTask(){
 			@Override
 			public void run() {
-				addMessage(userId, remindTime, spikeProduct);				
+				System.out.println("秒杀定时提醒启动！！！！！！");
+				addMessage(userId, sendDate, spikeProduct);				
 			}};
-		timer.schedule(timerTask, remindTime);
+		timer.schedule(timerTask, sendDate);
 	}
 	
 	//立即抢购时查询抢购商品情况
@@ -189,6 +192,16 @@ public class ProductSpikeService {
 		map.put("sendTime", sendTime);
 		map.put("picUrl", picUrl);
 		messageDAO.addMessage(map);
+	}
+	//更改秒杀提醒的状态
+	public void updateSpikeRemid(int spikeProductId, int userId, String remindTime){
+		long stamp = new Long(remindTime);
+		Date remindDate = new Date(stamp);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("spikeProductId", spikeProductId);
+		map.put("userId", userId);
+		map.put("remindTime", remindDate);
+		spikeRemindDAO.updateSpikeRemid(map);
 	}
 	
 	//定时器到截止时间时，处理当场秒杀的库存

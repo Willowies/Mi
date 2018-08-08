@@ -348,14 +348,23 @@ $(function(){
 				}
 			});	
 			//设置定时消息
-			/*$.ajax({
+			$.ajax({
 				type:"post",
 				async:false,
-				url:"addSpikeMessage.action?spikeProductId="+spikeProductId+"&sendTime="+reminTime,
-				success:function(data){
-					
+				url:"addSpikeMessage.action?spikeProductId="+spikeProductId+"&sendTime="+remindTime,
+				success:function(){
+					//更改提醒状态
+					console.log("已设置定时提醒");
+					$.ajax({
+						type:"post",
+						async:false,
+						url:"updateSpikeRemid.action?spikeProductId="+spikeProductId+"&sendTime="+remindTime,
+						success:function(){
+							console.log("已更改提醒状态");
+						}
+					});
 				}
-			});*/
+			});
 		}else{
 			//未登录
 			window.location.href = "login.jsp";

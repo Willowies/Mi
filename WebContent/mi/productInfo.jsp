@@ -249,7 +249,7 @@
 								<!--购买按钮-->
 								<ul class="btn-wrap clearfix" id="buyBtnBox">
 									<li>
-										<a id="buyOrNotice" class="but but-primary but-biglarge proBuyBtn" data-type="common" data-toggle="modal" onclick=""></a>
+										<a id="buyOrNotice" class="but but-primary but-biglarge proBuyBtn" data-type="common" data-toggle="modal"></a>
 									</li>
 								</ul>
 								<div class="pro-policy" id="policy">

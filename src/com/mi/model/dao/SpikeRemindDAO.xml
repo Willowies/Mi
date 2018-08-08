@@ -11,9 +11,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <insert id="addSpikeRemind" parameterType="map" >
         insert into spikeremind(spikeProductId,userId,remindTime,remindStatus) 
-        values(#{spikeProductId},#{userId},#{remindTime},1)
+        values(#{spikeProductId},#{userId},#{remindTime},0)
     </insert>
     
+    <update id="updateSpikeRemid" parameterType="map" >
+        update spikeremind set remindStatus=1 
+        where spikeProductId=#{spikeProductId} and userId=#{userId} and remindTime=#{remindTime}
+    </update>
     
 
 </mapper>
