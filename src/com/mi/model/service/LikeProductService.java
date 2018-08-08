@@ -94,7 +94,7 @@ public class LikeProductService {
 		map.put("userId",userId);
 		map.put("sendTime",sendTime);
 		
-		orderZhouDAO.updateOrderState(orderId, 4);
+		orderZhouDAO.updateOrderState(orderId, 3);
 		messageDAO.addMessage(map);
 	}
 }
