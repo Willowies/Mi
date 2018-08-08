@@ -93,7 +93,7 @@ public class ProductSpikeService {
 		List<Integer> list = spikeRemindDAO.selectSpikeRemind(map);
 		if(list.size() != 0){
 			for(int i = 0; i < list.size(); i++){
-				if(list.get(i) == 1){
+				if(list.get(i) == 0){
 					isSetted = "您已设置过了";
 				}else{
 					//设置提醒

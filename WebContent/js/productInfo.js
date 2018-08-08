@@ -134,11 +134,11 @@ $(function(){
 	//设置到货通知
 	function noticeArrival(){
 		checkLoginState();//判断登录
-		if(checkLogin == "true"){
-			//已登录
-			var version = $("#selectVersion li.active span.name").text();
-			var color = $("#selectColor ul li.active a").text();
-			$("#buyOrNotice").click(function(){			
+		$("#buyOrNotice").click(function(){
+			if(checkLogin == "true"){
+				//已登录
+				var version = $("#selectVersion li.active span.name").text();
+				var color = $("#selectColor ul li.active a").text();
 				$.ajax({
 					type:"post",
 					async:true,
@@ -154,20 +154,18 @@ $(function(){
 						});											
 					}
 				});
-				
-			});
-		}else{
-			//未登录
-			window.location.href = "login.jsp";
-		}
+			}else{
+				//未登录
+				window.location.href = "login.jsp";
+			}
+						
+		});
 	}
 	//领取优惠券
 	$("body").on("click",".getCoupon",function(){
-		alert("准备领取优惠券");
 		checkLoginState();//判断登录
 		if(checkLogin == "true"){
 			//已登录
-			alert("领取优惠券");
 			var couponId = $(this).parent().find(".couponId").text();
 			var discount = $(this).parent().find(".couponDiscount").text();
 			var range = $(this).parent().find(".couponName").text().split(" ");
@@ -184,7 +182,6 @@ $(function(){
 				dataType:"text",
 				url:"receiveCoupon.action?couponId="+couponId,
 				success:function(data){
-					alert(data);
 					$("#couponModal").modal("show");
 					$("p.tips").text(data);					
 					$(".coupon-txt span").text("适用于"+couponRange);
@@ -235,19 +232,7 @@ $(function(){
 			$("#img").removeClass("fix");
 		}
 	});
-	/*var headOffset = $(".product-head-info").offset();
-	var headHeight = $(".product-head-info").height();
-	console.log(headOffset.top);
-	console.log(headHeight);
-	$(window).scroll(function(){
-		var scrollTop = $(window).scrollTop();
-		console.log(scrollTop);
-		if(scrollTop >= (headOffset.top+headHeight)){
-			$(".product-head-info").css({"top":"70px","position":"fix"});
-		}else{
-			$(".product-head-info").css({"top":"0","position":"relative"});
-		}
-	});*/
+
 	
 	//判断登录
 	function checkLoginState(){
