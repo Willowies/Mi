@@ -80,11 +80,15 @@ public class ProductSpikeService {
 	}
 	
 	//增加秒杀提醒记录
-	public String addSpikeRemind(int spikeProductId, int userId, Date remindTime){
+	public String addSpikeRemind(int spikeProductId, int userId, String remindTime){
+		long stamp = new Long(remindTime);
+		//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date remindDate = new Date(stamp);
+		System.out.println(remindDate);
 		Map<String, Object> map = new HashMap<String, Object>();		
 		map.put("spikeProductId", spikeProductId);
 		map.put("userId", userId);
-		map.put("remindTime", remindTime);
+		map.put("remindTime", remindDate);
 		String isSetted = "";
 		List<Integer> list = spikeRemindDAO.selectSpikeRemind(map);
 		if(list.size() != 0){
@@ -156,8 +160,17 @@ public class ProductSpikeService {
 	}
 
 	//首页秒杀查询秒杀商品
-	public List<SpikeProduct> selectIndexSpikeProduct(Date currentDate){
-		List<SpikeProduct> spikeList = spikeProductDAO.selectIndexSpikeProduct(currentDate);
+	public List<SpikeProduct> selectIndexSpikeProduct(String currentDate){
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date spikeTime = null;
+		try {
+			spikeTime = format.parse(currentDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		//long stamp = date.getTime();
+		//Date currentTime = new Date(stamp);
+		List<SpikeProduct> spikeList = spikeProductDAO.selectIndexSpikeProduct(spikeTime);
 		for(int i = 8; i < spikeList.size(); i++){
 			spikeList.remove(i);
 		}
@@ -198,7 +211,7 @@ public class ProductSpikeService {
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("productId", spikeProductList.get(i).getProductId());
 					map.put("remainStock", remainStock);
-					stockDAO.updateSpikeStock(map);
+					stockDAO.updateSpikeStock1(map);
 				}
 			}
 		}

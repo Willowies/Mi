@@ -190,10 +190,9 @@
 			</button>
 			<div class="modal-body" style="max-height: 400px; padding: 40px 60px;">
 				<h3 style="font-size: 26px; margin: 1em 0;">设置提醒</h3>
-				<p id="isSetted" style="margin: 1em 0;">是否确认提醒？</p>
-				<div id="bodyfoot">
-					<a id="confirm" onclick="reminded()" class="but btn-primary" style="width: 158px; height: 38px; background: #ff6700; border-color: #ff6700; font-size: 14px; line-height: 38px;" data-dismiss="modal">确认</a>
-					<a id="cancel" class="but btn-gray" style="width: 158px; height: 38px; font-size: 14px; line-height: 38px;" data-dismiss="modal">取消</a>
+				<p id="isSetted" style="margin: 1em 0;"></p>
+				<div>
+					<a href="javascript:void(0)" class="but btn-primary iknown" style="width: 158px; height: 38px; background: #ff6700; border-color: #ff6700; font-size: 14px; line-height: 38px;">我知道了</a>
 				</div>
 			</div>
 		</div>
@@ -206,7 +205,7 @@
 				<h3 style="font-size: 26px; margin: 1em 0;">抢购已结束</h3>
 				<p style="margin: 1em 0;"></p>
 				<div>
-					<a href="" class="but btn-primary" style="width: 158px; height: 38px; background: #ff6700; border-color: #ff6700; font-size: 14px; line-height: 38px;">我知道了</a>
+					<a href="javascript:void(0)" class="but btn-primary iknown" style="width: 158px; height: 38px; background: #ff6700; border-color: #ff6700; font-size: 14px; line-height: 38px;">我知道了</a>
 				</div>
 			</div>
 		</div>
@@ -219,7 +218,7 @@
 				<h3 style="font-size: 26px; margin: 1em 0;">闪购已超上限</h3>
 				<p style="margin: 1em 0;">请下场再来</p>
 				<div>
-					<a href="" class="but btn-primary" style="width: 158px; height: 38px; background: #ff6700; border-color: #ff6700; font-size: 14px; line-height: 38px;">我知道了</a>
+					<a href="javascript:void(0)" class="but btn-primary iknown" style="width: 158px; height: 38px; background: #ff6700; border-color: #ff6700; font-size: 14px; line-height: 38px;">我知道了</a>
 				</div>
 			</div>
 		</div>

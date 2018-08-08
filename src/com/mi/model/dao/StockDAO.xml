@@ -33,4 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	set totalStock=totalStock-#{quantity}
     	where productId=#{productId}
     </update>
+    
+    <update id="updateSpikeStock1" parameterType="map">
+        update stock set allocatableStock=allocatableStock+#{remainStock} 
+        where productId=#{productId}
+    </update>
 </mapper>

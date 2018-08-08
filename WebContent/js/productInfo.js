@@ -10,8 +10,9 @@ $(function(){
 		$(".site-category").css("display","none");
 	});
 	//判断登录
-	var isLogin = checkLoginState();
-	if(isLogin == true){
+	var checkLogin;//标记是否登录
+	checkLoginState();
+	if(checkLogin == true){
 		$(".login-notic").css("display","none");
 	}
 	$(".proLoginClose").click(function(){
@@ -134,65 +135,65 @@ $(function(){
 	}
 	//设置到货通知
 	function noticeArrival(){
-		var isLogin = checkLoginState();//判断登录
-		if(isLogin == "true"){
+		checkLoginState();//判断登录
+		if(checkLogin == "true"){
 			//已登录
-			
+			var version = $("#selectVersion li.active span.name").text();
+			var color = $("#selectColor ul li.active a").text();
+			$("#buyOrNotice").click(function(){			
+				$.ajax({
+					type:"post",
+					astnc:true,
+					url:"noticeArrival.action?productName="+$("#pro-title").text()+"&version="+version+"&color="+color,
+					success:function(data){
+						$("#modalNoticeArrival").modal("show");
+						//console.log($("h4.isSetted").length);
+						$("h4.isSetted").text(data);
+						$("a.known").click(function(){
+							$("#buyOrNotice").css({"pointer-events":"none","opacity":"0.4"});
+							$("#buyOrNotice").text("已设置到货通知");
+						});											
+					}
+				});
+				
+			});
 		}else{
 			//未登录
+			window.location.href = "login.jsp";
 		}
-		var version = $("#selectVersion li.active span.name").text();
-		var color = $("#selectColor ul li.active a").text();
-		$("#buyOrNotice").click(function(){			
-			$.ajax({
-				type:"post",
-				astnc:true,
-				url:"noticeArrival.action?productName="+$("#pro-title").text()+"&version="+version+"&color="+color,
-				success:function(data){
-					$("#modalNoticeArrival").modal("show");
-					//console.log($("h4.isSetted").length);
-					$("h4.isSetted").text(data);
-					$("a.known").click(function(){
-						$("#buyOrNotice").css({"pointer-events":"none","opacity":"0.4"});
-						$("#buyOrNotice").text("已设置到货通知");
-					});											
-				}
-			});
-			
-		});
 	}
 	//领取优惠券
 	$(".getCoupon").click(function(){		
-		var isLogin = checkLoginState();//判断登录
-		if(isLogin == "true"){
+		checkLoginState();//判断登录
+		if(checkLogin == "true"){
 			//已登录
-			
+			var couponId = $(this).parent().find(".couponId").text();
+			var discount = $(this).parent().find(".couponDiscount").text();
+			var range = $(this).parent().find(".couponName").text().split(" ");
+			var couponRange = range[0]+" "+range[1];
+			var startDate = $(this).parent().find(".startDate").text();
+			var endDate = $(this).parent().find(".endDate").text();
+			startDate = new Date(startDate);		
+			endDate = new Date(endDate);
+			var start = startDate.getFullYear() + "-" +((startDate.getMonth()+1)<10?"0":"")+(startDate.getMonth()+1)+"-"+(startDate.getDate()<10?"0":"")+startDate.getDate();
+			var end = endDate.getFullYear() + "-" +((endDate.getMonth()+1)<10?"0":"")+(endDate.getMonth()+1)+"-"+(endDate.getDate()<10?"0":"")+endDate.getDate();
+			$.ajax({
+				type:"post",
+				astnc:true,
+				url:"receiveCoupon.action?couponId="+couponId,
+				success:function(data){
+					$("#couponModal").modal("show");
+					$("p.tips").text(data);					
+					$(".coupon-txt span").text("适用于"+couponRange);
+					$(".coupon-price").html("<sup>￥</sup>"+discount);
+					$(".coupon-time").text("有效时间："+start+"-"+end);
+				}
+				
+			});
 		}else{
 			//未登录
-		}
-		var couponId = $(this).parent().find(".couponId").text();
-		var discount = $(this).parent().find(".couponDiscount").text();
-		var range = $(this).parent().find(".couponName").text().split(" ");
-		var couponRange = range[0]+" "+range[1];
-		var startDate = $(this).parent().find(".startDate").text();
-		var endDate = $(this).parent().find(".endDate").text();
-		startDate = new Date(startDate);		
-		endDate = new Date(endDate);
-		var start = startDate.getFullYear() + "-" +((startDate.getMonth()+1)<10?"0":"")+(startDate.getMonth()+1)+"-"+(startDate.getDate()<10?"0":"")+startDate.getDate();
-		var end = endDate.getFullYear() + "-" +((endDate.getMonth()+1)<10?"0":"")+(endDate.getMonth()+1)+"-"+(endDate.getDate()<10?"0":"")+endDate.getDate();
-		$.ajax({
-			type:"post",
-			astnc:true,
-			url:"receiveCoupon.action?couponId="+couponId,
-			success:function(data){
-				$("#couponModal").modal("show");
-				$("p.tips").text(data);					
-				$(".coupon-txt span").text("适用于"+couponRange);
-				$(".coupon-price").html("<sup>￥</sup>"+discount);
-				$(".coupon-time").text("有效时间："+start+"-"+end);
-			}
-			
-		});		
+			window.location.href = "login.jsp";
+		}		
 				
 	});
 	
@@ -200,8 +201,8 @@ $(function(){
 	function buyProduct(){
 		$("#buyOrNotice").click(function(){
 			//判断登录
-			var isLogin = checkLoginState();
-			if(isLogin == "true"){
+			checkLoginState();
+			if(checkLogin == "true"){
 				//已登录 进行购买
 				window.location.href = "addCartItem.action?productIdString="+$("#productId").text();
 			}else{
@@ -247,15 +248,18 @@ $(function(){
 	
 	//判断登录
 	function checkLoginState(){
-		var checkResult = "";
+		//alert("检查登录");
 		$.ajax({
 			type:"post",
-			astnc:true,
+			async:false,
+			dataType:"text",
 			url:"checkLoginState.action",
 			success:function(data){
-				checkResult = data;
+				//alert("判断登录内部ajax"+data);
+				checkLogin = data;
 			}
 		});
-		return checkResult;
+	    //alert("判断登录内部"+checkLogin);
+		
 	}
 });

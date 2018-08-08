@@ -39,7 +39,7 @@ public class ProductSpikeController {
 	}
 	//设置秒杀提醒
 	@RequestMapping("addSpikeRemind")
-	public @ResponseBody String addSpikeRemind(HttpServletRequest request, String spikeProductId, Date remindTime, HttpSession session){
+	public @ResponseBody String addSpikeRemind(HttpServletRequest request, String spikeProductId, String remindTime, HttpSession session){
 		User user = getUser(session);
 		//spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
 		String isSetted = productSpikeService.addSpikeRemind(Integer.parseInt(spikeProductId), user.getUserId(), remindTime);
@@ -70,7 +70,7 @@ public class ProductSpikeController {
 	}
 	//返回首页查找的秒杀商品列表
 	@RequestMapping("selectIndexSpikeProduct")
-	public @ResponseBody List<SpikeProduct> selectIndexSpikeProduct(Date currentDate){
+	public @ResponseBody List<SpikeProduct> selectIndexSpikeProduct(String currentDate){
 		List<SpikeProduct> spikeList = productSpikeService.selectIndexSpikeProduct(currentDate);
 		return spikeList;
 	}

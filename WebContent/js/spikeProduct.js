@@ -19,16 +19,13 @@ $(function(){
 	var date = now.getFullYear() + "-" +((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
 	//把每个秒杀时间转换成时间戳存入button的value中
 	changeSpikeTime();
-	//setInterval(,1000);
 	var liList = $(".spike-banner ul").children("li");
 	var countIndex = 0;  //定位要显示的秒杀场次
 	var flag = "";  //标记”即将开始“or”正在进行“
-	var lastSpikeTime = null;
-	setSpikeBanner();
+	var lastEndTime = null;	
 	var focusSpikeTime = $(".spike-banner ul li.active button").attr("id");//选中的秒杀时间
-	//console.log(focusSpikeTime);
 	var focusTime = $(".spike-banner ul li.active button").attr("value");
-	getSpikeProduct();	
+	setSpikeBanner();	
 	$(".spike-banner ul li").click(function(){
 		$(".spike-banner ul li.active").removeClass("active");
 		$(this).addClass("active");
@@ -43,7 +40,7 @@ $(function(){
 	function setSpikeBanner(){				
 		var lastDate = $(".spike-banner ul li:last").find(".focustime").attr("value");//最晚的秒杀时间
 		var lastTime = Date.parse(lastDate.replace(/-/g,"/"));
-		lastSpikeTime = lastTime + 60*60*1000;
+		lastEndTime = lastTime + 60*60*1000;
 		var serverDate = new Date($.ajax({async: false}).getResponseHeader("Date"));
 		var serverTime = serverDate.getTime();
 		var gapTime = lastTime + 60*60*1000 - serverTime;//最大秒杀时间与当前时间间隔		
@@ -66,6 +63,8 @@ $(function(){
 		}
 		$(liList).removeClass("active");
 		$(liList[countIndex]).addClass("active");
+		focusTime = $(".spike-banner ul li.active button").attr("value");
+		getSpikeProduct();
 		//请求倒计时
 		var countDate = $(liList[countIndex]).find(".focustime").attr("value");
 		//console.log(countDate);
@@ -98,7 +97,7 @@ $(function(){
 			if(flag == "正在进行"){
 				remainTime = 60*60*1000 - remainTime;
 			}
-			if(!isNaN(remainTime)){
+			if(!isNaN(remainTime) && remainTime >= 0){
 				var hour = Math.floor(remainTime / 1000 / 60 / 60 % 24);
 				var minute = Math.floor(remainTime / 1000 / 60 % 60);
 				var second = Math.floor(remainTime / 1000 % 60);
@@ -108,14 +107,14 @@ $(function(){
 					$(liList[countIndex]).find("span").html("<em>正在进行<br>距结束   "+showTime+"</em>");
 					if(hour == 0 && minute == 0 && second == 0){
 						setSpikeBanner();
-						getSpikeProduct();
+						//getSpikeProduct();
 		    		}
 				}
 				if(flag == "即将开始"){
 					$(liList[countIndex]).find("span").html("<em>即将开始<br>距开始   "+showTime+"</em>");	
 					if(hour == 0 && minute == 0 && second == 0){
 						setSpikeBanner();
-						getSpikeProduct();
+						//getSpikeProduct();
 		    		}
 				}
 				for(var i = 0; i < countIndex; i++){
@@ -124,7 +123,7 @@ $(function(){
 				for(var i = countIndex+1; i < liList.length; i++){
 					$(liList[i]).find("span").html("即将开始");
 				}
-				if(nowTime >= lastSpikeTime){
+				if(nowTime >= lastEndTime){
 					for(var i = 0; i < liList.length; i++){
 						$(liList[i]).find("span").empty();
 						$(liList[i]).find("span").html("已结束");
@@ -139,7 +138,10 @@ $(function(){
 	function getSpikeProduct(){
 		var nowDate = new Date($.ajax({async: false}).getResponseHeader("Date"));//当前服务器时间		
 		//console.log(nowDate);
-		var focusDate = new Date(Date.parse(focusTime.replace(/-/g,"/")));//选中秒杀时间
+		focusSpikeTime = $(".spike-banner ul li.active button").attr("id");
+		console.log("当前时间"+focusTime);
+		var focusStamp = Date.parse(focusTime.replace(/-/g,"/"));
+		var focusDate = new Date(focusStamp);//选中秒杀时间
 		//console.log(focusDate);
 		//计算选中秒杀时间与当前时间的差
 		var diff = Math.abs(focusDate-nowDate)/1000/60;
@@ -155,15 +157,16 @@ $(function(){
 				//alert("方法调用后"+checkLogin);
 				if(checkLogin == "true"){
 					//已登录
-					alert("已登录");
+					//alert("已登录");
+					console.log("时间差"+diffMinute);
 					//可设置提醒但不可抢购		
 					if(diffMinute > 15 && focusDate > nowDate){
 						$(".spike-con ul.active").empty();
 						for(var i = 0; i < data.length; i++){
-							var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
-							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
+							var html = ""+" <li><p style=\"display:none;\" class=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
+							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].color)
 							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-							+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small remind\" data-toggle=\"modal\" data-target=\"#modalRemind\">提醒我</a></div></li>";
+							+(data[i].previousPrice)+"元 </del></p><a class=\"but btn-green btn-remind btn-small remind\" data-toggle=\"modal\" >提醒我</a></div></li>";
 							$(".spike-con ul.active").append(html);
 					    }
 					}
@@ -171,8 +174,8 @@ $(function(){
 					if(diffMinute > 0 && diffMinute <= 15 && focusDate > nowDate){
 						$(".spike-con ul.active").empty();
 						for(var i = 0; i < data.length; i++){
-							var html = "<p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p>"+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
-							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
+							var html = "<p style=\"display:none;\" class=\"spikeProductId\">"+(data[i].spikeProductId)+"</p>"+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
+							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].color)
 							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
 							+(data[i].previousPrice)+"元 </del></p><a class=\"but btn-green btn-disabled btn-small nostart\" onclick=\"\">即将开抢</a></div></li>";
 							$(".spike-con ul.active").append(html);
@@ -183,11 +186,11 @@ $(function(){
 					if(diffMinute <= 60 && diffMinute >= 0 && focusDate < nowDate){
 						$(".spike-con ul.active").empty();
 						for(var i = 0; i < data.length; i++){
-							var percent = 10 * data[i].currentSpikeNum / data[i].spikeQuantity;	
+							var percent = 100 * data[i].currentSpikeNum / data[i].spikeQuantity;	
 							console.log(percent);
 							var html = ""+" <li><p style=\"display:none;\" class=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
-							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
-							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width:"+percent+"px;\"></span><em>"+percent+"%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
+							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].color)
+							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width:"+percent+"%;\"></span><em>"+percent+"%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
 							+(data[i].previousPrice)+"元 </del></p><a class=\"but btn-green btn-remind btn-small start\" style=\"background: #ff6700 !important; border-color: #ff6700 !important; data-toggle=\"modal\">立即抢购</a></div></li>";
 							$(".spike-con ul.active").append(html);
 					    }
@@ -196,11 +199,11 @@ $(function(){
 					if(diffMinute > 60 && focusDate < nowDate){
 						$(".spike-con ul.active").empty();
 						for(var i = 0; i < data.length; i++){
-							var percent = 10 * data[i].currentSpikeNum / data[i].spikeQuantity;	
+							var percent = 100 * data[i].currentSpikeNum / data[i].spikeQuantity;	
 							console.log(percent);
-							var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
-							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
-							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width:"+percent+"px;\"></span><em>"+percent+"%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
+							var html = ""+" <li><p style=\"display:none;\" class=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
+							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].color)
+							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width:"+percent+"%;\"></span><em>"+percent+"%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
 							+(data[i].previousPrice)+"元 </del></p><a class=\"but btn-green btn-disabled btn-small over\" onclick=\"\">已结束</a></div></li>";
 							$(".spike-con ul.active").append(html);
 					    }
@@ -209,16 +212,22 @@ $(function(){
 					//未登录
 					$(".spike-con ul.active").empty();
 					for(var i = 0; i < data.length; i++){
-						var html = ""+" <li><p style=\"display:none;\" id=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
-						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
+						var html = ""+" <li><p style=\"display:none;\" class=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
+						+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].color)
 						+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process hide\"><span></span><em></em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
 						+(data[i].previousPrice)+"元 </del></p><a href=\"login.jsp\" class=\"but btn-green btn-remind btn-small login\" style=\"background: #ff6700 !important; border-color: #ff6700 !important;\">登录后抢购</a></div></li>";
 						$(".spike-con ul.active").append(html);
 				    }
 					//秒杀结束 按钮显示已结束
 					var activityStatus = $(".spike-banner ul li.active span").text();
+					//alert(activityStatus);
 					if(activityStatus == "已结束"){
-						$(".spike-con.login").text("已结束");
+						//alert($(".pro-con").children("a.login").length);
+						$(".pro-con").children("a.login").text("已结束");
+						$(".pro-con").children("a.login").removeClass("btn-remind");
+						$(".pro-con").children("a.login").addClass("btn-disabled");
+						$(".pro-con").children("a.login").css({"background": "#f2f2f2","border-color":"#f2f2f2"});
+						$(".pro-con").children("a.login").attr("href","javascript:void(0)");
 					}
 					
 				}
@@ -256,12 +265,31 @@ $(function(){
 				url:"buySpikeProduct.action?spikeProductId="+spikeProductId,
 				success:function(data){
 					if(data == "超过上限"){
+						//更改抢购按钮为“已结束”
+						$(this).text("已结束");
+						$(this).removeClass("btn-remind");
+						$(this).addClass("btn-disabled");
+						$(this).css({"background": "#f2f2f2","border-color":"#f2f2f2"});
+						$(this).attr("href","javascript:void(0)");
+						//弹出提醒
 						$("#modalMax").modal("show");
+						$("body").on("click",".iknown",function(){
+							$("#modalMax").modal("hide");
+						});
+
 					}
 	                if(data == "抢购已结束"){
+	                	//弹出提醒
 						$("#modalOver").modal("show");
 						//更改所有的抢购按钮为“已结束”
-						
+						$(".pro-con").children("a.login").text("已结束");
+						$(".pro-con").children("a.login").removeClass("btn-remind");
+						$(".pro-con").children("a.login").addClass("btn-disabled");
+						$(".pro-con").children("a.login").css({"background": "#f2f2f2","border-color":"#f2f2f2"});
+						$(".pro-con").children("a.login").attr("href","javascript:void(0)");
+						$("body").on("click",".iknown",function(){
+							$("#modalOver").modal("hide");
+						});
 					}
 	                if(data == "抢购成功"){
 	                	alert("抢购成功");
@@ -286,39 +314,54 @@ $(function(){
 	});
 
 	//发送秒杀提醒请求
-	function reminded(){
+	$("body").on("click",".remind",function(){	
+		var spikeProductId = $(this).parent().parent().find(".spikeProductId").text();
+		console.log("秒杀的商品"+spikeProductId);
 		checkLoginState();//判断登录
 		if(checkLogin == "true"){
-			//已登录
-			var spikeProductId = $(this).parent().find(".spikeProductId").text();
-			var focusDate = new Date(Date.parse(focusTime.replace(/-/g,"/")));//选中秒杀时间
-			var focusTime = focusDate.getTime();
-			var remindTime = focusDate.getTime()-15*60*1000;
-			var remindDate = new Date(remindTime);
+			//已登录			
+			//修改提醒样式
+			$(this).text("已提醒");
+			$(this).removeClass("remind");
+			$(this).addClass("btn-disabled");
+			$(this).css({"background": "#f2f2f2","border-color":"#f2f2f2"});
+			$(this).attr("href","javascript:void(0)");
+			//设置提醒
+			var focusTime = $(".spike-banner ul li.active button").attr("value");
+			var focusStamp = Date.parse(focusTime.replace(/-/g,"/"));//选中秒杀时间
+			var focusDate = new Date(focusStamp);
+			alert("当前场次"+focusDate);
+			var remindTime = focusStamp-15*60*1000;
+			//console.log(remindTime);
 			$.ajax({
-				type:post,
+				type:"post",
 				async:false,
-				url:"addSpikeRemind.action?spikeProductId="+spikeProductId+"&remindTime="+remindDate,
+				dataType:"text",
+				url:"addSpikeRemind.action?spikeProductId="+spikeProductId+"&remindTime="+remindTime,
 				success:function(data){
-					$("#isSetted").text(data);
-					$("#bodyfoot").css("display","none");
+					$("#modalRemind").modal("show");
+					console.log(data);
+					$("#isSetted").text(data);					
+					$("body").on("click",".iknown",function(){
+						$("#modalRemind").modal("hide");
+					});
 				}
 			});	
-			$(this).text("已提醒");
-			$.ajax({
-				type:post,
+			//设置定时消息
+			/*$.ajax({
+				type:"post",
 				async:false,
-				url:"addSpikeMessage.action?spikeProductId="+spikeProductId+"&sendTime="+remindDate,
+				url:"addSpikeMessage.action?spikeProductId="+spikeProductId+"&sendTime="+reminTime,
 				success:function(data){
 					
 				}
-			});
+			});*/
 		}else{
 			//未登录
 			window.location.href = "login.jsp";
-		}
+		}		
+	});
 
-	}
 	
 	//判断登录
 	function checkLoginState(){

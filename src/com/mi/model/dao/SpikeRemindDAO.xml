@@ -10,9 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <insert id="addSpikeRemind" parameterType="map" >
-        insert into spikeremind(spikeProductId,userId,remindTime) 
-        values(#{spikeProductId},#{userId},#{remindTime})
+        insert into spikeremind(spikeProductId,userId,remindTime,remindStatus) 
+        values(#{spikeProductId},#{userId},#{remindTime},1)
     </insert>
+    
     
 
 </mapper>
