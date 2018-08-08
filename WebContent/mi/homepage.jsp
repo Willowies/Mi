@@ -8,9 +8,11 @@
 		<title>首页</title>
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
+		<link href="../css/indexSpike.css" rel='stylesheet' type='text/css' />
 		<link href="../css/font-awesome.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
+		<script type="text/javascript" src="../js/indexSpike.js"></script>
 	</head>
 <body>
 	<div class="site-topbar">
@@ -144,10 +146,52 @@
 			</div>
 		</div>
 	</div>
-	
+	<!--开始闪购-->
+		<div class="home-container container">
+			<div class="flashPurchase carousel-container">
+			    <div class="plain-box">
+				    <div class="box-hd">
+					    <h2 class="title">小米闪购</h2>
+					    <div class="more">
+						    <div class="controls controls-line-small">
+							    <span class="control control-prev control-disabled">&laquo;</span>
+							    <span class="control control-next ">&raquo;</span>
+						    </div>
+					    </div>
+				    </div>
+				    <div class="box-bd">
+				    	<div class="flash-loading" id="flashLoading" style="display: none;">
+				    		<div class="loader"></div>
+				    	</div>
+				    	<div class="carousel-list goods-list rainbow-list clearfix">
+				    		<ul class="flashPurchase-countdown">
+				    			<li class="rainbow-item-4">
+				    				<div class="time-title">18:00  场</div>
+				    				<img src="../images/flashpurchase.png"/>
+				    				<div class="sub"></div>
+				    				<div class="countdown clearfix">
+				    					<div class="box">00</div>
+				    					<div class="dosh">:</div>
+				    					<div class="box">00</div>
+				    					<div class="dosh">:</div>
+				    					<div class="box">00</div>
+				    				</div>
+				    			</li>
+				    		</ul>
+				    		<div class="carousel-wrapper" style="height: 340px; overflow: hidden;">
+				    			<ul class="flashPurchase-list carousel-col-5-list" style="width: 2480px; margin-left: 0px; transition: margin-left 0.5s ease;">
+				    				
+				    			</ul>
+				    		</div>
+				    	</div>
+				    </div>
+			    </div>
+		    </div>
+		    <!--结束闪购-->
+		</div>
 	<div class="xm-groupPurchase">
 		<div class="titleG">
-			<h3 style="display:inline-block; margin:15px 0; float:left;">小米团购</h3>
+			<h3 style="display:inline-block; margin:15px 0; float:left; font-size:22px; font-weight:200;">小米团购</h3>
 			<div class="more">
 				<a class="morePre"><i class="fa fa-chevron-left"></i></a>
 				<a class="moreNext"><i class="fa fa-chevron-right"></i></a>
@@ -170,7 +214,7 @@
 		<div class="container">
 			<div class="phoneInfomation">
 				<div id="phone"  class="page-main-block" >
-					<h3 style="display:inline-block; margin:15px 0; float:left;">手机</h3>
+					<h3 style="display:inline-block; margin:15px 0; float:left;font-size:22px; font-weight:200;">手机</h3>
 					<div class="moreInfo">
 						<a href="selectClassfiedProduct.action?secondClassId=1" class="watchMore">查看全部&nbsp;<i class="fa fa-chevron-circle-right"></i></a>
 					</div>
@@ -188,7 +232,7 @@
 			</div>
 			<div class="elecInfomation">
 				<div id="homeelec"  class="page-main-block">
-					<h3 style="display:inline-block; margin:15px 0; float:left;">家电</h3>
+					<h3 style="display:inline-block; margin:15px 0; float:left;font-size:22px; font-weight:200;">家电</h3>
 					<div class="switchmore">
 						<ul style="list-style-type:none; font-size:16px; margin:0; padding:0;">
 							<li class="tab-active">热门</li>
@@ -219,7 +263,7 @@
 			</div>
 			<div class="accessoryInfomation">
 				<div id="accessory"  class="page-main-block">
-					<h3 style="display:inline-block; margin:15px 0; float:left;">手机配件</h3>
+					<h3 style="display:inline-block; margin:15px 0; float:left;font-size:22px; font-weight:200;">手机配件</h3>
 					<div class="switchmoreA">
 						<ul style="list-style-type:none; font-size:16px; margin:0; padding:0;">
 							<li class="tab-active">热门</li>
@@ -249,7 +293,7 @@
 			</div>
 			<div class="recommend">
 				<div class="titleB">
-					<h3 style="display:inline-block; margin:15px 0; float:left;">为你推荐</h3>
+					<h3 style="display:inline-block; margin:15px 0; float:left;font-size:22px; font-weight:200;">为你推荐</h3>
 					<div class="moreSecond">
 						<a class="morePreSecond"><i class="fa fa-chevron-left"></i></a>
 						<a class="moreNextSecond"><i class="fa fa-chevron-right"></i></a>
@@ -266,7 +310,7 @@
 			
 			<div class=comment>
 				<div class="titleC">
-					<h2 style="font-size:22px;">热评产品</h2>
+					<h2 style="font-size:22px; font-weight:200;">热评产品</h2>
 				</div>
 				<div class="content">
 					<div class="contentin">

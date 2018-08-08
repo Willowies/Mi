@@ -157,11 +157,13 @@ public class HomeController {
 	 * quit login
 	 */
 	@RequestMapping("quitLogin")
-	public void deleteUser(HttpSession session) {
+	public @ResponseBody int deleteUser(HttpSession session) {
 		User user = (User)session.getAttribute("user");
 		if(user!=null) {
 			session.removeAttribute("user");
+			return 1;
 		}
+		return 0;
 	}
 	
 }

@@ -347,7 +347,7 @@
 	flex-wrap:wrap;
 	padding:2px 0;
 	border:1px solid #e0e0e0;
-	background:#d4ecf2;
+	background:#fff;
 }
 .site-category-list .childrenItem{
 	width:265px;
@@ -1056,7 +1056,7 @@
 	position: relative;
     z-index: 10;
     width: 1226px;
-    height:438px;
+    height:400px;
     margin-right: auto;
     margin-left: auto;
 }

@@ -16,26 +16,13 @@ function initData(){
 						+"<span class='name'>"+data.userName+" </span>"
 						+"<i class='fa fa-angle-down fa-lg'></i></a><ul class='user-menu' style='display:none;'>"
 						+"<li><a href='disPlayMyPersonalCenter.action'>个人中心</a></li><li><a href='getWaitCommentProduct.action'>评价晒单</a></li><li><a href='displayLikeProduct.action'>我的喜欢</a></li>"
-						+"<li><a href='selectUser.jsp'>小米账户</a></li><li><a class='quitLogin'>退出登录</a></li></ul></span><span class='sep'>|</span>"
+						+"<li><a href='selectUser.jsp'>小米账户</a></li><li><a onclick='quitLogin()'>退出登录</a></li></ul></span><span class='sep'>|</span>"
 						+"<span class='message'><a rel='nofollow' href='displayMessage.action'>消息通知</a></span><span class='sep'>|</span>"
 						+"<a rel='nofollow' href='getAllOrder.action' class='myOrder'>我的订单</a>";
 				$(".topbar-info").append(str);
 				//for groupPurchase.jsp
 				sessionStorage.setItem("user_login","true");
 				console.log("Has logged in!");
-				$(".quitLogin").click(function(){
-					$.ajax({
-						type:"POST",
-						async:true,
-						dataType:"json",
-						contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-						url:"quitLogin.action",
-						success:function(data){
-							console.log("Quit!!!!!!");
-							window.location.href="homepage.jsp";
-						},
-					});
-				});
 			}
 			if(data.userId==0){
 				var str = "<a rel='nofollow' class='link' href='login.jsp' >登录</a><span class='sep'>|</span><a rel='nofollow' class='link' href='addUser.jsp' >注册</a>"
@@ -325,9 +312,24 @@ function initData(){
 			console.log("Load finished--popularproduct");
 		},
 	});
+	
 }
-
-
+//一定要放在init和docuemnt外面才能被onclick调用到
+function quitLogin(){
+	$.ajax({
+		type:"POST",
+		async:false,
+		dataType:"json",
+		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+		url:"quitLogin.action",
+		success:function(data){
+			if(data==1){
+				console.log("Quit!!!!!!");
+			}
+			window.location.href="homepage.jsp";
+		},
+	});
+}
 $(document).ready(function(){
 	/*shopping cart*/
 	$("#J_miniCartTrigger").hover(function(){
@@ -627,6 +629,38 @@ $(document).ready(function(){
 		carouselimgItem.eq(nextIndex).css("display","block");
 		carouselswitchItem.eq(nextIndex).addClass("active");
 	});
+	$(".carouselImg").hover(function(){
+	  clearInterval(window.timer);
+	},function(){
+	  window.timer=setInterval(moveAuto,3000);
+	});
+	function moveAuto(){
+		var length = $("div.carouselimgItem").length;
+		var carouselimgItem = $("div.carouselimgItem");//图
+		var carouselswitchItem = $("a.imgSwitch");//小圆钮
+		var currentImgIndex;
+		var nextImgIndex;
+//		console.log("length:"+length);
+		for(var i=0;i<length;i++){
+			if(carouselimgItem.eq(i).css("z-index")==50){
+				currentImgIndex = i;
+			}
+		}
+		if(currentImgIndex==4){
+			nextImgIndex=0;//确定下一个移动到的元素索引,图片和小圆钮是一样的
+		}else{
+			nextImgIndex = currentImgIndex + 1;
+		}
+		//改变图片z-index和display
+		carouselimgItem.eq(currentImgIndex).css("z-index","0");
+		carouselimgItem.eq(currentImgIndex).css("display","none");
+		carouselimgItem.eq(nextImgIndex).css("z-index","50");
+		carouselimgItem.eq(nextImgIndex).css("display","block");
+		//改变小圆钮的样式
+		carouselswitchItem.eq(currentImgIndex).removeClass("active");
+		carouselswitchItem.eq(nextImgIndex).addClass("active");
+	}
+	
 });
 
 
