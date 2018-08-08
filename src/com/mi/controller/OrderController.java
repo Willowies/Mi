@@ -196,7 +196,7 @@ public class OrderController extends BaseController{
 					while(true){
 						Date now = new Date();
 						//if(now.getTime() - orderDate.getTime()>1000*60*15){
-						if(now.getTime() - orderDate.getTime()>1000*60*2){
+						if(now.getTime() - orderDate.getTime()>1000*2){
 							likeProductService.addLogisticsMessage(orderId);
 							break;
 						}
