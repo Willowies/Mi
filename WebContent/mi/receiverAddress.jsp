@@ -7,14 +7,13 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>首页</title>
+		<title>收货地址</title>
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/personalCenter.css" />
 		<link rel="stylesheet" type="text/css" href="../css/receiverAddress.css"/>
 		<link href="../css/font-awesome.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js" ></script>
-		<script type="text/javascript" src="../js/jquery.jsonp.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
 		<script type="text/javascript" src="../js/receiverAddress.js"></script>
 	</head>
@@ -42,10 +41,10 @@
 			  	<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 			</div>
 			<div class="topbar-cart" id="J_miniCartTrigger">
-				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 					<i class="fa fa-shopping-cart"></i>
 					购物车
-					<span class="cart-mini-num">（0）</span>
+					<span class="cart-mini-num" >（0）</span>
 				</a>
 				<div class="cart-menu" id="J_miniCartMenu" >
 				</div>
@@ -186,7 +185,7 @@
 									<a href="../mi/asSelectTables.action">服务记录</a>
 								</li>
 								<li>
-									<a href="../mi/asApplyWay.html">申请服务</a>
+									<a href="AasApplyWay.jsp">申请服务</a>
 								</li>
 							</ul>
 						</div>
@@ -242,7 +241,11 @@
 							</div>
 						</div> -->
 						<c:forEach items="${resultList}"  var="r" >
-							<div class="receiverAddress-Item" receiverAddressId="${r.receiverAddressId}">
+							<div class="receiverAddress-Item" id="${r.receiverAddressId}" receiverName="${r.receiverName}" 
+							receiverPhone="${r.receiverPhone}" addressLabel="${r.addressLabel}" 
+							receiverName="${r.receiverName}" receiverPhone="${r.receiverPhone}" 
+							addressLabel="${r.addressLabel}" receiverProvince="${r.receiverProvince}" receiverCity="${r.receiverCity}" 
+							receiverDistrict="${r.receiverDistrict}"  address="${r.address}">
 							<dl>
 								<dt>
 									<em class="userName">${r.receiverName} </em>
@@ -274,19 +277,19 @@
 					</div>
 					<div class="receiveraddress-hide-add-body">
 						<div class="receiveraddress-formsection">
-							<input class="input-text" name="receiverName" placeholder="姓名"/>
+							<input class="input-text" name="receiverName" placeholder="姓名" id="receiverName" required="required"/>
 						</div>
 						<div class="receiveraddress-formsection">
-							<input class="input-text input-error" name = "receiverPhone" id="ContactNumber" placeholder="手机"/>
+							<input class="input-text input-error" name = "receiverPhone" id="receiverPhone" placeholder="手机"  required="required"/>
 						</div>
 						<div class="receiveraddress-formsection select-address">
-							<input id="j_selectAddress"  class="input-text" type="text"  name="four_address" readonly="readonly" value="选择省 / 市 / 区 / 街道" placeholder="选择省 / 市 / 区 / 街道">
+							<input id="j_selectAddress"  class="input-text" type="text"  name="four_address" readonly="readonly" value="选择省 / 市 / 区 / 街道" placeholder="选择省 / 市 / 区 / 街道"  required="required"/>
 						</div>
 						
 						<div class="wrapper-select-address windown-hide" id ="j_wrapperSelectAddress">
 							<div class="wrapper-search-address">
 								<div class="wrapper-search-section">
-									<input id= "j_search_input" class="search-input" placeholder="输入地址查询"/>
+									<input id= "j_search_input" class="search-input" placeholder="输入地址查询" />
 								</div>
 								<div class="search-example">
 									例如：东北大学
@@ -299,19 +302,19 @@
 							</div>
 						</div>
 						<div class="receiveraddress-formsection">
-							<input class="input-text" placeholder="省" name = "receiverProvince" id="province"/>
+							<input class="input-text" placeholder="省" name = "receiverProvince" id="province"  required="required"/>
 						</div>
 						<div class="receiveraddress-formsection">
-							<input class="input-text" placeholder="市" name = "receiverCity" id="city"/>
+							<input class="input-text" placeholder="市" name = "receiverCity" id="city"  required="required"/>
 						</div>
 						<div class="receiveraddress-formsection">
-							<input class="input-text" placeholder="区" name = "receiverDistrict" id="district"/>
+							<input class="input-text" placeholder="区" name = "receiverDistrict" id="district"  required="required"/>
 						</div>
 						<div class="receiveraddress-formsection detail-address">
-							<textarea class="input-text" placeholder="详细地址" name="address"></textarea>
+							<textarea class="input-text" placeholder="详细地址" name="address" id="address"  required="required"  required="required"></textarea>
 						</div>
 						<div class="receiveraddress-formsection">
-							<input class="input-text" placeholder="地址标签" name="addressLabel"/>
+							<input class="input-text" placeholder="地址标签" name="addressLabel" id="addressLabel"/>
 						</div>
 					</div>
 					

@@ -6,7 +6,7 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>首页</title>
+		<title>我喜欢的商品</title>
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/personalCenter.css" />
@@ -17,7 +17,7 @@
 	</head>
 
 	<body>
-	<div class="site-topbar">
+		<div class="site-topbar">
 		<div class="container">
 			<div class="topbar-nav">
 				<a rel="nofollow" href="../mi/homepage.jsp" >小米商城</a>
@@ -39,7 +39,7 @@
 			  	<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 			</div>
 			<div class="topbar-cart" id="J_miniCartTrigger">
-				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 					<i class="fa fa-shopping-cart"></i>
 					购物车
 					<span class="cart-mini-num">（0）</span>
@@ -118,7 +118,7 @@
 		<div class="breadcrumbs">
 			<div class="container2">
 				<a href="homepage.jsp">首页</a>
-				<soan class="sep">></span>
+				<span class="sep">></span>
 					<span>个人中心</span>
 			</div>
 		</div>
@@ -183,7 +183,7 @@
 									<a href="../mi/asSelectTables.action">服务记录</a>
 								</li>
 								<li>
-									<a href="../mi/asApplyWay.html">申请服务</a>
+									<a href="AasApplyWay.jsp">申请服务</a>
 								</li>
 							</ul>
 						</div>
@@ -232,7 +232,7 @@
 										<div class="actions">
 											<a class="btn btn-line-gray btn-small">删除</a>
 											<!-- 跳转到立即购买页面 -->
-											<a class="btn btn-primary btn-small" href="selectProductInfo?productName=${likeProduct.product.productName}">查看详情</a>
+											<a class="btn btn-primary btn-small" href="selectProductInfo.aciton?productName=${likeProduct.product.productName}">查看详情</a>
 										</div>
 									</li>
 									</c:forEach>

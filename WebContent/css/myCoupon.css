@@ -31,7 +31,10 @@
     border-left: 1px solid #e0e0e0;
     color: #757575;
 }
-.coupon-content .filiter-list li.active{
+.coupon-content .filiter-list li a{
+	color: #757575;
+}
+.coupon-content .filiter-list li.active a{
 	color: #ff6700;
 }
 .coupon-content .filiter-list li.first{

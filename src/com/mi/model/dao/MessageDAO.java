@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.mi.model.bean.Message;
 
 public interface MessageDAO {
-	public List<Message> selectMessageByUserId(@Param("userId")int userId);
+	public List<Message> selectMessageByUserId(@Param("userId")int userId,@Param("messageType")int messageType);
 	
 	public void addMessage(Map<String,Object> map);
 }

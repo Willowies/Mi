@@ -9,7 +9,6 @@ $(function() {
 		d.setAttribute("class", "wrapper-select-address");
 	});
 	$('#commit-recieverAddressForm').click(function() {
-		alert("进入");
 		$('#recieverAddressForm').submit();
 	});
 	$('#close-receiverAddress-hide').click(function() {
@@ -17,8 +16,8 @@ $(function() {
 		$('#receiverAddress-hide').addClass("windown-hide");
 	});
 	//校验手机号码位数
-	$(ContactNumber).blur(checkContactNumber())
-	/*$('#j_select_addressItem').click(function() {
+	/*$(ContactNumber).blur(checkContactNumber())
+	$('#j_select_addressItem').click(function() {
 		alert('j_select_addressItem');
 		$('#j_selectAddress').addClass("windown-hide");
 		var province = $('#j_addressItem').attr('province');
@@ -82,6 +81,7 @@ function showReceiverAddressHide(){
 	$('#receiverAddress-hide').removeClass("windown-hide");
 }
 function select_addressItem(index){
+	alert("进入select_addressItem");
 	$('#j_wrapperSelectAddress').addClass("windown-hide");
 	var province = $('#j_addressItem'+index).attr('province');
 	var city = $('#j_addressItem'+index).attr('city');
@@ -93,10 +93,27 @@ function select_addressItem(index){
 }
 function updateReceiverAddress(receiverAddressId){
 	$('#receiverAddress-hide').removeClass("windown-hide");
+	var r =$("#"+receiverAddressId);
+	var receiverName = r.attr("receiverName");
+	var receiverPhone = r.attr("receiverPhone");
+	var addressLabel = r.attr("addressLabel");
+	var receiverProvince = r.attr("receiverProvince");
+	var receiverCity = r.attr("receiverCity");
+	var receiverDistrict = r.attr("receiverDistrict");
+	var address = r.attr("address");
+
 	$('#addrecieverAddressForm').attr("action","updateReceiverAddress.action?receiverAddressId="+receiverAddressId);
+	
+	$('#receiverName').val(receiverName);
+	$('#receiverPhone').val(receiverPhone);
+	$('#province').val(receiverProvince);
+	$('#city').val(receiverCity);
+	$('#district').val(receiverDistrict);
+	$('#address').val(address);
+	$('#addressLabel').val(addressLabel);
 }
 
-function checkContactNumber() {
+/*function checkContactNumber() {
 	$("#error").css("display", "none");
 	var mobile = $.trim($("#ContactNumber").val());
 	var isMobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
@@ -125,4 +142,4 @@ function checkContactNumber() {
 		return false;
 	}
 	return true;
-}
+}*/

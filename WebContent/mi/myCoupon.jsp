@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>首页</title>
+		<title>优惠券</title>
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/personalCenter.css" />
@@ -18,157 +19,101 @@
 	</head>
 
 	<body>
-		<div class="site-topbar">
-			<div class="container">
-				<div class="topbar-nav">
-					<a rel="nofollow" href="../mi/homepage.jsp">小米商城</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="https://www.miui.com/" target="_blank">MIUI</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="">IoT</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" target="_blank">云服务</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" target="_blank">金融</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" target="_blank">有品</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" target="_blank">小爱开放平台</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" target="_blank">政企服务</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
-				</div>
-				<div class="topbar-cart" id="J_miniCartTrigger">
-					<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
-						<i class="fa fa-shopping-cart"></i> 购物车
-						<span class="cart-mini-num">（0）</span>
-					</a>
-					<div class="cart-menu" id="J_miniCartMenu">
-
-					</div>
-				</div>
-				<div class="topbar-info">
-					<a rel="nofollow" class="link" href="">登录</a>
-					<span class="sep">|</span>
-					<a rel="nofollow" class="link" href="">注册</a>
-					<span class="sep">|</span>
-					<span class="message">
-					<a rel="nofollow" href="">消息通知</a>
-				</span>
+			<div class="site-topbar">
+		<div class="container">
+			<div class="topbar-nav">
+				<a rel="nofollow" href="../mi/homepage.jsp" >小米商城</a>
+				<span class="sep">|</span>
+				<a rel="nofollow" href="https://www.miui.com/" target="_blank">MIUI</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="">IoT</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" target="_blank">云服务</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" target="_blank">金融</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" target="_blank" >有品</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" target="_blank" >小爱开放平台</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" target="_blank">政企服务</a>
+			  	<span class="sep">|</span>
+			  	<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
+			</div>
+			<div class="topbar-cart" id="J_miniCartTrigger">
+				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
+					<i class="fa fa-shopping-cart"></i>
+					购物车
+					<span class="cart-mini-num">（0）</span>
+				</a>
+				<div class="cart-menu" id="J_miniCartMenu" >
 				</div>
 			</div>
-		</div>
-		<div class="site-header">
-			<div class="container">
-				<div class="header-logo">
-					<a href="../mi/homepage.jsp"><img src="../images/logo-footer.png" alt="小米logo" /></a>
-				</div>
-				<div class="header-nav">
-					<ul class="nav-list">
-						<li id="J_navCategory" class="nav-category">
-							<a class="link-category">
-								<span class="text">全部商品分类</span>
-							</a>
-						</li>
-						<li id="navItem1" class="nav-item">小米手机
-							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
-								<div class="container">
-									<ul class="children-list clearfix">
-										<li class="first">
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8se.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8 SE</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-										<li>
-											<i class="line"></i>
-											<div class="figure figure-thumb">
-												<a href="https://www.mi.com/mi8/">
-													<img src="../images/pc-320-220-mi8.png" alt="小米8" width="160" height="110">
-												</a>
-											</div>
-											<div class="title">
-												<a href="">小米8</a>
-											</div>
-											<p class="price">2699元起</p>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</li>
-						<li id="navItem2" class="nav-item">红米</li>
-						<li id="navItem3" class="nav-item">电视</li>
-						<li id="navItem4" class="nav-item">笔记本</li>
-						<li id="navItem5" class="nav-item">盒子</li>
-						<li id="navItem6" class="nav-item">新品</li>
-						<li id="navItem7" class="nav-item">路由器</li>
-						<li id="navItem8" class="nav-item">智能硬件</li>
-						<li id="navItem9" class="nav-item-service"><a href="Service.jsp">服务</a></li>
-						<li id="navItem10" class="nav-item">社区</li>
-					</ul>
-				</div>
-				<div class="header-search">
-					<form id="J_searchForm" class="search-form">
-						<input class="search-text" type="search" id="search" name="keyword">
-						<input type="submit" class="search-btn" value="">
-					</form>
-				</div>
+			<div class="topbar-info">
+				
 			</div>
 		</div>
+	</div>
+	<div class="site-header">
+		<div class="container">
+			<div class="header-logo">
+				<a href="homepage.jsp"><img src="../images/logo-footer.png"  alt="小米logo" /></a>
+			</div>
+			<div class="header-nav">
+				<ul class="nav-list">
+					<li id="J_navCategory" class="nav-category">
+						<a href="" class="link-category" style="visibility: visible;">
+							<span class="text">全部商品分类</span>
+						</a>
+						<div class="site-category" style="display:none;">
+							<ul id="J_categoryList" class="site-category-list">
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=1" class="title">手机<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=2" class="title">平板<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=3" class="title">电视机<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=4" class="title">笔记本<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=5" class="title">空气净化器<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+								<li class="category-item">
+									<a href="selectClassfiedProduct.action?secondClassId=6" class="title">插线板<i class="fa fa-chevron-right"></i></a>
+									<div class="children"></div>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li id="navItem1" class="nav-item">小米手机<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem2" class="nav-item">红米<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem3" class="nav-item">电视<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem4" class="nav-item">笔记本<div id="J_navMenu" class="header-nav-menu"  style="display:none;"><div class="container"><ul class="children-list clearfix"></ul></div></div></li>
+					<li id="navItem5" class="nav-item">盒子</li>
+					<li id="navItem6" class="nav-item">新品</li>
+					<li id="navItem7" class="nav-item">路由器</li>
+					<li id="navItem8" class="nav-item">智能硬件</li>
+					<li id="navItem9" class="nav-item-service"><a href="Service.jsp">服务</a></li>
+					<li id="navItem10" class="nav-item">社区</li>
+				</ul>
+			</div>
+			<div class="header-search">
+				<form id="J_searchForm" class="search-form" method="post" action="searchProduct.action">
+					<input class="search-text" type="search" id="search" name="text" >
+					<input type="submit" class="search-btn" value="">
+				</form>
+			</div>
+		</div>
+	</div>
 		<!--面包树
 		使用的时候根据处在不同的位置对下面的文字以及点击后跳转的链接进行修改
 	-->
@@ -240,7 +185,7 @@
 									<a href="../mi/asSelectTables.action">服务记录</a>
 								</li>
 								<li>
-									<a href="../mi/asApplyWay.html">申请服务</a>
+									<a href="AasApplyWay.jsp">申请服务</a>
 								</li>
 							</ul>
 						</div>
@@ -273,9 +218,9 @@
 						</div>
 						<div class="more">
 							<ul class="filiter-list">
-								<li class="first active">未使用</li>
-								<li>已使用</li>
-								<li>已失效</li>
+								<li class="first active"><a href="displayCoupon.action?couponStatus=1">未使用</a></li>
+								<li><a href="displayCoupon.action?couponStatus=2">已使用</a></li>
+								<li><a href="displayCoupon.action?couponStatus=3">已失效</a></li>
 							</ul>
 						</div>
 						
@@ -293,8 +238,8 @@
 											</div>
 										</div>
 										<div class="item-description">
-											<p>适用范围：需要增加一条描述列</p>
-											<p>有效期:${c.startDate}</p>
+											<p>适用范围：只适合单一种类商品使用</p>
+											<p>有效期至:<fmt:formatDate value="${c.endDate}" type="date"/></p>
 										</div>
 										</li>
 									</c:forEach>

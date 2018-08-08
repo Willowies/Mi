@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html>
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>首页</title>
+		<title>消息通知</title>
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/personalCenter.css" />
@@ -18,7 +19,7 @@
 	</head>
 
 	<body>
-		<div class="site-topbar">
+	<div class="site-topbar">
 		<div class="container">
 			<div class="topbar-nav">
 				<a rel="nofollow" href="../mi/homepage.jsp" >小米商城</a>
@@ -40,7 +41,7 @@
 			  	<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 			</div>
 			<div class="topbar-cart" id="J_miniCartTrigger">
-				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="">
+				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
 					<i class="fa fa-shopping-cart"></i>
 					购物车
 					<span class="cart-mini-num">（0）</span>
@@ -184,7 +185,7 @@
 									<a href="../mi/asSelectTables.action">服务记录</a>
 								</li>
 								<li>
-									<a href="../mi/asApplyWay.html">申请服务</a>
+									<a href="AasApplyWay.jsp">申请服务</a>
 								</li>
 							</ul>
 						</div>
@@ -206,9 +207,21 @@
 						</div>
 					</div>
 				</div>
-
+				
 				<div class="main-page">
 					<div class="messageNotice-main">
+						<div class="message-hd">
+							<h1 class="title">消息通知</h1>
+						</div>
+						
+						<div class="more">
+							<ul class="filiter-list">
+								<li class="first"><a href="displayMessage.action?messageType=1">订单消息</a></li>
+								<li><a href="displayMessage.action?messageType=2">物流消息</a></li>
+								<li><a href="displayMessage.action?messageType=3">抢购消息</a></li>
+							</ul>
+						</div>
+						
 						<c:forEach items="${resultList}"  var="m">
 							<div class="messageNotice-list">
 							<div class="messageNotice-Item">
@@ -218,11 +231,8 @@
 									<div class="m-img-list fl">
 										<img src="${m.picUrl}">
 									</div>
-									<div class="m-b-fr fr">
-										<a class="m-btns">立即查看</a>
-									</div>
 								</div>
-								<span class="m-time">${m.sendTime}</span>
+								<span class="m-time"><fmt:formatDate value="${m.sendTime}" type="date"/></span>
 							</div>
 						</div>
 						</c:forEach>

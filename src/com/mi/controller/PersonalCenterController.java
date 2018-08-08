@@ -40,17 +40,14 @@ public class PersonalCenterController {
 	
 	@RequestMapping("disPlayMyPersonalCenter")
 	public String disPlayMyPersonalCenter(Model model,HttpSession session) {
-		/* 待整合的时候加入真实的USER
-		 * User user = (User)session.getAttribute("user");
-		if(user==null){
-			return "homePage";
-		}*/
-		/*User user = new User();
-		user.setUserId(1);*/
-		User user = (User)session.getAttribute("user");
+		
+		/*User user = (User)session.getAttribute("user");
 		if(user==null){
 			return "forward:homepage.jsp";
 		}
+		int userId = user.getUserId();*/
+		User user = new User();
+		user.setUserId(10002);
 		int userId = user.getUserId();
 		
 		int likeProductCount = likeProductService.selectLikeProductCount(userId);
@@ -67,14 +64,18 @@ public class PersonalCenterController {
 		return "forward:myPersonalCenter.jsp";
 	}
 	@RequestMapping("displayMessage")
-	public String disPlayMessage(Model model,HttpSession session,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
-		User user = (User)session.getAttribute("user");
+	public String disPlayMessage(Model model,HttpSession session,@RequestParam(value="messageType",defaultValue="1")Integer messageType,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
+		System.out.println("进入displayMessage");
+		/*User user = (User)session.getAttribute("user");
 		if(user==null){
 			return "forward:homepage.jsp";
 		}
+		int userId = user.getUserId();*/
+		User user = new User();
+		user.setUserId(10002);
 		int userId = user.getUserId();
-		
-		Map<String, Object> map = messageService.selectMessageByUserId(userId, pageNum, 5);
+		System.out.println(userId);
+		Map<String, Object> map = messageService.selectMessageByUserId(userId,messageType, pageNum, 5);
 		List<Message> messageResult = (List<Message>) map.get("list");
 		model.addAttribute("resultList", messageResult);
 		model.addAttribute("pageTotal", (int)map.get("pageTotal"));
@@ -95,14 +96,17 @@ public class PersonalCenterController {
 		return "forward:likeProduct.jsp";
 	}
 	@RequestMapping("displayCoupon")
-	public String disPlayCoupon(Model model,HttpSession session,@RequestParam(value="couponType",defaultValue="1")Integer couponType,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
-		User user = (User)session.getAttribute("user");
+	public String disPlayCoupon(Model model,HttpSession session,@RequestParam(value="couponStatus",defaultValue="1")Integer couponStatus,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
+		/*User user = (User)session.getAttribute("user");
 		if(user==null){
 			return "forward:homepage.jsp";
 		}
+		int userId = user.getUserId();*/
+		User user = new User();
+		user.setUserId(2);
 		int userId = user.getUserId();
 		
-		Map<String, Object> map = couponService.selectCouponByUserId(userId,couponType, pageNum, 5);
+		Map<String, Object> map = couponService.selectCouponByUserId(userId,couponStatus, pageNum, 5);
 		List<Coupon> result = (List<Coupon>) map.get("list");
 		model.addAttribute("resultList", result);
 		model.addAttribute("pageTotal", (int)map.get("pageTotal"));
@@ -110,10 +114,13 @@ public class PersonalCenterController {
 	}
 	@RequestMapping("displayReceiverAddress")
 	public String displayReceiverAddress(Model model,HttpSession session,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
-		User user = (User)session.getAttribute("user");
+		/*User user = (User)session.getAttribute("user");
 		if(user==null){
-			return "forward:homePage.jsp";
+			return "forward:homepage.jsp";
 		}
+		int userId = user.getUserId();*/
+		User user = new User();
+		user.setUserId(2);
 		int userId = user.getUserId();
 		
 		Map<String, Object> map = receiverAddressService.selectReceiverAddress(user.getUserId(),pageNum,5);

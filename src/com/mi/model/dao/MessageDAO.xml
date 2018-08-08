@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.mi.model.dao.MessageDAO">
      
     <select id="selectMessageByUserId"  resultType="Message" flushCache="true" >
-    	select * from message where UserId = #{userId}
+    	select * from message where UserId = #{userId} and messageType = #{messageType}
     </select>
 	
     <insert id="addMessage" parameterType="map">

@@ -17,9 +17,9 @@ import com.mi.model.dao.MessageDAO;
 public class MessageService {
 	@Autowired
 	private MessageDAO messageDAO;
-	public Map<String, Object> selectMessageByUserId(Integer userId,int pageNum,int pageSize){
+	public Map<String, Object> selectMessageByUserId(Integer userId,int  messageType,int pageNum,int pageSize){
 		Page<Message> page = PageHelper.startPage(pageNum, pageSize);
-		messageDAO.selectMessageByUserId(userId);
+		messageDAO.selectMessageByUserId(userId, messageType);
 		List<Message> list = page.getResult();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
