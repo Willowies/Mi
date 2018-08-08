@@ -229,7 +229,7 @@
 								<p class="m-commend">${m.message}</p>
 								<div class="m-bootom clearfix">
 									<div class="m-img-list fl">
-										<img src="${m.picUrl}">
+										<img src="../${m.picUrl}">
 									</div>
 								</div>
 								<span class="m-time"><fmt:formatDate value="${m.sendTime}" type="date"/></span>
