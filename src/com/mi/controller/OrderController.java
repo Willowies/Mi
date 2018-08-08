@@ -147,6 +147,20 @@ public class OrderController extends BaseController{
 		return "pay";
 	}
 	
+	@RequestMapping("payGroupOrderFromUser")
+	public String payGroupOrderFromUser(int orderId,Model model){
+		Order order = orderService.getOrderDetailsById(orderId);
+		model.addAttribute("orderResult",order);
+		return "groupPay";
+	}
+	
+	@RequestMapping("paySpikeOrderFromUser")
+	public String paySpikeOrderFromUser(int orderId,Model model){
+		Order order = orderService.getOrderDetailsById(orderId);
+		model.addAttribute("orderResult",order);
+		return "spikePay";
+	}
+	
 	@RequestMapping("payOrder")
 	public String payOrder(int orderId,Model model){
 		List<OrderProduct> lack = orderService.payOrder(orderId);

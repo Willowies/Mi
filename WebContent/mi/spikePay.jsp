@@ -81,7 +81,7 @@
 							<h2 class="title">订单提交成功！去付款咯 ~</h2>
 							<p class="order-time">
 								请在
-								<span class="pay-time-tip">48小时0分</span>
+								<span class="pay-time-tip">15分钟</span>
 								内完成支付，超时后将取消订单
 							</p>
 							<p class="post-info">
