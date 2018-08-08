@@ -72,7 +72,7 @@
 	</div>
 
 
-<form action="createGroupOrder.action" method="post">
+<form action="createSpikeOrder.action" method="post">
 		<div id="mask"></div>
 		<div class="page-main" style="padding-top:40px;padding-bottom:60px">
 			<div class="container">

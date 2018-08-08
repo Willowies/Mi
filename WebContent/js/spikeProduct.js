@@ -1,18 +1,5 @@
 $(function(){
-	//判断登录
-	function checkLoginState(){
-		var checkResult = "";
-		$.ajax({
-			type:"post",
-			astnc:true,
-			url:"checkLoginState.action",
-			success:function(data){
-				checkResult = data;
-			}
-		});
-		return checkResult;
-	}
-	
+	var checkLogin;//标记是否登录
 	$(".proLoginClose").click(function(){
 		$(".login-notic").css("display","none");
 	});
@@ -160,13 +147,15 @@ $(function(){
 		//console.log(diffMinute);
 		$.ajax({
 			type:"post",
-			astnc:true,
+			async:false,
 			url:"selectSpikeProduct.action?focusSpikeTime="+focusSpikeTime,
 			success:function(data){
 				//判断登录
-				var isLogin = checkLoginState();
-				if(isLogin == "true"){
+				checkLoginState();
+				//alert("方法调用后"+checkLogin);
+				if(checkLogin == "true"){
 					//已登录
+					alert("已登录");
 					//可设置提醒但不可抢购		
 					if(diffMinute > 15 && focusDate > nowDate){
 						$(".spike-con ul.active").empty();
@@ -199,7 +188,7 @@ $(function(){
 							var html = ""+" <li><p style=\"display:none;\" class=\"spikeProductId\">"+(data[i].spikeProductId)+"</p><div class=\"img-con\"><img class=\"done\" src=\"../"
 							+(data[i].picUrl)+"\" /></div><div class=\"pro-con\"><a class=\"name\" style=\"cursor:pointer;\">"+(data[i].productName)+(data[i].version)+(data[i].size)+(data[i].color)
 							+"</a><p class=\"desc tips\">"+(data[i].description)+"</p><p class=\"process \"><span style=\"width:"+percent+"px;\"></span><em>"+percent+"%</em></p><p class=\"price\">"+(data[i].spikePrice)+"元<del>"
-							+(data[i].previousPrice)+"元 </del></p><a href=\"\" class=\"but btn-green btn-remind btn-small start\" style=\"background: #ff6700 !important; border-color: #ff6700 !important; data-toggle=\"modal\">立即抢购</a></div></li>";
+							+(data[i].previousPrice)+"元 </del></p><a class=\"but btn-green btn-remind btn-small start\" style=\"background: #ff6700 !important; border-color: #ff6700 !important; data-toggle=\"modal\">立即抢购</a></div></li>";
 							$(".spike-con ul.active").append(html);
 					    }
 					}
@@ -254,77 +243,98 @@ $(function(){
 	
 	//抢购商品
 	$("body").on("click",".start",function(){
-		//alert("购买");
-		var isLogin = checkLoginState();//判断登录
-		if(isLogin == "true"){
+		alert("购买");
+		checkLoginState();//判断登录
+		if(checkLogin == "true"){
 			//已登录
-			
+			var spikeProductId = $(this).parent().parent().find(".spikeProductId").text();
+			console.log("秒杀商品ID"+spikeProductId);
+			$.ajax({
+				type:"post",
+				async:false,
+				dataType:"text",
+				url:"buySpikeProduct.action?spikeProductId="+spikeProductId,
+				success:function(data){
+					if(data == "超过上限"){
+						$("#modalMax").modal("show");
+					}
+	                if(data == "抢购已结束"){
+						$("#modalOver").modal("show");
+						//更改所有的抢购按钮为“已结束”
+						
+					}
+	                if(data == "抢购成功"){
+	                	alert("抢购成功");
+						$.ajax({
+							type:"post",
+							async:false,
+							dataType:"json",
+							url:"findSpikeProduct.action?spikeProductId="+spikeProductId,
+							success:function(data){
+								alert("准备跳转购买");
+								window.location.href = "updateSpikeOrder.action";
+							}
+						});
+					}
+				}
+			});
 		}else{
 			//未登录
+			window.location.href = "login.jsp";
 		}
-		var spikeProductId = $(this).parent().parent().find(".spikeProductId").text();
-		console.log("秒杀商品ID"+spikeProductId);
-		$.ajax({
-			type:"post",
-			astnc:false,
-			dataType:"text",
-			url:"buySpikeProduct.action?spikeProductId="+spikeProductId,
-			success:function(data){
-				if(data == "超过上限"){
-					$("#modalMax").modal("show");
-				}
-                if(data == "抢购已结束"){
-					$("#modalOver").modal("show");
-					//更改所有的抢购按钮为“已结束”
-					
-				}
-                if(data == "抢购成功"){
-					$.ajax({
-						type:"post",
-						astnc:false,
-						dataType:"json",
-						url:"findSpikeProduct.action?spikeProductId="+spikeProductId,
-						success:function(data){
-							window.location.href = "updateSpikeOrder.action?orderProduct="+data;
-						}
-					});
-				}
-			}
-		});
+
 	});
 
 	//发送秒杀提醒请求
 	function reminded(){
-		var isLogin = checkLoginState();//判断登录
-		if(isLogin == "true"){
+		checkLoginState();//判断登录
+		if(checkLogin == "true"){
 			//已登录
-			
+			var spikeProductId = $(this).parent().find(".spikeProductId").text();
+			var focusDate = new Date(Date.parse(focusTime.replace(/-/g,"/")));//选中秒杀时间
+			var focusTime = focusDate.getTime();
+			var remindTime = focusDate.getTime()-15*60*1000;
+			var remindDate = new Date(remindTime);
+			$.ajax({
+				type:post,
+				async:false,
+				url:"addSpikeRemind.action?spikeProductId="+spikeProductId+"&remindTime="+remindDate,
+				success:function(data){
+					$("#isSetted").text(data);
+					$("#bodyfoot").css("display","none");
+				}
+			});	
+			$(this).text("已提醒");
+			$.ajax({
+				type:post,
+				async:false,
+				url:"addSpikeMessage.action?spikeProductId="+spikeProductId+"&sendTime="+remindDate,
+				success:function(data){
+					
+				}
+			});
 		}else{
 			//未登录
+			window.location.href = "login.jsp";
 		}
-		var spikeProductId = $(this).parent().find(".spikeProductId").text();
-		var focusDate = new Date(Date.parse(focusTime.replace(/-/g,"/")));//选中秒杀时间
-		var focusTime = focusDate.getTime();
-		var remindTime = focusDate.getTime()-15*60*1000;
-		var remindDate = new Date(remindTime);
+
+	}
+	
+	//判断登录
+	function checkLoginState(){
+		//alert("检查登录");
 		$.ajax({
-			type:post,
-			astnc:true,
-			url:"addSpikeRemind.action?spikeProductId="+spikeProductId+"&remindTime="+remindDate,
+			type:"post",
+			async:false,
+			dataType:"text",
+			url:"checkLoginState.action",
 			success:function(data){
-				$("#isSetted").text(data);
-				$("#bodyfoot").css("display","none");
-			}
-		});	
-		$(this).text("已提醒");
-		$.ajax({
-			type:post,
-			astnc:true,
-			url:"addSpikeMessage.action?spikeProductId="+spikeProductId+"&sendTime="+remindDate,
-			success:function(data){
-				
+				//alert("判断登录内部ajax"+data);
+				checkLogin = data;
 			}
 		});
+	    //alert("判断登录内部"+checkLogin);
+		
 	}
 	
 });

@@ -54,9 +54,11 @@ public class ProductSpikeController {
 	}
 	//封装商品信息
 	@RequestMapping("findSpikeProduct")
-	public @ResponseBody OrderProduct findSpikeProduct(HttpServletRequest request, String spikeProductId){
+	public @ResponseBody OrderProduct findSpikeProduct(HttpServletRequest request, String spikeProductId, HttpSession session){
 		//spikeProductId = Integer.parseInt(request.getParameter("spikeProductId"));
 		OrderProduct orderProduct = productSpikeService.findSpikeProduct(Integer.parseInt(spikeProductId));
+		session.setAttribute("orderProduct", orderProduct);
+		session.setAttribute("spikeProductId", Integer.parseInt(spikeProductId));
 		return orderProduct;
 	}
 	//发送消息提醒秒杀

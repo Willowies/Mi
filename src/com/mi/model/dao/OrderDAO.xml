@@ -227,7 +227,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	where groupId=#{groupId}
     </update>
     
-    <select id="getSpikeProduct" parameterType="int">
+    <select id="getSpikeProduct" parameterType="int" resultType="SpikeProduct">
     	select *
     	from spikeproduct
     	where spikeProductId =#{spikeProductId}
