@@ -269,11 +269,11 @@ public class OrderService {
 	public void closeOrderTimer(int orderId){
 		//判断订单是否被支付
 		Order order = orderDAO.getOrderDetailsById(orderId);
-		if(order.getOrderState()==2){
-			//若已被支付不进行操作
-		}else{
+		if(order.getOrderState()==1){
 			//若未被支付关闭订单
 			orderDAO.closePayOrder(orderId);
+		}else{
+			//若已被支付不进行操作
 		}
 	}
 	

@@ -8,9 +8,8 @@
 		<link rel="stylesheet" href="../css/basic.css" type="text/css"/>
 	    <link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
-		<link href="../css/productInfo.css" rel='stylesheet' type='text/css' />
+		<link href="../css/productInfo.css" type="text/css" rel="stylesheet"/>
 		<link href="../css/font-awesome.css" rel='stylesheet' type='text/css' />
-		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
 		<link rel="stylesheet" href="../css/bootstrap.min.css">		
 		<script type="text/javascript" src="../js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
@@ -133,7 +132,7 @@
 		
 	<div class="mi8-index">
 			<div class="section section-index" style="height: 696px;">
-				<div class="txt" style="z-index: 10px; margin-top:50px;">
+				<div class="txt" style="z-index: 10; margin-top:50px;">
 					<img class="title2" src="../images/title2.png"/>
 					<h2 class="webfont">8  周  年  旗  舰  手  机</h2>
 					<p class="webfont">全球首款双频 GPS  |  骁龙845  |  AI 变焦双摄  |  红外人脸识别</p>
@@ -145,11 +144,11 @@
 						</span>
 					</div>
 				</div>
-				<div class="con" style="z-index: 1px;">
+				<div class="con1" style="z-index: 1;">
 					<div class="ui-wrapper" style="max-width: 100%;height: 697px;">
 						<div class="ui-viewport" style="width: 100%;position: relative;height: 697px;">
 							<ul class="list clearfix" style="width: auto;position: relative; height:696px">
-								<li class="slider clearfix" style="float: none;list-style: outside none none;width: 1263px;z-index: 50;display: block;opacity: 0.960116;height:696px">
+								<li class="slider clearfix" style="float: none;list-style: outside none none;z-index: 50;display: block;opacity: 0.960116;height:696px">
 									<img src="../images/index2.jpg" style="height:696px"/>
 								</li>
 							</ul>

@@ -100,7 +100,7 @@ public class AsController {
 	        	// 构建新的文件名
 	    		String newName = System.currentTimeMillis() + oldName.substring(oldName.indexOf("."));
 	    		// 文件的保存路径
-	    		File file = new File("E:/invioceUrl/", newName);
+	    		File file = new File("C:/asService/", newName);
 	    		// 上传
 	    		asInvoiceUrl.transferTo(file);
 	    		
@@ -190,7 +190,7 @@ public class AsController {
 			// 构建新的文件名
 			String newRepairName = System.currentTimeMillis() + oldRepairName.substring(oldRepairName.indexOf("."));
 			// 文件的保存路径
-		    File file = new File("E:/asRepairProUrl/", newRepairName);
+		    File file = new File("C:/asService/", newRepairName);
 			// 上传
 		    asRepairProUrl.transferTo(file);
 

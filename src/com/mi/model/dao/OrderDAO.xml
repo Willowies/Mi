@@ -200,7 +200,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <select id="selectOrderItemId" resultType="int">
-    	select max(orderItemId) from orderProduct
+    	select  ifnull(max(orderItemId),0)+1 from orderProduct
     </select>
     
     <update id="updatePayOrder" parameterType="int">

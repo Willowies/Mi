@@ -12,7 +12,7 @@
     position: relative;
 }
 
-.mi8-index .section-index .con,.mi8-index .section-index .ui-wrapper,.mi8-index .section-index .ui-viewport ,.mi8-index .section-index ul{
+.mi8-index .section-index .con1,.mi8-index .section-index .ui-wrapper,.mi8-index .section-index .ui-viewport ,.mi8-index .section-index ul{
 	height: 14.13em;
 }
 
@@ -112,6 +112,6 @@
 }
 
 .descrip{
-	margin-bottom: 440px;
+	margin-bottom: 550px;
 }
 
