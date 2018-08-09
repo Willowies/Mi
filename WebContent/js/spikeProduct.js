@@ -256,6 +256,7 @@ $(function(){
 		checkLoginState();//判断登录
 		if(checkLogin == "true"){
 			//已登录
+			var thisPro = $(this);
 			var spikeProductId = $(this).parent().parent().find(".spikeProductId").text();
 			console.log("秒杀商品ID"+spikeProductId);
 			$.ajax({
@@ -266,11 +267,11 @@ $(function(){
 				success:function(data){
 					if(data == "超过上限"){
 						//更改抢购按钮为“已结束”
-						$(this).text("已结束");
-						$(this).removeClass("btn-remind");
-						$(this).addClass("btn-disabled");
-						$(this).css({"background": "#f2f2f2","border-color":"#f2f2f2"});
-						$(this).attr("href","javascript:void(0)");
+						$(thisPro).text("已结束");
+						$(thisPro).removeClass("btn-remind");
+						$(thisPro).addClass("btn-disabled");
+						$(thisPro).css({"background": "#f2f2f2","border-color":"#f2f2f2"});
+						$(thisPro).attr("href","javascript:void(0)");
 						//弹出提醒
 						$("#modalMax").modal("show");
 						$("body").on("click",".iknown",function(){
@@ -279,14 +280,14 @@ $(function(){
 
 					}
 	                if(data == "抢购已结束"){
-	                	//弹出提醒
-						$("#modalOver").modal("show");
 						//更改所有的抢购按钮为“已结束”
 						$(".pro-con").children("a.login").text("已结束");
 						$(".pro-con").children("a.login").removeClass("btn-remind");
 						$(".pro-con").children("a.login").addClass("btn-disabled");
 						$(".pro-con").children("a.login").css({"background": "#f2f2f2","border-color":"#f2f2f2"});
 						$(".pro-con").children("a.login").attr("href","javascript:void(0)");
+						//弹出提醒
+						$("#modalOver").modal("show");
 						$("body").on("click",".iknown",function(){
 							$("#modalOver").modal("hide");
 						});
@@ -333,6 +334,7 @@ $(function(){
 			console.log("当前场次"+focusDate);
 			var remindTime = focusStamp-15*60*1000;
 			//console.log(remindTime);
+			
 			$.ajax({
 				type:"post",
 				async:false,
@@ -348,6 +350,7 @@ $(function(){
 				}
 			});	
 			//设置定时消息
+			
 			$.ajax({
 				type:"post",
 				async:false,
