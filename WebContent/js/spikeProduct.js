@@ -252,7 +252,7 @@ $(function(){
 	
 	//抢购商品
 	$("body").on("click",".start",function(){
-		alert("购买");
+		//alert("购买");
 		checkLoginState();//判断登录
 		if(checkLogin == "true"){
 			//已登录
@@ -292,14 +292,14 @@ $(function(){
 						});
 					}
 	                if(data == "抢购成功"){
-	                	alert("抢购成功");
+	                	//alert("抢购成功");
 						$.ajax({
 							type:"post",
 							async:false,
 							dataType:"json",
 							url:"findSpikeProduct.action?spikeProductId="+spikeProductId,
 							success:function(data){
-								alert("准备跳转购买");
+								//alert("准备跳转购买");
 								window.location.href = "updateSpikeOrder.action";
 							}
 						});
@@ -358,7 +358,7 @@ $(function(){
 					$.ajax({
 						type:"post",
 						async:false,
-						url:"updateSpikeRemid.action?spikeProductId="+spikeProductId+"&sendTime="+remindTime,
+						url:"updateSpikeRemind.action?spikeProductId="+spikeProductId+"&remindTime="+remindTime,
 						success:function(){
 							console.log("已更改提醒状态");
 						}

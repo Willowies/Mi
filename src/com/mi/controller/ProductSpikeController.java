@@ -74,7 +74,7 @@ public class ProductSpikeController {
 		return spikeList;
 	}
 	//更改秒杀提醒的状态
-	@RequestMapping("updateSpikeRemid")
+	@RequestMapping("updateSpikeRemind")
 	public void updateSpikeRemid(String spikeProductId, String remindTime, HttpSession session){
 		User user = getUser(session);
 		productSpikeService.updateSpikeRemid(Integer.parseInt(spikeProductId), user.getUserId(), remindTime);

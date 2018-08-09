@@ -199,8 +199,9 @@ $(function(){
 	
 	//购买商品
 	function buyProduct(){
-		var productName = $("#pro-title").text();
 		$("#buyOrNotice").click(function(){
+			var productName = $("#pro-title").text();
+			//alert("商品名称"+productName);
 			//判断登录
 			checkLoginState();
 			if(checkLogin == "true"){
