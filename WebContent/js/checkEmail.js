@@ -1,5 +1,5 @@
-function checkEmail(userId){
-	var email = $("#email").val();
+function checkEmail(userId,email){
+	alert("进入");
 	requestUrl = 'sendVerificationCode.action?userId='+userId+'&emailAddress='+ email;
 	alert(requestUrl);
 	

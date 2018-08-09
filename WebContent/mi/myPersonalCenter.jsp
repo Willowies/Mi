@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -15,6 +15,8 @@
 		<link href="../css/font-awesome.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery.min.js" ></script>
 		<script type="text/javascript" src="../js/receiverAddress.js"></script>
+		<script type="text/javascript" src="../js/homepage.js"></script>
+		<script type="text/javascript" src="../js/checkEmail.js"></script>
 
 	</head>
 
@@ -224,12 +226,23 @@
 								<div class="useractions">
 									<ul class="action-list">
 										<li>
-											绑定手机,
+											绑定手机:
 											<span class="tel">${user.userPhone}</span>
 										</li>
 										<li>
-											绑定邮箱,
-											<span class="tel">${user.userEmail}</span>
+											绑定邮箱:
+											<span class="tel" id="email">${user.userEmail}
+											</span>
+											<input id="check" onclick="checkEmail('${user.userId}','${user.userEmail}')"  style="width: 70px; height: 25px;" type="button" value="邮箱认证" />
+											<c:if test="${vertifyState == 0}">
+   													<p>邮箱未认证<p>
+											</c:if>
+											<c:if test="${vertifyState == 1}">
+   													<p>邮箱已认证<p>
+											</c:if>
+											<c:if test="${vertifyState == 2}">
+   													<p>未绑定邮箱<p>
+											</c:if>
 										</li>
 									</ul>
 								</div>
@@ -278,6 +291,7 @@
 						</div>
 					</div>
 				</div>
+		</div>
 		</div>
 		
 		<div class="site-footer">
