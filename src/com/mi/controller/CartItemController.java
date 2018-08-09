@@ -69,7 +69,7 @@ public class CartItemController extends BaseController{
 	}
 	
 	@RequestMapping("addCartItem")
-	public String addCartItem(String productIdString,HttpSession session,Model model){
+	public String addCartItem(String productIdString,String productName,HttpSession session,Model model){
 		User user = (User)session.getAttribute("user");
 		int productId = Integer.parseInt(productIdString);
 		int result = cartItemService.addCartItem(productId,user.getUserId());
@@ -77,7 +77,7 @@ public class CartItemController extends BaseController{
 			//达到商品最大限购数量
 			//model.addAttribute("productName",productName);
 			model.addAttribute("message", "商品已到达最大限购数量");
-			return "gotoCart";
+			return "forward:selectProductInfo.action?productName="+productName;
 		}else {
 			//未达到商品最大限购数量
 			//购物车中有该商品且未达到最大限购数量
