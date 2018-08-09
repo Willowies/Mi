@@ -10,6 +10,7 @@
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
 		<link href="../css/productInfo.css" rel='stylesheet' type='text/css' />
 		<link href="../css/font-awesome.css" rel='stylesheet' type='text/css' />
+		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
 		<link rel="stylesheet" href="../css/bootstrap.min.css">		
 		<script type="text/javascript" src="../js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
@@ -161,7 +162,58 @@
 				<p id="paragraph2" style="display: none;">全黑环境疾速解锁</p>
 			</div>
 		</div>
-	
+	<div id="myCarousel" class="carousel slide" style="height:692px;">
+		    <!-- 轮播（Carousel）指标 -->
+		    <ol class="carousel-indicators">
+		        <li data-target="#myCarousel" data-slide-to="0" class="active" style="margin-right: 10px;"></li>
+		        <li data-target="#myCarousel" data-slide-to="1" style="margin-right: 10px;"></li>
+		        <li data-target="#myCarousel" data-slide-to="2" style="margin-right: 10px;"></li>
+		    </ol>   
+		    <!-- 轮播（Carousel）项目 -->
+		    <div class="carousel-inner">
+		        <div class="item active">
+		        	<div class="carousel-caption descrip">
+		        		<div class="text">
+		        			<h2>超轻四曲面<br />
+		        			轻薄圆润，舒适握感</h2>
+		        			<p>四曲面玻璃机身， 超轻 7 系铝金属中框，水滴弧收腰设计</p>
+		        		</div>
+		        	</div>
+		            <img src="../images/border3.jpg" alt="First slide">
+		        </div>
+		        <div class="item">
+		        	<div class="carousel-caption descrip">
+		        		<div class="text">
+		        			<h2>全球首款双频 GPS 手机<br />
+		        			超精准定位</h2>
+		        			<p>小米8 全球首款双频 GPS 手机，支持L1 + L5双频定位，双频信号协同工作</p>
+		        			<p>在城市复杂环境中，有效改善导航精准度</p>
+		        		</div>
+		        	</div>
+		            <img src="../images/border4.jpg" alt="Second slide">
+		        </div>
+		        <div class="item">
+		        	<div class="carousel-caption descrip">
+		        		<div class="text" style="color: #fff !important;">
+		        			<h2>前置2000万<br />
+		        			“微整形”美颜相机，肖像级背景虚化</h2>
+		        			<p>超高解析力的 2000 万前置摄像头，1.8μm（4合1）大像素技术，暗光自拍也能更清晰明亮</p>
+		        			<p>全新升级的 3D 美颜技术与 AI 单摄背景虚化，让自拍照如同棚拍直出一样出彩</p>
+		        		</div>
+		        	</div>
+		            <img src="../images/border2.jpg" alt="Third slide">
+		        </div>
+		    </div>
+		    <!-- 轮播（Carousel）导航 -->
+		    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		        <span class="sr-only">Previous</span>
+		    </a>
+		    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		        <span class="sr-only">Next</span>
+		    </a>
+		</div>
 	
 		
 	<div class="site-footer">

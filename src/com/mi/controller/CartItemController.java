@@ -1,5 +1,7 @@
 package com.mi.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mi.model.bean.CartItem;
+import com.mi.model.bean.Coupon;
 import com.mi.model.bean.Product;
+import com.mi.model.bean.ReceiverAddress;
 import com.mi.model.bean.User;
 import com.mi.model.dao.CartItemDAO;
 import com.mi.model.service.CartItemService;
@@ -77,8 +81,11 @@ public class CartItemController extends BaseController{
 		if(result==2){
 			//达到商品最大限购数量
 			//model.addAttribute("productName",productName);
-			model.addAttribute("message", "商品已到达最大限购数量");
-			return "forward:selectProductInfo.action?productName="+productName;
+			//model.addAttribute("message", "商品已到达最大限购数量");
+			session.setAttribute("message", "商品已到达最大限购数量");
+			System.out.println("要传过去的商品名为"+productName);
+			System.out.println(productName);
+			return "redirect:selectProductInfo.action?productName="+productName;
 		}else {
 			//未达到商品最大限购数量
 			//购物车中有该商品且未达到最大限购数量
@@ -100,26 +107,30 @@ public class CartItemController extends BaseController{
 	
 	@RequestMapping("displayProductSummary")
 	public String displayProductSummary(String productName){
-		if(productName=="小米8"){
+		System.out.println("productName的值为"+productName);
+		System.out.println(productName);
+		if(productName.equals("小米8")){
 			return "xiaomi8";
-		}else if(productName=="小米平板4"){
+		}else if(productName.equals("小米平板4")){
 			return "miPad4";
-		}else if(productName=="小米电视4"){
+		}else if(productName.equals("小米电视4")){
 			return "TV4";
-		}else if(productName=="红米note5"){
+		}else if(productName.equals("红米note5")){
 			return "miNote5";
-		}else if(productName=="小米游戏本"){
+		}else if(productName.equals("小米游戏本")){
 			return "gameBook";
-		}else if(productName=="米家空气净化器Pro"){
+		}else if(productName.equals("米家空气净化器Pro")){
 			return "airClean";
-		}else if(productName=="小米6X 极简保护壳"){
+		}else if(productName.equals("小米6X 极简保护壳")){
 			return "mi6X";
-		}else if(productName=="红米S2 标准高透膜"){
+		}else if(productName.equals("红米S2 标准高透膜")){
 			return "miS2";
-		}else if(productName=="小米USB充电器快充版（18W）"){
+		}else if(productName.equals("小米USB充电器快充版（18W）")){
 			return "miUsbCharger";
 		}else{
 			return "miUsbCharger";
 		}
 	}
+	
+	
 }
