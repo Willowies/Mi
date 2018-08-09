@@ -110,7 +110,7 @@
 		</div>
 	</div>
 	
-	<div class="product-head-info">
+<%-- 	<div class="product-head-info">
 			<div class="product-head-box">
 				<div class="product-name">这个商品没有参数页面</div>
 				<div class="con">
@@ -120,7 +120,7 @@
 					<a href="selectProductInfo.action?productName=小米8" class="btn-toBuy">立即购买</a>
 				</div>
 			</div>
-	</div>
+	</div> --%>
 	
 	<div class="parameter-container">
 		<div class="context">

@@ -114,10 +114,10 @@
 			<div class="product-head-box">
 				<div class="product-name">红米note5</div>
 				<div class="con">
-					<a href="displayProductSummary.action?productName=${productName}">概述</a>&nbsp; |&nbsp;
-					<a href="displayProductParameter.action?productName=${productName}">参数</a>&nbsp; |&nbsp;
-					<a href="getCommentPage.action?productName=${productName}">用户评价</a>&nbsp; |&nbsp;
-					<a href="selectProductInfo.action?productName=小米8" class="btn-toBuy">立即购买</a>
+					<a href="displayProductSummary.action?productName=红米note5">概述</a>&nbsp; |&nbsp;
+					<a href="displayProductParameter.action?productName=红米note5">参数</a>&nbsp; |&nbsp;
+					<a href="getCommentPage.action?productName=红米note5">用户评价</a>&nbsp; |&nbsp;
+					<a href="selectProductInfo.action?productName=红米note5" class="btn-toBuy">立即购买</a>
 				</div>
 			</div>
 	</div>

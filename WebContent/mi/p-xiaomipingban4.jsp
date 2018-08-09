@@ -114,10 +114,10 @@
 			<div class="product-head-box">
 				<div class="product-name">小米平板4</div>
 				<div class="con">
-					<a href="displayProductSummary.action?productName=${productName}">概述</a>&nbsp; |&nbsp;
-					<a href="displayProductParameter.action?productName=${productName}">参数</a>&nbsp; |&nbsp;
-					<a href="getCommentPage.action?productName=${productName}">用户评价</a>&nbsp; |&nbsp;
-					<a href="selectProductInfo.action?productName=小米8" class="btn-toBuy">立即购买</a>
+					<a href="displayProductSummary.action?productName=小米平板4">概述</a>&nbsp; |&nbsp;
+					<a href="displayProductParameter.action?productName=小米平板4">参数</a>&nbsp; |&nbsp;
+					<a href="getCommentPage.action?productName=小米平板4">用户评价</a>&nbsp; |&nbsp;
+					<a href="selectProductInfo.action?productName=小米平板4" class="btn-toBuy">立即购买</a>
 				</div>
 			</div>
 	</div>
