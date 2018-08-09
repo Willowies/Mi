@@ -109,15 +109,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     <insert id="addNotice"  >
-    	INSERT into message (messageTitle,message,userId,sendTime,messageType) 
+    	INSERT into message (messageTitle,message,userId,sendTime,messageType,picUrl) 
     	select * from 
 		(select  "到货通知" messageTitle,concat(b.productName,"到货，请尽快购买") message,
-		a.userId,"${0}" sendTime,"2" messageType,b.picUrl as picUrl
+		a.userId,#{0} sendTime,3 messageType,b.picUrl as picUrl
 		from noticeofarrival a 
 		left join product b on a.productId=b.productId
 		 WHERE a.productId=#{1}) 
 		 t
-    </insert> 
+    </insert>  
     
     <resultMap type="groupProduct" id="groupProductResult">
     	<id column="groupProductId" property="groupProductId" />

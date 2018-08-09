@@ -214,7 +214,7 @@
 								<c:if test="${not empty comment.commentUrl}">
 									<div class="m-img-list clearfix h-img-list">
 										<div class="img-item img-item1 item-one showimg">
-											<img class="J_resetImgItem J_canZoom" src="../${comment.commentUrl}" height="160px" width="auto" style="cursor: pointer;" onclick="showPic(this)">
+											<img class="J_resetImgItem J_canZoom" src="../${comment.commentUrl}" height="160px" width="160px" style="cursor: pointer;" onclick="showPic(this)">
 										</div>
 									</div>
 								</c:if>
