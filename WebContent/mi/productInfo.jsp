@@ -458,13 +458,14 @@
 		<div class="slogan ir">探索黑科技，小米为发烧而生</div>
 	</div>
 	<%
-		Object message = request.getAttribute("message");
+		Object message = session.getAttribute("message");
 		if(message!=null&&!"".equals(message)){
 	%>
 		<script type="text/javascript">
 		alert("<%=message%>");
 		</script>
 	<%
+		session.removeAttribute("message");
 		}
 	%>
 	</body>
