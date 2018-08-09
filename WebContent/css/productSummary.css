@@ -100,3 +100,18 @@
 	font-size: 20px;
 	margin: 15px;
 }
+
+.text{
+	color: #111;
+}
+
+.text h2{
+	font-size: 35px;
+	margin-bottom: 15px;
+	line-height: 40px;
+}
+
+.descrip{
+	margin-bottom: 440px;
+}
+
