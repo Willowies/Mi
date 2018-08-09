@@ -18,7 +18,7 @@
 					<a href="outLogin.action"><img src="../images/mi-logo.png" /></a>
 				</div>
 				<div id="return">
-					<a href="outLogin.action">退出</a>
+					<a href="myPersonalCenter.jsp">退出</a>
 				</div>
 			</div>
 			<div id="middleside">

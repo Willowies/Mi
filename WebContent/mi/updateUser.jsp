@@ -62,7 +62,7 @@
 			            
 					    <h4>邮箱:</h4>
 					    <div class="div1">
-					        <input type="text"  name="userEmail" placeholder="请输入正确的邮箱格式" value="${errorMap.userEmail==null?sessionScope.user.userEmail:''}" />
+					        <input type="email"  name="userEmail" placeholder="请输入正确的邮箱格式" value="${errorMap.userEmail==null?sessionScope.user.userEmail:''}" />
 			                <span style="color:red">${errorMap.userEmail }</span>
 			            </div>
 					    <h4>银行卡:</h4>

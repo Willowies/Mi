@@ -46,7 +46,7 @@
 				<div id="main-item" >					
 						<h4>原密码:</h4>
 					    <div class="div1">
-						   <input type="password" name="oldPassword" placeholder="输入原始密码" />
+						   <input type="password" name="oldPassword" placeholder="输入原始密码" required="required" />
 					    </div>
 					    
 					    <h4>新密码:</h4>
