@@ -132,7 +132,7 @@
 					<!--未登录提示-->
 					<div class="page-container">						
                                                                                  为方便您购买，请提前登录 
-                        <a href="" class="proLogin" onclick="" style="color: #ff6700 !important;text-decoration: none;margin-left:25px">立即登录</a> 
+                        <a href="login.jsp" class="proLogin" onclick="" style="color: #ff6700 !important;text-decoration: none;margin-left:25px">立即登录</a> 
                         <span class="proLoginClose fa fa-close" style="color: #b5b5b5;" onclick=""></span>
 					</div>
 				</div>
@@ -457,5 +457,15 @@
 		</div>
 		<div class="slogan ir">探索黑科技，小米为发烧而生</div>
 	</div>
+	<%
+		Object message = request.getAttribute("message");
+		if(message!=null&&!"".equals(message)){
+	%>
+		<script type="text/javascript">
+		alert("<%=message%>");
+		</script>
+	<%
+		}
+	%>
 	</body>
 </html>

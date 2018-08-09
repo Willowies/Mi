@@ -70,6 +70,7 @@ public class CartItemController extends BaseController{
 	
 	@RequestMapping("addCartItem")
 	public String addCartItem(String productIdString,String productName,HttpSession session,Model model){
+		System.out.println("传过来的商品名为"+productName);
 		User user = (User)session.getAttribute("user");
 		int productId = Integer.parseInt(productIdString);
 		int result = cartItemService.addCartItem(productId,user.getUserId());
