@@ -246,7 +246,7 @@
 														<div id="faultImgContainer " class="uploader clearfix ">
 															<!-- <a id="faultImgUploader " class="btn-uploader J_btnUploader " href="javascript: void(0); " data-uploader-name="faultImg " data-biz-name="fault ">添加图片</a> -->
 															 <label class="btn-uploader J_btnUploader" for="uploadImage">上传图片</label>
-                                                              <input type="file" name="asRepairProUrl" value="" id="uploadImage" hidden="hidden" accept="image/gif, image/jpg, image/png" >
+                                                              <input type="file" name="asRepairProUrl" value="" id="uploadImage" hidden="hidden" accept="image" >
 														</div>
 														<!-- <input type="hidden" name="faultImgUrl " /> -->
 													</fieldset>

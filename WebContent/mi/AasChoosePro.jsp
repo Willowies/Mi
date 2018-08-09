@@ -245,7 +245,7 @@
                                 <fieldset class="form-section">
                                     <div id="invoiceImgContainer" class="uploader clearfix">
                                          <label class="btn-uploader J_btnUploader"  for="uploadImage">上传图片</label>
-                                         <input type="file" name="asInvoiceUrl" id="uploadImage" hidden="hidden" accept="image/gif, image/jpg, image/png" >
+                                         <input type="file" name="asInvoiceUrl" id="uploadImage" hidden="hidden" accept="image" >
                                     </div>  
                                 </fieldset>
                             </div>
