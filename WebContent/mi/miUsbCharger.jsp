@@ -121,10 +121,10 @@
 			<div class="product-head-box">
 				<div class="product-name">${productName}</div>
 				<div class="con">
-					<a href="displayProductSummary.action?productName=${productName}">概述</a>&nbsp; |&nbsp;
-					<a href="displayProductParameter.action?productName=${productName}">参数</a>&nbsp; |&nbsp;
-					<a href="getCommentPage.action?productName=${productName}">用户评价</a>&nbsp; |&nbsp;
-					<a href="selectProductInfo.action?productName=${productName}" class="btn-toBuy">立即购买</a>
+					<a href="displayProductSummary.action?productName=小米USB充电器快充版（18W）">概述</a>&nbsp; |&nbsp;
+					<a href="displayProductParameter.action?productName=小米USB充电器快充版（18W）">参数</a>&nbsp; |&nbsp;
+					<a href="getCommentPage.action?productName=小米USB充电器快充版（18W）">用户评价</a>&nbsp; |&nbsp;
+					<a href="selectProductInfo.action?productName=小米USB充电器快充版（18W）" class="btn-toBuy">立即购买</a>
 				</div>
 			</div>
 		</div>

@@ -121,10 +121,10 @@
 			<div class="product-head-box">
 				<div class="product-name">${productName}</div>
 				<div class="con">
-					<a href="displayProductSummary.action?productName=${productName}">概述</a>&nbsp; |&nbsp;
-					<a href="displayProductParameter.action?productName=${productName}">参数</a>&nbsp; |&nbsp;
-					<a href="getCommentPage.action?productName=${productName}">用户评价</a>&nbsp; |&nbsp;
-					<a href="selectProductInfo.action?productName=${productName}" class="btn-toBuy">立即购买</a>
+					<a href="displayProductSummary.action?productName=红米S2 标准高透膜">概述</a>&nbsp; |&nbsp;
+					<a href="displayProductParameter.action?productName=红米S2 标准高透膜">参数</a>&nbsp; |&nbsp;
+					<a href="getCommentPage.action?productName=红米S2 标准高透膜">用户评价</a>&nbsp; |&nbsp;
+					<a href="selectProductInfo.action?productName=红米S2 标准高透膜" class="btn-toBuy">立即购买</a>
 				</div>
 			</div>
 		</div>

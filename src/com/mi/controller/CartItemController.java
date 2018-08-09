@@ -28,6 +28,8 @@ public class CartItemController extends BaseController{
 	private CartItemService cartItemService;
 	@Autowired
 	private HomeService homeService;
+	@Autowired
+	private ProductInfoController p;
 	
 	//待删，向session中加入userId
 	@RequestMapping("addUserId")
@@ -82,10 +84,10 @@ public class CartItemController extends BaseController{
 			//达到商品最大限购数量
 			//model.addAttribute("productName",productName);
 			//model.addAttribute("message", "商品已到达最大限购数量");
-			session.setAttribute("message", "商品已到达最大限购数量");
+			model.addAttribute("message", "商品已到达最大限购数量");
 			System.out.println("要传过去的商品名为"+productName);
 			System.out.println(productName);
-			return "redirect:selectProductInfo.action?productName="+productName;
+			return p.selectProductInfo(model, productName, session);
 		}else {
 			//未达到商品最大限购数量
 			//购物车中有该商品且未达到最大限购数量
