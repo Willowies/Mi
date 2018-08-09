@@ -194,14 +194,14 @@ public class ProductSpikeService {
 		messageDAO.addMessage(map);
 	}
 	//更改秒杀提醒的状态
-	public void updateSpikeRemid(int spikeProductId, int userId, String remindTime){
+	public void updateSpikeRemind(int spikeProductId, int userId, String remindTime){
 		long stamp = new Long(remindTime);
 		Date remindDate = new Date(stamp);
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("spikeProductId", spikeProductId);
 		map.put("userId", userId);
 		map.put("remindTime", remindDate);
-		spikeRemindDAO.updateSpikeRemid(map);
+		spikeRemindDAO.updateSpikeRemind(map);
 	}
 	
 	//定时器到截止时间时，处理当场秒杀的库存
