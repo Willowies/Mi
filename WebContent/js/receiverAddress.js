@@ -81,7 +81,6 @@ function showReceiverAddressHide(){
 	$('#receiverAddress-hide').removeClass("windown-hide");
 }
 function select_addressItem(index){
-	alert("进入select_addressItem");
 	$('#j_wrapperSelectAddress').addClass("windown-hide");
 	var province = $('#j_addressItem'+index).attr('province');
 	var city = $('#j_addressItem'+index).attr('city');
