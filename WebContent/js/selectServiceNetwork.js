@@ -61,101 +61,15 @@ function provincechange(n) {
 	}
 	city.options[0].selected = true;
 }
-$(document).ready(function() {
-	$(".link-category").hover(function() {
-		$(".site-category").css("display", "block");
-	}, function() {
-		$(".site-category").css("display", "none");
-	});
-	$(".site-category").hover(function() {
-		$(".site-category").css("display", "block");
-	}, function() {
-		$(".site-category").css("display", "none");
-	});
-});
-/*下面是百度地图api相关*/
 
-// 百度地图API功能
-
-	//下拉列表功能
-
+function changecenter(p){
+	      if (p=="鞍山市"）{
+	         var newpoint=new BMap.Point(123.00597,41.114563);
+	         map.centerAndZoom(newpoint,12);
+	      }
 	
-	var map = new BMap.Map("allmap"); // 创建Map实例
-	$(".servicenetworks").text();
-
-	map.centerAndZoom("沈阳市", 15);
-	//添加地图类型控件
-	map.addControl(new BMap.MapTypeControl({
-		mapTypes: [
-			BMAP_NORMAL_MAP,
-			BMAP_HYBRID_MAP
-		]
-	}));
-	map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
-	var top_left_control = new BMap.ScaleControl({
-		anchor: BMAP_ANCHOR_TOP_LEFT
-	}); // 左上角，添加比例尺
-	var top_left_navigation = new BMap.NavigationControl(); //左上角，添加默认缩放平移控件
-	map.addControl(top_left_control);
-	map.addControl(top_left_navigation);
-
-	var points = [{
-			"lng": 123.58,
-			"lat": 41.89,
-			"url": "http://www.baidu.com",
-			"id": 1,
-			"name": "p1"
-		},
-		{
-			"lng": 123.59,
-			"lat": 41.90,
-			"url": "http://www.mi.com",
-			"id": 2,
-			"name": "p2"
-		},
-		{
-			"lng": 123.57,
-			"lat": 42.08,
-			"url": "http://www.csdn.com",
-			"id": 3,
-			"name": "p3"
-		}
-	];
-
-	function addMarker(points) {
-		//循环建立标注点
-		for(var i = 0, pointsLen = points.length; i < pointsLen; i++) {
-			var point = new BMap.Point(points[i].lng, points[i].lat); //将标注点转化成地图上的点
-			var marker = new BMap.Marker(point); //将点转化成标注点
-			map.addOverlay(marker); //将标注点添加到地图上
-			//添加监听事件
-			(function() {
-				var thePoint = points[i];
-				marker.addEventListener("click",
-					//显示信息的方法
-					function() {
-						showInfo(this, thePoint);
-					});
-			})();
-		}
-
 	}
-	/*fuction changecenter(x,y){
-		map.centerAndZoom(x,y, 15);
-		
-	}
-	 $(function () {
-            $(".changepoint").click(function () {
-                debugger;
-                var css = $(".changepoint").attr("style");
-                if (css.indexOf("border: 1px solid #757575")>=0)
-                    $(this).css("border", "1px solid #FF6700");
-                else
-                    $(this).css("border", "1px solid #757575");
-            });
-        })*/
-			
-			
+
 
 			
 			

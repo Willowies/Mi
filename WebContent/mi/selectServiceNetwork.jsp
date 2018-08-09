@@ -131,7 +131,7 @@
 							<select class="selectbox" name="province" value="${province}" id="param_province" onchange="provincechange(this.selectedIndex)">
 								<option>请选择省份</option>
 							</select>
-							<select class="selectbox" name="city" value="${city}" id="param_city">
+							<select class="selectbox" name="city" value="${city}" id="param_city" onchange="changecenter(${city})">
 								<option>请选择城市</option>
 							</select>
 							<button class="selectbutton" type="submit">查询受理网点</button>
@@ -191,24 +191,119 @@
 				
 				
 			</div>
+	<script>
+			
 
-			<!--
-				onclick="changecenter(${sn.snCoordx},${sn.Coordy})"
-				
-				<div class="resultandmap">
+	
+	
 
-				
-					<div class="resultandmap-select-result">
-							<%
-		if(request.getAttribute("sns")!=null){
-			List sns=(List) request.getAttribute("sns");
-			if(!sns.isEmpty()){ 
-			        
-		%> 
+	
+	var map = new BMap.Map("allmap"); 
+	map.centerAndZoom(new BMap.Point(116.417854,39.921988), 15);
+
+	
+	
+	
+	map.addControl(new BMap.MapTypeControl({
+		mapTypes: [
+			BMAP_NORMAL_MAP,
+			BMAP_HYBRID_MAP
+		]
+	}));
+	map.enableScrollWheelZoom(true); 
+	var top_left_control = new BMap.ScaleControl({
+		anchor: BMAP_ANCHOR_TOP_LEFT
+	}); 
+	var top_left_navigation = new BMap.NavigationControl(); 
+	map.addControl(top_left_control);
+	map.addControl(top_left_navigation);
+	
+	
+	
+	
+	
+	map.centerAndZoom(new BMap.Point(123.040001,42.000000), 12);
+	var data_info = [[123.040001,42.000000,"沈阳市沈河区小北关街126号(沈阳燃气分公司北走200)","沈阳创统电子有限公司","024-88576199/31481166"],
+					 [123.110001,42.080002,"沈阳市三好街华强电子世界1楼66-70号","沈阳创新嘉元商贸有限公司","024-83991935"],
+					 [123.00597,41.114563,"鞍山市铁东区建国南路甲183-2(五一路立交桥北下道口)","鞍山市铁东区鹏达飞通讯商行","0412-2225677"]
+					];
+					
+	var opts = {
+				width : 250,     // 信息窗口宽度
+				height: 160,     // 信息窗口高度
+				title : "信息窗口" , // 信息窗口标题
+				enableMessage:true//设置允许信息窗发送短息
+			   };
+	for(var i=0;i<data_info.length;i++){
+		var marker = new BMap.Marker(new BMap.Point(data_info[i][0],data_info[i][1]));  // 创建标注
+		var content = "<h3> 名称："+ data_info[i][3]+"</h3>"+"<p>地址："+data_info[i][2]+"</p><p>联系电话"+data_info[i][4]+"</p>";
 		
-		        <ul>
-							<c:forEach items="${sns}" var="sn">
-						
+		map.addOverlay(marker);               // 将标注添加到地图中
+		addClickHandler(content,marker);
+	}
+	function addClickHandler(content,marker){
+		marker.addEventListener("click",function(e){
+			openInfo(content,e)}
+		);
+	}
+	function openInfo(content,e){
+		var p = e.target;
+		var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+		var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
+		map.openInfoWindow(infoWindow,point); //开启信息窗口
+	}
+	
+	
+	/*var snss=[<c:forEach items="${sns}" var="sn1">
+	           ["${sn1.snCoordx}",
+	            "${sn1.snCoordy}",
+	            "${sn1.snName}",
+	            "${sn1.snAddress}",
+	            "${sn1.snTelephone}",
+	            [<c:forEach items="${sn1.serviceProducts}"  var="sp1">
+	            "${sp1.spName}",</c:forEach>],
+	            [<c:forEach items="${sn1.serviceTypes}"  var="st1">
+	            "${st1.stName}",</c:forEach>]
+	            ]
+	            </c:forEach>];
+	          
+	var opts = {
+				width : 250,     
+				height: 80,     
+				title : "信息窗口" , 
+				enableMessage:true
+			   };
+			   
+	for(var i=0;i<snss.length;i++){
+		var marker = new BMap.Marker(new BMap.Point(snss[i][0],snss[i][1]));  
+		var content = snss[i][2];
+		map.addOverlay(marker);               
+		addClickHandler(content,marker);
+	}
+	
+	function addClickHandler(content,marker){
+		marker.addEventListener("click",function(e){
+			openInfo(content,e)}
+		);
+	}
+	
+	function openInfo(content,e){
+		var p = e.target;
+		var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+		var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
+		map.openInfoWindow(infoWindow,point); //开启信息窗口
+	}*/
+	
+	
+	          
+	
+	
+	          
+
+			</script>
+
+		       <!--
+							<c:forEach items="${sns}" var="sn">						
 							<li >
 								<h3 title="${sn.snName}">${sn.snName}</h3>
 							    <p title="${sn.snAddress}">${sn.snAddress}</p>
@@ -227,106 +322,10 @@
 									<span>${st.stName}</span>
 								</c:forEach>
 							</li>		
-							</c:forEach>
-		
-				</ul>	
-							<%
-			}else{
-		%>
-							<p>未查询到数据</p>
-							<%
-			}
-		}
-		%>
-				
+							</c:forEach>           -->
 
-			</div>-->
+		   </div>
 
-		</div>
-
-<script type="text/javascript">
-	//下拉列表功能
-
-	
-	var map = new BMap.Map("allmap"); // 创建Map实例
-	$(".servicenetworks").text();
-
-	map.centerAndZoom("沈阳市", 15);
-	//添加地图类型控件
-	map.addControl(new BMap.MapTypeControl({
-		mapTypes: [
-			BMAP_NORMAL_MAP,
-			BMAP_HYBRID_MAP
-		]
-	}));
-	map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
-	var top_left_control = new BMap.ScaleControl({
-		anchor: BMAP_ANCHOR_TOP_LEFT
-	}); // 左上角，添加比例尺
-	var top_left_navigation = new BMap.NavigationControl(); //左上角，添加默认缩放平移控件
-	map.addControl(top_left_control);
-	map.addControl(top_left_navigation);
-
-	/*var points = [{
-			"lng": 112.58,
-			"lat": 26.89,
-			"url": "http://www.baidu.com",
-			"id": 1,
-			"name": "p1"
-		},
-		{
-			"lng": 112.59,
-			"lat": 26.90,
-			"url": "http://www.mi.com",
-			"id": 2,
-			"name": "p2"
-		},
-		{
-			"lng": 112.57,
-			"lat": 26.88,
-			"url": "http://www.csdn.com",
-			"id": 3,
-			"name": "p3"
-		}
-	];
-
-	function addMarker(points) {
-		//循环建立标注点
-		for(var i = 0, pointsLen = points.length; i < pointsLen; i++) {
-			var point = new BMap.Point(points[i].lng, points[i].lat); //将标注点转化成地图上的点
-			var marker = new BMap.Marker(point); //将点转化成标注点
-			map.addOverlay(marker); //将标注点添加到地图上
-			//添加监听事件
-			(function() {
-				var thePoint = points[i];
-				marker.addEventListener("click",
-					//显示信息的方法
-					function() {
-						showInfo(this, thePoint);
-					});
-			})();
-		}
-
-	}*/
-	/*fuction changecenter(x,y){
-		map.centerAndZoom(x,y, 15);
-		
-	}
-	 $(function () {
-            $(".changepoint").click(function () {
-                debugger;
-                var css = $(".changepoint").attr("style");
-                if (css.indexOf("border: 1px solid #757575")>=0)
-                    $(this).css("border", "1px solid #FF6700");
-                else
-                    $(this).css("border", "1px solid #757575");
-            });
-        })*/
-			
-			
-
-			
-		</script>
 
 		</div>
 		<div class="site-footer">
