@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where q.groupId=t.groupId and t.orderType=2 and t.orderState=4
     </select>
     <insert id="addGroup" flushCache="true">
-    	insert into `group`(groupProductId, currentQuantity, creator, state) values(#{groupProductId, jdbcType=INTEGER}, 1, #{userName, jdbcType=VARCHAR}, 0)
+    	insert into `group`(groupProductId, currentQuantity, creator, state) values(#{groupProductId, jdbcType=INTEGER}, 0, #{userName, jdbcType=VARCHAR}, 0)
     </insert>
     <select id="getGroupId" flushCache="true" resultType="Integer">
     	select g.groupId from `group` as g where g.groupProductId=#{groupProductId, jdbcType=INTEGER} and g.creator=#{userName, jdbcType=VARCHAR}
