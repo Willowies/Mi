@@ -117,7 +117,6 @@ $(function(){
 						$("span.sale").css("display","inline-block");
 						$("span.over").css("display","none");
 						$("#buyOrNotice").text("加入购物车");
-						buyProduct();
 					}
 					if(data == "暂时缺货"){
 						$("span.over").css("display","inline-block");
@@ -126,41 +125,43 @@ $(function(){
 						$("#buyOrNotice").addClass("setRemind");
 						$("#buyOrNotice").removeClass("proBuyBtn");
 						$("#buyOrNotice").css({"border-color":"#ff6700","background":"#ff6700","color":"rgb(255, 103, 0)"});
-						noticeArrival();
 					}
 				}		        
 		});
 	}
-	//设置到货通知
-	function noticeArrival(){
-		checkLoginState();//判断登录
+	//设置到货通知		
 		$("#buyOrNotice").click(function(){
-			if(checkLogin == "true"){
-				//已登录
-				var version = $("#selectVersion li.active span.name").text();
-				var color = $("#selectColor ul li.active a").text();
-				$.ajax({
-					type:"post",
-					async:true,
-					dataType:"text",
-					url:"noticeArrival.action?productName="+$("#pro-title").text()+"&version="+version+"&color="+color,
-					success:function(data){
-						$("#modalNoticeArrival").modal("show");
-						//console.log($("h4.isSetted").length);
-						$("h4.isSetted").text(data);
-						$("a.known").click(function(){
-							$("#buyOrNotice").css({"pointer-events":"none","opacity":"0.4"});
-							$("#buyOrNotice").text("已设置到货通知");
-						});											
-					}
-				});
-			}else{
-				//未登录
-				window.location.href = "login.jsp";
+			//checkLoginState();//判断登录
+			var notice = $("#buyOrNotice").text();
+			alert(notice);
+			if(notice == "到货通知"){
+				if(checkLogin == "true"){
+					//已登录
+					var version = $("#selectVersion li.active span.name").text();
+					var color = $("#selectColor ul li.active a").text();
+					$.ajax({
+						type:"post",
+						async:true,
+						dataType:"text",
+						url:"noticeArrival.action?productName="+$("#pro-title").text()+"&version="+version+"&color="+color,
+						success:function(data){
+							$("#modalNoticeArrival").modal("show");
+							//console.log($("h4.isSetted").length);
+							$("h4.isSetted").text(data);
+							$("a.known").click(function(){
+								$("#buyOrNotice").css({"pointer-events":"none","opacity":"0.4"});
+								$("#buyOrNotice").text("已设置到货通知");
+							});											
+						}
+					});
+				}else{
+					//未登录
+					window.location.href = "login.jsp";
+				}
 			}
+
 						
 		});
-	}
 	//领取优惠券
 	$("body").on("click",".getCoupon",function(){
 		checkLoginState();//判断登录
@@ -198,8 +199,10 @@ $(function(){
 	});
 	
 	//购买商品
-	function buyProduct(){
-		$("#buyOrNotice").click(function(){
+
+	$("#buyOrNotice").click(function(){
+		var notice = $("#buyOrNotice").text();
+		if(notice == "加入购物车"){
 			var productName = $("#pro-title").text();
 			//alert("商品名称"+productName);
 			//判断登录
@@ -211,10 +214,9 @@ $(function(){
 				//未登录 跳转到登录界面
 				window.location.href = "login.jsp";
 			}
-				
-
-		});
-	}
+		}
+	});
+	
 	//设置图片滚动样式
 	var offset = $("#img").offset();
 	$(window).scroll(function(){

@@ -328,7 +328,7 @@
 					&times;
 			</button>
 			<div class="modal-body" style="max-height: 400px; padding: 40px 60px;">
-				<h4 id="#isSetted" class="isSetted" style="margin: 10px 0 20px; font-size: 30px; font-weight: normal; color: #ff6700;text-align: center;"></h4>
+				<h4 id="isSetted" class="isSetted" style="margin: 10px 0 20px; font-size: 30px; font-weight: normal; color: #ff6700;text-align: center;"></h4>
 				<p style="margin: 1em 0;"></p>
 				<div>
 					<a class="but btn-primary known" data-dismiss="modal" style="color:#fff !important; width: 158px; height: 38px; background: #ff6700; border-color: #ff6700; font-size: 14px; line-height: 38px; margin-left: 61px;">我知道了</a>
