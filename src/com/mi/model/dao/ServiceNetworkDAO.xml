@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.ServiceNetworkDAO">
+    
+    <select id="selectSN"  resultMap="ServiceNetworkMap">
+        select SN.*,SP.*,ST.*
+        from ServiceNetwork SN,productSecondClass SP,ServiceType ST,
+             NetworkServiceConnection NTC,NetworkProductConnection NPC
+             
+        where 
+        SN.snId=NTC.snId
+        and
+        ST.stId=NTC.stId
+        
+        and
+        SN.snId=NPC.snId
+        and
+        SP.SecondClassId=NPC.SecondClassId
+        
+        and 
+        SN.snId in 
+        (select SN.snId 
+        from 
+        ServiceNetwork SN,productSecondClass SP,ServiceType ST,
+        NetworkServiceConnection NTC,NetworkProductConnection NPC
+        where 
+        SN.snCity=#{snCity}
+       
+      
+        <if test="secondClassId!=null and secondClassId!=0 ">
+          and 
+          SP.SecondClassId=#{secondClassId}
+          and
+          SN.snId=NPC.snId
+          and
+          SP.SecondClassId=NPC.SecondClassId  
+        </if>
+         )  
+    </select>
+    <select id="selectAllServiceProducts" resultMap="ServiceProductMap">
+    select * from productSecondClass
+    </select>
+    
+    <resultMap type="ServiceNetwork" id="ServiceNetworkMap">
+    <id property="snId" column="snId"/>
+    <result property="snName" column="snName"/>
+    <result property="snCity" column="snCity"/>
+    <result property="snCountry" column="snCountry"/>
+    <result property="snAddress" column="snAddress"/>
+    <result property="snTelephone" column="snTelephone"/>
+    <result property="snWorkTime" column="snWorkTime"/>
+    <result property="snCoordx" column="snCoordx"/>
+    <result property="snCoordy" column="snCoordy"/>
+    <collection property="serviceProducts" ofType="ServiceProduct">
+        <id property="spId" column="SecondClassId"/>
+        <result property="spName" column="SecondClassName"/>
+    </collection>
+    <collection property="serviceTypes" ofType="ServiceType">
+       <id property="stId" column="stId"/>
+       <result property="stName" column="stName"/>
+    </collection>
+    
+    </resultMap>
+    
+    <resultMap type="ServiceProduct" id="ServiceProductMap">
+   		 <id property="spId" column="SecondClassId"/>
+        <result property="spName" column="SecondClassName"/>
+    </resultMap>
+
+</mapper>
