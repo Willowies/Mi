@@ -3,21 +3,29 @@ package com.mi.utils;
 import org.apache.commons.mail.HtmlEmail;
 
 public class MailUtil {
-	public static boolean sendEmail(String emailaddress,String code){
+	public static boolean sendEmail(String emailaddress,int userId,String code){
 		try {
-			HtmlEmail email = new HtmlEmail();//不用更改
-			email.setHostName("smtp.qq.com");//需要修改，126邮箱为smtp.126.com,163邮箱为163.smtp.com，QQ为smtp.qq.com
+			HtmlEmail email = new HtmlEmail();
+			email.setHostName("smtp.sina.com");
 			email.setCharset("UTF-8");
-			email.setSmtpPort(587);
-			email.addTo(emailaddress);// 收件地址
- 
-			email.setFrom("793012567@qq.com", "wanghaowen");//此处填邮箱地址和用户名,用户名可以任意填写
- 
-			email.setAuthentication("793012567@qq.com", "wagtmloronhzbdje");//此处填写邮箱地址和客户端授权码
- 
-			email.setSubject("邮件测试");//此处填写邮件名，邮件名可任意填写
-			email.setMsg("尊敬的用户您好,您本次注册的验证码是:" + code);//此处填写邮件内容
- 
+			email.addTo(emailaddress);
+			email.setFrom("zhouneuedu@sina.com", "zhouneuedu@sina.com");
+			email.setAuthentication("zhouneuedu@sina.com", "asdzxc321");
+			email.setSubject("小米商城邮件激活测试（本人学生，开发测试软件，请不要封我的邮箱谢谢！）");
+
+			/*email.setMsg("尊敬的用户您好,您正在进行小米商城邮箱绑定验证:\n如果是本人操作请单击链接，否则忽视本邮件。\n" + 
+			"<a href=\" "+linkUrl+">点击此处进行验证</a>");*/
+			 StringBuffer sf=new StringBuffer();
+		        sf.append("<a href=\"http://localhost:8099/Mi/mi/vertifyCodeWhetherCorrect.action?userId=");
+	 	        sf.append(userId);
+		        sf.append("&vertifyCode=");
+		        sf.append(code);
+		        sf.append("\">");
+		        sf.append(" <FONT   face=\"MS   UI   Gothic\"   size=\"3\"><b>点击这里</b></FONT>");
+		        sf.append("</a>");
+		        sf.append("这是小米商城邮件激活测试激活账号，24小时生效，否则重新验证，请尽快激活！<br>");
+		        email.setMsg(sf.toString());
+			System.out.println(emailaddress);
 			email.send();
 			return true;
 		}

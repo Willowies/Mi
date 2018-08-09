@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.mi.model.bean.Order;
 import com.mi.model.bean.ReceiverAddress;
 import com.mi.model.dao.ReceiverAddressDAO;
 

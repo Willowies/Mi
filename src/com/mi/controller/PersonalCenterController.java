@@ -18,8 +18,10 @@ import com.mi.model.bean.Message;
 import com.mi.model.bean.Product;
 import com.mi.model.bean.ReceiverAddress;
 import com.mi.model.bean.User;
+import com.mi.model.dao.MailVertifyDAO;
 import com.mi.model.service.CouponService;
 import com.mi.model.service.LikeProductService;
+import com.mi.model.service.MailVertifyService;
 import com.mi.model.service.MessageService;
 import com.mi.model.service.ReceiverAddressService;
 import com.mi.model.service.UserService;
@@ -37,25 +39,26 @@ public class PersonalCenterController {
 	private ReceiverAddressService receiverAddressService;
 	@Autowired
 	private CouponService couponService;
+	@Autowired
+	private MailVertifyService mailVertifyService;
 	
 	@RequestMapping("disPlayMyPersonalCenter")
 	public String disPlayMyPersonalCenter(Model model,HttpSession session) {
 		
-		/*User user = (User)session.getAttribute("user");
+		User user = (User)session.getAttribute("user");
 		if(user==null){
 			return "forward:homepage.jsp";
 		}
-		int userId = user.getUserId();*/
-		User user = new User();
-		user.setUserId(10002);
 		int userId = user.getUserId();
 		
+		int vertifyState = mailVertifyService.selectVertifyState(userId);
 		int likeProductCount = likeProductService.selectLikeProductCount(userId);
 		int unpayOrderCount = likeProductService.selectUnpayOrderCount(userId);
 		int pendingOrderCount = likeProductService.selectPendingOrderCount(userId);
 		int uncommentOrderCount = likeProductService.selectUncommentOrderCount(userId);
 		
 		model.addAttribute("user",user);
+		model.addAttribute("vertifyState",vertifyState);
 		model.addAttribute("likeProductCount",likeProductCount);
 		model.addAttribute("unpayOrderCount",unpayOrderCount);
 		model.addAttribute("pendingOrderCount",pendingOrderCount);
@@ -66,14 +69,12 @@ public class PersonalCenterController {
 	@RequestMapping("displayMessage")
 	public String disPlayMessage(Model model,HttpSession session,@RequestParam(value="messageType",defaultValue="1")Integer messageType,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
 		System.out.println("½øÈëdisplayMessage");
-		/*User user = (User)session.getAttribute("user");
+		User user = (User)session.getAttribute("user");
 		if(user==null){
 			return "forward:homepage.jsp";
 		}
-		int userId = user.getUserId();*/
-		User user = new User();
-		user.setUserId(10002);
 		int userId = user.getUserId();
+		
 		System.out.println(userId);
 		Map<String, Object> map = messageService.selectMessageByUserId(userId,messageType, pageNum, 5);
 		List<Message> messageResult = (List<Message>) map.get("list");
@@ -97,13 +98,10 @@ public class PersonalCenterController {
 	}
 	@RequestMapping("displayCoupon")
 	public String disPlayCoupon(Model model,HttpSession session,@RequestParam(value="couponStatus",defaultValue="1")Integer couponStatus,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
-		/*User user = (User)session.getAttribute("user");
+		User user = (User)session.getAttribute("user");
 		if(user==null){
 			return "forward:homepage.jsp";
 		}
-		int userId = user.getUserId();*/
-		User user = new User();
-		user.setUserId(2);
 		int userId = user.getUserId();
 		
 		Map<String, Object> map = couponService.selectCouponByUserId(userId,couponStatus, pageNum, 5);
@@ -114,16 +112,13 @@ public class PersonalCenterController {
 	}
 	@RequestMapping("displayReceiverAddress")
 	public String displayReceiverAddress(Model model,HttpSession session,@RequestParam(value="pageNum",defaultValue="1")Integer pageNum) {
-		/*User user = (User)session.getAttribute("user");
+		User user = (User)session.getAttribute("user");
 		if(user==null){
 			return "forward:homepage.jsp";
 		}
-		int userId = user.getUserId();*/
-		User user = new User();
-		user.setUserId(2);
 		int userId = user.getUserId();
 		
-		Map<String, Object> map = receiverAddressService.selectReceiverAddress(user.getUserId(),pageNum,5);
+		Map<String, Object> map = receiverAddressService.selectReceiverAddress(userId,pageNum,5);
 		List<ReceiverAddress> resultList = (List<ReceiverAddress>) map.get("list");
 		model.addAttribute("resultList", resultList);
 		model.addAttribute("pageTotal", (int)map.get("pageTotal"));

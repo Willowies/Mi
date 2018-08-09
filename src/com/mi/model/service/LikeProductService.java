@@ -67,7 +67,7 @@ public class LikeProductService {
 	public void addLogisticsMessage(int orderId){
 		Order order = orderDAO.getOrderDetailsById(orderId);
 		List<OrderProduct> products = order.getProducts();
-		String messageTitle = "您编号为"+orderId+"的订单已经到货";
+		String messageTitle = "您编号为"+orderId+"的订单已经完成";
 		String message = "您的订单：";
 		int messageType = 3;
 		String picUrl = products.get(0).getProduct().getPicUrl();
