@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mi.model.dao.MailVertifyDAO">
+    <select id="selectVertifyCode" resultType="EmailVertifyCode" flushCache="true"> 
+    	select * from emailvertifyCode where userId = #{userId}
+    </select> 
+    
+    
+    <update id="updateEmailVertifyCode" parameterType="EmailVertifyCode"> 
+    	update emailVertifyCode
+    	<set>
+    		<if test="vertifyCode!=0">
+    			vertifyCode = #{vertifyCode},
+    		</if>
+    		<if test="vertifyState!=0">
+    			vertifyState = #{vertifyState},
+    		</if>
+    	</set>
+    	where userId=#{userId}
+    </update>
+    
+    
+    
+    <insert id="insertEmailVertifyCode">
+    	<selectKey keyProperty="emailVertifyCodeId" resultType="int" order="BEFORE">
+    		select ifnull(max(emailVertifyCodeId),0)+1 from emailVertifyCode as emailVertifyCodeId  <!-- 最大值加1的方式 -->
+    	</selectKey>
+    	insert into emailVertifyCode values (emailVertifyCodeId,#{userId},0,0);
+    </insert>
+    
+</mapper>
+
+
+
+
+
+
+
+

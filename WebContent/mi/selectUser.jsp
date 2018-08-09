@@ -15,7 +15,7 @@
 		<div id="wrapper">
 			<div id="upside">
 				<div>
-					<a href="outLogin.action"><img src="../images/mi-logo.png" /></a>
+					<a href="homepage.jsp"><img src="../images/mi-logo.png" /></a>
 				</div>
 				<div id="return">
 					<a href="myPersonalCenter.jsp">退出</a>

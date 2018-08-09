@@ -8,6 +8,7 @@
 <title>编辑个人信息</title>
 <link rel="stylesheet" type="text/css" href="../css/updateUser.css" />
 <script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/checkEmail.js"></script>
 <script>
 	function validate(){
 		var v = $ ("input[name='userCard']").val();		
@@ -62,9 +63,9 @@
 			            
 					    <h4>邮箱:</h4>
 					    <div class="div1">
-					        <input type="email"  name="userEmail" placeholder="请输入正确的邮箱格式" <%-- value="${errorMap.userEmail==null?sessionScope.user.userEmail:'' --%>}" />
+					        <input type="email" id="email" name="userEmail" placeholder="请输入正确的邮箱格式" <%-- value="${errorMap.userEmail==null?sessionScope.user.userEmail:'' --%>}" />
 			                <%-- <span style="color:red">${errorMap.userEmail }</span> --%>
-			                <input id="check" type="button" style="width: 80px; height: 40px;" value="发送验证码"/>
+			                <input id="check" onclick="checkEmail(${sessionScope.user.userId })" type="button" style="width: 80px; height: 40px;" value="发送验证码"/>
 			            </div>
 					    <h4>银行卡:</h4>
 					    <div class="div1">
