@@ -62,8 +62,9 @@
 			            
 					    <h4>邮箱:</h4>
 					    <div class="div1">
-					        <input type="email"  name="userEmail" placeholder="请输入正确的邮箱格式" value="${errorMap.userEmail==null?sessionScope.user.userEmail:''}" />
-			                <span style="color:red">${errorMap.userEmail }</span>
+					        <input type="email"  name="userEmail" placeholder="请输入正确的邮箱格式" <%-- value="${errorMap.userEmail==null?sessionScope.user.userEmail:'' --%>}" />
+			                <%-- <span style="color:red">${errorMap.userEmail }</span> --%>
+			                <input id="check" type="button" style="width: 80px; height: 40px;" value="发送验证码"/>
 			            </div>
 					    <h4>银行卡:</h4>
 					    <div class="div1">
