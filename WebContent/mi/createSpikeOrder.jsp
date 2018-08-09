@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="../css/alert.css" type="text/css"/>
 <link rel="stylesheet" href="../css/head.css" type="text/css"/>
 <link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 <link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
@@ -14,11 +15,26 @@
 <link rel="stylesheet" href="../css/createOrder.css" type="text/css"/>
 <script type="text/javascript" src="../js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="../js/createOtherOrder.js"></script>
+<script type="text/javascript" src="../js/alert.js"></script>
 <link href="../css/font-awesome.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>填写订单信息</title>
 </head>
 <body>
+<div id="mask1" style="display:none;"></div>
+<div class="alert" style="display:none;">
+			<div class="alert-content">
+				<div class="alert-text">
+					<h3 class="much-text">地址不能为空！</h3>
+				</div>
+				<div class="alert-action">
+					<button class="alert-button">
+						确定
+					</button>
+				</div>
+				<a class="alert-close" id="closeAlert"><i class="fa fa-close"></i></a>
+			</div>
+		</div>
 <div class="site-topbar">
 		<div class="container">
 			<div class="topbar-nav">
