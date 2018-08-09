@@ -280,7 +280,7 @@
                                                 </fieldset>     
                                             </div>     
                                                 <div class="other-input J_otherInput ">
-														<textarea placeholder="请输入具体问题... " class="input-text "  name="asDescription " id="issue-other " required="required"></textarea>
+														<textarea placeholder="请输入详细地址.. " class="input-text "  name="asDescription " id="issue-other " required="required"></textarea>
 												</div>        
                                         </div>
                                     </div>
