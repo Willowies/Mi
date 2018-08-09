@@ -318,7 +318,7 @@
 							<div class="picItem">
 								<img src="../images/54e35fdd-bc68-4a89-bad7-c9c3bb2fc6fe.jpeg" width="296" height="220" alt="米家压力IH电饭煲">
 							</div>
-							<p class="review">包装很让人感动，式样也很可爱，做出的饭全家人都爱吃，超爱五星！手机控制还是不太熟练，最主要是没有连接...</p>
+							<p class="reviewHot">包装很让人感动，式样也很可爱，做出的饭全家人都爱吃，超爱五星！手机控制还是不太熟练，最主要是没有连接...</p>
 							<p class="author"> 来自于 HZG 的评价 </p>
 							<div class="info">
 								<h3 class="title">

@@ -138,7 +138,7 @@ $(function(){
     			$(".carousel-wrapper ul").empty();
     			for(var i = 0; i < length; i++){
     				var proInner = "<li class=\"item rainbow-item-"+(i+1)+"\">";
-    				proInner = proInner+"<a href=\"../mi/spikeProduct.jsp\" target=\"_blank\" onclick=\"\"><div class=\"bg\"></div></a><div class=\"content\"><a class=\"thumb\"><img src=\""+data[i].picUrl+
+    				proInner = proInner+"<a href=\"../mi/spikeProduct.jsp\" target=\"_blank\" onclick=\"\"><div class=\"bg\"></div></a><div class=\"content\"><a class=\"thumb\"><img src=\"../"+data[i].picUrl+
 		    		   "\"/></a><h3 class=\"title\"><a onclick=\"\">"+data[i].productName+data[i].version+data[i].color+data[i].size+"</a></h3><p class=\"desc\">"+data[i].description
 		    		   +"</p><p class=\"price\"><span>"+data[i].spikePrice+"</span>&nbsp;<span>元</span>&nbsp;<del>"+data[i].previousPrice+"元</del></p></div></li>";
     				$(".carousel-wrapper ul").append(proInner);

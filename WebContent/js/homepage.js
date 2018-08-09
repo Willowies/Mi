@@ -303,12 +303,19 @@ function initData(){
 			for(var i=0;i<data.length;i++){
 				var str="<div class='contentItem'><div class='picItem'><a style='inline-block;' href='selectProductInfo.action?productName="+data[i].productName+"'><img src='../"
 					+data[i].picUrl+"' width='296' height='220' alt='"+data[i].productName
-					+"'></a></div><a  href='selectProductInfo.action?productName="+data[i].productName+"'><p class='review'>"+data[i].comment.commentContent+"</p></a><p class='author'>"
+					+"'></a></div><a  href='selectProductInfo.action?productName="+data[i].productName+"'><p class='reviewHot'>"+data[i].comment.commentContent+"</p></a><p class='author'>"
 					+"来自于 "+data[i].coupon.user.userName+" 的评价 </p><div class='info'><h3 class='title'>"
 					+"<a  href='selectProductInfo.action?productName="+data[i].productName+"' >"+data[i].productName+"</a></h3><span class='sep'> | </span>"
 					+"<p class='price'><span class='num'>"+data[i].productPrice+"</span>元</p></div></div>";
 				$(".contentin").append(str);
 			}
+			
+			//浮动特效——热评产品
+			$(".contentin div.contentItem").hover(function(){
+				$(this).addClass("brick-item-active");
+			},function(){
+				$(this).removeClass("brick-item-active");
+			});
 			console.log("Load finished--popularproduct");
 		},
 	});
@@ -334,7 +341,7 @@ $(document).ready(function(){
 	/*shopping cart*/
 	$("#J_miniCartTrigger").hover(function(){
 		$("#J_miniCartTrigger").addClass("topbar-cart-active");
-		$("#J_miniCartMenu").slideDown();
+		$("#J_miniCartMenu").stop(true,false).slideDown(500);
 		$("#J_miniCartMenu").css("display","flex");
 		
 		//insert load.gif
@@ -355,7 +362,7 @@ $(document).ready(function(){
 				var totalAmount=0;
 				for(var i=0;i<data.length;i++){
 					var cartItem="<li><div class='cartItem'><a class='cartItemId' style='visibility:hidden;width:0px;'>"+data[i].cartItem+"</a>"
-						+"<a href='' class='image'><img src='../images/"
+						+"<a href='' class='image'><img src='../"
 						+data[i].product.picUrl+"' width='60' height='60'></a><a href='' class='name'>"
 						+data[i].product.extremeName+"</a><span class='price'>"
 						+data[i].product.productPrice+"元 x "+data[i].quantity
@@ -413,7 +420,7 @@ $(document).ready(function(){
 			},
 		});
 	},function(){
-		$("#J_miniCartMenu").slideUp();
+		$("#J_miniCartMenu").stop(true,false).slideUp(500);
 		//delete load.gif when the data is not loaded out
 		$("#J_miniCartMenu").empty();
 		$("#J_miniCartTrigger").removeClass("topbar-cart-active");
@@ -444,9 +451,9 @@ $(document).ready(function(){
 				console.log("get Navmenu finished--nav product ");
 			},
 		});
-		$(this).children().slideDown();
+		$(this).children().stop(true,false).slideDown(500);
 	},function(){
-		$(this).children().slideUp();
+		$(this).children().stop(true,false).slideUp(500);
 		$(this).children().children().children().empty();
 	});
 	/* category-item */
@@ -489,6 +496,7 @@ $(document).ready(function(){
 		$(this).children("a.name").css("color","#333");
 		$(this).children("a.delete").css("display","none");
 	});
+	
 	/*
 	 * switch groupproduct, next previous
 	 */

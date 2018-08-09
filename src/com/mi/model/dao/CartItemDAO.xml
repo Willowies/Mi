@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getCartItems"  parameterType="int" resultMap="cartItemResult" flushCache="true" >
 		select a.cartItemId, a.quantity, a.state, a.userId, b.* 
 		from cartitem as a, product as b 
-		where a.userId=#{userId} and a.productId=b.productId
+		where a.userId=#{userId} and a.productId=b.productId and a.state=1
     </select>
     <delete id="deleteCartItem" parameterType="int" flushCache="true">
     	delete from cartitem where cartItemId=#{cartItemId}
