@@ -133,12 +133,7 @@ li{
     cursor: pointer;
 }
 a {
-    color: #757575 !important;
     text-decoration: none !important;
-}
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: auto;
 }
 a:hover {
 	color: #ff6700 !important;

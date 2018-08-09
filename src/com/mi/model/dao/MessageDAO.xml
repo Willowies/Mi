@@ -10,6 +10,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
     <insert id="addMessage" parameterType="map">
         insert into message(messageTitle,message,userId,sendTime,messageType,picUrl) 
-        values(#{messageTitle},#{message},#{userId},#{sendTime},1,#{picUrl})
+        values(#{messageTitle},#{message},#{userId},#{sendTime},3,#{picUrl})
     </insert>
 </mapper>

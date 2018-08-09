@@ -33,6 +33,7 @@ public class ProductInfoController {
 	@RequestMapping("selectProductInfo")
 	public String selectProductInfo(Model model, String productName, HttpSession session){
 		//调用Service
+		System.out.println("商品名称："+productName);
 		try {
 			URLDecoder.decode(productName, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
