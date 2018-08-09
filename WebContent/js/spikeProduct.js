@@ -330,7 +330,7 @@ $(function(){
 			var focusTime = $(".spike-banner ul li.active button").attr("value");
 			var focusStamp = Date.parse(focusTime.replace(/-/g,"/"));//选中秒杀时间
 			var focusDate = new Date(focusStamp);
-			alert("当前场次"+focusDate);
+			console.log("当前场次"+focusDate);
 			var remindTime = focusStamp-15*60*1000;
 			//console.log(remindTime);
 			$.ajax({

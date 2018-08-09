@@ -199,12 +199,13 @@ $(function(){
 	
 	//购买商品
 	function buyProduct(){
+		var productName = $("#pro-title").text();
 		$("#buyOrNotice").click(function(){
 			//判断登录
 			checkLoginState();
 			if(checkLogin == "true"){
 				//已登录 进行购买
-				window.location.href = "addCartItem.action?productIdString="+$("#productId").text();
+				window.location.href = "addCartItem.action?productIdString="+$("#productId").text()+"&productName="+productName;
 			}else{
 				//未登录 跳转到登录界面
 				window.location.href = "login.jsp";
