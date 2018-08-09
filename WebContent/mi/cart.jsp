@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="../css/alert.css" type="text/css"/>
 <link rel="stylesheet" href="../css/head.css" type="text/css"/>
 <link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 <link href="../css/homepage.css" type="text/css" rel="stylesheet"/>
@@ -12,6 +13,7 @@
 <script type="text/javascript" src="../js/homepage.js"></script>
 <script type="text/javascript" src="../js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="../js/cart.js"></script>
+<script type="text/javascript" src="../js/alert.js"></script>
 <link href="../css/cart.css" rel="stylesheet" type="text/css" /> 
 <link href="../css/basic.css" rel="stylesheet" type="text/css"/>
 <link href="../css/font-awesome.css" rel="stylesheet" type="text/css" />
@@ -19,6 +21,20 @@
 <title>我的购物车-小米商城</title>
 </head>
 <body>
+<div id="mask1" style="display:none;"></div>
+<div class="alert" style="display:none;">
+			<div class="alert-content">
+				<div class="alert-text">
+					<h3 class="much-text">商品已到达最大限购数量</h3>
+				</div>
+				<div class="alert-action">
+					<button class="alert-button">
+						确定
+					</button>
+				</div>
+				<a class="alert-close" id="closeAlert"><i class="fa fa-close"></i></a>
+			</div>
+		</div>
 
 	<div class="site-topbar">
 		<div class="container">
@@ -314,7 +330,11 @@
 		if(message!=null&&!"".equals(message)){
 	%>
 		<script type="text/javascript">
-		alert("<%=message%>");
+		$("#mask1").css({
+  			height: $(document).height()
+		})
+		$("#mask1").show();
+		$(".alert").show();
 		</script>
 	<%
 		}

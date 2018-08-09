@@ -1,57 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>评价</title>
-		<link rel="stylesheet" href="../css/bootstrap-self-use.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet" />
 		<link href="../css/font-awesome.css" rel="stylesheet">
-		<link href="../css/model.css" rel="stylesheet">
-		<link href="../css/commentDetails.css" rel="stylesheet">
-
+		<link href="../css/selectServiceNetwork.css" type="text/css" rel="stylesheet" />
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
-		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../js/myOwnHeadJs.js" ></script>
-		<script>
-			function showPic(i) {
-				var src = i.src;
-				if(src != null && src != '') {
-					$('#jump-big-img').attr("src", src);
-					$('#jump-block').css("display", "block");
-				}
-			}
+		<script src="../js/selectServiceNetwork.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=kagUWSbQaKFfW9oxhDWXsEqEFNCgfb1y"></script>
+		<script src="../js/selectReceivingPoint.js"></script>
 
-			function fadePic() {
-				$('#jump-block').css("display", "none");
-
-			}
-			
-			function validateUser(){
-				var html = $.ajax({
-					type: "POST",
-					url: "checkLoginState.action",
-					async: false
-				}).responseText;
-				var obj = JSON.parse(html);
-				if(html == "true") {
-					return true;
-				} else {
-					alert("请先登录");
-					return false;
-				}
-			}
-		</script>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<!-- <meta http-equiv="refresh" content="0;" url="selectSP.action"/>  -->
+		<title>小米授权服务中心网点</title>
 	</head>
 
-	<body>
+	<body onload="init('${province}')">
+
 		<div class="site-topbar">
 			<div class="container">
 				<div class="topbar-nav">
@@ -93,39 +68,7 @@
 				</div>
 				<div class="header-nav">
 					<ul class="nav-list">
-						<li id="J_navCategory" class="nav-category">
-							<a href="" class="link-category" style="visibility: visible;">
-								<span class="text">全部商品分类</span>
-							</a>
-							<div class="site-category" style="display:none;">
-								<ul id="J_categoryList" class="site-category-list">
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=1" class="title">手机<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=2" class="title">平板<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=3" class="title">电视机<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=4" class="title">笔记本<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=5" class="title">空气净化器<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=6" class="title">插线板<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-								</ul>
-							</div>
-						</li>
+
 						<li id="navItem1" class="nav-item">小米手机
 							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
 								<div class="container">
@@ -173,92 +116,219 @@
 			</div>
 		</div>
 
-		<div class="menu-bar">
-			<div class="container ">
-				<a href='../mi/homepage.jsp'>首页</a><span class="sep">&gt;</span>
-				<a>评价商品</a>
-			</div>
-		</div>
-		<!-- 弹窗 -->
-		<div id="jump-block" onclick="fadePic()">
-			<div class="big-img">
-				<img id="jump-big-img" src="../images/T1bXKjBQAT1RXrhCrK.jpg" width="600px" />
-			</div>
-		</div>
-		<div class="grey-back-div">
-			<div class="middle-content">
-				<div class="product-info">
-					<div class="span13 comment-detail">
-						<ul class="m-comment-list">
-							<%
-								if(request.getAttribute("comment")!=null){
-							%>
-							<li class="com-item J_resetImgCon J_canZoomBox" data-id="154912845">
-								<a class="user-img"> <img src="../${comment.user.userHead}"> </a>
-								<div class="comment-info">
-									<a class="user-name">${comment.user.userName}</a>
-									<p class="time">
-										<fmt:formatDate value="${comment.commentDate}" type="date" />
-									</p>
-								</div>
-								<div class="comment-eval">
-									<c:if test="${comment.commentRank == 1}"><i class="fa fa-frown-o" aria-hidden="true"></i> 失望</c:if>
-									<c:if test="${comment.commentRank == 2}"><i class="fa fa-meh-o" aria-hidden="true"></i> 一般</c:if>
-									<c:if test="${comment.commentRank == 3}"><i class="fa fa-meh-o" aria-hidden="true"></i> 满意</c:if>
-									<c:if test="${comment.commentRank == 4}"><i class="fa fa-smile-o" aria-hidden="true"></i> 喜欢</c:if>
-									<c:if test="${comment.commentRank == 5}"><i class="fa fa-smile-o" aria-hidden="true"></i> 超爱</c:if>
-								</div>
-								<div class="comment-txt">
-									<p> ${comment.commentContent}</p>
-								</div>
-								<c:if test="${not empty comment.commentUrl}">
-									<div class="m-img-list clearfix h-img-list">
-										<div class="img-item img-item1 item-one showimg">
-											<img class="J_resetImgItem J_canZoom" src="../${comment.commentUrl}" height="160px" width="160px" style="cursor: pointer;" onclick="showPic(this)">
-										</div>
-									</div>
-								</c:if>
-								<div class="comment-input" onsubmit="return validateUser();">
-									<form action="responseComment.action" method="post">
-										<input name="commentId" value="${comment.commentId}" style="display: none;" />
-										<input name="productId" value="${comment.product.productId}" style="display: none;" />
-										<input type="text" name="commentContent" placeholder="回复楼主" class="J_commentAnswerInput">
-										<button class="btn  answer-btn J_commentAnswerBtn">回复</button>
-									</form>
-								</div>
-								<div class="comment-answer">
-									<c:forEach items="${comment.commentResponses}" var="response">
-									<div class="answer-item"> 
-										<c:if test="${not empty response.user.userHead}">
-										<img class="answer-img" src="../${response.user.userHead}">
-										</c:if>
-										<div class="answer-content">
-											<h3 class="">${response.user.userName}</h3>
-											<p> ${response.commentContent} </p>
-										</div>
-									</div>
-									</c:forEach>
-								</div>
-							</li>
-							<%
-		} else {
-	%>
-							<p style="margin-left: 170px;">未知错误</p3>
-								<%
-		}
-	%>
-						</ul>
+		<div class="ServiceNetwork">
+			<div class="titlediv">
+				<div class="image">
+					<img src="../images/l-top1.png" alt="申请售后服务">
+				</div>
+				<div class="titleclass">
+					<div class="titleclass-image">
+						<img src="../images/pos.png" alt="申请售后服务">
+						<span class="orange">${province},${city}</span> 附近共有<span class="orange">${ServiceNetworkcount}</span>个 服务网点
 					</div>
-				</div>
-				<div class="comment-details">
-					<img src="../${comment.product.picUrl}" alt="" height="160px" width="auto">
-					<a href="selectProductInfo.action?productName=${comment.product.productName}">
-						<h4 class="product-name">${comment.product.productName}</h4></a>
-					<div class="product-price">${comment.product.productPrice} 元 </div>
+					<div class="formclass">
+						<form action="selectSN.action" method="post">
+							<select class="selectbox" name="province" value="${province}" id="param_province" onchange="provincechange(this.selectedIndex)">
+								<option>请选择省份</option>
+							</select>
+							<select class="selectbox" name="city" value="${city}" id="param_city">
+								<option>请选择城市</option>
+							</select>
+							<button class="selectbutton" type="submit">查询受理网点</button>
+						</form>
+
+					</div>
+
 				</div>
 			</div>
+				
+
+			
+			<div class="resultandmap">
+				<div class="selectresult">
+					<div class="resultandmap-select-title">
+							<form action="selectSP.action" id="spId" method="post">
+
+								<input name="province" value "${province}" style="display:none">
+								<input name="city" value "${city}" style="display:none">
+								<select name="spId" class="productselectbox">
+									<option value="">全部产品</option>
+									<c:forEach items="${sps}" var="sp">
+										<option value="${sp.spId}">${sp.spName}</option>
+									</c:forEach>
+
+								</select>
+								<button type="submit" class="selectbutton1">查询</button>
+
+							</form>
+
+					</div>
+					<div class="resultandmap-select-result">
+					<%if(request.getAttribute("sns")!=null){
+			             List sns=(List) request.getAttribute("sns");
+			             if(!sns.isEmpty()){%> 
+				    <ul>
+							<c:forEach items="${sns}" var="sn">					
+							<li >
+								<div class="libox">
+								<h3 title="${sn.snName}">${sn.snName}</h3>
+							    <p title="${sn.snAddress}">${sn.snAddress}</p>
+							    <p title="${sn.snTelephone}">联系电话：${sn.snTelephone}</p>
+							   </div>
+							</li>		
+							</c:forEach>
+		
+				</ul>	
+							<%}else{		%>
+							<p>未查询到数据</p>							
+							<%			}		}		%>
+				</div>
+					
+				</div>
+				<div id="allmap" class="mapstyle">
+					
+				</div>
+				
+				
+			</div>
+
+			<!--
+				onclick="changecenter(${sn.snCoordx},${sn.Coordy})"
+				
+				<div class="resultandmap">
+
+				
+					<div class="resultandmap-select-result">
+							<%
+		if(request.getAttribute("sns")!=null){
+			List sns=(List) request.getAttribute("sns");
+			if(!sns.isEmpty()){ 
+			        
+		%> 
+		
+		        <ul>
+							<c:forEach items="${sns}" var="sn">
+						
+							<li >
+								<h3 title="${sn.snName}">${sn.snName}</h3>
+							    <p title="${sn.snAddress}">${sn.snAddress}</p>
+							    <p>id:${sn.snId}</p>
+								<p>${sn.snCity} ${rp.rpCountry}</p>
+								<p>${sn.snName}</p>
+								<p>地址：${sn.snAddress}</p>
+								<p>联系电话：${sn.snTelephone}</p>
+								<p>营业时间：${sn.snWorkTime}</p>
+								<p>产品类型</p>
+								<c:forEach items="${sn.serviceProducts}" var="sp">
+									<span>${sp.spName}</span>
+								</c:forEach>
+								<p>服务类型</p>
+								<c:forEach items="${sn.serviceTypes}" var="st">
+									<span>${st.stName}</span>
+								</c:forEach>
+							</li>		
+							</c:forEach>
+		
+				</ul>	
+							<%
+			}else{
+		%>
+							<p>未查询到数据</p>
+							<%
+			}
+		}
+		%>
+				
+
+			</div>-->
+
 		</div>
 
+<script type="text/javascript">
+	//下拉列表功能
+
+	
+	var map = new BMap.Map("allmap"); // 创建Map实例
+	$(".servicenetworks").text();
+
+	map.centerAndZoom("沈阳市", 15);
+	//添加地图类型控件
+	map.addControl(new BMap.MapTypeControl({
+		mapTypes: [
+			BMAP_NORMAL_MAP,
+			BMAP_HYBRID_MAP
+		]
+	}));
+	map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+	var top_left_control = new BMap.ScaleControl({
+		anchor: BMAP_ANCHOR_TOP_LEFT
+	}); // 左上角，添加比例尺
+	var top_left_navigation = new BMap.NavigationControl(); //左上角，添加默认缩放平移控件
+	map.addControl(top_left_control);
+	map.addControl(top_left_navigation);
+
+	/*var points = [{
+			"lng": 112.58,
+			"lat": 26.89,
+			"url": "http://www.baidu.com",
+			"id": 1,
+			"name": "p1"
+		},
+		{
+			"lng": 112.59,
+			"lat": 26.90,
+			"url": "http://www.mi.com",
+			"id": 2,
+			"name": "p2"
+		},
+		{
+			"lng": 112.57,
+			"lat": 26.88,
+			"url": "http://www.csdn.com",
+			"id": 3,
+			"name": "p3"
+		}
+	];
+
+	function addMarker(points) {
+		//循环建立标注点
+		for(var i = 0, pointsLen = points.length; i < pointsLen; i++) {
+			var point = new BMap.Point(points[i].lng, points[i].lat); //将标注点转化成地图上的点
+			var marker = new BMap.Marker(point); //将点转化成标注点
+			map.addOverlay(marker); //将标注点添加到地图上
+			//添加监听事件
+			(function() {
+				var thePoint = points[i];
+				marker.addEventListener("click",
+					//显示信息的方法
+					function() {
+						showInfo(this, thePoint);
+					});
+			})();
+		}
+
+	}*/
+	/*fuction changecenter(x,y){
+		map.centerAndZoom(x,y, 15);
+		
+	}
+	 $(function () {
+            $(".changepoint").click(function () {
+                debugger;
+                var css = $(".changepoint").attr("style");
+                if (css.indexOf("border: 1px solid #757575")>=0)
+                    $(this).css("border", "1px solid #FF6700");
+                else
+                    $(this).css("border", "1px solid #757575");
+            });
+        })*/
+			
+			
+
+			
+		</script>
+
+		</div>
 		<div class="site-footer">
 			<div class="container">
 				<div class="footer-service">
@@ -380,6 +450,7 @@
 			</div>
 			<div class="slogan ir">探索黑科技，小米为发烧而生</div>
 		</div>
+
 	</body>
 
 </html>

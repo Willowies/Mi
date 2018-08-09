@@ -380,7 +380,7 @@ public class OrderCenterController extends BaseController {
                 //设置字体颜色
                 over.setColorFill(BaseColor.BLACK); 
                 //设置字体的输出位置  
-                over.setTextMatrix(250, 200-ind*10);   
+                over.setTextMatrix(300, 200-ind*10);   
                 //要输出的text  
                 over.showText(oP.getQuantity()+".00" );    
                 over.endText(); 

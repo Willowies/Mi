@@ -37,7 +37,7 @@
 			  	<a rel="nofollow" href="" data-toggle="modal">Select Region</a>
 			</div>
 			<div class="topbar-cart" id="J_miniCartTrigger">
-				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="findCartItem.action">
+				<a rel="nofollow" class="cart-mini" id="J_miniCartBtn" href="javascript:void(0)">
 					<i class="fa fa-shopping-cart"></i>
 					购物车
 					<span class="cart-mini-num">（0）</span>

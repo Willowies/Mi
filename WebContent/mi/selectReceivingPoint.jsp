@@ -1,57 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>评价</title>
-		<link rel="stylesheet" href="../css/bootstrap-self-use.css" />
+		<script src="../js/selectReceivingPoint.js"></script>
+
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>-->
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet" />
+		<link href="../css/selectReceivingPoint.css" type="text/css" rel="stylesheet" />
 		<link href="../css/font-awesome.css" rel="stylesheet">
-		<link href="../css/model.css" rel="stylesheet">
-		<link href="../css/commentDetails.css" rel="stylesheet">
-
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
-		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../js/myOwnHeadJs.js" ></script>
-		<script>
-			function showPic(i) {
-				var src = i.src;
-				if(src != null && src != '') {
-					$('#jump-big-img').attr("src", src);
-					$('#jump-block').css("display", "block");
-				}
-			}
+		<title>小米县级受理点查询</title>
 
-			function fadePic() {
-				$('#jump-block').css("display", "none");
-
-			}
-			
-			function validateUser(){
-				var html = $.ajax({
-					type: "POST",
-					url: "checkLoginState.action",
-					async: false
-				}).responseText;
-				var obj = JSON.parse(html);
-				if(html == "true") {
-					return true;
-				} else {
-					alert("请先登录");
-					return false;
-				}
-			}
-		</script>
 	</head>
 
-	<body>
+	<body onload="init()">
 		<div class="site-topbar">
 			<div class="container">
 				<div class="topbar-nav">
@@ -93,39 +67,7 @@
 				</div>
 				<div class="header-nav">
 					<ul class="nav-list">
-						<li id="J_navCategory" class="nav-category">
-							<a href="" class="link-category" style="visibility: visible;">
-								<span class="text">全部商品分类</span>
-							</a>
-							<div class="site-category" style="display:none;">
-								<ul id="J_categoryList" class="site-category-list">
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=1" class="title">手机<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=2" class="title">平板<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=3" class="title">电视机<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=4" class="title">笔记本<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=5" class="title">空气净化器<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=6" class="title">插线板<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-								</ul>
-							</div>
-						</li>
+
 						<li id="navItem1" class="nav-item">小米手机
 							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
 								<div class="container">
@@ -172,91 +114,95 @@
 				</div>
 			</div>
 		</div>
+		<!--内容块-->
+		<div class="selectReceivingPoint">
+			<div class="selectresult">
+				<div class="hd">
+					<span>${province}  ${city}</span>附近的受理网点
+				</div>
+				<div class="selectform">
+					<h1>小米售后 县区受理网点查询</h1>
+					<p class="desc">
+						<span class="user-city" id="J_userCity">${province}  ${city}</span> 附近的受理网点
+					</p>
 
-		<div class="menu-bar">
-			<div class="container ">
-				<a href='../mi/homepage.jsp'>首页</a><span class="sep">&gt;</span>
-				<a>评价商品</a>
-			</div>
-		</div>
-		<!-- 弹窗 -->
-		<div id="jump-block" onclick="fadePic()">
-			<div class="big-img">
-				<img id="jump-big-img" src="../images/T1bXKjBQAT1RXrhCrK.jpg" width="600px" />
-			</div>
-		</div>
-		<div class="grey-back-div">
-			<div class="middle-content">
-				<div class="product-info">
-					<div class="span13 comment-detail">
-						<ul class="m-comment-list">
-							<%
-								if(request.getAttribute("comment")!=null){
-							%>
-							<li class="com-item J_resetImgCon J_canZoomBox" data-id="154912845">
-								<a class="user-img"> <img src="../${comment.user.userHead}"> </a>
-								<div class="comment-info">
-									<a class="user-name">${comment.user.userName}</a>
-									<p class="time">
-										<fmt:formatDate value="${comment.commentDate}" type="date" />
-									</p>
-								</div>
-								<div class="comment-eval">
-									<c:if test="${comment.commentRank == 1}"><i class="fa fa-frown-o" aria-hidden="true"></i> 失望</c:if>
-									<c:if test="${comment.commentRank == 2}"><i class="fa fa-meh-o" aria-hidden="true"></i> 一般</c:if>
-									<c:if test="${comment.commentRank == 3}"><i class="fa fa-meh-o" aria-hidden="true"></i> 满意</c:if>
-									<c:if test="${comment.commentRank == 4}"><i class="fa fa-smile-o" aria-hidden="true"></i> 喜欢</c:if>
-									<c:if test="${comment.commentRank == 5}"><i class="fa fa-smile-o" aria-hidden="true"></i> 超爱</c:if>
-								</div>
-								<div class="comment-txt">
-									<p> ${comment.commentContent}</p>
-								</div>
-								<c:if test="${not empty comment.commentUrl}">
-									<div class="m-img-list clearfix h-img-list">
-										<div class="img-item img-item1 item-one showimg">
-											<img class="J_resetImgItem J_canZoom" src="../${comment.commentUrl}" height="160px" width="160px" style="cursor: pointer;" onclick="showPic(this)">
-										</div>
-									</div>
-								</c:if>
-								<div class="comment-input" onsubmit="return validateUser();">
-									<form action="responseComment.action" method="post">
-										<input name="commentId" value="${comment.commentId}" style="display: none;" />
-										<input name="productId" value="${comment.product.productId}" style="display: none;" />
-										<input type="text" name="commentContent" placeholder="回复楼主" class="J_commentAnswerInput">
-										<button class="btn  answer-btn J_commentAnswerBtn">回复</button>
-									</form>
-								</div>
-								<div class="comment-answer">
-									<c:forEach items="${comment.commentResponses}" var="response">
-									<div class="answer-item"> 
-										<c:if test="${not empty response.user.userHead}">
-										<img class="answer-img" src="../${response.user.userHead}">
-										</c:if>
-										<div class="answer-content">
-											<h3 class="">${response.user.userName}</h3>
-											<p> ${response.commentContent} </p>
-										</div>
-									</div>
-									</c:forEach>
-								</div>
-							</li>
-							<%
-		} else {
-	%>
-							<p style="margin-left: 170px;">未知错误</p3>
-								<%
+					<form action="selectRP.action" method="post">
+						<select class="selectbox" name="province" id="param_province" onchange="provincechange(this.selectedIndex)">
+							<option>请选择省份</option>
+						</select>
+						<select class="selectbox" name="city" id="param_city">
+							<option>请选择城市</option>
+						</select>
+						<button class="selectbutton" type="submit">查询受理网点</button>
+					</form>
+				</div>
+				<div class="bd">
+
+					<dl>
+						<%
+		    if(request.getAttribute("rps")!=null){
+			List rps=(List) request.getAttribute("rps");
+			if(!rps.isEmpty()){ 
+		      %>
+						<c:forEach items="${rps}" var="rp">
+							<div class="resultdiv">
+								<dt>${rp.rpCity}   ${rp.rpCountry}</dt>
+								<dd title="${rp.rpName}">${rp.rpName}</dd>
+								<dd title="${rp.rpAddress}">地址：${rp.rpAddress}</dd>
+								<dd>联系电话：${rp.rpTelephone}</dd>
+
+							</div>
+
+						</c:forEach>
+
+						<%
+			}else{
+		%>
+						<p>未查询到数据</p>
+						<%
+			}
 		}
-	%>
-						</ul>
-					</div>
-				</div>
-				<div class="comment-details">
-					<img src="../${comment.product.picUrl}" alt="" height="160px" width="auto">
-					<a href="selectProductInfo.action?productName=${comment.product.productName}">
-						<h4 class="product-name">${comment.product.productName}</h4></a>
-					<div class="product-price">${comment.product.productPrice} 元 </div>
+		%>
+
+					</dl>
+
 				</div>
 			</div>
+			<div class="normal_question">
+
+				<div class="holddiv">
+					<div class="hd">常见问题</div>
+					<div class="qd">
+						<dl>
+							<dt>Q： 受理点是什么？</dt>
+							<dd>受理点是小米公司在县区授权的售后服务接机点，负责接收有售后服务需求的小米手机并免费邮寄至上级小米授权服务中心进行售后服务</dd>
+						</dl>
+						<dl>
+							<dt>Q： 受理点与小米授权服务中心有什么区别？</dt>
+							<dd>受理点只接收用户手机并替用户邮寄给上级小米授权服务中心，不具备维修功能</dd>
+						</dl>
+						<dl>
+							<dt>Q： 送修的机器到受理点后多长时间可以修好？</dt>
+							<dd>受理点接收用户产品后，5个工作日内处理完毕，用户可以去受理点取机。</dd>
+						</dl>
+						<dl>
+							<dt>Q： 保修期外的机器受理点可以受理吗？</dt>
+							<dd>可以受理，保修期外的机器将按全国统一报价，由维修点联系客户进行报价</dd>
+						</dl>
+						<dl>
+							<dt>Q： 受理点可以接小米电视机吗？</dt>
+							<dd>目前受理点只开放了小米手机、小米平板、小米盒子、小米路由器产品。</dd>
+						</dl>
+						<dl>
+							<dt>Q： 对受理点不满意，怎么办？</dt>
+							<dd>如您对小米授权受理点的服务不满意，可随时拨打小米服务热线进行反馈，小米服务热线工作时间：周一至周日 8:00-18:00 （仅收市话费）4001005678</dd>
+						</dl>
+					</div>
+
+				</div>
+
+			</div>
+
 		</div>
 
 		<div class="site-footer">

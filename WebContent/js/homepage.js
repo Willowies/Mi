@@ -22,6 +22,7 @@ function initData(){
 				$(".topbar-info").append(str);
 				//for groupPurchase.jsp
 				sessionStorage.setItem("user_login","true");
+				$(".cart-mini").attr("href","findCartItem.action");
 				console.log("Has logged in!");
 			}
 			if(data.userId==0){
@@ -29,6 +30,7 @@ function initData(){
 					+"<span class='sep'>|</span><span class='message'><a rel='nofollow' href='login.jsp'>消息通知</a></span>";
 				$(".topbar-info").append(str);
 				sessionStorage.setItem("user_login","false");
+				$(".cart-mini").attr("href","javascript:void(0)");
 				console.log("Has not logged in!");
 			}
 			console.log("Check login state finished--shopping cart number");

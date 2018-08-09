@@ -265,7 +265,7 @@
 													<c:if test="${order.orderState == 1}">待支付</c:if>
 													<c:if test="${order.orderState == 2}">待收货</c:if>
 													<c:if test="${order.orderState == 3}">已完成</c:if>
-													<c:if test="${order.orderState == 0}">已作废</c:if>
+													<c:if test="${order.orderState == 0}">已关闭</c:if>
 												</div>
 											</div>
 											<table class="order-detail-table">
@@ -301,10 +301,10 @@
 															<a class="btn" href="getOrderDetailsById.action?orderId=${order.orderId}">订单详情</a>
 															<c:if test="${order.orderState == 1}">
 															<c:if test="${order.orderType == 1}">
-																<a class="btn" href="payOrder.action?orderId=${order.orderId}">立即支付</a>
+																<a class="btn" href="payOrderFromUser.action?orderId=${order.orderId}">立即支付</a>
 															</c:if>
 															<c:if test="${order.orderType == 3}">
-																<a class="btn" href="paySpikeOrder.action?orderId=${order.orderId}">立即支付</a>
+																<a class="btn" href="paySpikeOrderFromUser.action?orderId=${order.orderId}">立即支付</a>
 															</c:if>
 															</c:if>
 															<c:if test="${order.orderState == 3}">

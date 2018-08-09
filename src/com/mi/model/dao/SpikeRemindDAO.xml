@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         values(#{spikeProductId},#{userId},#{remindTime},0)
     </insert>
     
-    <update id="updateSpikeRemid" parameterType="map" >
+    <update id="updateSpikeRemind" parameterType="map" >
         update spikeremind set remindStatus=1 
         where spikeProductId=#{spikeProductId} and userId=#{userId} and remindTime=#{remindTime}
     </update>

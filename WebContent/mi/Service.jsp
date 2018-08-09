@@ -1,54 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 	<head>
+
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>评价</title>
-		<link rel="stylesheet" href="../css/bootstrap-self-use.css" />
 		<link href="../css/Reset.css" type="text/css" rel="stylesheet" />
 		<link href="../css/homepage.css" type="text/css" rel="stylesheet" />
 		<link href="../css/font-awesome.css" rel="stylesheet">
-		<link href="../css/model.css" rel="stylesheet">
-		<link href="../css/commentDetails.css" rel="stylesheet">
-
+		<link href="../css/Service.css" type="text/css" rel="stylesheet" />
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
-		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../js/myOwnHeadJs.js" ></script>
-		<script>
-			function showPic(i) {
-				var src = i.src;
-				if(src != null && src != '') {
-					$('#jump-big-img').attr("src", src);
-					$('#jump-block').css("display", "block");
-				}
-			}
-
-			function fadePic() {
-				$('#jump-block').css("display", "none");
-
-			}
-			
-			function validateUser(){
-				var html = $.ajax({
-					type: "POST",
-					url: "checkLoginState.action",
-					async: false
-				}).responseText;
-				var obj = JSON.parse(html);
-				if(html == "true") {
-					return true;
-				} else {
-					alert("请先登录");
-					return false;
-				}
-			}
-		</script>
+		<base target="_blank">
+		
+		<title>小米帮助中心-小米商城</title>
 	</head>
 
 	<body>
@@ -93,39 +62,7 @@
 				</div>
 				<div class="header-nav">
 					<ul class="nav-list">
-						<li id="J_navCategory" class="nav-category">
-							<a href="" class="link-category" style="visibility: visible;">
-								<span class="text">全部商品分类</span>
-							</a>
-							<div class="site-category" style="display:none;">
-								<ul id="J_categoryList" class="site-category-list">
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=1" class="title">手机<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=2" class="title">平板<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=3" class="title">电视机<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=4" class="title">笔记本<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=5" class="title">空气净化器<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-									<li class="category-item">
-										<a href="selectClassfiedProduct.action?secondClassId=6" class="title">插线板<i class="fa fa-chevron-right"></i></a>
-										<div class="children"></div>
-									</li>
-								</ul>
-							</div>
-						</li>
+
 						<li id="navItem1" class="nav-item">小米手机
 							<div id="J_navMenu" class="header-nav-menu" style="display:none;">
 								<div class="container">
@@ -173,92 +110,81 @@
 			</div>
 		</div>
 
-		<div class="menu-bar">
-			<div class="container ">
-				<a href='../mi/homepage.jsp'>首页</a><span class="sep">&gt;</span>
-				<a>评价商品</a>
+		<div class="servicediv">
+			<div class="selfservice">
+				<h2>自助服务</h2>
 			</div>
-		</div>
-		<!-- 弹窗 -->
-		<div id="jump-block" onclick="fadePic()">
-			<div class="big-img">
-				<img id="jump-big-img" src="../images/T1bXKjBQAT1RXrhCrK.jpg" width="600px" />
-			</div>
-		</div>
-		<div class="grey-back-div">
-			<div class="middle-content">
-				<div class="product-info">
-					<div class="span13 comment-detail">
-						<ul class="m-comment-list">
-							<%
-								if(request.getAttribute("comment")!=null){
-							%>
-							<li class="com-item J_resetImgCon J_canZoomBox" data-id="154912845">
-								<a class="user-img"> <img src="../${comment.user.userHead}"> </a>
-								<div class="comment-info">
-									<a class="user-name">${comment.user.userName}</a>
-									<p class="time">
-										<fmt:formatDate value="${comment.commentDate}" type="date" />
-									</p>
-								</div>
-								<div class="comment-eval">
-									<c:if test="${comment.commentRank == 1}"><i class="fa fa-frown-o" aria-hidden="true"></i> 失望</c:if>
-									<c:if test="${comment.commentRank == 2}"><i class="fa fa-meh-o" aria-hidden="true"></i> 一般</c:if>
-									<c:if test="${comment.commentRank == 3}"><i class="fa fa-meh-o" aria-hidden="true"></i> 满意</c:if>
-									<c:if test="${comment.commentRank == 4}"><i class="fa fa-smile-o" aria-hidden="true"></i> 喜欢</c:if>
-									<c:if test="${comment.commentRank == 5}"><i class="fa fa-smile-o" aria-hidden="true"></i> 超爱</c:if>
-								</div>
-								<div class="comment-txt">
-									<p> ${comment.commentContent}</p>
-								</div>
-								<c:if test="${not empty comment.commentUrl}">
-									<div class="m-img-list clearfix h-img-list">
-										<div class="img-item img-item1 item-one showimg">
-											<img class="J_resetImgItem J_canZoom" src="../${comment.commentUrl}" height="160px" width="160px" style="cursor: pointer;" onclick="showPic(this)">
-										</div>
-									</div>
-								</c:if>
-								<div class="comment-input" onsubmit="return validateUser();">
-									<form action="responseComment.action" method="post">
-										<input name="commentId" value="${comment.commentId}" style="display: none;" />
-										<input name="productId" value="${comment.product.productId}" style="display: none;" />
-										<input type="text" name="commentContent" placeholder="回复楼主" class="J_commentAnswerInput">
-										<button class="btn  answer-btn J_commentAnswerBtn">回复</button>
-									</form>
-								</div>
-								<div class="comment-answer">
-									<c:forEach items="${comment.commentResponses}" var="response">
-									<div class="answer-item"> 
-										<c:if test="${not empty response.user.userHead}">
-										<img class="answer-img" src="../${response.user.userHead}">
-										</c:if>
-										<div class="answer-content">
-											<h3 class="">${response.user.userName}</h3>
-											<p> ${response.commentContent} </p>
-										</div>
-									</div>
-									</c:forEach>
-								</div>
-							</li>
-							<%
-		} else {
-	%>
-							<p style="margin-left: 170px;">未知错误</p3>
-								<%
-		}
-	%>
-						</ul>
-					</div>
-				</div>
-				<div class="comment-details">
-					<img src="../${comment.product.picUrl}" alt="" height="160px" width="auto">
-					<a href="selectProductInfo.action?productName=${comment.product.productName}">
-						<h4 class="product-name">${comment.product.productName}</h4></a>
-					<div class="product-price">${comment.product.productPrice} 元 </div>
-				</div>
-			</div>
-		</div>
 
+			<div class="row">
+				<ul>
+					<li>
+						<br/>
+						<a href="../mi/AasApplyWay.jsp" target="_blank" data-stat-id="2facb281b3a68d7a" onclick="_msq.push(['trackEvent', 'dbc112ecb8bd96ad-2facb281b3a68d7a', 'https://service.order.mi.com/apply/front', 'pcpid', '']);">
+							<img src="../images/service-icon-shouhoufuwu.png" alt="申请售后服务">
+							<br/>
+							<span>申请售后服务</span>
+						</a>
+					</li>
+					<li>
+						<br/>
+						<a href="../mi/getAllOrder.action" target="_blank" data-stat-id="fbf0552b37fced29" onclick="_msq.push(['trackEvent', 'dbc112ecb8bd96ad-fbf0552b37fced29', '//static.mi.com/order/', 'pcpid', '']);">
+							<img src="../images/service-icon-dingdan.png" alt="订单查询">
+							<br/>
+							<span>订单查询</span>
+						</a>
+					</li>
+					<li>
+						<br/>
+						<a href="../mi/selectUser.jsp" target="_blank" data-stat-id="d6a8f72255a82f08" onclick="_msq.push(['trackEvent', 'dbc112ecb8bd96ad-d6a8f72255a82f08', 'https://account.xiaomi.com/pass/auth/security/home', 'pcpid', '']);">
+							<img src="../images/service-icon-xmaccount.png" alt="小米账户">
+							<br/>
+							<span>小米账户</span>
+						</a>
+					</li>
+					<li>
+						<br/>
+						<a href="../mi/selectReceivingPoint.jsp" target="_blank" data-stat-id="e9621ccfd395dd92" onclick="_msq.push(['trackEvent', 'dbc112ecb8bd96ad-e9621ccfd395dd92', 'https://www.mi.com/static/acceptance/', 'pcpid', '']);">
+							<img src="../images/service-icon-shoulidian.png" alt="售后县级受理点">
+							<br/>
+							<span>售后县级受理点</span>
+						</a>
+					</li>
+					<li>
+						<br/>
+						<a href="../mi/selectSP.action" target="_blank" data-stat-id="513ddbca53bc911c" onclick="_msq.push(['trackEvent', 'dbc112ecb8bd96ad-513ddbca53bc911c', '//www.mi.com/static/maintainlocation/', 'pcpid', '']);">
+							<img src="../images/service-icon-wangdian.png" alt="授权服务网点">
+							<br/>
+							<span>授权服务网点</span>
+						</a>
+					</li>
+					<li>
+						<br/>
+						<a href="//list.mi.com/accessories/tag?id=tv_service" target="_blank" data-stat-id="bbea1f24b4487b0b" onclick="_msq.push(['trackEvent', 'dbc112ecb8bd96ad-bbea1f24b4487b0b', '//list.mi.com/accessories/tagid=tv_service', 'pcpid', '']);">
+							<img src="../images/service-icon-anzhuang.png" alt="付费服务">
+							<br/>
+							<span>付费服务</span>
+						</a>
+					</li>
+					<li>
+						<br/>
+						<a href="//www.mi.com/service/exchange/#phone" target="_blank" data-stat-id="ef46ddec2589a6fa" onclick="_msq.push(['trackEvent', 'dbc112ecb8bd96ad-ef46ddec2589a6fa', '//www.mi.com/service/exchange/#phone', 'pcpid', '']);">
+							<img src="../images/service-icon-shouhouzc.png" alt="售后政策">
+							<br/>
+							<span>售后政策</span>
+						</a>
+					</li>
+					<li>
+						<br/>
+						<a href="http://chaxun.mi.com" target="_blank" data-stat-id="0fb2d2b5f7fc15f7" onclick="_msq.push(['trackEvent', 'dbc112ecb8bd96ad-0fb2d2b5f7fc15f7', 'http://chaxun.mi.com', 'pcpid', '']);">
+							<img src="../images/service-icon-chaxun.png" alt="查询真伪">
+							<br/>
+							<span>查询真伪</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
 		<div class="site-footer">
 			<div class="container">
 				<div class="footer-service">

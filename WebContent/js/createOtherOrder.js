@@ -185,7 +185,11 @@ $(document).ready(function(){
 		var ok5 = $("#iEmail").val() == "" && $.trim($("#iEmail").val()).length == 0;
 		if(ok1){
 			//未选择地址
-	        alert("地址不能为空！");
+			$("#mask1").css({
+	  			height: $(document).height()
+			})
+			$("#mask1").show();
+			$(".alert").show();
 	        return false;
 		}else{
 			//选择了地址

@@ -19,6 +19,12 @@
 			th{
 				    font-weight: 100;
 			}
+			h3{
+				margin: 30px 0 30px 0;
+    			font-size: 18px;
+    			font-weight: 400;
+    			color: #333;
+			}
 		</style>
 		<script type="text/javascript" src="../js/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homepage.js"></script>
@@ -271,21 +277,21 @@
 							</ul>
 							<c:if test="${order.orderState == 1}">
 							<c:if test="${order.orderType == 1}">
-							<form id="searchOrder" class="search-order" action="payOrder.action" method="post">
+							<form id="searchOrder" class="search-order" action="payOrderFromUser.action" method="post">
 								<input class="search-text" type="search" id="" name="orderId" value="${order.orderId}" style="display: none;" />
 								<input type="submit" class="search-btn" value="立即支付" style="width: 100px;height: 30px;float: right;border-color: #aaa;" />
 							</form>
 							<div style="float: left;margin: 50px 0 20px -50px;color: #ff6700;"><span>订单关闭时间：</span><span id="_h"></span><span id="_m"></span><span id="_s"></span></div>
 							</c:if>
 							<c:if test="${order.orderType == 2}">
-							<form id="searchOrder" class="search-order" action="payGroupOrder.action" method="post">
+							<form id="searchOrder" class="search-order" action="payGroupOrderFromUser.action" method="post">
 								<input class="search-text" type="search" id="" name="orderId" value="${order.orderId}" style="display: none;" />
 								<input type="submit" class="search-btn" value="立即支付" style="width: 100px;height: 30px;float: right;border-color: #aaa;" />
 							</form>
 							<div style="float: left;margin: 50px 0 20px -50px;color: #ff6700;"><span>订单关闭时间：</span><span id="_h"></span><span id="_m"></span><span id="_s"></span></div>
 							</c:if>
 							<c:if test="${order.orderType == 3}">
-							<form id="searchOrder" class="search-order" action="paySpikeOrder.action" method="post">
+							<form id="searchOrder" class="search-order" action="paySpikeOrderFromUser.action" method="post">
 								<input class="search-text" type="search" id="" name="orderId" value="${order.orderId}" style="display: none;" />
 								<input type="submit" class="search-btn" value="立即支付" style="width: 100px;height: 30px;float: right;border-color: #aaa;" />
 							</form>
@@ -368,7 +374,7 @@
 																	<a href="selectProductInfo.action?productName=${product.product.productName}" target="_blank"> <img src="../${product.product.picUrl}" width="80" height="80"> </a>
 																</div>
 																<p class="name">
-																	<a href="selectProductInfo.action?productName=${product.product.productName}" target="_blank">${product.product.productName}</a>
+																	<a href="selectProductInfo.action?productName=${product.product.productName}" target="_blank">${product.product.productName} ${product.product.version} ${product.product.color}</a>
 																</p>
 																<p class="price">${product.productPrice}元 × ${product.quantity}</p>
 															</li>

@@ -312,7 +312,7 @@
 															<a class="btn" href="getOrderDetailsById.action?orderId=${order.orderId}">订单详情</a>
 															<c:if test="${order.orderState == 1}">
 																<c:if test="${order.orderType == 2}">
-																	<a class="btn" href="payGroupOrder.action?orderId=${order.orderId}">立即支付</a>
+																	<a class="btn" href="payGroupOrderFromUser.action?orderId=${order.orderId}">立即支付</a>
 																</c:if>
 															</c:if>
 															<c:if test="${order.orderState == 3}">
