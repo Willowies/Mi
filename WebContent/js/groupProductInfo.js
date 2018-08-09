@@ -47,6 +47,7 @@ function initData2(){
 				$(".groupProductPrice").append(data[0].groupProduct.groupPrice+"元"+"&nbsp;<del class='productPrice'></del>");
 				$(".productPrice").text(data[0].groupProduct.product.productPrice+"元");
 				$(".groupProduct_show").append("<img src='../"+data[0].groupProduct.product.picUrl+"' width='600px' height='600px'  />");
+				$(".endTime").text(data[0].groupProduct.endDate);
 				
 				var beforeLocal = new Date();
 				var serverDate = getServerDate();
@@ -96,6 +97,7 @@ function initData2(){
 				$(".productPrice").text(data.product.productPrice+"元");
 				console.log(data.product.picUrl);
 				$(".groupProduct_show").append("<img src='../"+data.product.picUrl+"' width='600px' height='600px'  />");
+				$(".endTime").text(data.endDate);
 				//倒计时
 				var beforeLocal = new Date();
 				var serverDate = getServerDate();
@@ -154,7 +156,8 @@ $(document).ready(function(){
 			type:"POST",
 			async:true,
 			data:{
-				groupProductId:$("#groupProductId").text()
+				groupProductId:$("#groupProductId").text(),
+				endTime:$(".endTime").text()
 			},
 			dataType:"json",
 			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
@@ -165,6 +168,9 @@ $(document).ready(function(){
 					//can't create
 					console.log("Can't create group anymore!");
 					alert("团数已达上限，您可以尝试参团！");
+				}else if(data==-1){
+					console.log("活动已经结束了");
+					alert("活动已结束！！！");
 				}else{
 					console.log("Create finish--product group");
 					provideOrderProduct();//同步
@@ -231,7 +237,8 @@ function startCount(endTime) {
 //        	clearInterval(countTimer);
         	console.log("leftTime:"+leftTime);
         	//开始清算,ajax
-        	
+        	$(".joinGroup").attr("disabled","disabled");
+        	$("#createGroup").attr("disabled","disabled");
         }
   },1000);
 }

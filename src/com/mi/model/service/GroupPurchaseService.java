@@ -50,7 +50,13 @@ public class GroupPurchaseService {
 	public List<Group> getProductGroups(int groupProductId){
 		return groupDAO.getProductGroups(groupProductId);
 	}
-	public int addGroup(int groupProductId, String userName) {
+	public int addGroup(int groupProductId, String userName, long endTime) {
+		//judge whether the endDate has come
+		long currentTime = (new Date()).getTime();
+		//if has passed due, return -1
+		if(currentTime>endTime) {
+			return -1;
+		}
 		//count up the total people in groups
 		List<Group> list = groupDAO.getProductGroups(groupProductId);
 		int totalNum = 0;

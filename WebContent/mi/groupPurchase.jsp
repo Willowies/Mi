@@ -118,18 +118,6 @@
 				<p class="groupPurchaseTitle">小米团购</p>
 				<p class="groupPurchaseNow">所有商品</p>
 				<div class="groupProductList">
-					<div class="groupProductItem">
-						<div class="gpImg">
-							<a href="groupProductInfo.jsp?groupProductId=1" style="height:190px; display:block;"><img src="../images/e1c81fc611f7b76c7d3f71a50c1a58e0.jpg" width="190px" height="190px"></a>
-						</div>
-						<div class="gpInfo">
-							<a href="groupProductInfo.jsp?groupProductId=1" class="name">米家随身风扇 蓝色</a>
-							<p class="desc">能放在口袋的小风扇</p>
-							<p class="price">1元<del style="color:#b0b0b0;">19.9元</del></p>
-							<a href="groupProductInfo.jsp?groupProductId=1" class="moreInfo">商品详情</a>
-						</div>			
-					</div>
-					
 
 				</div>
 			</div>

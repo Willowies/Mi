@@ -122,6 +122,7 @@
 					<p class="groupProductName"></p>
 					<p class="groupProductDesc"></p>
 					<span class="groupProductPrice"></span>
+					<a class="endTime" style="width:0px;height:0px;visibility:hidden;"></a>
 					<div class="countDown">
 						<span>距离结束：</span>
 				        <span id="_d">00</span>

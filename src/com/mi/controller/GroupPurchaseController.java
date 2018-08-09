@@ -50,7 +50,10 @@ public class GroupPurchaseController {
 		String userName = userTemp.getUserName();
 		/*User user = new User();
 		user.setUserName("张三");*/
-		int groupid = groupPurchaseService.addGroup(groupProductId, userName);
+		//get endTime to judge
+		long endTime = Long.parseLong(request.getParameter("endTime"));
+		
+		int groupid = groupPurchaseService.addGroup(groupProductId, userName, endTime);
 		System.out.println("groupid Controller"+groupid);
 		session.setAttribute("groupId", groupid);
 		return groupid;
